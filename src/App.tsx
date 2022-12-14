@@ -4,7 +4,9 @@ import {
   Route,
   Link,
 } from "react-router-dom";
+import { TextField } from "./Components/TextField";
 import { Login, Register } from "./Pages";
+import Components from "./Pages/Components";
 
 
 function App(props:any) {
@@ -18,6 +20,14 @@ function App(props:any) {
     {
       path: "/register",
       element:<Register/>,
+    },  
+    {
+      path: "/components",
+      element:<Components/>,
+    },  
+    {
+      path: "/components/textfield",
+      element:<TextField/>,
     },  
     {
       path:"*",
