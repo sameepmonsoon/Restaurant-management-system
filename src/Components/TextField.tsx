@@ -1,5 +1,6 @@
 // @ts-nocheck
 import { forwardRef } from 'react';
+import { LabelDiv, MainDiv } from './TextField.Style';
 
 type TextFieldProps = {
   name?: string;
@@ -82,10 +83,10 @@ export  const TextField = forwardRef(
     // @ts-ignore
     console.log("inside")
     return (
-      <div style={{display:"flex"}}>
-        <div error={error} theme={theme}>
+      <MainDiv showDisplayFlex={true}>
+        <LabelDiv error={error} theme={theme}>
           {labelText()}
-        </div>
+        </LabelDiv>
 
         <div style={{display:"flex"}}>
           {prefix && <div theme={theme}>{prefix}</div>}
@@ -129,7 +130,7 @@ export  const TextField = forwardRef(
             </>
           )} */}
         </div>
-      </div>
+      </MainDiv>
     );
   }
 );
