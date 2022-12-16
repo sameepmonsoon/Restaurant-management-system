@@ -1,5 +1,6 @@
 // @ts-nocheck
 import { forwardRef } from 'react';
+import { LabelDiv, MainDiv,Input} from './TextField.Style';
 
 type TextFieldProps = {
   name?: string;
@@ -82,29 +83,32 @@ export  const TextField = forwardRef(
     // @ts-ignore
     console.log("inside")
     return (
-      <div style={{display:"flex"}}>
-        <div error={error} theme={theme}>
-          {labelText()}
+      <MainDiv>
+        <div>
+        <LabelDiv error={error} theme={theme}>
+         {labelText()}
+         
+        </LabelDiv>
         </div>
-
+     
         <div style={{display:"flex"}}>
-          {prefix && <div theme={theme}>{prefix}</div>}
-
-          <input
-            ref={ref}
-            id={`input-${name}`}
-            name={name}
-            value={value}
-            placeholder={placeholder || friendlyName(name)}
-            defaultValue={defaultValue}
-            onChange={onChange}
-            onBlur={onBlur}
-            prefix={!!prefix}
-            min={min || 0}
-            type={type}
-            theme={theme}
-            disabled={disabled}
-          />
+          {prefix && <div theme={theme}></div>}
+          <Input 
+           ref={ref}
+           id={`input-${name}`}
+           name={name}
+           value={value}
+           placeholder={placeholder || friendlyName(name)}
+           defaultValue={defaultValue}
+           onChange={onChange}
+           onBlur={onBlur}
+           prefix={!!prefix}
+           min={min || 0}
+           type={type}
+           theme={theme}
+           disabled={disabled}
+          >
+          </Input>
           {icon && (
             <div suffix={!!suffix} type={!!type} hideNumberChange={!!hideNumberChange}>
               {icon}
@@ -113,7 +117,7 @@ export  const TextField = forwardRef(
 
           {suffix && (
             <div type={!!type} hideNumberChange={!!hideNumberChange}>
-              {suffix}
+             
             </div>
           )}
 
@@ -129,7 +133,7 @@ export  const TextField = forwardRef(
             </>
           )} */}
         </div>
-      </div>
+      </MainDiv>
     );
   }
 );
