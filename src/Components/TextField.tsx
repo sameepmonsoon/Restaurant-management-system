@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { forwardRef } from 'react';
-import { LabelDiv, MainDiv,Input} from './TextField.Style';
+import { LabelDiv, MainDiv,Input,Button} from './TextField.Style';
 
 type TextFieldProps = {
   name?: string;
@@ -86,8 +86,7 @@ export  const TextField = forwardRef(
       <MainDiv>
         <div>
         <LabelDiv error={error} theme={theme}>
-         {labelText()}
-         
+         {labelText()} 
         </LabelDiv>
         </div>
      
@@ -107,8 +106,8 @@ export  const TextField = forwardRef(
            type={type}
            theme={theme}
            disabled={disabled}
-          >
-          </Input>
+          />
+          {/* </Input> */}
           {icon && (
             <div suffix={!!suffix} type={!!type} hideNumberChange={!!hideNumberChange}>
               {icon}
@@ -120,6 +119,7 @@ export  const TextField = forwardRef(
              
             </div>
           )}
+         
 
           {/* {type === `number` && !hideNumberChange && (
             <>
@@ -133,6 +133,11 @@ export  const TextField = forwardRef(
             </>
           )} */}
         </div>
+      
+        
+       
+         
+       
       </MainDiv>
     );
   }
