@@ -7,36 +7,36 @@ import {
 import { TextField } from "./Components/TextField";
 import { Login, Register } from "./Pages";
 import Components from "./Pages/Components";
+import ForgotPassword from "./Pages/ForgotPassword";
 
-
-function App(props:any) {
+function App(props: any) {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: (
-      <Login/>
-      ),
+      element: <Login />,
     },
     {
       path: "/register",
-      element:<Register/>,
-    },  
+      element: <Register />,
+    },
     {
       path: "/components",
-      element:<Components/>,
-    },  
+      element: <Components />,
+    },
     {
       path: "/components/textfield",
-      element:<TextField/>,
-    },  
+      element: <TextField />,
+    },
     {
-      path:"*",
-      element:(<h1>page not found</h1>)
-    }
+      path: "/ForgotPassword",
+      element: <ForgotPassword />,
+    },
+    {
+      path: "*",
+      element: <h1>page not found</h1>,
+    },
   ]);
-  return (
-    <RouterProvider router={router} />
-  )
+  return <RouterProvider router={router} />;
 }
 
-export default App
+export default App;

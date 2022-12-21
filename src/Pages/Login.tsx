@@ -8,6 +8,7 @@ import { FormDiv } from "./Login.Style";
 import { Title } from "./Login.Style";
 import { PasswordField } from "./Login.Style";
 import { FormError } from "./Login.Style";
+import { Caption } from "./Login.Style";
 import MediaQuery from "react-responsive";
 import { Link } from "react-router-dom";
 import "./Login";
@@ -34,7 +35,7 @@ export function Login() {
       <MainLoginDiv>
         <Image>
           <img className="img-fluid image" src={"/src/assets/KBLimage.jpg"} />
-          <p>Welcome to kpop Dashboard</p>
+          <Caption>Welcome to Kpop Dashboard</Caption>   
         </Image>
 
         <FormDiv>
@@ -72,8 +73,8 @@ export function Login() {
                 <input type="checkbox" />
                 Rembember Me
               </div>
-              <Link to="" style={{ color: "black" }}>
-                {" "}
+              <Link to="ForgotPassword" style={{ color: "black" }}>
+              
                 Forgot Password
               </Link>
             </PasswordField>
