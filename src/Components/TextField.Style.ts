@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { useMediaQuery } from "react-responsive";
 
 type PropType={
     showDisplayFlex:boolean
@@ -14,6 +15,10 @@ font-weight: 500;
 font-style: normal;
 color: #1E1E1E;
 font-family: 'Inter', sans-serif;
+
+@media screen {
+    
+}
 `
 export const Input= styled('input')`
 box-sizing: border-box;

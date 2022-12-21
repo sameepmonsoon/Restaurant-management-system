@@ -37,3 +37,14 @@ color: #1E1E1E;
 margin-bottom: 2rem;
 font-family: 'Inter', sans-serif;
 `
+export const PasswordField = styled('div')`
+display: flex;
+justify-content: space-between;
+`
+// export  const Link= styled('link')`
+// text-decoration: none;
+// `
+
+export const FormError = styled('p')`
+color: red;
+`

@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { forwardRef } from 'react';
 import { LabelDiv, MainDiv,Input,Button} from './TextField.Style';
+// import MediaQuery from 'react-responsive'
 
 type TextFieldProps = {
   name?: string;
@@ -85,11 +86,14 @@ export  const TextField = forwardRef(
     return (
       <MainDiv>
         <div>
-        <LabelDiv error={error} theme={theme}>
+          
+          <LabelDiv error={error} theme={theme}>
          {labelText()} 
-        </LabelDiv>
+         </LabelDiv>
+      
+       
         </div>
-     
+
         <div style={{display:"flex"}}>
           {prefix && <div theme={theme}></div>}
           <Input 
@@ -133,6 +137,7 @@ export  const TextField = forwardRef(
             </>
           )} */}
         </div>
+       
       
         
        
