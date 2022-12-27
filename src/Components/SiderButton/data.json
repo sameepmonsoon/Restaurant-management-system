@@ -1,0 +1,15 @@
+
+[
+    {
+        "title": "Products",
+        "icon": "bi bi-mailbox",
+        "childrens": [
+          {
+            "title": "All Products",
+            "icon": "bi-house-fill",
+            "path": "/Products"
+          }
+        ]
+      }
+
+]
