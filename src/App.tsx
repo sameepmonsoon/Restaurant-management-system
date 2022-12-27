@@ -41,10 +41,10 @@ function App(props: any) {
     //         </ul>
     //      </SiderButton>,
     // },
-    // {
-    //   path:"/home",
-    //   element:<Dashboard/>
-    // } , 
+    {
+      path:"/home",
+      element:<Dashboard/>
+    } , 
     {
       path: "/addButton",
       element: <AddCard icon={<AddIcon/>} label={"ADD PURCHASE"}/>

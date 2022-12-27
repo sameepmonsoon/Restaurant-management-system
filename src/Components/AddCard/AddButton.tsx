@@ -1,4 +1,4 @@
-import {AddButtonMain, AddButtonIcon, AddButtonLabel} from './AddButton.Style';
+import {AddButtonMain, AddButtonIcon, AddButtonLabel, AddCardItems} from './AddButton.Style';
 
 type addButton = {
   icon: React.ReactNode;
@@ -10,8 +10,10 @@ const AddButton = (props: addButton) => {
   return ( 
     <>
       <AddButtonMain>
-          <AddButtonIcon>{icon}</AddButtonIcon>
-          <AddButtonLabel> {label}</AddButtonLabel>
+          <AddCardItems>
+            <AddButtonIcon>{icon}</AddButtonIcon>
+            <AddButtonLabel> {label}</AddButtonLabel>
+          </AddCardItems>
       </AddButtonMain>
     </> 
   );
