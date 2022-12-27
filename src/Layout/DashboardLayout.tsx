@@ -8,6 +8,7 @@ export default function DashboardLayout({children,renderActions,renderFilters}:{
     <>
         <Navbar/>
         <Sider/>
+        
         <DashboardHeaderLayout>
         {renderActions} 
         </DashboardHeaderLayout>

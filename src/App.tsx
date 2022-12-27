@@ -4,7 +4,11 @@ import {
   Route,
   Link,
 } from "react-router-dom";
+import InventoryCard from "./Components/InventoryCard/InventoryCard";
 import { TextField } from "./Components/TextField";
+import {MdOutlineShoppingCart} from 'react-icons/md'
+import {BiPurchaseTag} from 'react-icons/bi'
+import {CiBoxes} from 'react-icons/ci'
 import { Login, Register } from "./Pages";
 import Components from "./Pages/Components";
 import Dashboard from "./Pages/Dashboard";
@@ -33,7 +37,13 @@ function App(props:any) {
     {
       path:"/home",
       element:<Dashboard/>
+    }, 
+
+    {
+      path:"/components/inventorycard",
+      element:<InventoryCard  title={"sales"} icon={<BiPurchaseTag size={30}/>} amount={10000} cardType="sales" active="sales"/>
     } , 
+   
     {
       path:"*",
       element:(<h1>page not found</h1>)
