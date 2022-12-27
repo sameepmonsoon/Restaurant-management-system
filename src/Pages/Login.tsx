@@ -11,7 +11,6 @@ import { FormError } from "./Login.Style";
 import MediaQuery from "react-responsive";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import axios from "axios"
 import { HTTPMethods } from "../Utils/HTTPMock";
 import { useNavigationAfterTokenCheck } from "../Hooks/useNavigateToLogin";
 export function Login() {

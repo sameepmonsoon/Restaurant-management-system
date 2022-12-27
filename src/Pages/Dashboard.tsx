@@ -3,6 +3,8 @@ import DashboardLayout from '../Layout/DashboardLayout'
 import Navbar from '../PageComponent/Dashboard/Navbar/Navbar'
 
 export default function Dashboard() {
+  
+
   return (
   <DashboardLayout
     renderActions={
