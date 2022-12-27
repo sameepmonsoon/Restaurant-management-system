@@ -5,54 +5,58 @@ import {
   Link,
 } from "react-router-dom";
 import { TextField } from "./Components/TextField";
+import SiderButton from "./Components/SiderButton/SiderButton";
 import { Login, Register } from "./Pages";
 import Components from "./Pages/Components";
 import Dashboard from "./Pages/Dashboard";
-import AddButton from "./Components/Addbutton/AddButton";
+import AddCard from "./Components/AddCard/AddButton";
 import AddIcon from '@mui/icons-material/Add';
 
 
-function App(props:any) {
+function App(props: any) {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: (
-      <Login/>
-      ),
+      element: <Login />,
     },
     {
       path: "/register",
-      element:<Register/>,
-    },  
-    {
-      path: "/components",
-      element:<Components/>,
-    },  
-    {
-      path: "/components/textfield",
-      element:<TextField/>,
+      element: <Register />,
     },
     {
-      path:"/home",
-      element:<Dashboard/>
-    } ,
+      path: "/components",
+      element: <Components />,
+    },
     {
-      path:'/AddButton',
-      element: <AddButton name="Hello Kitty" icon={AddIcon} />
-      
-    }, 
+      path: "/components/textfield",
+      element: <TextField />,
+    },
+    // {
+    //   path: "/components/siderbutton",
+    //   element:<SiderButton titleIcon={<FaBeer/>} title="Title" childrenIcon={<FaBeer/>}>
+    //         <ul>
+    //           <li>a</li>
+    //           <li>b</li>
+    //           <li>c</li>
+    //         </ul>
+    //      </SiderButton>,
+    // },
+    // {
+    //   path:"/home",
+    //   element:<Dashboard/>
+    // } , 
     {
-      path:"*",
-      element:(<h1>page not found</h1>)
-    }
+      path: "/addButton",
+      element: <AddCard icon={<AddIcon/>} label={"ADD PURCHASE"}/>
+    },
+    {
+      path: "*",
+      element: <h1>page not found</h1>,
+    },
   ]);
   return (
-    <>
-      <RouterProvider router={router} />
-      
-    </>
-    
+    <RouterProvider router={router} />
   )
 }
 
-export default App
+export default App;
