@@ -12,15 +12,19 @@ import {CiBoxes} from 'react-icons/ci'
 import { Login, Register } from "./Pages";
 import Components from "./Pages/Components";
 import Dashboard from "./Pages/Dashboard";
+import ForgotPassword from "./Pages/ForgotPassword";
+import { FaBeer } from "react-icons/fa";
+import {MdAdd} from "react-icons/md";
+import ActionButton from "./Components/ActionButton/ActionButton";
+import SiderButton from "./Components/SiderButton/SiderButton";
 
 
-function App(props:any) {
+
+function App(props: any) {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: (
-      <Login/>
-      ),
+      element: <Login />,
     },
     {
       path: "/register",
@@ -46,14 +50,15 @@ function App(props:any) {
     // } 
     , 
    
+
     {
-      path:"*",
-      element:(<h1>page not found</h1>)
-    }
+      path: "*",
+      element: <h1>page not found</h1>,
+    },
   ]);
   return (
     <RouterProvider router={router} />
   )
 }
 
-export default App
+export default App;

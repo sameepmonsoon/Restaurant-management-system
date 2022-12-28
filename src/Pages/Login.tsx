@@ -8,10 +8,10 @@ import { FormDiv } from "./Login.Style";
 import { Title } from "./Login.Style";
 import { PasswordField } from "./Login.Style";
 import { FormError } from "./Login.Style";
+import { Caption } from "./Login.Style";
 import MediaQuery from "react-responsive";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import axios from "axios"
 import { HTTPMethods } from "../Utils/HTTPMock";
 import { useNavigationAfterTokenCheck } from "../Hooks/useNavigateToLogin";
 export function Login() {
@@ -86,8 +86,8 @@ export function Login() {
                 <input type="checkbox" />
                 Rembember Me
               </div>
-              <Link to="" style={{ color: "black" }}>
-                {" "}
+              <Link to="ForgotPassword" style={{ color: "black" }}>
+              
                 Forgot Password
               </Link>
             </PasswordField>
