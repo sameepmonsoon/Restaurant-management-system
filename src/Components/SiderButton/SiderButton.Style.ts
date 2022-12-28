@@ -60,3 +60,7 @@ display: flex;
 margin-top: 15px;
 margin-left: 35px;
 `
+
+export const Dropdown = styled.div`
+    
+`

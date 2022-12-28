@@ -7,9 +7,9 @@ export const AddButtonMain = styled('div')`
     background-color: #313131;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
     color: #FFFFFF;
+    display: flex;
     align-items: center;
     justify-content: center;
-    display: flex;
 
 
 `
@@ -23,12 +23,11 @@ export const AddCardItems = styled.div`
     justify-content: center;
     
 `
-export const AddButtonIcon =styled('image')`
-    color: #FFFFFF;
-
+export const AddButtonIcon =styled.section`
+    color: white;
 `
 
-export const AddButtonLabel = styled('text')`
+export const AddButtonLabel = styled.p`
     margin-top: 4px;
     color: #FFFFFF;
     font-family: 'Inter';
