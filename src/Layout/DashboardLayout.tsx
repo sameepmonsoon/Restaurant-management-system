@@ -6,9 +6,10 @@ import DashboardHeaderLayout from './DashboardHeaderLayout'
 export default function DashboardLayout({children,renderActions,renderFilters}:{children:JSX.Element,renderActions?:JSX.Element,renderFilters?:JSX.Element}) {
   return (
     <>
-        <Navbar/>
-        <Sider/>
-        
+        <Sider/>  
+<br /><br /><br />
+        <Navbar navTitle={"Dashboard"} navbarCardName={"Purchase"} arrowIcon={true}/>
+        <br /><br /><br />
         <DashboardHeaderLayout>
         {renderActions} 
         </DashboardHeaderLayout>
