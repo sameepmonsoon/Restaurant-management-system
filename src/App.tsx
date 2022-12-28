@@ -28,40 +28,29 @@ function App(props: any) {
     },
     {
       path: "/register",
-      element: <Register />,
-    },
-    {
-      path: "/components",
-      element: <Components />,
-    },
-    {
-      path: "/components/textfield",
-      element:<TextField/>,
-      
-    },
-    {
-      path: "/components/siderbutton",
-      element:<SiderButton titleIcon={<FaBeer/>} title="Title" childrenIcon={<FaBeer/>}>
-            <ul>
-              <li>a</li>
-              <li>b</li>
-              <li>c</li>
-            </ul>
-         </SiderButton>,
+      element:<Register/>,
     },
     {
       path:"/home",
       element:<Dashboard/>
-    },
+    },  
     {
-      path:"/components/inventorycard",
-      element:<InventoryCard  title={"purchase"} icon={<MdOutlineShoppingCart size={30}/>} amount={"10,000"} cardType="purchase" active={true}/>
-    } , 
+      path: "/components",
+      element:<Components/>,
+    }
+    
+    // ,  
+    // {
+    //   path: "/components/textfield",
+    //   element:<TextField/>,
+    // },
+    // {
+    //   path:"/components/inventorycard",
+    //   element:<InventoryCard  title={"purchase"} icon={<MdOutlineShoppingCart size={30}/>} amount={"10,000"} cardType="purchase" active={true}/>
+    // } 
+    , 
    
-    {
-      path: "/components/actionButton",
-      element: <ActionButton icon={<MdAdd  fontSize="1.4em"/>} label={"ADD PURCHASE"} onClick={(e: React.MouseEvent<HTMLElement>) => console.log("Clicked")} />
-    },
+
     {
       path: "*",
       element: <h1>page not found</h1>,
