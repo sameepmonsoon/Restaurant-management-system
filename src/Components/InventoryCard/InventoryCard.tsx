@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import {
     MainDivInventory,
     IconDiv,
@@ -13,7 +12,7 @@ import {
 type InventoryTitles = {
   title:String,
   icon: React.ReactNode,
-  amount:number,
+  amount:String
   cardType:String,
   active:String
 }

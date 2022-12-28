@@ -41,7 +41,7 @@ function App(props:any) {
 
     {
       path:"/components/inventorycard",
-      element:<InventoryCard  title={"sales"} icon={<BiPurchaseTag size={30}/>} amount={10000} cardType="sales" active="sales"/>
+      element:<InventoryCard  title={"purchase"} icon={<MdOutlineShoppingCart size={30}/>} amount={"10,000"} cardType="purchase" active="purchase"/>
     } , 
    
     {

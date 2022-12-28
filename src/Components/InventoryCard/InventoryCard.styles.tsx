@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-// props received from inventory card
+// props received from InventoryCard.tsx
 type MainDivInventoryPropTypes = {
     cardType:String,
     active:String
@@ -17,22 +17,21 @@ border:0;
 border-radius:10px;
 flex-wrap:wrap;
 flex-direction:column;
-background: ${({active})=>active=="purchase"?"linear-gradient(351deg, rgba(120,240,186,1) 48%, rgba(150,230,192,1) 100%);":"sales"?"linear-gradient(351deg, rgba(255,172,50,1) 0%, rgba(255,227,176,1) 100%);":"linear-gradient(351deg, rgba(255,137,82,1) 0%, rgba(252,203,180,1) 100%);"} ;
-filter: drop-shadow(0px 4px 4px #adb5bd);
-
+/* for active cards/onClick */
+background: ${({active})=>active=="purchase"?"linear-gradient(351deg, rgba(120,240,186,1) 48%, rgba(150,230,192,1) 100%);":active==="sales"?"linear-gradient(351deg, rgba(255,172,50,1) 0%, rgba(255,227,176,1) 100%);":active==="stock"?"linear-gradient(352deg, rgba(221,148,115,1) 0%, rgba(251,210,183,1) 100%);":"linear-gradient(310deg, rgba(108,107,107,1) 0%, rgba(218,218,218,1) 100%);"} ;
+filter: drop-shadow(0px 4px 4px #6a6a6a);
 &:hover{
-    background:${({cardType})=>cardType=="purchase"?"linear-gradient(351deg, rgba(120,240,186,1) 48%, rgba(150,230,192,1) 100%);":"sales"?"linear-gradient(351deg, rgba(255,172,50,1) 0%, rgba(255,227,176,1) 100%);":"linear-gradient(351deg, rgba(255,137,82,1) 0%, rgba(252,203,180,1) 100%);"}  ;
+    background:${({cardType})=>cardType=="purchase"?"linear-gradient(351deg, rgba(120,240,186,1) 48%, rgba(150,230,192,1) 100%);":cardType==="sales"?"linear-gradient(351deg, rgba(255,172,50,1) 0%, rgba(255,227,176,1) 100%);":cardType==="stock"?"linear-gradient(352deg, rgba(221,148,115,1) 0%, rgba(251,210,183,1) 100%);":"linear-gradient(310deg, rgba(108,107,107,1) 0%, rgba(218,218,218,1) 100%)"}  ;
 
-}`; 
-
-
+}`;
 
 
-// for icons
+
+
+// for card icons
 export const IconDiv = styled('div')`
 order:1;
 align-self:flex-end;
-/* border:1px solid black; */
 padding:15px 30px;
 @media (max-width: 500px) {
     & {
@@ -42,7 +41,7 @@ padding:15px 30px;
 }
 ;`
 
-// container for card text and amount
+// flex container for card text and amount
 export const InventoryCardTextAmountDiv = styled('div')`
 display:flex;
 flex-direction:column;
@@ -58,9 +57,9 @@ font-style: normal;
 
 `;
 
+
 // for card title
 export const InventoryCardText = styled('div')`
-// border:1px solid black;
 text-transform: capitalize;
 letter-spacing:1px;
 font-weight: 300;
@@ -69,12 +68,10 @@ line-height: 1em;
 `;
 
 
-// for amount
+// for card amount
 export const InventoryCardAmount = styled('div')`
-// border:1px solid black;
 letter-spacing:1px;
 font-weight: bold;
 font-size:23px;
 line-height:20px;
-
 `;
