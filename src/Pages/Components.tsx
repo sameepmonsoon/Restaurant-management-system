@@ -5,6 +5,9 @@ import * as yup from 'yup';
 import InventoryCard from '../Components/InventoryCard/InventoryCard';
 import { MdOutlineShoppingCart } from 'react-icons/md';
 
+import {
+  DashboardComponents
+} from './Components.styles'
 
 export default function Components() {
     let schema = yup.object().shape({
@@ -27,11 +30,18 @@ function onSumbit(e:any){
   return (
     <>
     <div>Components</div>
+    <DashboardComponents>
+
     <form onSubmit={handleSubmit}>
         <TextField name="name"  onChange={handleChange} error={errors.name} prefix={"name"} suffix={"suffix"} />
     </form>
+
+    
     <InventoryCard  title={"purchase"} icon={<MdOutlineShoppingCart size={30}/>} amount={"10,000"} cardType="purchase" active={true}/>
 
+    
+    
+    </DashboardComponents>
     </>
   )
 }
