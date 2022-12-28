@@ -22,6 +22,7 @@
     "react-responsive": "^9.0.2",
     "react-router-dom": "^6.4.5",
     "vite-plugin-checker": "^0.5.2",
+    "yarn": "^1.22.19",
     "yup": "^0.32.11"
   },
   "devDependencies": {
