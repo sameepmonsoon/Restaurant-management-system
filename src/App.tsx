@@ -37,11 +37,10 @@ function App(props:any) {
     {
       path:"/home",
       element:<Dashboard/>
-    }, 
-
+    },
     {
       path:"/components/inventorycard",
-      element:<InventoryCard  title={"purchase"} icon={<MdOutlineShoppingCart size={30}/>} amount={"10,000"} cardType="purchase" active="purchase"/>
+      element:<InventoryCard  title={"purchase"} icon={<MdOutlineShoppingCart size={30}/>} amount={"10,000"} cardType="purchase" active={true}/>
     } , 
    
     {

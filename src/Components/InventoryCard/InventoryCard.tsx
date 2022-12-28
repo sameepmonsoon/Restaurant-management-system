@@ -14,16 +14,16 @@ type InventoryTitles = {
   icon: React.ReactNode,
   amount:String
   cardType:String,
-  active:String
+  active:boolean
 }
 
  
 
   const InventoryCard = (props:InventoryTitles) => {
   const{title,icon,amount,cardType,active}=props
-  
-  
+    
   return (
+    // @ts-ignore
     <MainDivInventory cardType={cardType} active={active}>
         <IconDiv> 
       {icon}

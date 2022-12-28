@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
+import { MouseEventHandler } from "react";
 
 // props received from InventoryCard.tsx
 type MainDivInventoryPropTypes = {
     cardType:String,
-    active:String
+    active:boolean
 }
 
 
@@ -13,16 +14,29 @@ export const MainDivInventory = styled('div')<MainDivInventoryPropTypes>`
 display:flex;
 height:150px;
 width:281px;
-border:0;
+
 border-radius:10px;
 flex-wrap:wrap;
 flex-direction:column;
 /* for active cards/onClick */
-background: ${({active})=>active=="purchase"?"linear-gradient(351deg, rgba(120,240,186,1) 48%, rgba(150,230,192,1) 100%);":active==="sales"?"linear-gradient(351deg, rgba(255,172,50,1) 0%, rgba(255,227,176,1) 100%);":active==="stock"?"linear-gradient(352deg, rgba(221,148,115,1) 0%, rgba(251,210,183,1) 100%);":"linear-gradient(310deg, rgba(108,107,107,1) 0%, rgba(218,218,218,1) 100%);"} ;
-filter: drop-shadow(0px 4px 4px #6a6a6a);
-&:hover{
-    background:${({cardType})=>cardType=="purchase"?"linear-gradient(351deg, rgba(120,240,186,1) 48%, rgba(150,230,192,1) 100%);":cardType==="sales"?"linear-gradient(351deg, rgba(255,172,50,1) 0%, rgba(255,227,176,1) 100%);":cardType==="stock"?"linear-gradient(352deg, rgba(221,148,115,1) 0%, rgba(251,210,183,1) 100%);":"linear-gradient(310deg, rgba(108,107,107,1) 0%, rgba(218,218,218,1) 100%)"}  ;
 
+
+background: ${({cardType,active})=>cardType=="purchase" && !active?
+                            "linear-gradient(351deg, rgba(120,240,186,1) 48%, rgba(150,230,192,1) 100%);":
+                            cardType=="purchase" && active?
+                            "green":
+                            cardType==="sales" && !active?
+                            "linear-gradient(351deg, rgba(255,172,50,1) 0%, rgba(255,227,176,1) 100%);":
+                            cardType==="sales" && active?"red":
+                            cardType==="stock" && !active?"linear-gradient(352deg, rgba(221,148,115,1) 0%, rgba(251,210,183,1) 100%);":
+                            "linear-gradient(310deg, rgba(108,107,107,1) 0%, rgba(218,218,218,1) 100%);"} ;
+filter: drop-shadow(0px 4px 4px #6a6a6a);
+:hover{
+    background:${({cardType})=>
+        cardType=="purchase"?"linear-gradient(160.89deg, #ABFFD9 10.16%, rgba(29, 248, 149, 0.53) 87.09%)":
+                cardType==="sales"?"linear-gradient(351deg, rgba(255,172,50,1) 0%, rgba(255,227,176,1) 100%);"
+                :"linear-gradient(352deg, rgba(221,148,115,1) 0%, rgba(251,210,183,1) 100%);"
+    }  
 }`;
 
 
