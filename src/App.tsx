@@ -25,23 +25,26 @@ function App(props:any) {
     {
       path: "/register",
       element:<Register/>,
-    },  
-    {
-      path: "/components",
-      element:<Components/>,
-    },  
-    {
-      path: "/components/textfield",
-      element:<TextField/>,
     },
     {
       path:"/home",
       element:<Dashboard/>
-    },
+    },  
     {
-      path:"/components/inventorycard",
-      element:<InventoryCard  title={"purchase"} icon={<MdOutlineShoppingCart size={30}/>} amount={"10,000"} cardType="purchase" active={true}/>
-    } , 
+      path: "/components",
+      element:<Components/>,
+    }
+    
+    // ,  
+    // {
+    //   path: "/components/textfield",
+    //   element:<TextField/>,
+    // },
+    // {
+    //   path:"/components/inventorycard",
+    //   element:<InventoryCard  title={"purchase"} icon={<MdOutlineShoppingCart size={30}/>} amount={"10,000"} cardType="purchase" active={true}/>
+    // } 
+    , 
    
     {
       path:"*",

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { InventoryTitles } from '../../Types/Components/InventoryCardTypes';
 import {
     MainDivInventory,
     IconDiv,
@@ -8,14 +9,6 @@ import {
 } from './InventoryCard.styles';
 
 
-// for inventory card titles
-type InventoryTitles = {
-  title:String,
-  icon: React.ReactNode,
-  amount:String
-  cardType:String,
-  active:boolean
-}
 
  
 

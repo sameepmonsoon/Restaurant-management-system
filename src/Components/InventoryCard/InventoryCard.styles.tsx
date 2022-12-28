@@ -1,11 +1,8 @@
 import styled from "@emotion/styled";
 import { MouseEventHandler } from "react";
 
-// props received from InventoryCard.tsx
-type MainDivInventoryPropTypes = {
-    cardType:String,
-    active:boolean
-}
+import { MainDivInventoryPropTypes } from "../../Types/Components/MainDivInventoryPropTypes";
+
 
 
 
