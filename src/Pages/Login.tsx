@@ -47,7 +47,7 @@ export function Login() {
     <>
       <MainLoginDiv>
         <Image>
-          <img className="img-fluid image" src={""} />
+          <img className="img-fluid image" src={"/assets/KBLimage.jpg"} />
           <p>Welcome to kpop Dashboard</p>
         </Image>
 
