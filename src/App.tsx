@@ -13,6 +13,12 @@ import { Login, Register } from "./Pages";
 import Components from "./Pages/Components";
 import Dashboard from "./Pages/Dashboard";
 import ForgotPassword from "./Pages/ForgotPassword";
+import { FaBeer } from "react-icons/fa";
+import {MdAdd} from "react-icons/md";
+import ActionButton from "./Components/ActionButton/ActionButton";
+import SiderButton from "./Components/SiderButton/SiderButton";
+
+
 
 function App(props: any) {
   const router = createBrowserRouter([
@@ -31,6 +37,17 @@ function App(props: any) {
     {
       path: "/components/textfield",
       element:<TextField/>,
+      
+    },
+    {
+      path: "/components/siderbutton",
+      element:<SiderButton titleIcon={<FaBeer/>} title="Title" childrenIcon={<FaBeer/>}>
+            <ul>
+              <li>a</li>
+              <li>b</li>
+              <li>c</li>
+            </ul>
+         </SiderButton>,
     },
     {
       path:"/home",
@@ -42,15 +59,17 @@ function App(props: any) {
     } , 
    
     {
-      path: "/ForgotPassword",
-      element: <ForgotPassword />,
+      path: "/components/actionButton",
+      element: <ActionButton icon={<MdAdd  fontSize="1.4em"/>} label={"ADD PURCHASE"} onClick={(e: React.MouseEvent<HTMLElement>) => console.log("Clicked")} />
     },
     {
       path: "*",
       element: <h1>page not found</h1>,
     },
   ]);
-  return <RouterProvider router={router} />;
+  return (
+    <RouterProvider router={router} />
+  )
 }
 
 export default App;

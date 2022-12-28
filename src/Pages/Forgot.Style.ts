@@ -50,3 +50,22 @@ cursor: pointer;
 }
 
 `
+export const FormError = styled('p')`
+color: red;
+
+`
+export const Title= styled('p')`
+width: 126px;
+height: 52px;
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 52px;
+line-height: 52px;
+/* identical to box height, or 100% */
+letter-spacing: -0.06em;
+color: #1E1E1E;
+margin-bottom: 2rem;
+font-family: 'Inter', sans-serif;
+
+`
