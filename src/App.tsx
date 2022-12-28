@@ -4,9 +4,14 @@ import {
   Route,
   Link,
 } from "react-router-dom";
+import InventoryCard from "./Components/InventoryCard/InventoryCard";
 import { TextField } from "./Components/TextField";
+import {MdOutlineShoppingCart} from 'react-icons/md'
+import {BiPurchaseTag} from 'react-icons/bi'
+import {CiBoxes} from 'react-icons/ci'
 import { Login, Register } from "./Pages";
 import Components from "./Pages/Components";
+import Dashboard from "./Pages/Dashboard";
 import ForgotPassword from "./Pages/ForgotPassword";
 
 function App(props: any) {
@@ -25,8 +30,17 @@ function App(props: any) {
     },
     {
       path: "/components/textfield",
-      element: <TextField />,
+      element:<TextField/>,
     },
+    {
+      path:"/home",
+      element:<Dashboard/>
+    },
+    {
+      path:"/components/inventorycard",
+      element:<InventoryCard  title={"purchase"} icon={<MdOutlineShoppingCart size={30}/>} amount={"10,000"} cardType="purchase" active={true}/>
+    } , 
+   
     {
       path: "/ForgotPassword",
       element: <ForgotPassword />,

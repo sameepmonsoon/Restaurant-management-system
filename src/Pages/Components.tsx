@@ -2,6 +2,8 @@ import { useFormik } from 'formik'
 import React from 'react'
 import { TextField } from '../Components/TextField'
 import * as yup from 'yup';
+import InventoryCard from '../Components/InventoryCard/InventoryCard';
+import { MdOutlineShoppingCart } from 'react-icons/md';
 
 
 export default function Components() {
@@ -27,8 +29,9 @@ function onSumbit(e:any){
     <div>Components</div>
     <form onSubmit={handleSubmit}>
         <TextField name="name"  onChange={handleChange} error={errors.name} prefix={"name"} suffix={"suffix"} />
-    <button type='submit'>Submit</button>
     </form>
+    <InventoryCard  title={"purchase"} icon={<MdOutlineShoppingCart size={30}/>} amount={"10,000"} cardType="purchase" active={true}/>
+
     </>
   )
 }

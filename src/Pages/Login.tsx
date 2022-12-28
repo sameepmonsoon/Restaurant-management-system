@@ -10,10 +10,17 @@ import { PasswordField } from "./Login.Style";
 import { FormError } from "./Login.Style";
 import { Caption } from "./Login.Style";
 import MediaQuery from "react-responsive";
-import { Link } from "react-router-dom";
-import "./Login";
-
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import axios from "axios"
+import { HTTPMethods } from "../Utils/HTTPMock";
+import { useNavigationAfterTokenCheck } from "../Hooks/useNavigateToLogin";
 export function Login() {
+  const redirect=useNavigationAfterTokenCheck()
+  const navigate=useNavigate()
+  redirect()
+
+
   let schema = yup.object().shape({
     email: yup.string().email().required(" Email is required"),
     password: yup.string().min(6).required(" Password is required"),
@@ -21,21 +28,28 @@ export function Login() {
   const { values, handleSubmit, handleChange, errors, touched } = useFormik({
     initialValues: { email: "", password: "" },
     onSubmit: (values) => {
-      console.log("values", values);
-    },
+      // NOTE : Currently we are using our token this token will be saved in localstorage after login response from backend
+      localStorage.setItem("token","this is token")
+      navigate("/home")
+      // HTTPMethods.post("/login",values)
+      // .then(function(resp){
+        // NOTE : Save token localStorage.setItem("token",resp.token)
+      //   console.log("response is",resp)
+      // Navigate to "/home"
+      // })
+      // .catch(function(err){
+      //   console.log("error is",err)
+      // })  
+      },
     validationSchema: schema,
   });
-  // const Responsive = ()=>{
-  //   const isDesktopOrLaptop = useMediaQuery({
-  //     query: '(min-width: 1224px)'
-  // })
 
   return (
     <>
       <MainLoginDiv>
         <Image>
-          <img className="img-fluid image" src={"/src/assets/KBLimage.jpg"} />
-          <Caption>Welcome to Kpop Dashboard</Caption>   
+          <img className="img-fluid image" src={"/assets/KBLimage.jpg"} />
+          <p>Welcome to kpop Dashboard</p>
         </Image>
 
         <FormDiv>
