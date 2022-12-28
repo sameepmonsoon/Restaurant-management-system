@@ -28,9 +28,7 @@ export function Login() {
   const { values, handleSubmit, handleChange, errors, touched } = useFormik({
     initialValues: { email: "", password: "" },
     onSubmit: (values) => {
-      // NOTE : Currently we are using our token this token will be saved in localstorage after login response from backend
-      // localStorage.setItem("token","this is token")
-      // navigate("/home")
+
       HTTPMethods.post("/auth/login",values)
       .then(async function(resp:any){
       const {payload}=resp.data 
