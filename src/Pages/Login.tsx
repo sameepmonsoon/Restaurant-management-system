@@ -14,6 +14,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { HTTPMethods } from "../Utils/HTTPMock";
 import { useNavigationAfterTokenCheck } from "../Hooks/useNavigateToLogin";
+import { ResponseType } from "../Types/Utils/ResponseTypes";
 export function Login() {
   const redirect=useNavigationAfterTokenCheck()
   const navigate=useNavigate()
@@ -27,17 +28,17 @@ export function Login() {
   const { values, handleSubmit, handleChange, errors, touched } = useFormik({
     initialValues: { email: "", password: "" },
     onSubmit: (values) => {
-      // NOTE : Currently we are using our token this token will be saved in localstorage after login response from backend
-      // localStorage.setItem("token","this is token")
-      // navigate("/home")
-      HTTPMethods.post("/login",values)
-      .then(function(resp){
-          console.log("response is",resp)
-        // NOTE : Save token localStorage.setItem("token",resp.token)
-        // console.log("response is",resp)
-      // Navigate to "/home"
+
+      HTTPMethods.post("/auth/login",values)
+      .then(async function(resp:any){
+      const {payload}=resp.data 
+      const {token}=payload
+      await localStorage.setItem("token",token)
+      // Success Message
+      navigate("/home")
       })
       .catch(function(err){
+        // Error Message
         console.log("error is",err)
       })  
       },
