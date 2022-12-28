@@ -1,8 +1,7 @@
-import React from 'react'
 import DashboardLayout from '../Layout/DashboardLayout'
 import Navbar from '../PageComponent/Dashboard/Navbar/Navbar'
 
-export default function Dashboard() {
+function Dashboard() {
   return (
   <DashboardLayout
     renderActions={
@@ -18,3 +17,5 @@ export default function Dashboard() {
   </DashboardLayout>
 )
 }
+
+export default Dashboard;
