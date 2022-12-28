@@ -4,8 +4,14 @@ import { SiderMainDiv, SiderButtonLabel, LogoutSetting, SettingDiv,
 } from './Sider.Style'
 import SiderButton from '../../../Components/SiderButton/SiderButton'
 import {FiSettings} from 'react-icons/fi'
+import {HiOutlineLogout} from 'react-icons/hi'
+import {useNavigate} from "react-router-dom";
 
 export default function Sider() {
+  const navigate = useNavigate();
+  const handleLogout =()=>{
+    navigate("/")
+  }
   return (
     <div>
       <SiderMainDiv>
@@ -16,12 +22,12 @@ export default function Sider() {
 
           <LogoutSetting>
             <SettingDiv>
-                <SiderIcon> Icon </SiderIcon>
+                <SiderIcon> <FiSettings fontSize="1.1rem"/></SiderIcon>
                 <span>Settings</span>
             </SettingDiv>
 
-            <SettingDiv>
-                <SiderIcon> Icon</SiderIcon>
+            <SettingDiv  onClick={handleLogout}>
+                <SiderIcon>  <HiOutlineLogout fontSize="1.4rem"/> </SiderIcon>
                 <span>Logout</span>
             </SettingDiv>
               

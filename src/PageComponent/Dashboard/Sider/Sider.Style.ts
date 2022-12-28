@@ -13,13 +13,11 @@ export const SiderMainDiv = styled.div`
 export  const SiderButtonLabel = styled.div`
     /* display: flex;
     flex-direction: column; */
+    cursor: pointer;
     
 `
 
 export  const LogoutSetting = styled.div`
-    /* display: flex;
-    flex-direction: column; */
-    background-color: white;
     width: 50%;
 
 `
@@ -27,10 +25,11 @@ export  const LogoutSetting = styled.div`
 export const SettingDiv = styled.div`
     display: flex;
     flex-direction: row;
+    cursor: pointer;
 `
 
 export const SiderIcon = styled.section`
-    padding-right: 0.7rem;
+    margin-right: 0.6rem;
 `
 
 // export const LogoutDiv = styled.div`

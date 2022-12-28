@@ -14,31 +14,37 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { HTTPMethods } from "../Utils/HTTPMock";
 import { useNavigationAfterTokenCheck } from "../Hooks/useNavigateToLogin";
+import { ResponseType } from "../Types/Utils/ResponseTypes";
+
+// import Toast from "../Components/Snackbar/Snackbar";
+
+
 export function Login() {
   const redirect=useNavigationAfterTokenCheck()
   const navigate=useNavigate()
   redirect()
 
-
   let schema = yup.object().shape({
     email: yup.string().email().required(" Email is required"),
     password: yup.string().min(6).required(" Password is required"),
   });
+
   const { values, handleSubmit, handleChange, errors, touched } = useFormik({
     initialValues: { email: "", password: "" },
     onSubmit: (values) => {
-      // NOTE : Currently we are using our token this token will be saved in localstorage after login response from backend
-      localStorage.setItem("token","this is token")
+      HTTPMethods.post("/auth/login",values)
+      .then(async function(resp:any){
+        console.log(resp.data)
+      const {payload}=resp.data 
+      const {token}=payload
+      await localStorage.setItem("token",token)
+      // Success Message
       navigate("/home")
-      // HTTPMethods.post("/login",values)
-      // .then(function(resp){
-        // NOTE : Save token localStorage.setItem("token",resp.token)
-      //   console.log("response is",resp)
-      // Navigate to "/home"
-      // })
-      // .catch(function(err){
-      //   console.log("error is",err)
-      // })  
+      })
+      .catch(function(err){
+        // Error Message
+        console.log("error is",err)
+      })  
       },
     validationSchema: schema,
   });
@@ -50,7 +56,6 @@ export function Login() {
           <img className="img-fluid image" src={"/assets/KBLimage.jpg"} />
           <p>Welcome to kpop Dashboard</p>
         </Image>
-
         <FormDiv>
           <form onSubmit={handleSubmit}>
             <Title>
@@ -63,7 +68,8 @@ export function Login() {
               // error={errors.email}
               label={"Email"}
               placeholder="Enter your Email"
-              value={values.email}
+              defaultValue={"ashwon2000bajracharya@gmail.com"}
+              
             ></TextField>
               {errors.email && touched.email ? (
               <FormError>{errors.email}</FormError>
@@ -75,7 +81,7 @@ export function Login() {
               // error={errors.password}
               label={"Password"}
               placeholder="Enter your Password"
-              value={values.password}
+              defaultValue={"123123"}
             ></TextField>
              {errors.password && touched.password ? (
               <FormError>{errors.password}</FormError>
@@ -86,13 +92,13 @@ export function Login() {
                 <input type="checkbox" />
                 Rembember Me
               </div>
+            
               <Link to="ForgotPassword" style={{ color: "black" }}>
-              
                 Forgot Password
               </Link>
             </PasswordField>
 
-            <Button type="submit">Sign in</Button>
+            <Button type="submit"  >Sign in</Button>
           </form>
         </FormDiv>
       </MainLoginDiv>

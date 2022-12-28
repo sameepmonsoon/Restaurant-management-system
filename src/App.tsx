@@ -12,6 +12,7 @@ import { Login, Register } from "./Pages";
 import Components from "./Pages/Components";
 import Dashboard from "./Pages/Dashboard";
 import Sider from "./PageComponent/Dashboard/Sider/Sider";
+import Snackbar from "./Components/Snackbar/Snackbar";
 
 // import ForgotPassword from "./Pages/ForgotPassword";
 // import { FaBeer } from "react-icons/fa";
@@ -58,6 +59,11 @@ function App(props: any) {
       element: <Sider/>
     },
 
+    {
+      path: "snackbar",
+      element: <Snackbar/>
+    }
+,
     {
       path: "*",
       element: <h1>page not found</h1>,
