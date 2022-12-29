@@ -5,10 +5,11 @@ import * as yup from 'yup';
 import InventoryCard from '../Components/InventoryCard/InventoryCard';
 import { MdAdd, MdOutlineShoppingCart } from 'react-icons/md';
 
+
 import {
   DashboardComponents
 } from './Components.styles'
-import ActionButton from '../Components/ActionButton/ActionButton';
+import Navbar from '../PageComponent/Dashboard/Navbar/Navbar';
 
 export default function Components() {
     let schema = yup.object().shape({
@@ -39,9 +40,7 @@ function onSumbit(e:any){
    
 
     
-    <InventoryCard  title={"purchase"} icon={<MdOutlineShoppingCart size={30}/>} amount={"10,000"} cardType="purchase" active={true}/>
-
-    <ActionButton icon={<MdAdd    fontSize="1.4em"/>} label={"ADD PURCHASE"} onClick={(e: React.MouseEvent<HTMLElement>) => console.log("Clicked")} />
+    <InventoryCard  title={"purchase"} icon={<MdOutlineShoppingCart size={30}/>} amount={"10,000"} cardType="purchase" active={false}/>
     
     
     </DashboardComponents>
