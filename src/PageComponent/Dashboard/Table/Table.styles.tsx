@@ -1,4 +1,7 @@
 import styled from "@emotion/styled";
+import {TableStatusStyled} from "../../../Types/Components/DashboardTableStyles"
+
+
 
 export const MainTableDiv = styled('table')`
 display: flex;
@@ -25,8 +28,7 @@ border-radius: 5px 5px 0px 0px;
 
 
 export const TableBody   = styled('tbody')`
-row-gap:10px;
-
+/* row-gap:200px; */
 tr{
     margin-top: 20px;
     height: 62px;
@@ -38,7 +40,6 @@ tr{
 
 
 export const TableRow = styled('tr')`
-/* margin-top:5px; */
 display: flex;
 flex-direction:row;
 align-items: center;
@@ -47,7 +48,25 @@ flex: 1;
 background-color: aquamarine;
 background: #FFFFFF;
 box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15);
+`;
 
+export const TableDataStatus = styled('span')<TableStatusStyled>`
+font-family: 'Inter';
+display: flex;
+align-items: center;
+justify-content: center;
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 17px;
+letter-spacing: 0.01em;
+${({status})=>status==="complete"?"color:#02844B;background: #E7FFF1;":
+status==="pre-order"?"color:#17BFB5;background: #E7FFF1;":
+status==="cancelled"?"color:#E84A4A;background:#FAE8E9;":
+"color:#E98C02;background:#FAE8E9;"} ;
+width: 89px;
+height: 27px;
+border-radius: 14px;
 
 `;
 
