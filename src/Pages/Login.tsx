@@ -8,12 +8,13 @@ import { FormDiv } from "./Login.Style";
 import { Title } from "./Login.Style";
 import { PasswordField } from "./Login.Style";
 import { FormError } from "./Login.Style";
+import { Caption } from "./Login.Style";
 import MediaQuery from "react-responsive";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import axios from "axios"
 import { HTTPMethods } from "../Utils/HTTPMock";
 import { useNavigationAfterTokenCheck } from "../Hooks/useNavigateToLogin";
+import { ResponseType } from "../Types/Utils/ResponseTypes";
 export function Login() {
   const redirect=useNavigationAfterTokenCheck()
   const navigate=useNavigate()
@@ -27,18 +28,19 @@ export function Login() {
   const { values, handleSubmit, handleChange, errors, touched } = useFormik({
     initialValues: { email: "", password: "" },
     onSubmit: (values) => {
-      // NOTE : Currently we are using our token this token will be saved in localstorage after login response from backend
-      localStorage.setItem("token","this is token")
+
+      HTTPMethods.post("/auth/login",values)
+      .then(async function(resp:any){
+      const {payload}=resp.data 
+      const {token}=payload
+      await localStorage.setItem("token",token)
+      // Success Message
       navigate("/home")
-      // HTTPMethods.post("/login",values)
-      // .then(function(resp){
-        // NOTE : Save token localStorage.setItem("token",resp.token)
-      //   console.log("response is",resp)
-      // Navigate to "/home"
-      // })
-      // .catch(function(err){
-      //   console.log("error is",err)
-      // })  
+      })
+      .catch(function(err){
+        // Error Message
+        console.log("error is",err)
+      })  
       },
     validationSchema: schema,
   });
@@ -50,7 +52,6 @@ export function Login() {
           <img className="img-fluid image" src={"/assets/KBLimage.jpg"} />
           <p>Welcome to kpop Dashboard</p>
         </Image>
-
         <FormDiv>
           <form onSubmit={handleSubmit}>
             <Title>
@@ -86,8 +87,8 @@ export function Login() {
                 <input type="checkbox" />
                 Rembember Me
               </div>
-              <Link to="" style={{ color: "black" }}>
-                {" "}
+            
+              <Link to="ForgotPassword" style={{ color: "black" }}>
                 Forgot Password
               </Link>
             </PasswordField>
