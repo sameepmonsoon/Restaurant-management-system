@@ -11,7 +11,7 @@ export default function DashboardLayout({children,renderActions,renderFilters}:{
 <br /><br /><br />
         <Navbar navTitle={"Dashboard"} navbarCardName={"Purchase"} arrowIcon={true}/>
         <br /><br />
-        <Table/>
+        <Table status={"complete"}/>
         <br />
         <DashboardHeaderLayout>
         {renderActions} 
