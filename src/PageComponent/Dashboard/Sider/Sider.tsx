@@ -7,6 +7,10 @@ import {FiSettings} from 'react-icons/fi'
 import {HiOutlineLogout} from 'react-icons/hi'
 import {useNavigate} from "react-router-dom";
 
+import { RiArrowDropDownLine } from "react-icons/Ri";
+import { title } from 'process'
+
+
 export default function Sider() {
   const navigate = useNavigate();
   const handleLogout =()=>{
@@ -18,6 +22,7 @@ export default function Sider() {
           <SiderButtonLabel>
               <h6>ANALYTICS</h6>
               <section> SiderButton </section>
+              {/* <SiderButton titleIcon={<RiArrowDropDownLine/>} title={"Dashboard"} /> */}
           </SiderButtonLabel>
 
           <LogoutSetting>

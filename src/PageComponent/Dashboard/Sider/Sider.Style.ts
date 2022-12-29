@@ -32,8 +32,5 @@ export const SiderIcon = styled.section`
     margin-right: 0.6rem;
 `
 
-// export const LogoutDiv = styled.div`
-//      display: flex;
-//     flex-direction: row;
-// `
+
 

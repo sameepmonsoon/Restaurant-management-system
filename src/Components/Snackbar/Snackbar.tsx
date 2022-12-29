@@ -3,7 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Toast = () => {
-    const snackbar= ()=>{
+    const popUpHandle= ()=>{
         toast.success("Toast clicked",{
             position: "top-center",
             autoClose: 1000,
@@ -15,7 +15,7 @@ const Toast = () => {
     }
     return ( 
     <>  
-        <button onClick={snackbar}>Toast</button>
+        <button onClick={popUpHandle}>Toast</button>
         <ToastContainer/>
     </> );
 }

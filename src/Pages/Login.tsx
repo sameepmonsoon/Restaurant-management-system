@@ -18,12 +18,21 @@ import { ResponseType } from "../Types/Utils/ResponseTypes";
 
 // import Toast from "../Components/Snackbar/Snackbar";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export function Login() {
-  const redirect=useNavigationAfterTokenCheck()
+  // const redirect=useNavigationAfterTokenCheck()
   const navigate=useNavigate()
-  redirect()
+  // redirect()
 
+  const popUpHandle =()=>{
+    toast.success("successfull login",{
+      theme: "colored",
+      hideProgressBar: true,
+      autoClose: 1000
+    })
+  }
   let schema = yup.object().shape({
     email: yup.string().email().required(" Email is required"),
     password: yup.string().min(6).required(" Password is required"),
@@ -98,10 +107,11 @@ export function Login() {
               </Link>
             </PasswordField>
 
-            <Button type="submit"  >Sign in</Button>
+            <Button type="submit" onClick={popUpHandle} >Sign in</Button>
           </form>
         </FormDiv>
       </MainLoginDiv>
+      <ToastContainer/>
     </>
   );
 }

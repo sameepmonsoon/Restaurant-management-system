@@ -41,7 +41,7 @@ function onSumbit(e:any){
     
     <InventoryCard  title={"purchase"} icon={<MdOutlineShoppingCart size={30}/>} amount={"10,000"} cardType="purchase" active={true}/>
 
-    <ActionButton icon={<MdAdd    fontSize="1.4em"/>} label={"ADD PURCHASE"} onClick={(e: React.MouseEvent<HTMLElement>) => console.log("Clicked")} />
+    <ActionButton icon={<MdAdd fontSize="1.4em"/>} label={"ADD PURCHASE"} onClick={(e: React.MouseEvent<HTMLElement>) => console.log("Clicked")} />
     
     
     </DashboardComponents>
