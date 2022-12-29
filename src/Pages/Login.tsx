@@ -11,14 +11,14 @@ import { FormError } from "./Login.Style";
 import { Caption } from "./Login.Style";
 import MediaQuery from "react-responsive";
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { HTTPMethods } from "../Utils/HTTPMock";
 import { useNavigationAfterTokenCheck } from "../Hooks/useNavigateToLogin";
 import { ResponseType } from "../Types/Utils/ResponseTypes";
 
 // import Toast from "../Components/Snackbar/Snackbar";
 
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export function Login() {
@@ -27,28 +27,41 @@ export function Login() {
   // redirect()
 
   const popUpHandle =()=>{
+
     toast.success("successfull login",{
       theme: "colored",
       hideProgressBar: true,
       autoClose: 1000
     })
+
   }
+
+  
   let schema = yup.object().shape({
     email: yup.string().email().required(" Email is required"),
     password: yup.string().min(6).required(" Password is required"),
   });
 
+
   const { values, handleSubmit, handleChange, errors, touched } = useFormik({
     initialValues: { email: "", password: "" },
     onSubmit: (values) => {
+    
       HTTPMethods.post("/auth/login",values)
       .then(async function(resp:any){
         console.log(resp.data)
-      const {payload}=resp.data 
-      const {token}=payload
-      await localStorage.setItem("token",token)
+        const {payload}=resp.data 
+        const {token}=payload
+        localStorage.setItem("token",token)
+
       // Success Message
-      navigate("/home")
+        toast.success("successfull login",{
+          theme: "colored",
+          hideProgressBar: true,
+          autoClose: 1000
+        })
+      
+      return navigate("/home")
       })
       .catch(function(err){
         // Error Message
@@ -107,11 +120,11 @@ export function Login() {
               </Link>
             </PasswordField>
 
-            <Button type="submit" onClick={popUpHandle} >Sign in</Button>
+            <Button type="submit" onClick={()=>handleSubmit()}>Sign in</Button>
           </form>
         </FormDiv>
       </MainLoginDiv>
-      <ToastContainer/>
+      
     </>
   );
 }

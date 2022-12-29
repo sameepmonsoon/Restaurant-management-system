@@ -13,6 +13,7 @@ import Components from "./Pages/Components";
 import Dashboard from "./Pages/Dashboard";
 import Sider from "./PageComponent/Dashboard/Sider/Sider";
 import Snackbar from "./Components/Snackbar/Snackbar";
+import { ToastContainer } from "react-toastify";
 
 // import ForgotPassword from "./Pages/ForgotPassword";
 // import { FaBeer } from "react-icons/fa";
@@ -70,7 +71,11 @@ function App(props: any) {
     },
   ]);
   return (
+    <>
+    <ToastContainer/>
     <RouterProvider router={router} />
+    </>
+   
   )
 }
 
