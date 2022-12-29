@@ -1,6 +1,7 @@
 import React from 'react'
-import { SiderMainDiv, SiderButtonLabel, LogoutSetting, SettingDiv,
-          SiderIcon
+import { SiderLogoDiv, SiderMainDiv, SiderButtonLabel, LogoutSetting, SettingDiv,
+          SiderIcon,
+          SiderDiv
 } from './Sider.Style'
 import SiderButton from '../../../Components/SiderButton/SiderButton'
 import {FiSettings} from 'react-icons/fi'
@@ -8,6 +9,7 @@ import {HiOutlineLogout} from 'react-icons/hi'
 import {useNavigate} from "react-router-dom";
 
 import { title } from 'process'
+import { RiArrowDropDownLine } from 'react-icons/ri'
 
 
 export default function Sider() {
@@ -16,14 +18,24 @@ export default function Sider() {
     navigate("/")
   }
   return (
-    <div>
+    <SiderDiv>
+      <SiderLogoDiv>
+          <SiderIcon>
+            <img src="/assets/logo.png" alt="LOGO" />
+          </SiderIcon>
+          <div>
+            <h4>KPOP</h4>
+            <p>Restaurant</p>
+          </div>
+
+      </SiderLogoDiv>
+
       <SiderMainDiv>
           <SiderButtonLabel>
               <h6>ANALYTICS</h6>
-              <section> SiderButton </section>
-              {/* <SiderButton titleIcon={<RiArrowDropDownLine/>} title={"Dashboard"} /> */}
+              <section> DASHBOARD COMPONENT </section>
+              
           </SiderButtonLabel>
-
           <LogoutSetting>
             <SettingDiv>
                 <SiderIcon> <FiSettings fontSize="1.1rem"/></SiderIcon>
@@ -34,14 +46,11 @@ export default function Sider() {
                 <SiderIcon>  <HiOutlineLogout fontSize="1.4rem"/> </SiderIcon>
                 <span>Logout</span>
             </SettingDiv>
-              
-                
-
           </LogoutSetting>
 
       </SiderMainDiv>
       
-    </div>
+    </SiderDiv>
 
   )
 }
