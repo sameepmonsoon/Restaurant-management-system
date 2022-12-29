@@ -2,19 +2,18 @@ import React from 'react'
 import { MainDiv } from '../../../Components/TextField.Style'
 import {HiChevronDown} from 'react-icons/hi'
 import {HiDotsVertical} from 'react-icons/hi'
+import { TableStatus } from '../../../Types/Components/DashbaordTable'
 import { 
     MainTableDiv,
-     TableBody,
-      TableData,
-       TableHeader,
-       TableHeadData,
-        TableRow,
-        TableDataForDate,
-        TableDataStatus } from './Table.styles'
+    TableBody,
+    TableData,
+    TableHeader,
+    TableHeadData,
+    TableRow,
+    TableDataForDate,
+    TableDataStatus } from './Table.styles'
 
-        type TableStatus={
-            status:String,
-        }
+       
 
 const Table = (props:TableStatus) => {
     const{status}= props
@@ -42,7 +41,8 @@ const Table = (props:TableStatus) => {
             <TableData>5000</TableData>
         
             <TableData>
-                <TableDataStatus status={status}>{status}</TableDataStatus>
+                <TableDataStatus status={status}>
+                    {status}</TableDataStatus>
                 </TableData>
             <TableData>22 Dec 2022
                <TableDataForDate>

@@ -1,8 +1,7 @@
 import styled from "@emotion/styled";
+import {TableStatusStyled} from "../../../Types/Components/DashboardTableStyles"
 
-type TableStatusStyled= {
-    status:String,
-}
+
 
 export const MainTableDiv = styled('table')`
 display: flex;
@@ -63,7 +62,8 @@ line-height: 17px;
 letter-spacing: 0.01em;
 ${({status})=>status==="complete"?"color:#02844B;background: #E7FFF1;":
 status==="pre-order"?"color:#17BFB5;background: #E7FFF1;":
-status==="cancelled"?"color:#E84A4A;background:#FAE8E9;":"color:#E98C02;background:#FAE8E9;"} ;
+status==="cancelled"?"color:#E84A4A;background:#FAE8E9;":
+"color:#E98C02;background:#FAE8E9;"} ;
 width: 89px;
 height: 27px;
 border-radius: 14px;
