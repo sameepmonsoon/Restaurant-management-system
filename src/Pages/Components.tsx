@@ -5,9 +5,11 @@ import * as yup from 'yup';
 import InventoryCard from '../Components/InventoryCard/InventoryCard';
 import { MdAdd, MdOutlineShoppingCart } from 'react-icons/md';
 
+
 import {
   DashboardComponents
 } from './Components.styles'
+import Navbar from '../PageComponent/Dashboard/Navbar/Navbar';
 import ActionButton from '../Components/ActionButton/ActionButton';
 
 export default function Components() {
