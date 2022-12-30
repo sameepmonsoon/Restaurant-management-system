@@ -10,8 +10,12 @@ flex-direction: row;
 flex-wrap: wrap;
 justify-content:space-between;
 align-items: center;
-width: 1169px;
-height: 86px;
+
+/*made FLEX 1 and padding added instead of width and height*/
+flex:1;
+padding: 15px;
+/* width: 1439px;
+height: 86px; */
 `;
 
 
@@ -19,8 +23,12 @@ height: 86px;
 //navbar bar icon-left
 export const NavbarItemIcon = styled('div')`
 order:1;
-margin-top:1%;
-margin-left:0px;
+/* margin-top:1%; */
+/* margin-left:0px; */
+/* position updated to relative */
+position:relative;
+left: -15px;
+top: -7px;
 width:25px;
 height:30px;
 color: #7D7C7C;
