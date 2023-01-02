@@ -4,7 +4,7 @@ import SiderButton from '../../../Components/SiderButton/SiderButton'
 export default function Sider() {
   return (
     <div>
-      
+      I am sider .
     </div>
 
   )
