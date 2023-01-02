@@ -2,11 +2,12 @@ import styled from "@emotion/styled";
 
 export const SiderDiv = styled.div`
     width: 270px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
 `
 export const SiderLogoDiv = styled.div`
     display: flex;
     border-bottom: 2px solid white;
-    background-color: aliceblue;
     line-height: 50px;
     height: 86px;
     padding: 23px; 
@@ -50,8 +51,8 @@ export const SiderMainDiv = styled.div`
     flex-direction: column;
     justify-content: space-between;
     height: 100vh;
-    background-color: aliceblue;
     padding: 23px;
+    box-shadow: 0 -2px 4px -4px #333;
 
 `
 
