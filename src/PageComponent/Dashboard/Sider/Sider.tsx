@@ -18,6 +18,7 @@ export default function Sider() {
     navigate("/")
   }
   return (
+
     <SiderDiv>
       <SiderLogoDiv>
           <SiderIcon>
@@ -51,6 +52,10 @@ export default function Sider() {
       </SiderMainDiv>
       
     </SiderDiv>
+
+    <div>
+      I am sider .
+    </div>
 
   )
 }
