@@ -37,7 +37,7 @@ export default function Sider() {
       <SiderMainDiv>
           <SiderButtonLabel>
               <h6 style={{color:"#1E1E1E", fontWeight:"600"}}>ANALYTICS</h6>
-              <section> DASHBOARD COMPONENT </section>
+              <section> DASHBOARD  </section>
               
           </SiderButtonLabel>
           <LogoutSetting>
