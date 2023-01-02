@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 export const SiderDiv = styled.div`
-
+    width: 270px;
 `
 export const SiderLogoDiv = styled.div`
     display: flex;
