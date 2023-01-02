@@ -1,7 +1,10 @@
 import React from 'react'
 import { SiderLogoDiv, SiderMainDiv, SiderButtonLabel, LogoutSetting, SettingDiv,
           SiderIcon,
-          SiderDiv
+          SiderDiv,
+          SiderLogoName,
+          SiderLogoHeader,
+          SiderLogoSubHeader
 } from './Sider.Style'
 import SiderButton from '../../../Components/SiderButton/SiderButton'
 import {FiSettings} from 'react-icons/fi'
@@ -22,18 +25,18 @@ export default function Sider() {
     <SiderDiv>
       <SiderLogoDiv>
           <SiderIcon>
-            <img src="/assets/logo.png" alt="LOGO" />
+            <img src="/assets/logo.png" alt="LOGO"  style={{width: "52px", height: "52px"}}/>
           </SiderIcon>
-          <div>
-            <h4>KPOP</h4>
-            <p>Restaurant</p>
-          </div>
+          <SiderLogoName>
+            <SiderLogoHeader>KPOP</SiderLogoHeader>
+            <SiderLogoSubHeader>Restaurant</SiderLogoSubHeader>
+          </SiderLogoName>
 
       </SiderLogoDiv>
 
       <SiderMainDiv>
           <SiderButtonLabel>
-              <h6>ANALYTICS</h6>
+              <h6 style={{color:"#1E1E1E", fontWeight:"600"}}>ANALYTICS</h6>
               <section> DASHBOARD COMPONENT </section>
               
           </SiderButtonLabel>
@@ -53,9 +56,6 @@ export default function Sider() {
       
     </SiderDiv>
 
-    <div>
-      I am sider .
-    </div>
 
   )
 }

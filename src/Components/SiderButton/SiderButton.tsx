@@ -1,5 +1,5 @@
 import React from "react";
-import { MainCard } from "./SiderButton.Style";
+import { Children,ChildrenItem, ChildrenCard, MainCard } from "./SiderButton.Style";
 import { TitleCard } from "./SiderButton.Style";
 import { Icon } from "./SiderButton.Style";
 import { Icon2 } from "./SiderButton.Style";
@@ -29,7 +29,13 @@ const SiderButton = (props: card) => {
             </Icon2>
           }
           
-
+        <ChildrenCard>
+          <Children>
+            <ChildrenItem>Purchase</ChildrenItem>
+            <ChildrenItem>Sales</ChildrenItem>
+            <ChildrenItem>Stock</ChildrenItem>
+          </Children>
+        </ChildrenCard>
         </TitleCard>
         {/* {
           children

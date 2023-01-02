@@ -60,6 +60,27 @@ display: flex;
 margin-top: 15px;
 margin-left: 35px;
 `
+export const Children =styled('ul')`
+font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 20px;
+position: absolute;
+`
+export const ChildrenItem=styled('button')`
+font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 20px;
+background: none;
+
+`
+export const ChildrenCard=styled('div')`
+max-width: 224px;
+height: 170px;
+background-color:#f2eded ;
+display: none;
+`
 
 export const Dropdown = styled.div`
     
