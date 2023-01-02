@@ -15,7 +15,6 @@ type card = {
 };
 const SiderButton = (props: card) => {
   const {titleIcon,title,childrenIcon,children}=props
-  console.log("title",title)
   return (
     <>
       <MainCard>
@@ -28,6 +27,8 @@ const SiderButton = (props: card) => {
               <RiArrowDropDownLine />
             </Icon2>
           }
+        </TitleCard>
+        {childrenIcon}
           
         <ChildrenCard>
           <Children>

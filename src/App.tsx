@@ -1,5 +1,9 @@
 import {
   createBrowserRouter,
+  RouterProvider,} from "react-router-dom";
+import { Login, Register } from "./Pages";
+import Components from "./Pages/Components";
+import Dashboard from "./Pages/Dashboard";
   RouterProvider,
   Route,
   Link,
