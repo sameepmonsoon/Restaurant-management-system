@@ -7,16 +7,21 @@ import {
 import InventoryCard from "./Components/InventoryCard/InventoryCard";
 import { TextField } from "./Components/TextField";
 import {MdOutlineShoppingCart} from 'react-icons/md'
-import {BiPurchaseTag} from 'react-icons/bi'
-import {CiBoxes} from 'react-icons/ci'
+
 import { Login, Register } from "./Pages";
 import Components from "./Pages/Components";
 import Dashboard from "./Pages/Dashboard";
-import ForgotPassword from "./Pages/ForgotPassword";
-import { FaBeer } from "react-icons/fa";
-import {MdAdd} from "react-icons/md";
-import ActionButton from "./Components/ActionButton/ActionButton";
-import SiderButton from "./Components/SiderButton/SiderButton";
+import Sider from "./PageComponent/Dashboard/Sider/Sider";
+import Snackbar from "./Components/Snackbar/Snackbar";
+import { ToastContainer } from "react-toastify";
+
+// import ForgotPassword from "./Pages/ForgotPassword";
+// import { FaBeer } from "react-icons/fa";
+// import {MdAdd} from "react-icons/md";
+// import ActionButton from "./Components/ActionButton/ActionButton";
+// import SiderButton from "./Components/SiderButton/SiderButton";
+// import {BiPurchaseTag} from 'react-icons/bi'
+// import {CiBoxes} from 'react-icons/ci'
 
 
 
@@ -51,14 +56,23 @@ function App(props: any) {
     // } 
     , 
    
+    {
+      path: "pagecomponent/sider",
+      element: <Sider/>
+    }
 
+,
     {
       path: "*",
       element: <h1>page not found</h1>,
     },
   ]);
   return (
+    <>
+    <ToastContainer/>
     <RouterProvider router={router} />
+    </>
+   
   )
 }
 
