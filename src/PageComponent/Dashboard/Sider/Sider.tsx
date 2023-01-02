@@ -56,9 +56,6 @@ export default function Sider() {
       
     </SiderDiv>
 
-    <div>
-      I am sider .
-    </div>
 
   )
 }
