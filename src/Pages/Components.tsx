@@ -10,6 +10,7 @@ import {
   DashboardComponents
 } from './Components.styles'
 import Navbar from '../PageComponent/Dashboard/Navbar/Navbar';
+import DrawerC from '../PageComponent/Dashboard/Drawer/Drawer';
 
 export default function Components() {
     let schema = yup.object().shape({
@@ -42,7 +43,7 @@ function onSumbit(e:any){
     
     <InventoryCard  title={"purchase"} icon={<MdOutlineShoppingCart size={30}/>} amount={"10,000"} cardType="purchase" active={false}/>
     
-    
+    <DrawerC cardtitle={"new purchase"}/>
     </DashboardComponents>
    
 
