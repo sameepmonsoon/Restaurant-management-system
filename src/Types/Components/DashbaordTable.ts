@@ -1,3 +1,6 @@
+import { productObjectType } from "./ProductListsType"
+
 export type TableStatus={
-    status:String,
+
+    data?: productObjectType[]
 }

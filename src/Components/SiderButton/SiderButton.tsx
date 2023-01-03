@@ -37,7 +37,6 @@ const SiderButton = (props: card) => {
             <ChildrenItem>Stock</ChildrenItem>
           </Children>
         </ChildrenCard>
-        </TitleCard>
         {/* {
           children
         } */}
