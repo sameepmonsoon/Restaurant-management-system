@@ -30,12 +30,12 @@ const Navbar = (props:NavbarTitles) => {
   <NabarItemTextContainer>
    <NavbarItemTextElementOne>{navTitle}</NavbarItemTextElementOne>
    {arrowIcon===true?
-<NavbarItemTextElementsArrow><RiArrowRightSLine size={25}/>
-</NavbarItemTextElementsArrow>:null}
-<NavbarItemTextElementThree>{navbarCardName}</NavbarItemTextElementThree>
-</NabarItemTextContainer>
-    <NavbarLogoContainer>
-      <NavbarIconNotification>
+  <NavbarItemTextElementsArrow><RiArrowRightSLine size={25}/>
+  </NavbarItemTextElementsArrow>:null}
+  <NavbarItemTextElementThree>{navbarCardName}</NavbarItemTextElementThree>
+  </NabarItemTextContainer>
+      <NavbarLogoContainer>
+        <NavbarIconNotification>
         <VscBellDot size={20}/>
       </NavbarIconNotification>
        <NavbarLogoIcon> 

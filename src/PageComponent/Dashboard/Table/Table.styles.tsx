@@ -9,7 +9,6 @@ flex-direction: column;
 flex-wrap: nowrap;
 box-sizing: border-box;
 width: 1105px;
-height: 407px;
 `;
 
 export const TableHeader = styled ('thead')`

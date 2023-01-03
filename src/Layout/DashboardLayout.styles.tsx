@@ -19,7 +19,6 @@ gap: 100px;
 padding-top:10px;
 padding-left: 10px;
 
-background: gray;
 @media screen and (max-width:1290px) {
     background:red;
     flex-flow: row nowrap;

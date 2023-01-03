@@ -4,25 +4,13 @@ import {
 import { Login, Register } from "./Pages";
 import Components from "./Pages/Components";
 import Dashboard from "./Pages/Dashboard";
- 
-import InventoryCard from "./Components/InventoryCard/InventoryCard";
-import { TextField } from "./Components/TextField";
-import {MdOutlineShoppingCart} from 'react-icons/md'
-
-
 import Sider from "./PageComponent/Dashboard/Sider/Sider";
 import Snackbar from "./Components/Snackbar/Snackbar";
 import { ToastContainer } from "react-toastify";
 import Table from "./PageComponent/Dashboard/Table/Table";
-
-// import ForgotPassword from "./Pages/ForgotPassword";
-// import { FaBeer } from "react-icons/fa";
-// import {MdAdd} from "react-icons/md";
-// import ActionButton from "./Components/ActionButton/ActionButton";
-// import SiderButton from "./Components/SiderButton/SiderButton";
-// import {BiPurchaseTag} from 'react-icons/bi'
-// import {CiBoxes} from 'react-icons/ci'
-
+import Sales from "./Pages/Sales";
+import Stocks from "./Pages/Stocks";
+import Purchase from "./Pages/Purchase";
 
 
 function App(props: any) {
@@ -37,7 +25,21 @@ function App(props: any) {
     },
     {
       path:"/home",
-      element:<Dashboard/>
+      element:<Dashboard/>,
+      children:[
+        {
+          path:"purchase",
+          element:<Purchase/>
+        },
+        {
+          path:"sales",
+          element:<Sales/>
+        },
+        {
+          path:"stocks",
+          element:<Stocks/>
+        }
+      ]
     },  
     {
       path:"/home/purchase",
@@ -47,8 +49,8 @@ function App(props: any) {
       path: "/components",
       element:<Components/>,
     }
-
     
+
     
     
     // ,  
