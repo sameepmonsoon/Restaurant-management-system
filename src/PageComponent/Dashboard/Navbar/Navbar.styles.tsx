@@ -10,10 +10,10 @@ flex-direction: row;
 flex-wrap: wrap;
 justify-content:space-between;
 align-items: center;
-
 /*made FLEX 1 and padding added instead of width and height*/
 flex:1;
 padding: 15px;
+height: 80px;
 /* width: 1439px;
 height: 86px; */
 `;
