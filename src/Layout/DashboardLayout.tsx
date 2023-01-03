@@ -36,14 +36,16 @@ export default function DashboardLayout({children,renderActions,renderFilters}:{
         <DashboardFilterComponent><b>Filters here</b></DashboardFilterComponent>
         <DashboardBodyTable>
           <div><b>Cart icon  cart-box</b></div>
-        <Table status={"complete"}/>
         </DashboardBodyTable>
         
         <DashboardHeaderLayout>
         {renderActions} 
+      
         </DashboardHeaderLayout>
         {renderFilters}
         {children}
+
+        
 
 
         </DashboardBodyComponents>

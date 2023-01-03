@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { MainDiv } from '../../../Components/TextField.Style'
 import {HiChevronDown} from 'react-icons/hi'
 import {HiDotsVertical} from 'react-icons/hi'
@@ -13,10 +13,9 @@ import {
     TableDataForDate,
     TableDataStatus } from './Table.styles'
 
-       
-
 const Table = (props:TableStatus) => {
-    const{status}= props
+    const {data}=props
+    
   return (
   <>
   <MainTableDiv>
@@ -30,31 +29,30 @@ const Table = (props:TableStatus) => {
     <TableHeadData>date<HiChevronDown/></TableHeadData> 
     </TableHeader>
     <TableBody>
-        <TableRow>
-            <TableData>01</TableData>
-        
-            <TableData>Mackeral Fish</TableData>
-        
-            <TableData>5 Packets</TableData>
-            <TableData>1000</TableData>
-        
-            <TableData>5000</TableData>
-        
-            <TableData>
-                <TableDataStatus status={status}>
-                    {status}</TableDataStatus>
-                </TableData>
-            <TableData>22 Dec 2022
-               <TableDataForDate>
-                <HiDotsVertical size={20}/>
-               </TableDataForDate>
+        {
+           data && data.map((product, index)=> <TableRow >
+                <TableData> { index+1}</TableData>
+                <TableData>{product.name}</TableData>
+                <TableData>{product.quantity}</TableData>
+                <TableData>{product.per_piece}</TableData>
+                <TableData>{product.net_price}</TableData>
+                <TableData>{product.status}</TableData>
 
-           </TableData>
-        </TableRow>
+                <TableData>{product.purchased_date}
+                   <TableDataForDate>
+                    <HiDotsVertical size={20}/>
+                   </TableDataForDate>
+    
+               </TableData>
+            </TableRow>)
+        }  
+       
         
     
     
     </TableBody>
+    
+
   </MainTableDiv>
   </>
   
