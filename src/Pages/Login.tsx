@@ -11,31 +11,57 @@ import { FormError } from "./Login.Style";
 import { Caption } from "./Login.Style";
 import MediaQuery from "react-responsive";
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { HTTPMethods } from "../Utils/HTTPMock";
 import { useNavigationAfterTokenCheck } from "../Hooks/useNavigateToLogin";
 import { ResponseType } from "../Types/Utils/ResponseTypes";
+
+// import Toast from "../Components/Snackbar/Snackbar";
+
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export function Login() {
-  const redirect=useNavigationAfterTokenCheck()
+  // const redirect=useNavigationAfterTokenCheck()
   const navigate=useNavigate()
-  redirect()
+  // redirect()
 
+  const popUpHandle =()=>{
 
+    toast.success("successfull login",{
+      theme: "colored",
+      hideProgressBar: true,
+      autoClose: 1000
+    })
+
+  }
+
+  
   let schema = yup.object().shape({
     email: yup.string().email().required(" Email is required"),
     password: yup.string().min(6).required(" Password is required"),
   });
+
+
   const { values, handleSubmit, handleChange, errors, touched } = useFormik({
     initialValues: { email: "", password: "" },
     onSubmit: (values) => {
-
+    
       HTTPMethods.post("/auth/login",values)
       .then(async function(resp:any){
-      const {payload}=resp.data 
-      const {token}=payload
-      await localStorage.setItem("token",token)
+        console.log(resp.data)
+        const {payload}=resp.data 
+        const {token}=payload
+        localStorage.setItem("token",token)
+
       // Success Message
-      navigate("/home")
+        toast.success("successfull login",{
+          theme: "colored",
+          hideProgressBar: true,
+          autoClose: 1000
+        })
+      
+      return navigate("/home")
       })
       .catch(function(err){
         // Error Message
@@ -64,7 +90,8 @@ export function Login() {
               // error={errors.email}
               label={"Email"}
               placeholder="Enter your Email"
-              value={values.email}
+              defaultValue={"ashwon2000bajracharya@gmail.com"}
+              
             ></TextField>
               {errors.email && touched.email ? (
               <FormError>{errors.email}</FormError>
@@ -76,7 +103,7 @@ export function Login() {
               // error={errors.password}
               label={"Password"}
               placeholder="Enter your Password"
-              value={values.password}
+              defaultValue={"123123"}
             ></TextField>
              {errors.password && touched.password ? (
               <FormError>{errors.password}</FormError>
@@ -93,10 +120,11 @@ export function Login() {
               </Link>
             </PasswordField>
 
-            <Button type="submit">Sign in</Button>
+            <Button type="submit" onClick={()=>handleSubmit()}>Sign in</Button>
           </form>
         </FormDiv>
       </MainLoginDiv>
+      
     </>
   );
 }
