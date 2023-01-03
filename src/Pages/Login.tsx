@@ -27,7 +27,6 @@ export function Login() {
   // redirect()
 
   const popUpHandle =()=>{
-
     toast.success("successfull login",{
       theme: "colored",
       hideProgressBar: true,

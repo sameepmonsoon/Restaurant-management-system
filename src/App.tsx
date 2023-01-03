@@ -1,6 +1,6 @@
 import {
   createBrowserRouter,
-  RouterProvider,} from "react-router-dom";
+  RouterProvider} from "react-router-dom";
 import { Login, Register } from "./Pages";
 import Components from "./Pages/Components";
 import Dashboard from "./Pages/Dashboard";
@@ -15,6 +15,7 @@ import {MdOutlineShoppingCart} from 'react-icons/md'
 import Sider from "./PageComponent/Dashboard/Sider/Sider";
 import Snackbar from "./Components/Snackbar/Snackbar";
 import { ToastContainer } from "react-toastify";
+import Table from "./PageComponent/Dashboard/Table/Table";
 
 // import ForgotPassword from "./Pages/ForgotPassword";
 // import { FaBeer } from "react-icons/fa";
@@ -41,9 +42,15 @@ function App(props: any) {
       element:<Dashboard/>
     },  
     {
+      path:"/home/purchase",
+      element:<Dashboard/>
+    },  
+    {
       path: "/components",
       element:<Components/>,
     }
+
+    
     
     
     // ,  
