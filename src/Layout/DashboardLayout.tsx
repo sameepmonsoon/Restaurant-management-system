@@ -1,5 +1,7 @@
 import React from 'react'
 import {MdOutlineShoppingCart} from 'react-icons/md'
+import {BiPurchaseTag} from 'react-icons/bi'
+import {FaBoxes} from 'react-icons/fa'
 import InventoryCard from '../Components/InventoryCard/InventoryCard'
 import Navbar from '../PageComponent/Dashboard/Navbar/Navbar'
 import { NavbarMainDiv } from '../PageComponent/Dashboard/Navbar/Navbar.styles'
