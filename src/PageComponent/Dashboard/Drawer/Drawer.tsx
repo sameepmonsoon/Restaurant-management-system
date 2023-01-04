@@ -17,23 +17,19 @@ import 'react-modern-drawer/dist/index.css'
 
 type DrawerTitles = {
     cardtitle:string,
+    open:boolean,
+    closeDrawer:()=>void
 }
 const DrawerC = (props:DrawerTitles) => {
-    const{cardtitle} = props
-    const [open,setOpen]=useState(false)
+    const{cardtitle,open,closeDrawer} = props
     // const { values, handleSubmit, handleChange, errors, touched } = useFormik({
     //     initialValues:{name:"Noodles",quantity:"10",perprice:"1000",netprice:"5000",status:"completed",date:"new date():"},
     //     onSubmit:(values)=>{alert(values)}
     // })
-    const toggleDrawer = () => {
-        setOpen((prevState) => !prevState)
-    }   
-
   return (
-  <>
    <Drawer
                 open={open}
-                onClose={toggleDrawer}
+                onClose={closeDrawer}
                 size={460}
                 direction='right'
                 className='bla bla bla'
@@ -42,7 +38,7 @@ const DrawerC = (props:DrawerTitles) => {
    <DrawerTitleDiv>
          <DrawerTitleDivTitle>{cardtitle}</DrawerTitleDivTitle>
    <DrawerTitleCancelButton>
-        <button onClick={()=>setOpen(false)}>X</button>
+        <button onClick={()=>closeDrawer()}>X</button>
    </DrawerTitleCancelButton>
    </DrawerTitleDiv>
     <DrawerInputContentDiv>
@@ -68,8 +64,6 @@ const DrawerC = (props:DrawerTitles) => {
     </DrawerButtonDiv>
   </DrawerMainDiv>
   </Drawer>
-<button onClick={()=>setOpen(true)}>Drawer</button>
- </>
     )
 }
 

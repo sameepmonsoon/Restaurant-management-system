@@ -14,7 +14,11 @@ import {
 
 } from './DashboardLayout.styles'
 
+import DrawerC from '../PageComponent/Dashboard/Drawer/Drawer'
 export default function DashboardLayout({children,renderActions,renderFilters}:{children:JSX.Element,renderActions?:JSX.Element,renderFilters?:JSX.Element}) {
+  function closeDrawer(){
+
+  }
   return (
     <>
     <DashboardMainDiv>
@@ -27,15 +31,14 @@ export default function DashboardLayout({children,renderActions,renderFilters}:{
           <InventoryCard  title={"stock"} icon={<MdOutlineShoppingCart size={30}/>} amount={"10,000"} cardType="stock" active={false}/>
              {renderActions}
           </InventoryCardContainerDiv>
-
-<FilterComponentDiv>
-          {renderFilters}
-
-          </FilterComponentDiv> 
-          <ChildrenDiv>
-          {children}
-          </ChildrenDiv>
-        </LayoutContainerDiv>
+        <FilterComponentDiv>
+                  {renderFilters}
+                  </FilterComponentDiv> 
+                  <ChildrenDiv>
+                  {children}
+                  </ChildrenDiv>
+                </LayoutContainerDiv>
+          <DrawerC open={true} closeDrawer={closeDrawer} cardtitle={"Purchase"}/>      
         </DashboardMainDiv>
     </>
   )

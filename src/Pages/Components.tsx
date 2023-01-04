@@ -44,7 +44,7 @@ function onSumbit(e:any){
     
     <InventoryCard  title={"purchase"} icon={<MdOutlineShoppingCart size={30}/>} amount={"10,000"} cardType="purchase" active={false}/>
     
-    <DrawerC cardtitle={"new purchase"}/>
+    {/* <DrawerC cardtitle={"new purchase"}/> */}
     </DashboardComponents>
     <DashboardComponents>
         <InventoryCard  title={"purchase"} icon={<MdOutlineShoppingCart size={30}/>} amount={"10,000"} cardType="purchase" active={true}/>
