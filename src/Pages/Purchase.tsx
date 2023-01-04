@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import Table from '../PageComponent/Dashboard/Table/Table'
+import { toast } from 'react-toastify'
+import PurchaseTable from '../PageComponent/Dashboard/Table/PurchaseTable'
 import { productObjectType } from '../Types/Components/ProductListsType'
 import { HTTPMethods } from '../Utils/HTTPMock'
 
@@ -11,10 +12,16 @@ export default function Purchase() {
               setProducts(res.data)
           })
           .catch(async (err) => {
-              console.log(err)
+              toast.info("Server is down to display the table data.",{
+                theme: "colored",
+                hideProgressBar: true,
+                autoClose: 2000,
+                position: "bottom-right",
+                toastId: 'info1'
+              })
           })
       },[])
   return (
-    <Table  data={products}/>
+    <PurchaseTable  data={products}/>
   )
 }

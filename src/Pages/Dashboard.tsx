@@ -25,6 +25,7 @@ function Dashboard() {
       <div>Filters</div>
     }
   >
+    
     <Outlet />
   </DashboardLayout>
 )
