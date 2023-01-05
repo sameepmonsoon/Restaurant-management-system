@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
+import Snackbar from '../Components/Snackbar/Snackbar'
 import SalesTable from '../PageComponent/Dashboard/Table/SalesTable'
 import { productObjectType } from '../Types/Components/ProductListsType'
 import { HTTPMethods } from '../Utils/HTTPMock'
