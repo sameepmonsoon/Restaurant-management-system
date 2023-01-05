@@ -10,6 +10,7 @@ import { useDrawer } from './states/Drawer.state';
 function Dashboard() {
   const {open,toggleDrawer}=useDrawer()
   function openDrawer(){
+    console.log("inside open drawer",open)
     toggleDrawer()
   }
   return (

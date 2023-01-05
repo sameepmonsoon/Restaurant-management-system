@@ -16,16 +16,14 @@ import {
 import 'react-modern-drawer/dist/index.css'
 
 type DrawerTitles = {
-    cardtitle:string,
+    cardtitle: string,
     open:boolean,
-    closeDrawer:()=>void
+    closeDrawer:()=>void,
+    children?:JSX.Element |JSX.Element[]
 }
 const DrawerC = (props:DrawerTitles) => {
-    const{cardtitle,open,closeDrawer} = props
-    // const { values, handleSubmit, handleChange, errors, touched } = useFormik({
-    //     initialValues:{name:"Noodles",quantity:"10",perprice:"1000",netprice:"5000",status:"completed",date:"new date():"},
-    //     onSubmit:(values)=>{alert(values)}
-    // })
+    const{cardtitle,open,closeDrawer,children} = props
+
   return (
    <Drawer
                 open={open}
@@ -38,30 +36,19 @@ const DrawerC = (props:DrawerTitles) => {
    <DrawerTitleDiv>
          <DrawerTitleDivTitle>{cardtitle}</DrawerTitleDivTitle>
    <DrawerTitleCancelButton>
-        <button onClick={()=>closeDrawer()}>X</button>
+        <button onClick={(e)=>{
+            e.preventDefault()
+            closeDrawer()
+        }}>X</button>
    </DrawerTitleCancelButton>
    </DrawerTitleDiv>
     <DrawerInputContentDiv>
-     <TextField name="Product" type='text' defaultValue="Product" placeholder='Product' />
-     <TextField name="Quantity" type='number' defaultValue="Quantity" placeholder='Quantity'/>
-     <TextField name="per price" type='number' defaultValue="perprice" placeholder='1000'/>
-     <TextField name='net price' type='number' defaultValue="netprice" placeholder='5000'/>
-    {/* <select>
-        <option>complete</option>
-        <option>pending</option>
-        <option>cancelled</option>
-        <option>processing</option>
-    </select> */}
-    {/* <p>Purchase Date</p>
- <input type="date" name="name" id="" /> */}
-
-
-<TextField name="date" type='date'/>
+        {
+            children
+        }
     
     </DrawerInputContentDiv>
-    <DrawerButtonDiv>
-           <Button>add</Button><Button>clear</Button>
-    </DrawerButtonDiv>
+
   </DrawerMainDiv>
   </Drawer>
     )
