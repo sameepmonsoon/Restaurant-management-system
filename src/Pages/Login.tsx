@@ -60,7 +60,7 @@ export function Login() {
           autoClose: 1000
         })
       
-      return navigate("/home")
+      return navigate("/home/purchase")
       })
       .catch(function(err){
         // Error Message

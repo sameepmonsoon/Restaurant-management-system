@@ -83,7 +83,7 @@ line-height: 1em;
 // for card amount
 export const InventoryCardAmount = styled('div')`
 letter-spacing:1px;
-font-weight: bold;
+font-weight: 550;
 font-size:23px;
 line-height:20px;
 `;

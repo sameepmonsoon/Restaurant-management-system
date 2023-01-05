@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 // @ts-ignore
-import Drawer from 'react-modern-drawer'
+import Drawer from "react-modern-drawer"
 import { TextField } from '../../../Components/TextField'
 import { useFormik } from 'formik'
 import { LabelDiv, MainDiv,Input,Button} from '../../../Components/TextField.Style';

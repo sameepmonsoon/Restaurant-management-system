@@ -34,10 +34,10 @@ const SalesTable = (props:TableStatus) => {
                 <TableData style={{ justifyContent: 'center'}}> { index+1}</TableData>
                 <TableData>{product.name}</TableData>
                 <TableData>{product.quantity }</TableData>
-                <TableData>{product.per_piece}</TableData>
+                <TableData>{product.per_price}</TableData>
                 <TableData>{product.net_price}</TableData>
-                <TableData>{product.status}</TableData>
-                <TableData>{product.purchased_date}
+                <TableData>{product.date}
+
                    <TableDataForDate>
                     <HiDotsVertical size={20}/>
                    </TableDataForDate>
