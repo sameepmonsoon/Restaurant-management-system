@@ -71,7 +71,6 @@ export  const TextField = forwardRef(
       // modifications
       return text;
     }
-    console.log("error is",error)
     function increment() {
       inputPrototype.call(input, +input.value + 1);
       input.dispatchEvent(new Event('change', { bubbles: true }));
@@ -82,8 +81,6 @@ export  const TextField = forwardRef(
       input.dispatchEvent(new Event('change', { bubbles: true }));
     }
 
-    // @ts-ignore
-    console.log("inside")
     return (
       <MainDiv>
         <div>

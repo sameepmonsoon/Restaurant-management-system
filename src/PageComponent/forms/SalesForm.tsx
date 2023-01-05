@@ -1,23 +1,75 @@
 import { useFormik } from 'formik'
 import React from 'react'
 import { TextField } from '../../Components/TextField'
-
+import { Button, LabelDiv } from '../../Components/TextField.Style'
+import { DrawerButtonDiv } from '../Dashboard/Drawer/Drawer.styles'
+import * as yup from "yup"
+import { HTTPMethods } from '../../Utils/HTTPMock'
+import { useDrawer } from '../../Pages/states/Drawer.state'
+import { toast } from 'react-toastify'
 export default function SalesForm() {
-    const {values,errors,handleChange,handleSubmit}=useFormik({
+const {open,toggleDrawer} = useDrawer();
+
+  let schema = yup.object().shape({
+    sales:yup.string().required("is required"),
+    quantity:yup.number().required("is requuired").positive().integer(),
+    per_piece:yup.number().required("is required").positive().integer(),
+    date:yup.date().required("is required")
+  })
+    const {values,errors,handleChange,handleSubmit,handleReset,resetForm}=useFormik({
         initialValues:{
-            name:"",
+            items_name:"",
             quantity:'',
-            perPrice:'',
-            netPrice:''
+            per_piece:'',
+            status:"",
+            date:""
         },
         onSubmit:(values)=>{
-            console.log("submit",values)
-        }
+          console.log("I am data",values)
+          //  HTTPMethods.post("/orders/create-sales",values)
+          //  .then(function(resp){
+          //   handleReset
+          //   toggleDrawer()
+            
+          //  })
+          //  .catch(function(err){
+          //    toast.success("Error in purchase creation",{
+          //       theme: "colored",
+          //       hideProgressBar: true,
+          //       autoClose: 1000
+          //     })
+          //   })
+        },
+        validationSchema:schema
     })
   return (
     <form onSubmit={handleSubmit}>
-            <TextField name="Product" type='text' defaultValue="Product" placeholder='Product' error={errors.name} onChange={handleChange}/>
-            <TextField name="Quantity" type='number' defaultValue="Quantity" placeholder='Quantity' onChange={handleChange}/>
+            <TextField name="items_name" type='text' defaultValue="" placeholder='Product' error={errors.items_name} onChange={handleChange} label="Items name"/>
+            <TextField name="quantity" type='number' defaultValue={""} placeholder='Quantity' onChange={handleChange} error={errors.quantity} label="Quantity"/>
+            <TextField name="per_piece" type='number' defaultValue={""} placeholder='1000' onChange={handleChange} error={errors.per_piece}  label="Per Price"/>
+            
+            <div style={{display:"flex", flexDirection:"column"}}>
+                {
+                    <LabelDiv error={errors.status} >
+                        {errors.status || "Status" }
+                    </LabelDiv>
+                }
+            <select name="status" onChange={handleChange}>
+              <option></option>
+                <option>Card</option>
+                <option>Fonepay</option>
+                <option>Cash</option>
+                <option>Due</option>
+           </select>
+            </div><br />
+            <TextField name="date" type="date" placeholder='date' onChange={handleChange} error={errors.date} label="Sales date"/>
+            <DrawerButtonDiv>
+           <Button type='submit' onClick={(e)=>{
+            e.preventDefault()
+            handleSubmit()
+           }}>add</Button>
+           <Button onClick={handleReset}>clear</Button>
+    </DrawerButtonDiv>
     </form>
   )
 }
