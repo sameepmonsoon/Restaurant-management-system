@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import StocksTable from '../PageComponent/Dashboard/Table/StocksTable'
 import { productObjectType } from '../Types/Components/ProductListsType'
@@ -9,7 +9,7 @@ export default function Stocks() {
     useEffect(()=>{
       HTTPMethods.get("/stock/read")
       .then(async (res:any) => {
-        setProducts(res.data)
+        setProducts(res.data.payload.data)
       })
       .catch(async (err)=>{
         toast.info("Server is down to display the table data.",{
@@ -23,9 +23,6 @@ export default function Stocks() {
         
       },[])
   return (
-    
-      <StocksTable data={products}/>
-    
-     
+     products.length? <StocksTable data={products}/>:<div>loading</div>
   )
 }
