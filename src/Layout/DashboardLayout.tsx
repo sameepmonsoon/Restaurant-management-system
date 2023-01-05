@@ -2,17 +2,14 @@ import React from 'react'
 import {MdOutlineShoppingCart} from 'react-icons/md'
 import InventoryCard from '../Components/InventoryCard/InventoryCard'
 import Navbar from '../PageComponent/Dashboard/Navbar/Navbar'
-import { NavbarMainDiv } from '../PageComponent/Dashboard/Navbar/Navbar.styles'
 import Sider from '../PageComponent/Dashboard/Sider/Sider'
-import { ChildrenDiv, InventoryCardContainerDiv, LayoutContainerDiv } from './DashboardLayout.style'
+import {InventoryCardContainerDiv, LayoutContainerDiv } from './DashboardLayout.style'
 import { 
-
-  DashboardMainDiv, 
-
-
+  DashboardMainDiv
 } from './DashboardLayout.styles'
 
 export default function DashboardLayout({children,renderActions,renderFilters}:{children:JSX.Element,renderActions?:JSX.Element,renderFilters?:JSX.Element}) {
+  
   return (
     <>
     <DashboardMainDiv>

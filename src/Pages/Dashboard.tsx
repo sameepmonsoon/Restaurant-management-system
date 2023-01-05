@@ -5,10 +5,12 @@ import { productObjectType } from '../Types/Components/ProductListsType';
 import { Outlet } from 'react-router';
 import ActionButton from '../Components/ActionButton/ActionButton';
 import { MdAdd } from 'react-icons/md';
+import { useDrawer } from './states/Drawer.state';
 
 function Dashboard() {
+  const {open,toggleDrawer}=useDrawer()
   function openDrawer(){
-
+    toggleDrawer()
   }
   return (
   <DashboardLayout
