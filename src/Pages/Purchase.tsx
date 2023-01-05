@@ -9,7 +9,7 @@ export default function Purchase() {
     useEffect(()=>{
           HTTPMethods.get('/purchase/read?page=1&offset=10')
           .then(async (res:any) => {
-              setProducts(res.data)
+              setProducts(res.data.payload.data)
           })
           .catch(async (err) => {
               toast.info("Server is down to display the table data.",{
@@ -22,6 +22,6 @@ export default function Purchase() {
           })
       },[])
   return (
-    <PurchaseTable  data={products}/>
+    products.length ? <PurchaseTable  data={products}/>:<div>Loading</div>
   )
 }
