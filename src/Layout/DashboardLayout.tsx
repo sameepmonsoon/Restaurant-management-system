@@ -11,8 +11,12 @@ import {
 
 
 } from './DashboardLayout.styles'
+import DrawerC from '../PageComponent/Dashboard/Drawer/Drawer'
 
 export default function DashboardLayout({children,renderActions,renderFilters}:{children:JSX.Element,renderActions?:JSX.Element,renderFilters?:JSX.Element}) {
+  function closeDrawer(){
+
+  }
   return (
     <>
     <DashboardMainDiv>
@@ -28,6 +32,7 @@ export default function DashboardLayout({children,renderActions,renderFilters}:{
             {renderFilters}
             {children}
           </LayoutContainerDiv>
+          <DrawerC cardtitle={"purchase"} open={true} closeDrawer={()=>console.log("toggle")}/>
         </DashboardMainDiv>
     </>
   )
