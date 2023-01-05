@@ -35,7 +35,7 @@ export function friendlyName(name: string) {
   }
   return '';
 }
-export  const TextField = forwardRef(
+export  const DropdownField = forwardRef(
   (
     {
       name,
