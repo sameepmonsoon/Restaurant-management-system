@@ -42,8 +42,7 @@ export const  SiderLogoSubHeader = styled('div')`
     font-weight: 400;
     font-size: 13px;
     line-height: 15px;
-
-color: #000000; 
+    color: #000000; 
 `
 
 export const SiderMainDiv = styled.div`
@@ -58,12 +57,10 @@ export const SiderMainDiv = styled.div`
 
 export  const SiderButtonLabel = styled.div`
     cursor: pointer;
-    
 `
 
 export  const LogoutSetting = styled.div`
     width: 50%;
-
 `
 
 export const SettingDiv = styled.div`

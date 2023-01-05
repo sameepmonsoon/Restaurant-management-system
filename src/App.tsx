@@ -1,13 +1,21 @@
 import {
   createBrowserRouter,
-  RouterProvider,Route, Link} from "react-router-dom";
+  RouterProvider} from "react-router-dom";
 import { Login, Register } from "./Pages";
 import Components from "./Pages/Components";
 import Dashboard from "./Pages/Dashboard";
+  import {
+  Route,
+  Link,
+} from "react-router-dom";
+import InventoryCard from "./Components/InventoryCard/InventoryCard";
+import { TextField } from "./Components/TextField";
+import {MdOutlineShoppingCart} from 'react-icons/md'
+
 import Sider from "./PageComponent/Dashboard/Sider/Sider";
 import Snackbar from "./Components/Snackbar/Snackbar";
 import { ToastContainer } from "react-toastify";
-import Table from "./PageComponent/Dashboard/Table/Table";
+import Table from "./PageComponent/Dashboard/Table/PurchaseTable";
 import Sales from "./Pages/Sales";
 import Stocks from "./Pages/Stocks";
 import Purchase from "./Pages/Purchase";

@@ -7,9 +7,9 @@ import ActionButton from '../Components/ActionButton/ActionButton';
 import { MdAdd } from 'react-icons/md';
 
 function Dashboard() {
-  
+  function openDrawer(){
 
-
+  }
   return (
   <DashboardLayout
     renderActions={
@@ -18,13 +18,14 @@ function Dashboard() {
         <ActionButton
             icon={<MdAdd fontSize="1.4em" />}
             label={"ADD PURCHASE"}
-            onClick={(e: React.MouseEvent<HTMLElement>) => console.log("Clicked")}
+            onClick={(e: React.MouseEvent<HTMLElement>) =>openDrawer()  }
           />
     }
     renderFilters={
       <div>Filters</div>
     }
   >
+    
     <Outlet />
   </DashboardLayout>
 )

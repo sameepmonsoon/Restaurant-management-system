@@ -6,6 +6,7 @@ display: flex;
 flex-flow:row nowrap;
 `;
 
+
 // div for sider only---- logo included inside sider
 // export const DashboardSiderDiv = styled('div')`
 // order: 1;
