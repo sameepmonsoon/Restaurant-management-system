@@ -63,6 +63,7 @@ const SalesTable = (props:TableStatus) => {
 
     <TableHeader><TableHeadData> <input type="checkbox" name="" id="" />id <HiChevronDown/> 
     </TableHeadData>
+    <TableHeadData>date<HiChevronDown/></TableHeadData> 
     <TableHeadData>items<HiChevronDown/></TableHeadData>
     <TableHeadData>quantity<HiChevronDown/></TableHeadData>
     <TableHeadData>per price<HiChevronDown/></TableHeadData>
@@ -75,6 +76,7 @@ const SalesTable = (props:TableStatus) => {
         {
            data && data.map((product, index)=> 
            <TableRow >
+               
                 <TableData style={{ justifyContent: 'center'}}> { index+1}</TableData>
                 <TableData>{product.item_name}</TableData>
                 <TableData>{product.quantity }</TableData>

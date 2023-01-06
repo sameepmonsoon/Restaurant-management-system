@@ -16,7 +16,7 @@ import {
 import DrawerC from '../PageComponent/Dashboard/Drawer/Drawer'
 import { useDrawer } from '../Pages/states/Drawer.state'
 import { TextField } from '../Components/TextField'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import PurchaseForm from '../PageComponent/forms/PurchaseForm'
 import SalesForm from '../PageComponent/forms/SalesForm'
 
@@ -41,7 +41,6 @@ export default function DashboardLayout({children,renderActions,renderFilters}:{
   function closeDrawer(){
     toggleDrawer()
   }
-  const location=useLocation ()
   function manageForm(){
     if(location.pathname==="/home/purchase"){
       return <PurchaseForm/>
@@ -51,7 +50,18 @@ export default function DashboardLayout({children,renderActions,renderFilters}:{
     }
 
   }
-
+const location=useLocation()
+  function handleActiveCard(){
+    if(location.pathname){
+      return true
+    }
+    else if(location.pathname==="/home/sales"){
+      return true
+    }
+    else if(location.pathname==="/home/stocks"){
+      return true
+    }
+  }
 
 
   function manageTitle(){
@@ -70,10 +80,16 @@ export default function DashboardLayout({children,renderActions,renderFilters}:{
         <LayoutContainerDiv>
           <Navbar navTitle={"Dashboard"} navbarCardName={"Purchase"} arrowIcon={true}/>
           <InventoryCardContainerDiv>
+            <Link to={"/home"} style={{ color: '#090909', textDecoration: 'none' }} >
+                <InventoryCard  title={"Purchase"} icon={<MdOutlineShoppingCart size={30}/>} amount={`Rs. ${purchases?.totalpurchase}`} cardType="purchase" active={location.pathname==="/home/purchase"} />
+            </Link>
+            <Link to={"/home/sales"} style={{ color: '#090909', textDecoration: 'none'  }}>
+            <InventoryCard  title={"Sales"} icon={<BsTag size={30}/>} amount={`Rs. ${purchases?.total_sales}`} cardType="sales" active={location.pathname==="/home/sales"}/>
+            </Link>
 
-            <InventoryCard  title={"Purchase"} icon={<MdOutlineShoppingCart size={30}/>} amount={`Rs. ${purchases?.totalpurchase}`} cardType="purchase" active={true} />
-            <InventoryCard  title={"Sales"} icon={<BsTag size={30}/>} amount={`Rs. ${purchases?.total_sales}`} cardType="sales" active={false}/>
-            <InventoryCard  title={"Stocks"} icon={<CiBoxes size={35}/>} amount={`${purchases?.totalpurchase} products`} cardType="stock" active={false}/>
+            <Link to={"/home/stocks"} style={{ color: '#090909', textDecoration: 'none'  }}>
+              <InventoryCard  title={"Stocks"} icon={<CiBoxes size={35}/>} amount={`${purchases?.totalpurchase} products`} cardType="stock" active={location.pathname==="/home/stocks"}/>
+            </Link>
               {renderActions}
             </InventoryCardContainerDiv>
             <FilterComponentDiv>
