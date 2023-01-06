@@ -1,11 +1,13 @@
 export type productObjectType={
     name:string,
-    dish_name: string,
+    item_name:string,
     net_price:number,
+    total_amount:number,
     per_piece:number,
     per_price: number,
     product_type:string,
     purchase_id:number,
+    id:number,
     purchased_date:string,
     date: string,
     quantity:number,
@@ -13,3 +15,4 @@ export type productObjectType={
     status:string,
 
 }
+

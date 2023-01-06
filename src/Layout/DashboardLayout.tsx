@@ -8,7 +8,7 @@ import Navbar from '../PageComponent/Dashboard/Navbar/Navbar'
 import Sider from '../PageComponent/Dashboard/Sider/Sider'
 import { InventoryDataType } from '../Types/Components/InventoryDataTpes'
 import { HTTPMethods } from '../Utils/HTTPMock'
-import { ChildrenDiv, InventoryCardContainerDiv, LayoutContainerDiv } from './DashboardLayout.style'
+import { ChildrenDiv, FilterComponentDiv, InventoryCardContainerDiv, LayoutContainerDiv } from './DashboardLayout.style'
 // import {InventoryCardContainerDiv, LayoutContainerDiv } from './DashboardLayout.style'
 import { 
   DashboardMainDiv
@@ -92,8 +92,12 @@ const location=useLocation()
             </Link>
               {renderActions}
             </InventoryCardContainerDiv>
+            <FilterComponentDiv>
             {renderFilters}
+            </FilterComponentDiv>
+            <ChildrenDiv>
             {children}
+            </ChildrenDiv>
           </LayoutContainerDiv>
           <DrawerC cardtitle={manageTitle()} open={open} closeDrawer={()=>closeDrawer()}>
               {manageForm()}

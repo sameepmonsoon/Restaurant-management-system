@@ -60,8 +60,8 @@ const PurchaseTable = (props:TableStatus) => {
   <MainTableDiv>
     <TableHeader>
 
-    <TableHeadData>S.N<HiChevronDown/></TableHeadData>
-    <TableHeadData>date<HiChevronDown/></TableHeadData> 
+    <TableHeadData><input type="checkbox" name="" id="" />id <HiChevronDown/></TableHeadData>
+
     <TableHeadData>product<HiChevronDown/></TableHeadData>
     <TableHeadData>quantity<HiChevronDown/></TableHeadData>
     <TableHeadData>per price<HiChevronDown/></TableHeadData>
@@ -80,7 +80,12 @@ const PurchaseTable = (props:TableStatus) => {
                 <TableData>{product.quantity + " packet"}</TableData>
                 <TableData>{product.per_piece}</TableData>
                 <TableData>{product.net_price}</TableData>
+                <TableDataStatus status={product.status}>
                 <TableData>{product.status}</TableData>
+                </TableDataStatus>
+                <TableDataForDate>
+                <TableData>{product.purchased_date}</TableData>
+                </TableDataForDate>
                <TableData style={{width:"500px", display:"flex", gap:"20px"}}>
                <Button variant="contained" onClick={()=>editPurchase(product)}>Edit</Button>
                <Button variant="contained" onClick={()=>deletePurchase(product)}>Delete</Button>

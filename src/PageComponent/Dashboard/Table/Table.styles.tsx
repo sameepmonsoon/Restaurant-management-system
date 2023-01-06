@@ -43,8 +43,8 @@ display: flex;
 flex-direction:row;
 align-items: center;
 flex-wrap: nowrap;
-flex: 1;
-background-color: aquamarine;
+width: 1105px;
+/* flex: 1; */
 background: #FFFFFF;
 box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15);
 `;
@@ -54,14 +54,15 @@ font-family: 'Inter';
 display: flex;
 align-items: center;
 justify-content: center;
+padding-left: 0.1rem;
 font-style: normal;
 font-weight: 500;
 font-size: 14px;
 line-height: 17px;
 letter-spacing: 0.01em;
-${({status})=>status==="complete"?"color:#02844B;background: #E7FFF1;":
-status==="pre-order"?"color:#17BFB5;background: #E7FFF1;":
-status==="cancelled"?"color:#E84A4A;background:#FAE8E9;":
+${({status})=>status==="complete" || status==="cash"?"color:#02844B; background-color: #E7FFF1;":
+status==="pre-order" || status==="Fonepay"?"color:#17BFB5;background: #E7FFF1;":
+status==="cancelled"|| status==="due"?"color:#E84A4A; background:#FAE8E9;":
 "color:#E98C02;background:#FAE8E9;"} ;
 width: 89px;
 height: 27px;
@@ -70,18 +71,17 @@ border-radius: 14px;
 `;
 
 export const TableData = styled('td')`
-flex: 1;
+flex:1;
 display: flex;
 flex-direction:row;
 font-style: normal;
 font-weight: 400;
 font-size: 15px;
 line-height: 22px;
-color: #424242;
 padding-left: 10px;
 text-transform: capitalize;
-border-right:2px solid whitesmoke;
-border-top: 10px;
+/* border-right:2px solid whitesmoke;
+border-top: 10px; */
 `;
 
 
@@ -95,9 +95,10 @@ flex-direction: row;
 column-gap: 15%;
 text-transform: uppercase;
 align-items:center;
-border-right:2px solid whitesmoke;
-flex: 1;
-padding-left: 10px;
+width: 1105px;
+/* border-right:2px solid whitesmoke; */
+/* flex: 1; */
+/* padding-left: 10px; */
 `;
 
 export const TableDataForDate = styled('td')`
@@ -112,5 +113,14 @@ padding-left: 20px;
 text-transform: capitalize;
 border-top: 10px;
 `;
+
+export const TableDataAction = styled('td')`
+/* width:500px; */
+display: flex;
+gap:5%;
+padding: 0;
+margin-left: 20px;
+/* flex: 1; */
+`
 
 
