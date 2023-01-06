@@ -63,7 +63,7 @@ export  const TextField = forwardRef(
       window.HTMLInputElement.prototype,
       'value'
     ).set;
-    console.log("defaul;tvalue",defaultValue)
+    console.log("default value",defaultValue)
     function labelText() {
       const text = label || friendlyName(name);
       if (error) {

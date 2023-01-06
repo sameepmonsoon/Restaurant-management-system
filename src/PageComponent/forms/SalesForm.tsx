@@ -14,7 +14,8 @@ const {open,toggleDrawer} = useDrawer();
     item_name:yup.string().required("is required"),
     quantity:yup.number().required("is requuired").positive().integer(),
     per_piece:yup.number().required("is required").positive().integer(),
-    date:yup.date().required("is required")
+    date:yup.date().required("is required"),
+    status:yup.string().required("is required")
   })
     const {values,errors,handleChange,handleSubmit,handleReset,resetForm}=useFormik({
         initialValues:{

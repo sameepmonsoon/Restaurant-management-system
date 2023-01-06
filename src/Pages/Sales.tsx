@@ -7,7 +7,7 @@ import { HTTPMethods } from '../Utils/HTTPMock'
 export default function Sales() {
     const [products, setProducts] = useState<productObjectType[]>([])
     useEffect(()=>{
-          HTTPMethods.get('/orders/read-sales')
+          HTTPMethods.get('/new_sales/read?page=1&offset=2')
           .then(async (res:any) => {
               setProducts(res.data.payload.data)
           })
@@ -22,6 +22,6 @@ export default function Sales() {
           })
       },[])
   return (
-    products.length ? <SalesTable  data={products}/>:<div>Loading</div>
+    products.length? <SalesTable  data={products}/>:<div>Loading</div>
   )
 }
