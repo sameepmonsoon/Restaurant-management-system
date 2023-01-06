@@ -3,10 +3,10 @@ import { ActionButtonProps } from '../../Types/Components/ActionButtonTypes';
 
 
 const ActionButton = (props: ActionButtonProps) => {
-  const {icon, label} = props
+  const {icon, label,...rest} = props
   return ( 
     <>
-      <AddButtonMain >
+      <AddButtonMain {...rest}>
           <AddCardItems >
             <AddButtonIcon>{icon}</AddButtonIcon>
             <AddButtonLabel> {label}</AddButtonLabel>
