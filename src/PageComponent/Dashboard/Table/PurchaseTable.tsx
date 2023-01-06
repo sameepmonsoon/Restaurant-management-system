@@ -40,14 +40,13 @@ const PurchaseTable = (props:TableStatus) => {
    }  
 
    function deletePurchase(product:any){
-    HTTPMethods.post(`/purchase/delete/${product.purchase_id}`,{})
+    HTTPMethods.deleteMethod(`/purchase/delete/${product.purchase_id}`,{})
     .then(function(resp){
       toast.success("delete successful",{
         theme: "colored",
         hideProgressBar: true,
         autoClose: 1000
       })
-  
     })
     .catch(function(err){
       toast.success("Error in deletion",{
