@@ -26,15 +26,6 @@ export function Login() {
   const navigate=useNavigate()
   // redirect()
 
-  const popUpHandle =()=>{
-    toast.success("successfull login",{
-      theme: "colored",
-      hideProgressBar: true,
-      autoClose: 1000
-    })
-
-  }
-
   
   let schema = yup.object().shape({
     email: yup.string().email().required(" Email is required"),
@@ -57,7 +48,8 @@ export function Login() {
         toast.success("successfull login",{
           theme: "colored",
           hideProgressBar: true,
-          autoClose: 1000
+          autoClose: 1000,
+          toastId: "log1"
         })
       
       return navigate("/home/purchase")
@@ -98,6 +90,7 @@ export function Login() {
 
             <TextField
               name="password"
+              type="password"
               onChange={handleChange}
               // error={errors.password}
               label={"Password"}

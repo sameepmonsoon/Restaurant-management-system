@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { InventoryTitles } from '../../Types/Components/InventoryCardTypes';
+import { HTTPMethods } from '../../Utils/HTTPMock';
 import {
     MainDivInventory,
     IconDiv,
@@ -7,10 +8,6 @@ import {
     InventoryCardAmount,
     InventoryCardTextAmountDiv,    
 } from './InventoryCard.styles';
-
-
-
- 
 
   const InventoryCard = (props:InventoryTitles) => {
   const{title,icon,amount,cardType,active}=props

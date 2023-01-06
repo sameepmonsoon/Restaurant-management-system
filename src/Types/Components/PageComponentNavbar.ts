@@ -1,6 +1,6 @@
 
 export type NavbarTitles ={
-    navTitle:String,
+    navTitle:String | undefined,
     navbarCardName:String,
     arrowIcon:Boolean
   }
