@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { forwardRef } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 import { LabelDiv, MainDiv,Input,Button} from './TextField.Style';
 
 // import MediaQuery from 'react-responsive'
@@ -56,13 +56,14 @@ export  const TextField = forwardRef(
     }: TextFieldProps,
     ref
   ) => {
+    const [defaultValueState,setDefaultValue]=useState(defaultValue)
     const input = document.querySelector(`#input-${name}`);
     const theme="light"
     const inputPrototype = Object.getOwnPropertyDescriptor(
       window.HTMLInputElement.prototype,
       'value'
     ).set;
-
+    console.log("defaul;tvalue",defaultValue)
     function labelText() {
       const text = label || friendlyName(name);
       if (error) {
@@ -80,6 +81,7 @@ export  const TextField = forwardRef(
       inputPrototype.call(input, +input.value - 1);
       input.dispatchEvent(new Event('change', { bubbles: true }));
     }
+
 
     return (
       <MainDiv>
@@ -100,7 +102,7 @@ export  const TextField = forwardRef(
            name={name}
            value={value}
            placeholder={placeholder || friendlyName(name)}
-           defaultValue={defaultValue}
+           defaultValue={defaultValueState}
            onChange={onChange}
            onBlur={onBlur}
            prefix={!!prefix}
