@@ -7,7 +7,6 @@ export type productObjectType={
     per_price: number,
     product_type:string,
     purchase_id:number,
-
     id:number,
     purchased_date:string,
     date: string,

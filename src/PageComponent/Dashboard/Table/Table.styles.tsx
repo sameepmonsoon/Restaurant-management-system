@@ -95,9 +95,10 @@ flex-direction: row;
 column-gap: 15%;
 text-transform: uppercase;
 align-items:center;
-border-right:2px solid whitesmoke;
-flex: 1;
-padding-left: 10px;
+width: 1105px;
+/* border-right:2px solid whitesmoke; */
+/* flex: 1; */
+/* padding-left: 10px; */
 `;
 
 export const TableDataForDate = styled('td')`

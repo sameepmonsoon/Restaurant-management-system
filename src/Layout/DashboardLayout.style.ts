@@ -8,8 +8,8 @@ export const InventoryCardContainerDiv=styled('div')`
 display: flex;
 flex-direction: row;
 gap: 38px;
-margin-top:4%;
-margin-left:2%;
+margin-top:3%;
+margin-left:5%;
 margin-bottom: 4%;
 align-items: center ;
 `

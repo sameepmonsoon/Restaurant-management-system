@@ -8,7 +8,7 @@ import Navbar from '../PageComponent/Dashboard/Navbar/Navbar'
 import Sider from '../PageComponent/Dashboard/Sider/Sider'
 import { InventoryDataType } from '../Types/Components/InventoryDataTpes'
 import { HTTPMethods } from '../Utils/HTTPMock'
-import { ChildrenDiv, InventoryCardContainerDiv, LayoutContainerDiv } from './DashboardLayout.style'
+import { ChildrenDiv, FilterComponentDiv, InventoryCardContainerDiv, LayoutContainerDiv } from './DashboardLayout.style'
 // import {InventoryCardContainerDiv, LayoutContainerDiv } from './DashboardLayout.style'
 import { 
   DashboardMainDiv
@@ -76,8 +76,12 @@ export default function DashboardLayout({children,renderActions,renderFilters}:{
             <InventoryCard  title={"Stocks"} icon={<CiBoxes size={35}/>} amount={`${purchases?.totalpurchase} products`} cardType="stock" active={false}/>
               {renderActions}
             </InventoryCardContainerDiv>
+            <FilterComponentDiv>
             {renderFilters}
+            </FilterComponentDiv>
+            <ChildrenDiv>
             {children}
+            </ChildrenDiv>
           </LayoutContainerDiv>
           <DrawerC cardtitle={manageTitle()} open={open} closeDrawer={()=>closeDrawer()}>
               {manageForm()}
