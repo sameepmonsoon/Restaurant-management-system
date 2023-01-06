@@ -19,6 +19,8 @@ import Table from "./PageComponent/Dashboard/Table/PurchaseTable";
 import Sales from "./Pages/Sales";
 import Stocks from "./Pages/Stocks";
 import Purchase from "./Pages/Purchase";
+import DashboardLayout from "./Layout/DashboardLayout";
+import StocksTable from "./PageComponent/Dashboard/Table/StocksTable";
 
 
 function App(props: any) {
@@ -31,6 +33,7 @@ function App(props: any) {
       path: "/register",
       element:<Register/>,
     },
+  
     {
       path:"/home",
       element:<Dashboard/>,

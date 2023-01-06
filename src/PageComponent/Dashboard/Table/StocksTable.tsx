@@ -11,9 +11,12 @@ import {
     TableRow,
     TableDataForDate,
     TableDataStatus } from './Table.styles'
+import { useState } from 'react'
+import { HTTPMethods } from '../../../Utils/HTTPMock'
 
 const StocksTable = (props:TableStatus) => {
-    const {data}=props
+
+  const {data}=props
     
   return (
   <>
@@ -31,16 +34,8 @@ const StocksTable = (props:TableStatus) => {
            <TableRow >
                 <TableData style={{ justifyContent: 'center'}}> { index+1}</TableData>
                 <TableData>{product.name}</TableData>
-                <TableData>{product.quantity }</TableData>
-                <TableData>{product.per_piece}</TableData>
-                <TableData>{product.net_price}</TableData>
-                <TableData>{product.status}</TableData>
-                <TableData>{product.purchased_date}
-                   <TableDataForDate>
-                    <HiDotsVertical size={20}/>
-                   </TableDataForDate>
-    
-               </TableData>
+                <TableData>{product.initial_quantity }</TableData>
+               
             </TableRow>)
         }  
     

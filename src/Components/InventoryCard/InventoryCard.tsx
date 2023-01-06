@@ -26,7 +26,7 @@ import {
         {title}     
         </InventoryCardText>
         <InventoryCardAmount>
-          Rs.  {amount}
+            {amount}
         </InventoryCardAmount>
         </InventoryCardTextAmountDiv>
     </MainDivInventory>
