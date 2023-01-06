@@ -6,10 +6,11 @@ width: 85%;
 `
 export const InventoryCardContainerDiv=styled('div')`
 display: flex;
-flex-flow: row wrap;
-gap: 40px;
+flex-direction: row;
+gap: 38px;
 margin-top:4%;
-margin-left:5%;
+margin-left:2%;
+margin-bottom: 4%;
 align-items: center ;
 `
 export const ChildrenDiv=styled('div')`

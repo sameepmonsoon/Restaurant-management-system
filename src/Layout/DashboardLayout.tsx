@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import {MdOutlineShoppingCart} from 'react-icons/md'
+import {BsTag} from "react-icons/bs"
+import {CiBoxes} from "react-icons/ci"
 import { toast } from 'react-toastify'
 import InventoryCard from '../Components/InventoryCard/InventoryCard'
 import Navbar from '../PageComponent/Dashboard/Navbar/Navbar'
@@ -50,6 +52,8 @@ export default function DashboardLayout({children,renderActions,renderFilters}:{
 
   }
 
+
+
   function manageTitle(){
     if(location.pathname==="/home/purchase"){
       return "Purchase"
@@ -66,9 +70,10 @@ export default function DashboardLayout({children,renderActions,renderFilters}:{
         <LayoutContainerDiv>
           <Navbar navTitle={"Dashboard"} navbarCardName={"Purchase"} arrowIcon={true}/>
           <InventoryCardContainerDiv>
-            <InventoryCard  title={"Purchase"} icon={<MdOutlineShoppingCart size={30}/>} amount={`Rs. ${purchases?.totalpurchase}`} cardType="purchase" active={false}/>
-            <InventoryCard  title={"Sales"} icon={<MdOutlineShoppingCart size={30}/>} amount={`Rs. ${purchases?.total_sales}`} cardType="purchase" active={false}/>
-            <InventoryCard  title={"Stocks"} icon={<MdOutlineShoppingCart size={30}/>} amount={`${purchases?.totalpurchase} products`} cardType="purchase" active={false}/>
+
+            <InventoryCard  title={"Purchase"} icon={<MdOutlineShoppingCart size={30}/>} amount={`Rs. ${purchases?.totalpurchase}`} cardType="purchase" active={true} />
+            <InventoryCard  title={"Sales"} icon={<BsTag size={30}/>} amount={`Rs. ${purchases?.total_sales}`} cardType="sales" active={false}/>
+            <InventoryCard  title={"Stocks"} icon={<CiBoxes size={35}/>} amount={`${purchases?.totalpurchase} products`} cardType="stock" active={false}/>
               {renderActions}
             </InventoryCardContainerDiv>
             {renderFilters}
