@@ -72,8 +72,8 @@ export default function DashboardLayout({children,renderActions,renderFilters}:{
           <InventoryCardContainerDiv>
 
             <InventoryCard  title={"Purchase"} icon={<MdOutlineShoppingCart size={30}/>} amount={`Rs. ${purchases?.totalpurchase}`} cardType="purchase" active={true} />
-            <InventoryCard  title={"Sales"} icon={<BsTag size={30}/>} amount={`Rs. ${purchases?.total_sales}`} cardType="sales" active={true}/>
-            <InventoryCard  title={"Stocks"} icon={<CiBoxes size={35}/>} amount={`${purchases?.totalpurchase} products`} cardType="stock" active={true}/>
+            <InventoryCard  title={"Sales"} icon={<BsTag size={30}/>} amount={`Rs. ${purchases?.total_sales}`} cardType="sales" active={false}/>
+            <InventoryCard  title={"Stocks"} icon={<CiBoxes size={35}/>} amount={`${purchases?.totalpurchase} products`} cardType="stock" active={false}/>
               {renderActions}
             </InventoryCardContainerDiv>
             {renderFilters}
