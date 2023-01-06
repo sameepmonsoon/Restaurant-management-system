@@ -1,5 +1,6 @@
 export type productObjectType={
     name:string,
+    dish_name: string,
     net_price:number,
     per_piece:number,
     per_price: number,

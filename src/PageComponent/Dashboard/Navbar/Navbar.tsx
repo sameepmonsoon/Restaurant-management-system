@@ -19,9 +19,20 @@ import {
 } from './Navbar.styles'
 
 
+function subtitle() {
+  if(location.pathname==="/home/purchase"){
+    return("Purchase")
+  }
+  else if(location.pathname==="/home/sales"){
+    return("Sales")
+  }
+  else if(location.pathname==="/home/stocks"){
+    return("Stocks")
+  }
+}
 
 const Navbar = (props:NavbarTitles) => {
-  const{navTitle,navbarCardName,arrowIcon} = props
+  const{navTitle,arrowIcon} = props
   return (
   
   <>
@@ -32,7 +43,7 @@ const Navbar = (props:NavbarTitles) => {
    {arrowIcon===true?
   <NavbarItemTextElementsArrow><RiArrowRightSLine size={25}/>
   </NavbarItemTextElementsArrow>:null}
-  <NavbarItemTextElementThree>{navbarCardName}</NavbarItemTextElementThree>
+  <NavbarItemTextElementThree>{subtitle()}</NavbarItemTextElementThree>
   </NabarItemTextContainer>
       <NavbarLogoContainer>
         <NavbarIconNotification>

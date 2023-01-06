@@ -49,7 +49,7 @@ const PurchaseTable = (props:TableStatus) => {
       })
     })
     .catch(function(err){
-      toast.success("Error in deletion",{
+      toast.error("Error in deletion",{
         hideProgressBar: true,
         autoClose: 1000
       })
@@ -61,13 +61,12 @@ const PurchaseTable = (props:TableStatus) => {
     <TableHeader>
 
     <TableHeadData>S.N<HiChevronDown/></TableHeadData>
-
+    <TableHeadData>date<HiChevronDown/></TableHeadData> 
     <TableHeadData>product<HiChevronDown/></TableHeadData>
     <TableHeadData>quantity<HiChevronDown/></TableHeadData>
     <TableHeadData>per price<HiChevronDown/></TableHeadData>
     <TableHeadData>net price<HiChevronDown/></TableHeadData>
     <TableHeadData>status<HiChevronDown/></TableHeadData>
-    <TableHeadData>date<HiChevronDown/></TableHeadData> 
     <TableHeadData>Actions<HiChevronDown/></TableHeadData> 
 
     </TableHeader>
@@ -76,15 +75,12 @@ const PurchaseTable = (props:TableStatus) => {
            data && data.map((product, index)=> 
            <TableRow>
                 <TableData style={{ justifyContent: 'center'}}> { index+1}</TableData>
+                <TableData>{product.purchased_date}    </TableData>   
                 <TableData>{product.name}</TableData>
                 <TableData>{product.quantity + " packet"}</TableData>
                 <TableData>{product.per_piece}</TableData>
                 <TableData>{product.net_price}</TableData>
                 <TableData>{product.status}</TableData>
-                <TableData>{product.purchased_date}
-                 
-                  
-               </TableData>
                <TableData style={{width:"500px", display:"flex", gap:"20px"}}>
                <Button variant="contained" onClick={()=>editPurchase(product)}>Edit</Button>
                <Button variant="contained" onClick={()=>deletePurchase(product)}>Delete</Button>
