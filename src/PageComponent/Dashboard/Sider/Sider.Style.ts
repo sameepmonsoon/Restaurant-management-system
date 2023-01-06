@@ -20,8 +20,8 @@ export const SiderLogoDiv = styled.div`
 export const SiderIcon = styled.section`
 width: 48px;
 height: 48px;
-    margin-right: 0.6rem;
-    cursor: pointer;
+margin-right: 0.6rem;
+cursor: pointer;
 
 `
 
@@ -93,4 +93,12 @@ export const SettingDiv = styled.div`
     display: flex;
     flex-direction: row;
     cursor: pointer;
+    
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 22px;
+color: #676767;
+
 `

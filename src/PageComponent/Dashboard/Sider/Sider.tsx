@@ -43,10 +43,7 @@ export default function Sider() {
               <DashboardButton icon={<RxDashboard/>} title={"dashboard"}/>
           </SiderButtonLabel>
           <LogoutSetting>
-            <SettingDiv>
-                <SiderIcon> <FiSettings fontSize="1.1rem"/></SiderIcon>
-                <span>Settings</span>
-            </SettingDiv>
+
 
             <SettingDiv  onClick={handleLogout}>
                 <SiderIcon>  <HiOutlineLogout fontSize="1.4rem"/> </SiderIcon>
