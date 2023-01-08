@@ -6,12 +6,14 @@ const ActionButton = (props: ActionButtonProps) => {
   const {icon, label,...rest} = props
   return ( 
     <>
+    {label &&
       <AddButtonMain {...rest}>
           <AddCardItems >
             <AddButtonIcon>{icon}</AddButtonIcon>
             <AddButtonLabel> {label}</AddButtonLabel>
           </AddCardItems>
       </AddButtonMain>
+      }
     </> 
   );
 }

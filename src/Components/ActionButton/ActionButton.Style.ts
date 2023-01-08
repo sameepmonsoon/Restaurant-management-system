@@ -27,7 +27,7 @@ export const AddButtonIcon =styled.section`
     color: white;
 `
 
-export const AddButtonLabel = styled.p`
+export const AddButtonLabel = styled.div`
     margin-top: 4px;
     color: #FFFFFF;
     font-family: 'Inter';
