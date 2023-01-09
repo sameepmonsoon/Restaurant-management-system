@@ -1,7 +1,7 @@
 
 export type ActionButtonProps = {
     icon: React.ReactNode;
-    label: String,
+    label: String | undefined,
     onClick: (e: React.MouseEvent<HTMLElement>)=> void
 
   }
