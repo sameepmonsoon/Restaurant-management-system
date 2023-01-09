@@ -88,7 +88,7 @@ const location=useLocation()
             </Link>
 
             <Link to={"/home/stocks"} style={{ color: '#090909', textDecoration: 'none'  }}>
-              <InventoryCard  title={"Stocks"} icon={<CiBoxes size={35}/>} amount={`${purchases?.totalpurchase} products`} cardType="stock" active={location.pathname==="/home/stocks"}/>
+              <InventoryCard  title={"Stocks"} icon={<CiBoxes size={35}/>} amount={`${purchases?.total_stocks} products`} cardType="stock" active={location.pathname==="/home/stocks"}/>
             </Link>
               {renderActions}
             </InventoryCardContainerDiv>

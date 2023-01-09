@@ -18,7 +18,7 @@ export default function PurchaseForm() {
         status: yup.string().required("is required"),
         per_piece: yup.number().required("is required").positive().integer(),  
       });
-    const {values,errors,handleChange,handleSubmit,handleReset,setValues}=useFormik({
+    const {values,errors,handleChange,handleSubmit,handleReset,setValues,resetForm}=useFormik({
         initialValues:{
             product_type:'',
             name:"",
@@ -27,10 +27,10 @@ export default function PurchaseForm() {
             date:'',
             status:'',
         },
-        onSubmit:(values)=>{
+        onSubmit:(values,action)=>{
             HTTPMethods.post("/purchase/create",values)
             .then(function(resp){
-                handleReset
+                action.resetForm()
                 toggleDrawer()
             })
             .catch(function(err){
@@ -72,7 +72,9 @@ export default function PurchaseForm() {
                         {errors.status || "Status" }
                     </LabelDiv>
                 }
-            <select name="status" onChange={handleChange}>
+            <select
+             name="status"
+             onChange={handleChange}>
                 <option></option>
                 <option>complete</option>
                 <option>pending</option>
@@ -80,11 +82,16 @@ export default function PurchaseForm() {
             </select>
             </div>
         <DrawerButtonDiv>
-           <Button type='submit' onClick={(e)=>{
+           <Button type='submit'
+            onClick={(e)=>{
             e.preventDefault()
             handleSubmit()
            }}>add</Button>
-           <Button onClick={handleReset}>clear</Button>
+
+           {/* initially type="" was not specified. So, the clear button was not working */}
+           <Button
+            onClick={()=>resetForm()}
+             type="reset">clear</Button>
     </DrawerButtonDiv>
     </form>
   )

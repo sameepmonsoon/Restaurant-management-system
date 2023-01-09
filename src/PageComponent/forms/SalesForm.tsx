@@ -1,4 +1,4 @@
-import { useFormik } from 'formik'
+import { useFormik, Form } from 'formik'
 import React from 'react'
 import { TextField } from '../../Components/TextField'
 import { Button, LabelDiv } from '../../Components/TextField.Style'
@@ -7,9 +7,10 @@ import * as yup from "yup"
 import { HTTPMethods } from '../../Utils/HTTPMock'
 import { useDrawer } from '../../Pages/states/Drawer.state'
 import { toast } from 'react-toastify'
+import { useRef } from 'react'
 export default function SalesForm() {
 const {open,toggleDrawer} = useDrawer();
-
+   let useref = useRef()
   let schema = yup.object().shape({
     item_name:yup.string().required("is required"),
     quantity:yup.number().required("is requuired").positive().integer(),
@@ -25,11 +26,11 @@ const {open,toggleDrawer} = useDrawer();
             status:"",
             date:""
         },
-        onSubmit:(values)=>{
+        onSubmit:(values,action)=>{
           console.log("I am data",values)
            HTTPMethods.post("/new_sales/create",values)
            .then(function(resp){
-            handleReset
+            action.resetForm()
             toggleDrawer()
             
            })
@@ -65,11 +66,15 @@ const {open,toggleDrawer} = useDrawer();
             </div><br />
             <TextField name="date" type="date" placeholder='date' onChange={handleChange} error={errors.date} label="Sales date"/>
             <DrawerButtonDiv>
-           <Button type='submit' onClick={(e)=>{
+           <Button 
+            type='submit' 
+            onClick={(e)=>{
             e.preventDefault()
             handleSubmit()
            }}>add</Button>
-           <Button onClick={handleReset}>clear</Button>
+           <Button 
+           onClick={()=>resetForm()} 
+           type="reset">clear</Button>
     </DrawerButtonDiv>
     </form>
   )

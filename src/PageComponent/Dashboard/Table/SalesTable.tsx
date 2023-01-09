@@ -15,7 +15,7 @@ import {
 import { Button } from '@mui/material'
 import { HTTPMethods } from '../../../Utils/HTTPMock'
 import { useDrawer } from '../../../Pages/states/Drawer.state'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useMenu } from '../../../Components/actionPopUp/ActionPopUp.state'
 import { toast } from 'react-toastify'
 import { left } from '@popperjs/core'
@@ -25,6 +25,7 @@ const SalesTable = (props:TableStatus) => {
     const {menuOpen,toggleMenu}=useMenu()
     const {open,toggleDrawer,setDrawerData}=useDrawer()
     const [clickedData,setClickedData]=useState(null)
+
     
     
    const openMenu=(data:any)=>{
@@ -39,8 +40,7 @@ const SalesTable = (props:TableStatus) => {
     console.log("inside")
     setDrawerData({data,type:"purchase"})
     toggleDrawer()
-   }  
-
+   } 
    function deleteSales(product:any){
      HTTPMethods.deleteMethod(`/new_sales/delete/${product.id}`,{})
     .then(function(resp){
