@@ -11,6 +11,15 @@ export const MainLoginDiv = styled("div")`
   display: flex;
   flex-flow: row nowrap;
   font-family: "Inter", sans-serif;
+  input {
+    padding-left: 5%;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 10px;
+    color: #515151;
+  }
 `;
 
 //image container
@@ -88,7 +97,7 @@ export const Title = styled("p")`
 export const PasswordField = styled("div")`
   display: flex;
   align-items: flex-start;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
   flex-flow: row;
   width: 370px;
   height: 50px;
