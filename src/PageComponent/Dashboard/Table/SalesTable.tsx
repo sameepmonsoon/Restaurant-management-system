@@ -25,9 +25,7 @@ const SalesTable = (props:TableStatus) => {
     const {menuOpen,toggleMenu}=useMenu()
     const {open,toggleDrawer,setDrawerData}=useDrawer()
     const [clickedData,setClickedData]=useState(null)
-
-    
-    
+    const [val,setVal] = useState(true)
    const openMenu=(data:any)=>{
     setClickedData(data)
     toggleMenu()
@@ -42,6 +40,7 @@ const SalesTable = (props:TableStatus) => {
     toggleDrawer()
    } 
    function deleteSales(product:any){
+   
      HTTPMethods.deleteMethod(`/new_sales/delete/${product.id}`,{})
     .then(function(resp){
       toast.success("delete successful",{
