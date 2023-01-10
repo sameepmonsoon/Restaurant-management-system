@@ -4,6 +4,11 @@ import { Navigate, Outlet, useLocation } from 'react-router';
 import ActionButton from '../Components/ActionButton/ActionButton';
 import { MdAdd } from 'react-icons/md';
 import { useDrawer } from './states/Drawer.state';
+import Filters from '../Components/Filters/Filters';
+import {FiSearch,FiCalendar} from 'react-icons/fi'
+import {RiLoader2Fill} from 'react-icons/ri'
+import TotalItems from '../Components/TotalItems/TotalItems'
+
 
 function Dashboard() {
   const location=useLocation()
@@ -35,8 +40,14 @@ function Dashboard() {
           />
     }
     renderFilters={
-      <div>Filters</div>
+           <Filters title="Purchase"icon={<FiSearch size={20}/>} dateIcon={<FiCalendar size={20}/>} statusIcon={<RiLoader2Fill size={20}/>}/>
+  
     }
+    
+    renderTotalitems={
+      <TotalItems totalItems={12222222222}/> 
+    }
+    
   >
     <Outlet />
   </DashboardLayout>

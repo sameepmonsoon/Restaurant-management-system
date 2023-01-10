@@ -27,6 +27,7 @@ const {open,toggleDrawer} = useDrawer();
             date:""
         },
         onSubmit:(values,action)=>{
+          
           console.log("I am data",values)
            HTTPMethods.post("/new_sales/create",values)
            .then(function(resp){

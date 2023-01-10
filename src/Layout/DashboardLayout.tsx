@@ -20,7 +20,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import PurchaseForm from '../PageComponent/forms/PurchaseForm'
 import SalesForm from '../PageComponent/forms/SalesForm'
 
-export default function DashboardLayout({children,renderActions,renderFilters}:{children:JSX.Element,renderActions?:JSX.Element,renderFilters?:JSX.Element}) {
+export default function DashboardLayout({children,renderActions,renderFilters,renderTotalitems}:{children:JSX.Element,renderActions?:JSX.Element,renderFilters?:JSX.Element,renderTotalitems?:JSX.Element}) {
   const [purchases, setPurchase] = useState<InventoryDataType>()
   useEffect(()=>{
     HTTPMethods.get('/total/readTotal')
@@ -94,8 +94,10 @@ const location=useLocation()
             </InventoryCardContainerDiv>
             <FilterComponentDiv>
             {renderFilters}
+           
             </FilterComponentDiv>
             <ChildrenDiv>
+            {renderTotalitems}
             {children}
             </ChildrenDiv>
           </LayoutContainerDiv>

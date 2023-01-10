@@ -12,6 +12,7 @@ import SiderButton from '../Components/SiderButton/SiderButton';
 import { FaBeer } from 'react-icons/fa';
 import { RiArrowDropDownLine } from 'react-icons/ri';
 import { Children, ChildrenItem } from '../Components/SiderButton/SiderButton.Style';
+import Cart from '../Components/TotalItems/TotalItems';
 
 export default function Components() {
     let schema = yup.object().shape({
@@ -65,7 +66,7 @@ function onSumbit(e:any){
               <ChildrenItem>Stock</ChildrenItem>
             </Children>
           </SiderButton>
-      
+          
       </DashboardComponents>
     </>
   )
