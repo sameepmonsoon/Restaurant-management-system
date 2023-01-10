@@ -12,6 +12,18 @@ function Dashboard() {
     console.log("inside open drawer",open)
     toggleDrawer()
   }
+
+  function handleActionLabel(){
+    if(location.pathname==="/home/purchase"){
+      return "ADD PURCHASE"
+    }
+    else if(location.pathname==="/home/sales"){
+      return "ADD SALES"
+    }
+    else if(location.pathname==="/home/stocks"){
+      return "ADD STOCKS"
+    }
+  }
   return (
     location.pathname==="/home"?<Navigate to={"/home/purchase"}/>:
   <DashboardLayout
@@ -20,7 +32,7 @@ function Dashboard() {
       // And place it over here by replacing below code 
         <ActionButton
             icon={<MdAdd fontSize="1.4em" />}
-            label={"ADD PURCHASE"}
+            label={handleActionLabel()}
             onClick={(e: React.MouseEvent<HTMLElement>) =>openDrawer()  }
           />
     }

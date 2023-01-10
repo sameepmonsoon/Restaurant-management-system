@@ -23,6 +23,6 @@ export default function Stocks() {
         
       },[])
   return (
-     products.length? <StocksTable data={products}/>:<div>loading</div>
+     products.length? <StocksTable data={products}/>:<div>Loading</div>
   )
 }

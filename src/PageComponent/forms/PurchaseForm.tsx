@@ -7,6 +7,7 @@ import { Button, LabelDiv } from '../../Components/TextField.Style';
 import { HTTPMethods } from '../../Utils/HTTPMock';
 import { useDrawer } from '../../Pages/states/Drawer.state';
 import {  toast } from 'react-toastify';
+import { type } from 'os';
 export default function PurchaseForm() {
     const {open,toggleDrawer,drawerToEditData}=useDrawer()
     const [render,setRender]=useState(false)
@@ -18,7 +19,7 @@ export default function PurchaseForm() {
         status: yup.string().required("is required"),
         per_piece: yup.number().required("is required").positive().integer(),  
       });
-    const {values,errors,handleChange,handleSubmit,handleReset,setValues}=useFormik({
+    const {values,errors,handleChange,handleSubmit,handleReset,setValues, touched}=useFormik({
         initialValues:{
             product_type:'',
             name:"",
@@ -61,30 +62,45 @@ export default function PurchaseForm() {
     console.log("values are",values,drawerToEditData)
   return (
     <form onSubmit={handleSubmit}>
-            <TextField name="product_type" type='text' defaultValue={drawerToEditData.data?drawerToEditData.data.product_type:""} placeholder='Product' error={errors.product_type} onChange={handleChange} label="Product Type"/>
-            <TextField name="name" type='text' defaultValue="" placeholder='Product' error={errors.name} onChange={handleChange}/>
-            <TextField name="quantity" type='number' defaultValue="" placeholder='Quantity' onChange={handleChange} error={errors.quantity} />
-            <TextField name="per_piece" type='number' defaultValue="" placeholder='1000' onChange={handleChange} error={errors.per_piece}  label="Per Price"/>
-            <TextField name="date" type='date' error={errors.date} onChange={handleChange}/>
-            <div style={{display:"flex", flexDirection:"column"}}>
+            <TextField name="product_type" type='text' defaultValue={drawerToEditData.data?drawerToEditData.data.product_type:""} placeholder='Product'
+             error={touched.product_type && errors.product_type? (errors.product_type) : null } 
+             onChange={handleChange} label="Product Type"/>
+            <TextField name="name" type='text' defaultValue="" placeholder='Product' 
+            error={touched.name && errors.name? (errors.name) : null }
+            onChange={handleChange}/>
+            <TextField name="quantity" type='number' defaultValue="" placeholder='Quantity' onChange={handleChange} 
+            error={touched.quantity && errors.quantity? (errors.quantity) : null }
+            />
+            <TextField name="per_piece" type='number' defaultValue="" placeholder='1000' onChange={handleChange}
+            error={touched.per_piece && errors.per_piece? (errors.per_piece) : null }
+            label="Per Price"/>
+
+            <TextField name="date" type='date' 
+                error= { touched.date && errors.date? (errors.date): null}
+                onChange={handleChange}/>
+
+
+            <div style={{display:"flex", flexDirection:"column"}} >
                 {
                     <LabelDiv error={errors.status} >
                         {errors.status || "Status" }
                     </LabelDiv>
                 }
-            <select name="status" onChange={handleChange}>
-                <option></option>
-                <option>complete</option>
-                <option>pending</option>
+                <select name="status" onChange={handleChange}  >
+            
+                    <option></option>
+                    <option>Complete</option>
+                    <option>Pending</option>
 
-            </select>
+                </select>
+
             </div>
         <DrawerButtonDiv>
            <Button type='submit' onClick={(e)=>{
             e.preventDefault()
             handleSubmit()
            }}>add</Button>
-           <Button onClick={handleReset}>clear</Button>
+           <Button onClick={handleReset } type="reset" >clear</Button>
     </DrawerButtonDiv>
     </form>
   )
