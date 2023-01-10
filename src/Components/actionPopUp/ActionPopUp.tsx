@@ -1,22 +1,22 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import ClickAwayListener from '@mui/material/ClickAwayListener';
-import Grow from '@mui/material/Grow';
-import Paper from '@mui/material/Paper';
-import Popper from '@mui/material/Popper';
-import MenuItem from '@mui/material/MenuItem';
-import MenuList from '@mui/material/MenuList';
-import Stack from '@mui/material/Stack';
-import { HiDotsVertical } from 'react-icons/hi';
+import * as React from "react";
+import Button from "@mui/material/Button";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
+import Grow from "@mui/material/Grow";
+import Paper from "@mui/material/Paper";
+import Popper from "@mui/material/Popper";
+import MenuItem from "@mui/material/MenuItem";
+import MenuList from "@mui/material/MenuList";
+import Stack from "@mui/material/Stack";
+import { HiDotsVertical } from "react-icons/hi";
 
-export default function ActionPopUp({open,data,handleToggle}:any) {
-//   const [open, setOpen] = React.useState(false);
+export default function ActionPopUp({ open, data, handleToggle }: any) {
+  //   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
-    console.log("data is",data)
-//   const handleToggle = () => {
-//     handleToggle()
-//     // setOpen((prevOpen) => !prevOpen);
-//   };
+  console.log("data is", data);
+  //   const handleToggle = () => {
+  //     handleToggle()
+  //     // setOpen((prevOpen) => !prevOpen);
+  //   };
 
   const handleClose = (event: Event | React.SyntheticEvent) => {
     if (
@@ -25,19 +25,19 @@ export default function ActionPopUp({open,data,handleToggle}:any) {
     ) {
       return;
     }
-    handleToggle()
+    handleToggle();
     // setOpen(false);
   };
 
   function handleListKeyDown(event: React.KeyboardEvent) {
-    if (event.key === 'Tab') {
+    if (event.key === "Tab") {
       event.preventDefault();
-      handleToggle()
-    //   setOpen(false);
-    } else if (event.key === 'Escape') {
-      handleToggle()
+      handleToggle();
+      //   setOpen(false);
+    } else if (event.key === "Escape") {
+      handleToggle();
 
-    //   setOpen(false);
+      //   setOpen(false);
     }
   }
 
@@ -51,15 +51,13 @@ export default function ActionPopUp({open,data,handleToggle}:any) {
     prevOpen.current = open;
   }, [open]);
 
-  function handleDelete(e:Event | React.SyntheticEvent){
-    console.log("data is",data)
-    handleClose(e)
-
+  function handleDelete(e: Event | React.SyntheticEvent) {
+    console.log("data is", data);
+    handleClose(e);
   }
 
   return (
     <Stack direction="row" spacing={2}>
-  
       <div>
         <Popper
           open={open}
@@ -67,28 +65,28 @@ export default function ActionPopUp({open,data,handleToggle}:any) {
           role={undefined}
           placement="bottom-start"
           transition
-          disablePortal
-        >
+          disablePortal>
           {({ TransitionProps, placement }) => (
             <Grow
               {...TransitionProps}
               style={{
                 transformOrigin:
-                  placement === 'bottom-start' ? 'left top' : 'left bottom',
-              }}
-            >
+                  placement === "bottom-start" ? "left top" : "left bottom",
+              }}>
               <Paper>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList
                     autoFocusItem={open}
                     id="composition-menu"
                     aria-labelledby="composition-button"
-                    onKeyDown={handleListKeyDown}
-                  >
+                    onKeyDown={handleListKeyDown}>
                     <MenuItem onClick={handleClose}>Edit</MenuItem>
-                    <MenuItem onClick={(e:Event | React.SyntheticEvent)=>{
-                        handleDelete(e)
-                        }}>Delete</MenuItem>
+                    <MenuItem
+                      onClick={(e: Event | React.SyntheticEvent) => {
+                        handleDelete(e);
+                      }}>
+                      Delete
+                    </MenuItem>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>

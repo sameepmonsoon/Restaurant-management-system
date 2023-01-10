@@ -1,5 +1,10 @@
 import React from "react";
-import { Children,ChildrenItem, ChildrenCard, MainCard } from "./SiderButton.Style";
+import {
+  Children,
+  ChildrenItem,
+  ChildrenCard,
+  MainCard,
+} from "./SiderButton.Style";
 import { TitleCard } from "./SiderButton.Style";
 import { Icon } from "./SiderButton.Style";
 import { Icon2 } from "./SiderButton.Style";
@@ -11,25 +16,24 @@ type card = {
   titleIcon: React.ReactNode;
   title: string;
   childrenIcon?: React.ReactNode;
-  children?:JSX.Element
+  children?: JSX.Element;
 };
 const SiderButton = (props: card) => {
-  const {titleIcon,title,childrenIcon,children}=props
+  const { titleIcon, title, childrenIcon, children } = props;
   return (
     <>
       <MainCard>
         <TitleCard>
           <Icon>{titleIcon}</Icon>
           <Title>{title}</Title>
-          {
-            childrenIcon && 
+          {childrenIcon && (
             <Icon2>
               <RiArrowDropDownLine />
             </Icon2>
-          }
+          )}
         </TitleCard>
         {childrenIcon}
-          
+
         <ChildrenCard>
           <Children>
             <ChildrenItem>Purchase</ChildrenItem>

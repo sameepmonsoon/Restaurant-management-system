@@ -2,7 +2,7 @@ import { TextField } from "../Components/TextField";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { Button } from "../Components/TextField.Style";
-import { 
+import {
   Image,
   FormDiv,
   MainLoginDiv,
@@ -14,80 +14,71 @@ import {
   Caption,
   ForgetPassword,
   RemembermeDiv,
-  ImageTitleDiv} from "./Login.Style";
+  ImageTitleDiv,
+} from "./Login.Style";
 import MediaQuery from "react-responsive";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { HTTPMethods } from "../Utils/HTTPMock";
 import { useNavigationAfterTokenCheck } from "../Hooks/useNavigateToLogin";
 import { ResponseType } from "../Types/Utils/ResponseTypes";
-import {AiOutlineEye,AiOutlineEyeInvisible} from 'react-icons/ai'
-
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 // import Toast from "../Components/Snackbar/Snackbar";
 
-import {  toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export function Login() {
-
-
-
-// use state for password toggle button
- const[type,setType] = useState("password")
-//  @ts-ignore 
- const[eyeIcon,setEyeIcon] = useState(AiOutlineEye)
-//  function for toggle password
- function togglePassword(){
-  if(type==="password"){
-    setType("text")
-    setEyeIcon(AiOutlineEyeInvisible)
+  // use state for password toggle button
+  const [type, setType] = useState("password");
+  //  @ts-ignore
+  const [eyeIcon, setEyeIcon] = useState(AiOutlineEye);
+  //  function for toggle password
+  function togglePassword() {
+    if (type === "password") {
+      setType("text");
+      setEyeIcon(AiOutlineEyeInvisible);
+    } else {
+      setType("password");
+      setEyeIcon(AiOutlineEye);
+    }
   }
-  else{
-    setType("password")
-    setEyeIcon(AiOutlineEye)
-  }
-
-}
-
 
   // const redirect=useNavigationAfterTokenCheck()
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   // redirect()
 
-  
   let schema = yup.object().shape({
     email: yup.string().email().required(" Email is required"),
     password: yup.string().min(6).required(" Password is required"),
   });
 
-
   const { values, handleSubmit, handleChange, errors, touched } = useFormik({
     initialValues: { email: "", password: "" },
     onSubmit: (values) => {
-    
-      HTTPMethods.post("/auth/login",values)
-      .then(async function(resp:any){
-        console.log(resp.data)
-        const {payload}=resp.data 
-        const {token}=payload
-        localStorage.setItem("token",token)
+      HTTPMethods.post("/auth/login", values)
+        .then(async function (resp: any) {
+          console.log(resp.data);
+          const { payload } = resp.data;
+          const { token } = payload;
+          localStorage.setItem("token", token);
 
-      // Success Message
-        toast.success("successfull login",{
-          theme: "colored",
-          hideProgressBar: true,
-          autoClose: 1000,
-          toastId: "log1"
+          // Success Message
+          toast.success("successfull login", {
+            theme: "colored",
+            hideProgressBar: true,
+            autoClose: 1000,
+            toastId: "log1",
+          });
+
+          return navigate("/home/purchase");
         })
-      
-      return navigate("/home/purchase")
-      })
-      .catch(function(err){
-        // Error Message
-        console.log("error is",err)
-      })  
-      },
+        .catch(function (err) {
+          // Error Message
+          console.log("error is", err);
+        });
+    },
     validationSchema: schema,
   });
 
@@ -96,29 +87,27 @@ export function Login() {
       <MainLoginDiv>
         <Image>
           <ImageTitleDiv>
-          <h1>Welcome to KPOP Dashboard</h1>
-          <h2>&nbsp; </h2>
-          <h3>Login to access your account</h3>
+            <h1>Welcome to KPOP Dashboard</h1>
+            <h2>&nbsp; </h2>
+            <h3>Login to access your account</h3>
           </ImageTitleDiv>
         </Image>
         <FormDiv onSubmit={handleSubmit}>
-            <Title>
-              <p>Login</p>
-            </Title>
+          <Title>
+            <p>Login</p>
+          </Title>
 
-            <TextField
-              name="email"
-              onChange={handleChange}
-              // error={errors.email}
-              label={"Email"}
-              placeholder="Enter your Email"
-              defaultValue={"ashwon2000bajracharya@gmail.com"}
-              
-            ></TextField>
-              {errors.email && touched.email ? (
-              <FormError>{errors.email}</FormError>
-            ) : null}
-<PasswordContainer>
+          <TextField
+            name="email"
+            onChange={handleChange}
+            // error={errors.email}
+            label={"Email"}
+            placeholder="Enter your Email"
+            defaultValue={"ashwon2000bajracharya@gmail.com"}></TextField>
+          {errors.email && touched.email ? (
+            <FormError>{errors.email}</FormError>
+          ) : null}
+          <PasswordContainer>
             <TextField
               name="password"
               type={type}
@@ -126,32 +115,31 @@ export function Login() {
               // error={errors.password}
               label={"Password"}
               placeholder="Enter your Password"
-              defaultValue={"123123"}
-            ></TextField>
+              defaultValue={"123123"}></TextField>
             <ToggleIcon>
-            {type==="password"? <AiOutlineEyeInvisible size={20} onClick={togglePassword}/>:<AiOutlineEye size={20} onClick={togglePassword}/>}
+              {type === "password" ? (
+                <AiOutlineEyeInvisible size={20} onClick={togglePassword} />
+              ) : (
+                <AiOutlineEye size={20} onClick={togglePassword} />
+              )}
             </ToggleIcon>
-          
-</PasswordContainer>
-{errors.password && touched.password ? (
-              <FormError>{errors.password}</FormError>
-            ) : null}
-            <PasswordField>
-              <RemembermeDiv>
-                <input type="checkbox" />
-                Rembember Me
-              </RemembermeDiv>
-              <ForgetPassword  to="ForgotPassword">
-                
-                Forgot Password
-              
-              </ForgetPassword>
-            </PasswordField>
+          </PasswordContainer>
+          {errors.password && touched.password ? (
+            <FormError>{errors.password}</FormError>
+          ) : null}
+          <PasswordField>
+            <RemembermeDiv>
+              <input type="checkbox" />
+              Rembember Me
+            </RemembermeDiv>
+            <ForgetPassword to="ForgotPassword">Forgot Password</ForgetPassword>
+          </PasswordField>
 
-            <Button type="submit" onClick={()=>handleSubmit()}>Sign in</Button>
+          <Button type="submit" onClick={() => handleSubmit()}>
+            Sign in
+          </Button>
         </FormDiv>
       </MainLoginDiv>
-      
     </>
   );
 }

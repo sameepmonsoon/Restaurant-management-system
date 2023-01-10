@@ -1,81 +1,107 @@
-import { MainDiv } from '../../../Components/TextField.Style'
-import {HiChevronDown} from 'react-icons/hi'
-import {HiDotsVertical} from 'react-icons/hi'
-import { TableStatus } from '../../../Types/Components/DashbaordTable'
-import { 
-    MainTableDiv,
-    TableBody,
-    TableData,
-    TableHeader,
-    TableHeadData,
-    TableRow,
-    TableDataForDate,
-    TableDataStatus } from './Table.styles'
-import { useMenu } from '../../../Components/actionPopUp/ActionPopUp.state'
-import ActionPopUp from '../../../Components/actionPopUp/ActionPopUp'
-import { useState } from 'react'
-import { useDrawer } from '../../../Pages/states/Drawer.state'
-import { Button } from '@mui/material'
-import { HTTPMethods } from '../../../Utils/HTTPMock'
-import { toast } from 'react-toastify'
+import { MainDiv } from "../../../Components/TextField.Style";
+import { HiChevronDown } from "react-icons/hi";
+import { HiDotsVertical } from "react-icons/hi";
+import { TableStatus } from "../../../Types/Components/DashbaordTable";
+import {
+  MainTableDiv,
+  TableBody,
+  TableData,
+  TableHeader,
+  TableHeadData,
+  TableRow,
+  TableDataForDate,
+  TableDataStatus,
+} from "./Table.styles";
+import { useMenu } from "../../../Components/actionPopUp/ActionPopUp.state";
+import ActionPopUp from "../../../Components/actionPopUp/ActionPopUp";
+import { useState } from "react";
+import { useDrawer } from "../../../Pages/states/Drawer.state";
+import { Button } from "@mui/material";
+import { HTTPMethods } from "../../../Utils/HTTPMock";
+import { toast } from "react-toastify";
 
-const PurchaseTable = (props:TableStatus) => {
-    const {data}=props
-    const {menuOpen,toggleMenu}=useMenu()
-    const {open,toggleDrawer,setDrawerData}=useDrawer()
-    const [clickedData,setClickedData]=useState(null)
+const PurchaseTable = (props: TableStatus) => {
+  const { data } = props;
+  const { menuOpen, toggleMenu } = useMenu();
+  const { open, toggleDrawer, setDrawerData } = useDrawer();
+  const [clickedData, setClickedData] = useState(null);
 
-   const openMenu=(data:any)=>{
-    setClickedData(data)
-    toggleMenu()
-   }
-   const closeMenu=()=>{
-    setClickedData(null)
-    toggleMenu()
-   }
-   const editPurchase=(data:any)=>{
-    console.log("inside")
-    setDrawerData({data,type:"purchase"})
-    toggleDrawer()
-   }  
+  const openMenu = (data: any) => {
+    setClickedData(data);
+    toggleMenu();
+  };
+  const closeMenu = () => {
+    setClickedData(null);
+    toggleMenu();
+  };
+  const editPurchase = (data: any) => {
+    console.log("inside");
+    setDrawerData({ data, type: "purchase" });
+    toggleDrawer();
+  };
 
-   function deletePurchase(product:any){
-    HTTPMethods.deleteMethod(`/purchase/delete/${product.purchase_id}`,{})
-    .then(function(resp){
-      toast.success("delete successful",{
-        theme: "colored",
-        hideProgressBar: true,
-        autoClose: 1000
+  function deletePurchase(product: any) {
+    HTTPMethods.deleteMethod(`/purchase/delete/${product.purchase_id}`, {})
+      .then(function (resp) {
+        toast.success("delete successful", {
+          theme: "colored",
+          hideProgressBar: true,
+          autoClose: 1000,
+        });
       })
-    })
-    .catch(function(err){
-      toast.error("Error in deletion",{
-        hideProgressBar: true,
-        autoClose: 1000
-      })
-    })  
-   }
+      .catch(function (err) {
+        toast.error("Error in deletion", {
+          hideProgressBar: true,
+          autoClose: 1000,
+        });
+      });
+  }
   return (
-  <>
-  <MainTableDiv>
-    <TableHeader>
-
-    <TableHeadData><input type="checkbox" name="" id="" />id <HiChevronDown/></TableHeadData>
-    <TableHeadData>date<HiChevronDown/></TableHeadData>
-    <TableHeadData>product<HiChevronDown/></TableHeadData>
-    <TableHeadData>quantity<HiChevronDown/></TableHeadData>
-    <TableHeadData>per price<HiChevronDown/></TableHeadData>
-    <TableHeadData>net price<HiChevronDown/></TableHeadData>
-    <TableHeadData>status<HiChevronDown/></TableHeadData>
-    <TableHeadData>Actions<HiChevronDown/></TableHeadData> 
-
-    </TableHeader>
-    <TableBody>
-        {
-           data && data.map((product, index)=> 
-           <TableRow>
-                <TableData style={{ justifyContent: 'center'}}> { index+1}</TableData>
-                <TableData>{product.purchased_date}    </TableData>   
+    <>
+      <MainTableDiv>
+        <TableHeader>
+          <TableHeadData>
+            <input type="checkbox" name="" id="" />
+            id <HiChevronDown />
+          </TableHeadData>
+          <TableHeadData>
+            date
+            <HiChevronDown />
+          </TableHeadData>
+          <TableHeadData>
+            product
+            <HiChevronDown />
+          </TableHeadData>
+          <TableHeadData>
+            quantity
+            <HiChevronDown />
+          </TableHeadData>
+          <TableHeadData>
+            per price
+            <HiChevronDown />
+          </TableHeadData>
+          <TableHeadData>
+            net price
+            <HiChevronDown />
+          </TableHeadData>
+          <TableHeadData>
+            status
+            <HiChevronDown />
+          </TableHeadData>
+          <TableHeadData>
+            Actions
+            <HiChevronDown />
+          </TableHeadData>
+        </TableHeader>
+        <TableBody>
+          {data &&
+            data.map((product, index) => (
+              <TableRow>
+                <TableData style={{ justifyContent: "center" }}>
+                  {" "}
+                  {index + 1}
+                </TableData>
+                <TableData>{product.purchased_date} </TableData>
                 <TableData>{product.name}</TableData>
                 <TableData>{product.quantity + " packet"}</TableData>
                 <TableData>{product.per_piece}</TableData>
@@ -83,24 +109,26 @@ const PurchaseTable = (props:TableStatus) => {
                 <TableDataStatus status={product.status}>
                   <TableData>{product.status}</TableData>
                 </TableDataStatus>
-                
-               <TableData style={{width:"500px", display:"flex", gap:"20px"}}>
-               <Button variant="contained" onClick={()=>editPurchase(product)}>Edit</Button>
-               <Button variant="contained" onClick={()=>deletePurchase(product)}>Delete</Button>
 
+                <TableData
+                  style={{ width: "500px", display: "flex", gap: "20px" }}>
+                  <Button
+                    variant="contained"
+                    onClick={() => editPurchase(product)}>
+                    Edit
+                  </Button>
+                  <Button
+                    variant="contained"
+                    onClick={() => deletePurchase(product)}>
+                    Delete
+                  </Button>
                 </TableData>
+              </TableRow>
+            ))}
+        </TableBody>
+      </MainTableDiv>
+    </>
+  );
+};
 
-               
-            </TableRow>)
-        }
-         
-    </TableBody>
-    
-
-  </MainTableDiv>
-  </>
-  
-    )
-}
-
-export default PurchaseTable
+export default PurchaseTable;
