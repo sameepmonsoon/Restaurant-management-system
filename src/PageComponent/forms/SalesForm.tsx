@@ -18,7 +18,7 @@ const {open,toggleDrawer} = useDrawer();
     date:yup.date().required("is required"),
     status:yup.string().required("is required")
   })
-    const {values,errors,handleChange,handleSubmit,handleReset,resetForm}=useFormik({
+    const {values,errors,handleChange,handleSubmit,handleReset,resetForm, touched, }=useFormik({
         initialValues:{
             item_name:"",
             quantity:'',
@@ -47,9 +47,15 @@ const {open,toggleDrawer} = useDrawer();
     })
   return (
     <form onSubmit={handleSubmit}>
-            <TextField name="item_name" type='text' defaultValue="" placeholder='Product' error={errors.item_name} onChange={handleChange} label="Items name"/>
-            <TextField name="quantity" type='number' defaultValue={""} placeholder='Quantity' onChange={handleChange} error={errors.quantity} label="Quantity"/>
-            <TextField name="per_piece" type='number' defaultValue={""} placeholder='1000' onChange={handleChange} error={errors.per_piece}  label="Per Price"/>
+            <TextField name="item_name" type='text' defaultValue="" placeholder='Product' 
+            error={touched.item_name && errors.item_name? (errors.item_name) : null }
+            onChange={handleChange} label="Items name"/>
+            <TextField name="quantity" type='number' defaultValue={""} placeholder='Quantity' onChange={handleChange}
+            error={touched.quantity && errors.quantity? (errors.quantity) : null }
+            label="Quantity"/>
+            <TextField name="per_piece" type='number' defaultValue={""} placeholder='1000' onChange={handleChange}
+            error={touched.per_piece && errors.per_piece? (errors.per_piece) : null }
+            label="Per Price"/>
             
             <div style={{display:"flex", flexDirection:"column"}}>
                 {
@@ -65,7 +71,9 @@ const {open,toggleDrawer} = useDrawer();
                 <option>Due</option>
            </select>
             </div><br />
-            <TextField name="date" type="date" placeholder='date' onChange={handleChange} error={errors.date} label="Sales date"/>
+            <TextField name="date" type="date" placeholder='date' onChange={handleChange} 
+            error={touched.date && errors.date? (errors.date) : null }
+            label="Sales date"/>
             <DrawerButtonDiv>
            <Button 
             type='submit' 

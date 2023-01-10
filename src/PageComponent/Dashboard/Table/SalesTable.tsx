@@ -67,7 +67,6 @@ const SalesTable = (props:TableStatus) => {
     <TableHeadData>quantity<HiChevronDown/></TableHeadData>
     <TableHeadData>per price<HiChevronDown/></TableHeadData>
     <TableHeadData>net price<HiChevronDown/></TableHeadData>
-    <TableHeadData>date<HiChevronDown/></TableHeadData>
      <TableHeadData>Payment<HiChevronDown/></TableHeadData> 
     <TableHeadData>Actions<HiChevronDown/></TableHeadData> 
     </TableHeader>
@@ -77,13 +76,12 @@ const SalesTable = (props:TableStatus) => {
            <TableRow >
                
                 <TableData style={{ justifyContent: 'center'}}> { index+1}</TableData>
+                <TableData>{product.date}</TableData>
                 <TableData>{product.item_name}</TableData>
                 <TableData>{product.quantity }</TableData>
                 <TableData>{product.per_piece}</TableData>
                 <TableData>{product.total_amount}</TableData>
-                 <TableDataForDate>
-                   <TableData>{product.date}</TableData>
-                   </TableDataForDate>
+                
                    <TableDataStatus status={product.status} >
                    <TableData>{product.status}</TableData>
                    </TableDataStatus>

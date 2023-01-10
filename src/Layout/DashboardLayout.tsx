@@ -26,7 +26,7 @@ export default function DashboardLayout({children,renderActions,renderFilters,re
     HTTPMethods.get('/total/readTotal')
     .then(async (res) => {
         setPurchase(res.data)
-    })
+    })        
     .catch(async (err) => {
         
       toast.info("Server is down to display the data.",{
@@ -37,6 +37,12 @@ export default function DashboardLayout({children,renderActions,renderFilters,re
       })
     })
   },[])
+
+  const totalPurchase = purchases? (` Rs. ${purchases?.totalpurchase} `) : "loading";
+  const totalSales = purchases? (`Rs. ${purchases?.total_sales}`) : "loading";
+  const totalStocks = purchases? (`${purchases?.total_stocks} products`) : "loading";
+
+ 
   const {open,toggleDrawer}=useDrawer()
   function closeDrawer(){
     toggleDrawer()
@@ -81,10 +87,10 @@ const location=useLocation()
           <Navbar navTitle={"Dashboard"} navbarCardName={"Purchase"} arrowIcon={true}/>
           <InventoryCardContainerDiv>
             <Link to={"/home"} style={{ color: '#090909', textDecoration: 'none' }} >
-                <InventoryCard  title={"Purchase"} icon={<MdOutlineShoppingCart size={30}/>} amount={`Rs. ${purchases?.totalpurchase}`} cardType="purchase" active={location.pathname==="/home/purchase"} />
+                <InventoryCard  title={"Purchase"} icon={<MdOutlineShoppingCart size={30}/>} amount={`${totalPurchase}`} cardType="purchase" active={location.pathname==="/home/purchase"} />
             </Link>
             <Link to={"/home/sales"} style={{ color: '#090909', textDecoration: 'none'  }}>
-            <InventoryCard  title={"Sales"} icon={<BsTag size={30}/>} amount={`Rs. ${purchases?.total_sales}`} cardType="sales" active={location.pathname==="/home/sales"}/>
+                <InventoryCard  title={"Sales"} icon={<BsTag size={30}/>} amount={`${totalSales}`} cardType="sales" active={location.pathname==="/home/sales"}/>
             </Link>
 
             <Link to={"/home/stocks"} style={{ color: '#090909', textDecoration: 'none'  }}>

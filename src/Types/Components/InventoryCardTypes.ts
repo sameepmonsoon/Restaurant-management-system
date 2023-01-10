@@ -2,7 +2,7 @@
 export type InventoryTitles = {
     title:String,
     icon: React.ReactNode,
-    amount?:string | number
+    amount?:string | React.ReactNode
     cardType:String,
-    active:boolean | undefined
+    active:boolean 
 }
