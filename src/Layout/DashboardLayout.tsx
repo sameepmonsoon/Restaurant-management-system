@@ -8,6 +8,8 @@ import Navbar from "../PageComponent/Dashboard/Navbar/Navbar";
 import Sider from "../PageComponent/Dashboard/Sider/Sider";
 import { InventoryDataType } from "../Types/Components/InventoryDataTpes";
 import { HTTPMethods } from "../Utils/HTTPMock";
+import { siderToggle } from "../Pages/states/NavBar.state";
+
 import {
   ChildrenDiv,
   FilterComponentDiv,
@@ -50,6 +52,11 @@ export default function DashboardLayout({
         });
       });
   }, []);
+
+  const { openSider, toggleSider } = siderToggle();
+  function openCloseSider() {
+    toggleSider();
+  }
 
   const totalPurchase = purchases
     ? ` Rs. ${purchases?.totalpurchase} `
@@ -95,12 +102,13 @@ export default function DashboardLayout({
   return (
     <>
       <DashboardMainDiv>
-        <Sider />
+        {openSider === true ? <Sider /> : null}
         <LayoutContainerDiv>
           <Navbar
             navTitle={"Dashboard"}
             navbarCardName={"Purchase"}
             arrowIcon={true}
+            onClick={(e: React.MouseEvent<HTMLElement>) => openCloseSider()}
           />
           <InventoryCardContainerDiv>
             <Link
