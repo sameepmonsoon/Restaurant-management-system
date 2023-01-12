@@ -13,10 +13,10 @@ export default function SalesForm() {
   let useref = useRef();
   let schema = yup.object().shape({
     item_name: yup.string().required("is required"),
-    quantity: yup.number().required("is requuired").positive().integer(),
+    quantity: yup.number().required("is required").positive().integer(),
     per_piece: yup.number().required("is required").positive().integer(),
     date: yup.date().required("is required"),
-    status: yup.string().required("is required"),
+    status: yup.string().required("Status is required"),
   });
   const {
     values,
@@ -82,10 +82,13 @@ export default function SalesForm() {
       />
 
       <div style={{ display: "flex", flexDirection: "column" }}>
-        {<LabelDiv error={errors.status}>{errors.status || "Status"}</LabelDiv>}
+        {touched.status && errors.status ? (
+          <LabelDiv error={errors.status}>{errors.status}</LabelDiv>
+        ) : (
+          <LabelDiv>Status</LabelDiv>
+        )}
         <select name="status" onChange={handleChange}>
-          <option></option>
-          <option>Card</option>
+          <option selected>Card</option>
           <option>Fonepay</option>
           <option>Cash</option>
           <option>Due</option>

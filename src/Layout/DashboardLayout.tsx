@@ -85,10 +85,10 @@ export default function DashboardLayout({
 
   function manageTitle() {
     if (location.pathname === "/home/purchase") {
-      return "Purchase";
+      return "New Purchase";
     }
     if (location.pathname === "/home/sales") {
-      return "Sales";
+      return "New Sales";
     }
     return "Title";
   }

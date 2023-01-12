@@ -1,6 +1,6 @@
-import React, { ChangeEvent } from "react"
+import React, { ChangeEvent } from "react";
 
-export type TextAreaProps={
-    label:string,
-    type:string
-}
+export type TextAreaProps = {
+  label?: string;
+  type: string;
+};

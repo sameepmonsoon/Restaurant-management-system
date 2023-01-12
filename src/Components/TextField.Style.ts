@@ -18,7 +18,7 @@ export const LabelDiv = styled("label")<LabelType>`
   font-style: normal;
   color: #1e1e1e;
   font-family: "Inter", sans-serif;
-  color: ${({ error }) => (error ? "red" : "")};
+  color: ${({ error }) => (error ? "red" : "black")};
 
   @media screen {
   }

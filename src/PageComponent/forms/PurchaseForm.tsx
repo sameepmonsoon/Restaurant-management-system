@@ -15,9 +15,9 @@ export default function PurchaseForm() {
     name: yup.string().required("is required"),
     product_type: yup.string().required("is required"),
     quantity: yup.number().required("is required"),
-    date: yup.date().required("is required"),
-    status: yup.string().required("is required"),
-    per_piece: yup.number().required("is required").positive().integer(),
+    date: yup.date().required(" is required."),
+    status: yup.string().required("Status is required."),
+    per_piece: yup.number().required("is required.").positive().integer(),
   });
   const {
     values,
@@ -119,11 +119,16 @@ export default function PurchaseForm() {
       />
 
       <div style={{ display: "flex", flexDirection: "column" }}>
-        {<LabelDiv error={errors.status}>{errors.status || "Status"}</LabelDiv>}
+        {touched.status && errors.status ? (
+          <LabelDiv error={errors.status}>{errors.status}</LabelDiv>
+        ) : (
+          <LabelDiv>Status</LabelDiv>
+        )}
         <select name="status" onChange={handleChange}>
-          <option></option>
-          <option>complete</option>
-          <option>pending</option>
+          <option selected>Complete</option>
+          <option>Cancelled</option>
+          <option>Pending</option>
+          <option>Pre-order</option>
         </select>
       </div>
       <DrawerButtonDiv>
