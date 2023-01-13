@@ -36,6 +36,7 @@ export default function DashboardLayout({
   renderTotalitems?: JSX.Element;
 }) {
   const [purchases, setPurchase] = useState<InventoryDataType>();
+  const {setDrawerData} =useDrawer()
   useEffect(() => {
     HTTPMethods.get("/total/readTotal")
       .then(async (res) => {
@@ -61,6 +62,10 @@ export default function DashboardLayout({
 
   const { open, toggleDrawer } = useDrawer();
   function closeDrawer() {
+    console.log("insode c;ose Drawer")
+    setDrawerData({})
+    console.log("outside Drawer")
+
     toggleDrawer();
   }
   function manageForm() {

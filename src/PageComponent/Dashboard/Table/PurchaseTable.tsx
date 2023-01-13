@@ -19,6 +19,7 @@ import { useDrawer } from "../../../Pages/states/Drawer.state";
 import { Button } from "@mui/material";
 import { HTTPMethods } from "../../../Utils/HTTPMock";
 import { toast } from "react-toastify";
+import { DOMToggleButtonName } from "../../../Utils/DOMToggleButtonName";
 
 const PurchaseTable = (props: TableStatus) => {
   const { data } = props;
@@ -35,7 +36,6 @@ const PurchaseTable = (props: TableStatus) => {
     toggleMenu();
   };
   const editPurchase = (data: any) => {
-    console.log("inside");
     setDrawerData({ data, type: "purchase" });
     toggleDrawer();
   };
