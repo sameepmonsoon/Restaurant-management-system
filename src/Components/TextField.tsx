@@ -58,6 +58,7 @@ export const TextField = forwardRef(
       min,
       value,
       disabled = false,
+      ...rest
     }: TextFieldProps,
     ref
   ) => {
@@ -68,7 +69,6 @@ export const TextField = forwardRef(
       window.HTMLInputElement.prototype,
       "value"
     ).set;
-    console.log("default value", defaultValue);
     function labelText() {
       const text = label || friendlyName(name);
       if (error) {
@@ -112,6 +112,7 @@ export const TextField = forwardRef(
             type={type}
             theme={theme}
             disabled={disabled}
+            {...rest}
           />
           {/* </Input> */}
           {icon && (

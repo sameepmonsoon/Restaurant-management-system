@@ -8,11 +8,13 @@ import { HTTPMethods } from "../../Utils/HTTPMock";
 import { useDrawer } from "../../Pages/states/Drawer.state";
 import { toast } from "react-toastify";
 import { type } from "os";
+import { DOMToggleButtonName } from "../../Utils/DOMToggleButtonName";
 export default function PurchaseForm() {
-  const { open, toggleDrawer, drawerToEditData } = useDrawer();
+  const { open, toggleDrawer, drawerToEditData ,setDrawerData} = useDrawer();
   const [render, setRender] = useState(false);
   let schema = yup.object().shape({
     name: yup.string().required("is required"),
+    unit: yup.string().required("required"),
     product_type: yup.string().required("is required"),
     quantity: yup.number().required("is required"),
     date: yup.date().required(" is required."),
@@ -36,8 +38,35 @@ export default function PurchaseForm() {
       per_piece: "",
       date: "",
       status: "",
+      unit:''
     },
     onSubmit: (values, action) => {
+      if(Object.keys(drawerToEditData).length){
+        // Edit data
+        HTTPMethods.put(`/purchase/update/${drawerToEditData.data.purchase_id} `, values)
+        .then(function (resp) {
+          action.resetForm();
+          toggleDrawer();
+          toast.success("Purcahse edit successfully", {
+            theme: "colored",
+            hideProgressBar: true,
+            autoClose: 1000,
+          });
+        })
+        .catch(function (err) {
+          toast.success("Error in purchase creation", {
+            theme: "colored",
+            hideProgressBar: true,
+            autoClose: 1000,
+          });
+        })
+        .finally(function(){
+          toggleDrawer();
+          setDrawerData({})
+        })
+        return
+      }
+
       HTTPMethods.post("/purchase/create", values)
         .then(function (resp) {
           action.resetForm();
@@ -53,10 +82,18 @@ export default function PurchaseForm() {
     },
     validationSchema: schema,
   });
-  console.log("dfas");
   useEffect(() => {
+    const product_type=document.getElementById("input-product_type")
+    const name=document.getElementById("input-name")
+    // const net_price=document.getElementById("input-net_price")
+    const purchased_date=document.getElementById("input-date")
+    const quantity=document.getElementById("input-quantity")
+    const status =document.getElementById("input-status")
+    const unit=document.getElementById("input-unit")
+    const per_piece=document.getElementById("input-per_piece")
+
     if (drawerToEditData && drawerToEditData.type === "purchase") {
-      console.log("fasgkhdfiugig", drawerToEditData.data);
+      const {data}=drawerToEditData
       setValues({
         product_type: drawerToEditData.data.product_type,
         name: drawerToEditData.data.name,
@@ -64,10 +101,58 @@ export default function PurchaseForm() {
         per_piece: drawerToEditData.data.per_piece,
         date: drawerToEditData.data.purchased_date,
         status: drawerToEditData.data.status,
+        unit: drawerToEditData.data.unit
       });
+     
+      // Change the add button name to edit
+      DOMToggleButtonName("Edit")
+      // @ts-ignore
+      product_type.value=data.product_type
+      // @ts-ignore
+
+      name.value=data.name
+      // @ts-ignore
+
+      // net_price.value=data.net_price
+      // // @ts-ignore
+
+      purchased_date.value=data.purchased_date
+      // @ts-ignore
+
+      quantity.value=data.quantity
+      // @ts-ignore
+
+      status.value=data.status
+      // @ts-ignore
+      unit.value=data.unit
+      // @ts-ignore
+      per_piece.value=data.per_piece
     }
+    else{
+      // @ts-ignore
+      product_type.value=""
+      // @ts-ignore
+
+      name.value=""
+      // @ts-ignore
+
+      // net_price.value=data.net_price
+      // // @ts-ignore
+
+      purchased_date.value=""
+      // @ts-ignore
+
+      quantity.value=""
+      // @ts-ignore
+
+      status.value=""
+      // @ts-ignore
+      unit.value=""
+      // @ts-ignore
+      per_piece.value=""
+    }
+    
   }, [drawerToEditData]);
-  console.log("values are", values, drawerToEditData);
   return (
     <form onSubmit={handleSubmit}>
       <TextField
@@ -93,6 +178,7 @@ export default function PurchaseForm() {
         error={touched.name && errors.name ? errors.name : null}
         onChange={handleChange}
       />
+      <div style={{display:"flex",gap:"10px"}}>
       <TextField
         name="quantity"
         type="number"
@@ -100,7 +186,19 @@ export default function PurchaseForm() {
         placeholder="Quantity"
         onChange={handleChange}
         error={touched.quantity && errors.quantity ? errors.quantity : null}
+        // @ts-ignore
+        style={{width:"300px" }}
       />
+      <TextField
+        name="unit"
+        defaultValue=""
+        placeholder="unit"
+        onChange={handleChange}
+        error={touched.unit && errors.unit ? errors.unit : null}
+        // @ts-ignore
+        style={{width:"100px" }}
+      />
+      </div>
       <TextField
         name="per_piece"
         type="number"
@@ -124,7 +222,7 @@ export default function PurchaseForm() {
         ) : (
           <LabelDiv>Status</LabelDiv>
         )}
-        <select name="status" onChange={handleChange}>
+        <select name="status" onChange={handleChange} id="input-status">
           <option selected>Complete</option>
           <option>Cancelled</option>
           <option>Pending</option>

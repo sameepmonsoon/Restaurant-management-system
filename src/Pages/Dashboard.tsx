@@ -8,6 +8,7 @@ import Filters from "../Components/Filters/Filters";
 import { FiSearch, FiCalendar } from "react-icons/fi";
 import { RiLoader2Fill } from "react-icons/ri";
 import TotalItems from "../Components/TotalItems/TotalItems";
+import { DOMToggleButtonName } from "../Utils/DOMToggleButtonName";
 
 function Dashboard() {
   const location = useLocation();
@@ -43,11 +44,14 @@ function Dashboard() {
       renderActions={
         // Please make a button as a component which can be reusable in future  inside a Component directory which accepts Icon,Title and and OnClick props
         // And place it over here by replacing below code
-
         <ActionButton
           icon={<MdAdd fontSize="1.4em" />}
           label={actionLabel()}
-          onClick={(e: React.MouseEvent<HTMLElement>) => openDrawer()}
+          onClick={(e: React.MouseEvent<HTMLElement>) => {
+          // Change the Edit button name to Add
+            DOMToggleButtonName("Add")
+            openDrawer()
+          }}
         />
       }
       renderFilters={
