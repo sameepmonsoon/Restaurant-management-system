@@ -1,6 +1,6 @@
 // @ts-nocheck
-import { forwardRef, useEffect, useState } from 'react';
-import { LabelDiv, MainDiv,Input,Button} from './TextField.Style';
+import { forwardRef, useEffect, useState } from "react";
+import { LabelDiv, MainDiv, Input, Button } from "./TextField.Style";
 
 // import MediaQuery from 'react-responsive'
 
@@ -21,21 +21,25 @@ type TextFieldProps = {
   hideNumberChange?: boolean;
   onChange?: (e: any) => void;
   onBlur?: (e: FocusEvent) => void;
+  onFocus?: (e: FocusEvent) => void;
   disabled?: boolean;
 };
 export function friendlyName(name: string) {
   if (name) {
     return name
       .trim()
-      .replace('_id', '')
-      .replace(/[\W_]+/g, ' ')
-      .split(' ')
-      .map(element => element.charAt(0).toUpperCase() + element.slice(1).toLowerCase())
-      .join(' ');
+      .replace("_id", "")
+      .replace(/[\W_]+/g, " ")
+      .split(" ")
+      .map(
+        (element) =>
+          element.charAt(0).toUpperCase() + element.slice(1).toLowerCase()
+      )
+      .join(" ");
   }
-  return '';
+  return "";
 }
-export  const TextField = forwardRef(
+export const TextField = forwardRef(
   (
     {
       name,
@@ -49,6 +53,7 @@ export  const TextField = forwardRef(
       defaultValue,
       onChange,
       onBlur,
+      onFocus,
       hideNumberChange,
       min,
       value,
@@ -56,14 +61,14 @@ export  const TextField = forwardRef(
     }: TextFieldProps,
     ref
   ) => {
-    const [defaultValueState,setDefaultValue]=useState(defaultValue)
+    const [defaultValueState, setDefaultValue] = useState(defaultValue);
     const input = document.querySelector(`#input-${name}`);
-    const theme="light"
+    const theme = "light";
     const inputPrototype = Object.getOwnPropertyDescriptor(
       window.HTMLInputElement.prototype,
-      'value'
+      "value"
     ).set;
-    console.log("default value",defaultValue)
+    console.log("default value", defaultValue);
     function labelText() {
       const text = label || friendlyName(name);
       if (error) {
@@ -74,56 +79,53 @@ export  const TextField = forwardRef(
     }
     function increment() {
       inputPrototype.call(input, +input.value + 1);
-      input.dispatchEvent(new Event('change', { bubbles: true }));
+      input.dispatchEvent(new Event("change", { bubbles: true }));
     }
 
     function decrement() {
       inputPrototype.call(input, +input.value - 1);
-      input.dispatchEvent(new Event('change', { bubbles: true }));
+      input.dispatchEvent(new Event("change", { bubbles: true }));
     }
-
 
     return (
       <MainDiv>
         <div>
-          
           <LabelDiv error={error} theme={theme}>
-         {labelText()} 
-         </LabelDiv>
-      
-       
+            {labelText()}
+          </LabelDiv>
         </div>
 
-        <div style={{display:"flex"}}>
+        <div style={{ display: "flex" }}>
           {prefix && <div theme={theme}></div>}
-          <Input 
-           ref={ref}
-           id={`input-${name}`}
-           name={name}
-           value={value}
-           placeholder={placeholder || friendlyName(name)}
-           defaultValue={defaultValueState}
-           onChange={onChange}
-           onBlur={onBlur}
-           prefix={!!prefix}
-           min={min || 0}
-           type={type}
-           theme={theme}
-           disabled={disabled}
+          <Input
+            ref={ref}
+            id={`input-${name}`}
+            name={name}
+            value={value}
+            placeholder={placeholder || friendlyName(name)}
+            defaultValue={defaultValueState}
+            onChange={onChange}
+            onBlur={onBlur}
+            onFocus={onFocus}
+            prefix={!!prefix}
+            min={min || 0}
+            type={type}
+            theme={theme}
+            disabled={disabled}
           />
           {/* </Input> */}
           {icon && (
-            <div suffix={!!suffix} type={!!type} hideNumberChange={!!hideNumberChange}>
+            <div
+              suffix={!!suffix}
+              type={!!type}
+              hideNumberChange={!!hideNumberChange}>
               {icon}
             </div>
           )}
 
           {suffix && (
-            <div type={!!type} hideNumberChange={!!hideNumberChange}>
-             
-            </div>
+            <div type={!!type} hideNumberChange={!!hideNumberChange}></div>
           )}
-         
 
           {/* {type === `number` && !hideNumberChange && (
             <>
@@ -137,12 +139,6 @@ export  const TextField = forwardRef(
             </>
           )} */}
         </div>
-       
-      
-        
-       
-         
-       
       </MainDiv>
     );
   }

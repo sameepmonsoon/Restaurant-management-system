@@ -37,14 +37,13 @@ const ForgotPassword = () => {
             <p> Forgot Password</p>
           </Title> */}
 
-{/* <p>Forgot Password</p> */}
+          {/* <p>Forgot Password</p> */}
           <form onSubmit={handleSubmit}>
             <TextField
               onChange={handleChange}
               name="newpassword"
               label="New Password"
-              value={values.newpassword}
-            ></TextField>
+              value={values.newpassword}></TextField>
             {errors.newpassword && touched.newpassword ? (
               <FormError>{errors.newpassword}</FormError>
             ) : null}
@@ -53,8 +52,7 @@ const ForgotPassword = () => {
               onChange={handleChange}
               name="confirmnewpassword"
               label=" Confirm New Password"
-              value={values.confirmnewpassword}
-            ></TextField>
+              value={values.confirmnewpassword}></TextField>
             {errors.confirmnewpassword && touched.confirmnewpassword ? (
               <FormError>{errors.confirmnewpassword}</FormError>
             ) : null}

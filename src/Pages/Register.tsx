@@ -1,7 +1,5 @@
-import React from 'react'
+import React from "react";
 
-export  function Register() {
-  return (
-    <div>Register</div>
-  )
+export function Register() {
+  return <div>Register</div>;
 }

@@ -15,20 +15,21 @@ align-items: center ;
 `
 export const ChildrenDiv=styled('div')`
 display: flex;
-flex-flow: row wrap;
-gap: 40px;
+flex-flow: column wrap;
+gap: 10px;
 margin-top:3%;
 margin-left:5%;
-align-items: center ;
+align-items:flex-start;
 
 
 `
 export const FilterComponentDiv=styled('div')`
 display: flex;
-flex-flow: row wrap;
-gap: 40px;
+flex-flow:column nowrap;
+justify-content: flex-start;
+row-gap:40px;
 margin-top:3%;
 margin-left:5%;
-align-items: center ;
+align-items:flex-start;
 
 `
