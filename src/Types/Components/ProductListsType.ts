@@ -1,5 +1,5 @@
 export type productObjectType={
-    name:string,
+    name:string ,
     item_name:string,
     net_price:number,
     total_amount:number,

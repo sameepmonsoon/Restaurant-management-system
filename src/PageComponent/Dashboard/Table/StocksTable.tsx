@@ -14,9 +14,11 @@ import {
 } from "./Table.styles";
 import { useState } from "react";
 import { HTTPMethods } from "../../../Utils/HTTPMock";
+import { useFilterStore } from "../../../store/filtered";
 
 const StocksTable = (props: TableStatus) => {
   const { data } = props;
+  const searchedTerm = useFilterStore((state:any)=>state.searchTerm)
 
   return (
     <>
@@ -38,7 +40,7 @@ const StocksTable = (props: TableStatus) => {
         </TableHeader>
         <TableBody>
           {data &&
-            data.map((product, index) => (
+            data.filter(product=> product.name.toLowerCase().includes(searchedTerm.toLowerCase())).map((product, index) => (
               <TableRow>
                 <TableData style={{ justifyContent: "center" }}>
                   {" "}

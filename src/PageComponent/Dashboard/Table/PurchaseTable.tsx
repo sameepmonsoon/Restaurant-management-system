@@ -14,18 +14,21 @@ import {
 } from "./Table.styles";
 import { useMenu } from "../../../Components/actionPopUp/ActionPopUp.state";
 import ActionPopUp from "../../../Components/actionPopUp/ActionPopUp";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useDrawer } from "../../../Pages/states/Drawer.state";
 import { Button } from "@mui/material";
 import { HTTPMethods } from "../../../Utils/HTTPMock";
 import { toast } from "react-toastify";
 import { DOMToggleButtonName } from "../../../Utils/DOMToggleButtonName";
+import { useFilterStore } from "../../../store/filtered";
 
 const PurchaseTable = (props: TableStatus) => {
   const { data } = props;
   const { menuOpen, toggleMenu } = useMenu();
   const { open, toggleDrawer, setDrawerData } = useDrawer();
   const [clickedData, setClickedData] = useState(null);
+
+  const searchedTerm = useFilterStore((state: any)=> state.searchTerm)
 
   const openMenu = (data: any) => {
     setClickedData(data);
@@ -56,9 +59,10 @@ const PurchaseTable = (props: TableStatus) => {
         });
       });
   }
+
   return (
     <>
-      <MainTableDiv>
+      <MainTableDiv >
         <TableHeader>
           <TableHeadData>
             <input type="checkbox" name="" id="" />
@@ -93,39 +97,40 @@ const PurchaseTable = (props: TableStatus) => {
             <HiChevronDown />
           </TableHeadData>
         </TableHeader>
-        <TableBody>
-          {data &&
-            data.map((product, index) => (
-              <TableRow>
-                <TableData style={{ justifyContent: "center" }}>
-                  {" "}
-                  {index + 1}
-                </TableData>
-                <TableData>{product.purchased_date} </TableData>
-                <TableData>{product.name}</TableData>
-                <TableData>{product.quantity + " packet"}</TableData>
-                <TableData>{product.per_piece}</TableData>
-                <TableData>{product.net_price}</TableData>
-                <TableDataStatus status={product.status}>
-                  <TableData>{product.status}</TableData>
-                </TableDataStatus>
+          <TableBody>
+            {data && 
+            data.filter(product => product.name.toLowerCase().includes(searchedTerm.toLowerCase()))
+            .map((product, index) => (
+                  <TableRow key={index}>
+                    <TableData style={{ justifyContent: "center" }}>
+                      {" "}
+                      {index + 1 }
+                    </TableData>
+                    <TableData>{product.purchased_date} </TableData>
+                    <TableData>{product.name}</TableData>
+                    <TableData>{product.quantity + " packet"}</TableData>
+                    <TableData>{product.per_piece}</TableData>
+                    <TableData>{product.net_price}</TableData>
+                    <TableDataStatus status={product.status}>
+                      <TableData>{product.status}</TableData>
+                    </TableDataStatus>
 
-                <TableData
-                  style={{ width: "500px", display: "flex", gap: "20px" }}>
-                  <Button
-                    variant="contained"
-                    onClick={() => editPurchase(product)}>
-                    Edit
-                  </Button>
-                  <Button
-                    variant="contained"
-                    onClick={() => deletePurchase(product)}>
-                    Delete
-                  </Button>
-                </TableData>
-              </TableRow>
-            ))}
-        </TableBody>
+                    <TableData
+                      style={{ width: "500px", display: "flex", gap: "20px" }}>
+                      <Button
+                        variant="contained"
+                        onClick={() => editPurchase(product)}>
+                        Edit
+                      </Button>
+                      <Button
+                        variant="contained"
+                        onClick={() => deletePurchase(product)}>
+                        Delete
+                      </Button>
+                    </TableData>
+                </TableRow>              
+              ))}
+          </TableBody>
       </MainTableDiv>
     </>
   );

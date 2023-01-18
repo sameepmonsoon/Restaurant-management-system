@@ -24,6 +24,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import PurchaseForm from "../PageComponent/forms/PurchaseForm";
 import SalesForm from "../PageComponent/forms/SalesForm";
 
+
 export default function DashboardLayout({
   children,
   renderActions,
@@ -35,7 +36,9 @@ export default function DashboardLayout({
   renderFilters?: JSX.Element;
   renderTotalitems?: JSX.Element;
 }) {
+
   const [purchases, setPurchase] = useState<InventoryDataType>();
+
   const {setDrawerData} =useDrawer()
   useEffect(() => {
     HTTPMethods.get("/total/readTotal")
@@ -98,7 +101,7 @@ export default function DashboardLayout({
     return "Title";
   }
   return (
-    <>
+    <>          
       <DashboardMainDiv>
         <Sider />
         <LayoutContainerDiv>
@@ -144,12 +147,12 @@ export default function DashboardLayout({
             </Link>
             {renderActions}
           </InventoryCardContainerDiv>
-          <FilterComponentDiv>{renderFilters}</FilterComponentDiv>
-          <ChildrenDiv>
-            {renderTotalitems}
-            {children}
-          </ChildrenDiv>
-        </LayoutContainerDiv>
+              <FilterComponentDiv>{renderFilters}</FilterComponentDiv>
+              <ChildrenDiv>
+                {renderTotalitems}
+                {children}
+              </ChildrenDiv>
+            </LayoutContainerDiv>         
         <DrawerC
           cardtitle={manageTitle()}
           open={open}
