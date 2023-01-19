@@ -13,7 +13,6 @@ const Filters = (props: FilterTypes) => {
   const { title, icon, dateIcon, statusIcon } = props;
   const [type, setType] = useState("text");
 
-
   const {searchTerm, setSearchTerm} = useFilterStore(
     (state:any)=> ({searchTerm: state.searchTerm,
       setSearchTerm: state.setSearchTerm})
