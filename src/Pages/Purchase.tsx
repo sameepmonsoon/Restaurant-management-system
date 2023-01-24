@@ -6,26 +6,7 @@ import { productObjectType } from "../Types/Components/ProductListsType";
 import { HTTPMethods } from "../Utils/HTTPMock";
 
 export default function Purchase() {
-  const [products, setProducts] = useState<productObjectType[]>([]);
-  const[loading, setIsLoading] = useState(true)
-  // const [ {products, loading, fetchProducts} ] = useProductStore((state: any) => [state.products, state.loading, state.fetchProducts]);
-  const fetchProducts = ()=>{
-    setIsLoading(true)
-    HTTPMethods.get("/purchase/read?page=1&offset=10")
-    .then(async (res: any) => {
-      setProducts(res.data.payload.data);
-      setIsLoading(false);
-    })
-    .catch(async (err) => {
-      toast.info("Server is down to display the table data.", {
-        theme: "colored",
-        hideProgressBar: true,
-        autoClose: 2000,
-        position: "bottom-right",
-        toastId: "info1",
-      });
-    });
-  }
+  const [ products, loading, fetchProducts ] = useProductStore((state: any) => [state.products, state.loading, state.fetchProducts]);
 
   useEffect(() => {
     fetchProducts()
@@ -33,18 +14,11 @@ export default function Purchase() {
 
   return loading ? (
     <div>Loading</div>
-  ) : products? (
+  ) : products && products.length? (
     <PurchaseTable data={products} onDeleteSuccess={fetchProducts}/>
   ) : (
-    <div>No Data Available</div>
+    <div>No Data to Show</div>
   );
 
-   // if(loading){
-  //   return     <div>Loading</div>
 
-  // }else if (products && products.length){
-  //   return <PurchaseTable data={products} onDeleteSuccess={fetchProducts} />
-  // }else{
-  //   return <div>No data Available</div>
-  // }
 }

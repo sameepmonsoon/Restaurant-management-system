@@ -11,7 +11,6 @@ export const useFilterStore = create (set => ({
 export const useProductStore = create (set => ({
     products: [],
     loading: false,
-    
     fetchProducts: ()=> {
         set((state: any) => ({loading: true}))
         HTTPMethods.get("/purchase/read?page=1&offset=10")
@@ -30,9 +29,33 @@ export const useProductStore = create (set => ({
             })
         })
     },
-    setProducts: (products: productObjectType[]) => set((state:any)=> ({...state, products}))
+
+    // setProducts: (products: productObjectType[]) => set((state:any)=> ({...state, products}))
 }))
 
+export const useSalesStore = create (set => ({
+    salesProducts: [],
+    loading: false,
+    fetchSales: () => {
+        set((state:any)=> ({loading: true}))
+        HTTPMethods.get("/new_sales/read?page=1&offset=10")
+        .then(async (res:any) => {
+            set((state:any)=> ({salesProducts: res.data.payload.data, loading: false}))
+        })
+        .catch(async (err) => {
+            set((state:any)=> ({loading: false}))
+            toast.info("Server is down to display the table data.", {
+                theme: "colored",
+                hideProgressBar: true,
+                autoClose: 2000,
+                position: "bottom-right",
+                toastId: "info1"
+
+            })
+        })
+    },
+    setSales: (salesProducts:productObjectType[] ) => ((state:any)=> ({...state, salesProducts}))
+}))
 
 
 export const useStatusPaymentStore = create(set =>({
