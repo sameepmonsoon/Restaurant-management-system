@@ -9,9 +9,12 @@ import { useDrawer } from "../../Pages/states/Drawer.state";
 import { toast } from "react-toastify";
 import { type } from "os";
 import { DOMToggleButtonName } from "../../Utils/DOMToggleButtonName";
+import { useProductStore } from "../../store/filtered";
 export default function PurchaseForm() {
   const { open, toggleDrawer, drawerToEditData ,setDrawerData} = useDrawer();
   const [render, setRender] = useState(false);
+
+  const [products, setProducts] = useProductStore ((state:any)=> [state.products, state.setProducts])
   let schema = yup.object().shape({
     name: yup.string().required("is required"),
     unit: yup.string().required("required"),
@@ -43,7 +46,7 @@ export default function PurchaseForm() {
     onSubmit: (values, action) => {
       if(Object.keys(drawerToEditData).length){
         // Edit data
-        HTTPMethods.put(`/purchase/update/${drawerToEditData.data.purchase_id} `, values)
+         HTTPMethods.put(`/purchase/update/${drawerToEditData.data.purchase_id} `, values)
         .then(function (resp) {
           action.resetForm();
           toggleDrawer();
@@ -72,6 +75,7 @@ export default function PurchaseForm() {
           action.resetForm();
           toggleDrawer();
         })
+
         .catch(function (err) {
           toast.success("Error in purchase creation", {
             theme: "colored",

@@ -14,7 +14,7 @@ import {
 } from "./Table.styles";
 import { useMenu } from "../../../Components/actionPopUp/ActionPopUp.state";
 import ActionPopUp from "../../../Components/actionPopUp/ActionPopUp";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useDrawer } from "../../../Pages/states/Drawer.state";
 import { Button } from "@mui/material";
 import { HTTPMethods } from "../../../Utils/HTTPMock";
@@ -23,7 +23,7 @@ import { DOMToggleButtonName } from "../../../Utils/DOMToggleButtonName";
 import { useFilterStore } from "../../../store/filtered";
 
 const PurchaseTable = (props: TableStatus) => {
-  const { data } = props;
+  const { data, onDeleteSuccess } = props;
   const { menuOpen, toggleMenu } = useMenu();
   const { open, toggleDrawer, setDrawerData } = useDrawer();
   const [clickedData, setClickedData] = useState(null);
@@ -51,6 +51,7 @@ const PurchaseTable = (props: TableStatus) => {
           hideProgressBar: true,
           autoClose: 1000,
         });
+        onDeleteSuccess()
       })
       .catch(function (err) {
         toast.error("Error in deletion", {
@@ -59,6 +60,7 @@ const PurchaseTable = (props: TableStatus) => {
         });
       });
   }
+
 
   return (
     <>

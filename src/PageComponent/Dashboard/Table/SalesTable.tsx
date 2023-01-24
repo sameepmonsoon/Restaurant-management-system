@@ -23,7 +23,7 @@ import { left } from "@popperjs/core";
 import { useFilterStore } from "../../../store/filtered";
 
 const SalesTable = (props: TableStatus) => {
-  const { data } = props;
+  const { data, onDeleteSuccess } = props;
   const { menuOpen, toggleMenu } = useMenu();
   const { open, toggleDrawer, setDrawerData } = useDrawer();
   const [clickedData, setClickedData] = useState(null);
@@ -50,7 +50,9 @@ const SalesTable = (props: TableStatus) => {
           hideProgressBar: true,
           autoClose: 1000,
         });
+        onDeleteSuccess()
       })
+
       .catch(function (err) {
         toast.success("Error in deletion", {
           hideProgressBar: true,
