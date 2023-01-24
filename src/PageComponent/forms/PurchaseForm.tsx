@@ -14,7 +14,9 @@ export default function PurchaseForm() {
   const { open, toggleDrawer, drawerToEditData ,setDrawerData} = useDrawer();
   const [render, setRender] = useState(false);
 
-  const [products, setProducts] = useProductStore ((state:any)=> [state.products, state.setProducts])
+  const fetchProducts = useProductStore((state:any)=> (state.fetchProducts))
+
+  // const [products, setProducts] = useProductStore ((state:any)=> [state.products, state.setProducts])
   let schema = yup.object().shape({
     name: yup.string().required("is required"),
     unit: yup.string().required("required"),
@@ -49,12 +51,14 @@ export default function PurchaseForm() {
          HTTPMethods.put(`/purchase/update/${drawerToEditData.data.purchase_id} `, values)
         .then(function (resp) {
           action.resetForm();
-          toggleDrawer();
           toast.success("Purcahse edit successfully", {
             theme: "colored",
             hideProgressBar: true,
             autoClose: 1000,
           });
+          fetchProducts()
+          toggleDrawer();
+
         })
         .catch(function (err) {
           toast.success("Error in purchase creation", {
@@ -72,8 +76,15 @@ export default function PurchaseForm() {
 
       HTTPMethods.post("/purchase/create", values)
         .then(function (resp) {
-          action.resetForm();
+          toast.success("Product added successfully", {
+            theme: "colored",
+            hideProgressBar: true,
+            autoClose: 1000,
+          });
+          fetchProducts()
           toggleDrawer();
+          action.resetForm();
+
         })
 
         .catch(function (err) {
@@ -83,6 +94,7 @@ export default function PurchaseForm() {
             autoClose: 1000,
           });
         });
+        
     },
     validationSchema: schema,
   });
