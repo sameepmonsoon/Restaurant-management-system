@@ -34,7 +34,7 @@
     "vite-plugin-checker": "^0.5.2",
     "yarn": "^1.22.19",
     "yup": "^0.32.11",
-    "zustand": "^4.2.0"
+    "zustand": "^4.3.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.26",

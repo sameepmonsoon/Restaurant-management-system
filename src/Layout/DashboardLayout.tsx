@@ -23,6 +23,8 @@ import { TextField } from "../Components/TextField";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import PurchaseForm from "../PageComponent/forms/PurchaseForm";
 import SalesForm from "../PageComponent/forms/SalesForm";
+import { useFilterStore } from "../store/filtered";
+
 
 export default function DashboardLayout({
   children,
@@ -35,7 +37,12 @@ export default function DashboardLayout({
   renderFilters?: JSX.Element;
   renderTotalitems?: JSX.Element;
 }) {
+
+
+  const clearSearchTerm =()=> useFilterStore((state: any)=> state.setSearchTerm(""))
+
   const [purchases, setPurchase] = useState<InventoryDataType>();
+
   const {setDrawerData} =useDrawer()
   useEffect(() => {
     HTTPMethods.get("/total/readTotal")
@@ -98,7 +105,7 @@ export default function DashboardLayout({
     return "Title";
   }
   return (
-    <>
+    <>          
       <DashboardMainDiv>
         <Sider />
         <LayoutContainerDiv>
@@ -108,7 +115,7 @@ export default function DashboardLayout({
             arrowIcon={true}
           />
           <InventoryCardContainerDiv>
-            <Link
+            <Link onClick={clearSearchTerm}
               to={"/home"}
               style={{ color: "#090909", textDecoration: "none" }}>
               <InventoryCard
@@ -119,7 +126,7 @@ export default function DashboardLayout({
                 active={location.pathname === "/home/purchase"}
               />
             </Link>
-            <Link
+            <Link onClick={clearSearchTerm}
               to={"/home/sales"}
               style={{ color: "#090909", textDecoration: "none" }}>
               <InventoryCard
@@ -131,7 +138,7 @@ export default function DashboardLayout({
               />
             </Link>
 
-            <Link
+            <Link onClick={clearSearchTerm}
               to={"/home/stocks"}
               style={{ color: "#090909", textDecoration: "none" }}>
               <InventoryCard
@@ -144,12 +151,12 @@ export default function DashboardLayout({
             </Link>
             {renderActions}
           </InventoryCardContainerDiv>
-          <FilterComponentDiv>{renderFilters}</FilterComponentDiv>
-          <ChildrenDiv>
-            {renderTotalitems}
-            {children}
-          </ChildrenDiv>
-        </LayoutContainerDiv>
+              <FilterComponentDiv>{renderFilters}</FilterComponentDiv>
+              <ChildrenDiv>
+                {renderTotalitems}
+                {children}
+              </ChildrenDiv>
+            </LayoutContainerDiv>         
         <DrawerC
           cardtitle={manageTitle()}
           open={open}

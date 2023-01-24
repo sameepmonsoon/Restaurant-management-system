@@ -21,6 +21,7 @@ import Stocks from "./Pages/Stocks";
 import Purchase from "./Pages/Purchase";
 import DashboardLayout from "./Layout/DashboardLayout";
 import StocksTable from "./PageComponent/Dashboard/Table/StocksTable";
+import { Filter } from "@mui/icons-material";
 
 
 function App(props: any) {

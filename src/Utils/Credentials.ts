@@ -1,1 +1,1 @@
-export const BASE_URL="http://backend.hq.kpop.com.np"
+export const BASE_URL="https://backend.hq.kpop.com.np"
