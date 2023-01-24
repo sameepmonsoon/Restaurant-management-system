@@ -6,20 +6,24 @@ import { HTTPMethods } from "../Utils/HTTPMock";
 
 export default function Sales() {
   const [products, setProducts] = useState<productObjectType[]>([]);
-  useEffect(() => {
+
+  const fetchSales =()=>{
     HTTPMethods.get("/new_sales/read?page=1&offset=10")
-      .then(async (res: any) => {
-        setProducts(res.data.payload.data);
-      })
-      .catch(async (err) => {
-        toast.info("Server is down to display the table data.", {
-          theme: "colored",
-          hideProgressBar: true,
-          autoClose: 2000,
-          position: "bottom-right",
-          toastId: "info1",
-        });
+    .then(async (res: any) => {
+      setProducts(res.data.payload.data);
+    })
+    .catch(async (err) => {
+      toast.info("Server is down to display the table data.", {
+        theme: "colored",
+        hideProgressBar: true,
+        autoClose: 2000,
+        position: "bottom-right",
+        toastId: "info1",
       });
+    });
+  }
+  useEffect(() => {
+   fetchSales()
   }, []);
-  return products.length ? <SalesTable data={products} /> : <div>Loading</div>;
+  return products.length ? <SalesTable data={products} onDeleteSuccess={fetchSales} /> : <div>Loading</div>;
 }

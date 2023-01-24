@@ -2,5 +2,6 @@ import { productObjectType } from "./ProductListsType"
 
 export type TableStatus={
 
-    data?: productObjectType[]
+    data?: productObjectType[],
+    onDeleteSuccess: () => void;
 }

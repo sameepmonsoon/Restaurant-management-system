@@ -6,7 +6,8 @@ import { HTTPMethods } from '../Utils/HTTPMock'
 
 export default function Stocks() {
     const [products, setProducts] = useState<productObjectType[]>([])
-    useEffect(()=>{
+
+    const fetchStocks = ()=>{
       HTTPMethods.get("/stock/read")
       .then(async (res:any) => {
         setProducts(res.data.payload.data)
@@ -20,9 +21,12 @@ export default function Stocks() {
           toastId: 'info1'
         })
       })
-        
+    }
+    useEffect(()=>{
+     
+      fetchStocks()
       },[])
   return (
-     products.length? <StocksTable data={products}/>:<div>Loading</div>
+     products.length? <StocksTable data={products} onDeleteSuccess={fetchStocks}/>:<div>Loading</div>
   )
 }
