@@ -13,39 +13,38 @@ const ReportButton = () => {
         setIsOpen(!isOpen)
     }
     return ( 
-        <ReportDiv>
+        <ReportDiv >
             <DropdownHeader onClick={handleClick}>
                 <div>
-                    <AiFillPrinter/>
+                    <AiFillPrinter size={20}/>
                     <span> Report</span>
                 </div>
-                <RiArrowDropUpLine/>
+                <RiArrowDropUpLine size={35}/>
 
             </DropdownHeader>
 
             {
                  (
-                    <DropDownOptions>
-                        <Link to ="purchase" className="link">
+                    isOpen && <DropDownOptions>
+                        <Link to ="/report/purchase" className="link">
                             <li>Purchase</li>
                         </Link>
 
-                        <Link to="sales" className="link">
+                        <Link to="/report/sales" className="link">
                             <li>Sell</li>
                         </Link>
 
-                        <Link to="stocks" className="link">
+                        <Link to="/report/stocks" className="link">
                             <li>Stock</li>
                         </Link>
 
-                        <Link to="purchase" className="link">
+                        <Link to="/report/profit_anaylze" className="link">
                             <li>Profit Analysis</li>
                         </Link>
                     </DropDownOptions>
                 )
             }
-                            <Outlet/>
-
+            
         </ReportDiv>
 
      );

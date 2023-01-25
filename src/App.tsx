@@ -25,6 +25,8 @@ import { Filter } from "@mui/icons-material";
 import ReportButton from "./Components/ReportButton/ReportButton";
 import path from "node:path/win32";
 import PurchaseTable from "./PageComponent/Dashboard/Table/PurchaseTable";
+import ProfitAnalysis from "./Pages/ProfitAnalysis";
+import Reports from "./Pages/Reports";
 
 
 function App(props: any) {
@@ -59,7 +61,7 @@ function App(props: any) {
     
     {
       path:"/report",
-      element:<ReportButton/>,
+      element:<Reports/>,
       children: [
        {
         path: "purchase",
@@ -74,8 +76,8 @@ function App(props: any) {
         element: <Stocks/>
        },
        {
-        path: "purchase",
-        element: <Purchase/>
+        path: "profit_anaylze",
+        element: <ProfitAnalysis/>
        },
 
 

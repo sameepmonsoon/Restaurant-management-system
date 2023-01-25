@@ -3,7 +3,8 @@ import styled from "@emotion/styled";
 export const ReportDiv = styled('div')`
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
-  width: 224px;`
+  width: 100%;`
+
 
 export const DropdownHeader = styled('div')`
     background-color:#313131 ;
@@ -19,5 +20,9 @@ export const DropdownHeader = styled('div')`
 
 export const DropDownOptions = styled('ul')`
     color: #000;
+    .link{
+      text-decoration: none;
+      color: #000;
+    }
 
 `

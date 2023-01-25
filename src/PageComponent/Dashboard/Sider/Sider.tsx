@@ -42,9 +42,10 @@ export default function Sider() {
       <SiderMainDiv>
           <SiderButtonLabel>
               <SiderButtonTitle>analytics</SiderButtonTitle>
-              <DashboardButton icon={<RxDashboard/>} title={"dashboard"}/>
-                <ReportButton />
+              <DashboardButton icon={<RxDashboard/>} title={"dashboard"} />
+              <ReportButton />
           </SiderButtonLabel>
+        
 
           <LogoutSetting>
             <SettingDiv  onClick={handleLogout}>
