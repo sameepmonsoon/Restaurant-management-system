@@ -48,9 +48,9 @@ function Dashboard() {
           icon={<MdAdd fontSize="1.4em" />}
           label={actionLabel()}
           onClick={(e: React.MouseEvent<HTMLElement>) => {
-          // Change the Edit button name to Add
-            DOMToggleButtonName("Add")
-            openDrawer()
+            // Change the Edit button name to Add
+            DOMToggleButtonName("Add");
+            openDrawer();
           }}
         />
       }
