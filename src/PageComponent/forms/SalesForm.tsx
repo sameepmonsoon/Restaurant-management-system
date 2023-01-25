@@ -9,9 +9,11 @@ import { useDrawer } from "../../Pages/states/Drawer.state";
 import { toast } from "react-toastify";
 import { useRef } from "react";
 import { DOMToggleButtonName } from "../../Utils/DOMToggleButtonName";
+import { useSalesStore } from "../../store/filtered";
 export default function SalesForm() {
   const { open, toggleDrawer,drawerToEditData ,setDrawerData } = useDrawer();
 
+  const fetchSales = useSalesStore((state:any)=> (state.fetchSales))
   let useref = useRef();
   let schema = yup.object().shape({
     item_name: yup.string().required("is required"),
@@ -45,13 +47,14 @@ export default function SalesForm() {
         // Edit data
         HTTPMethods.put(`/new_sales/update/${drawerToEditData.data?.id} `, values)
         .then(function (resp) {
-          action.resetForm();
-          toggleDrawer();
-          toast.success("Purcahse edit successfully", {
+          toast.success("Sales edit successfully", {
             theme: "colored",
             hideProgressBar: true,
             autoClose: 1000,
           });
+          fetchSales()
+          action.resetForm();
+          toggleDrawer();
         })
         .catch(function (err) {
           toast.success("Error in purchase creation", {
@@ -70,6 +73,12 @@ export default function SalesForm() {
 
       HTTPMethods.post("/new_sales/create", values)
         .then(function (resp) {
+          toast.success("Product Added successfully", {
+            theme: "colored",
+            hideProgressBar: true,
+            autoClose: 1000,
+          });
+          fetchSales()
           action.resetForm();
           toggleDrawer();
         })

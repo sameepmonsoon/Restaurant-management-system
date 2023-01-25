@@ -12,6 +12,7 @@ export const DashboardButtonMainDiv = styled("div")`
   width: 224px;
   height: 50.95px;
   gap: 22px;
+  padding: 9px 0px;
 `;
 export const DashboardButtonIcon = styled("div")`
   margin-left: 19px;

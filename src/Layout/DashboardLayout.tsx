@@ -60,7 +60,7 @@ export default function DashboardLayout({
   }
 
   const totalPurchase = purchases
-    ? ` Rs. ${purchases?.totalpurchase} `
+    ? ` Rs. ${purchases.totalpurchase} `
     : "loading";
   const totalSales = purchases ? `Rs. ${purchases?.total_sales}` : "loading";
   const totalStocks = purchases
@@ -145,7 +145,7 @@ export default function DashboardLayout({
               <InventoryCard
                 title={"Stocks"}
                 icon={<CiBoxes size={35} />}
-                amount={`${purchases?.total_stocks} products`}
+                amount={`${totalStocks}`}
                 cardType="stock"
                 active={location.pathname === "/home/stocks"}
               />

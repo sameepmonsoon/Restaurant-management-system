@@ -20,13 +20,15 @@ import { useEffect, useState } from "react";
 import { useMenu } from "../../../Components/actionPopUp/ActionPopUp.state";
 import { toast } from "react-toastify";
 import { left } from "@popperjs/core";
+import { useFilterStore } from "../../../store/filtered";
 
 const SalesTable = (props: TableStatus) => {
-  const { data } = props;
+  const { data, onDeleteSuccess } = props;
   const { menuOpen, toggleMenu } = useMenu();
   const { open, toggleDrawer, setDrawerData } = useDrawer();
   const [clickedData, setClickedData] = useState(null);
   const [val, setVal] = useState(true);
+  const searchedTerm = useFilterStore((state:any)=> state.searchTerm)
   const openMenu = (data: any) => {
     setClickedData(data);
     toggleMenu();
@@ -48,7 +50,9 @@ const SalesTable = (props: TableStatus) => {
           hideProgressBar: true,
           autoClose: 1000,
         });
+        onDeleteSuccess()
       })
+
       .catch(function (err) {
         toast.success("Error in deletion", {
           hideProgressBar: true,
@@ -96,7 +100,8 @@ const SalesTable = (props: TableStatus) => {
         </TableHeader>
         <TableBody>
           {data &&
-            data.map((product, index) => (
+            data.filter(product => product.item_name.toLowerCase().includes(searchedTerm.toLowerCase()))
+            .map((product, index) => (
               <TableRow>
                 <TableData style={{ justifyContent: "center" }}>
                   {" "}
