@@ -62,7 +62,7 @@ export const TextField = forwardRef(
     }: TextFieldProps,
     ref
   ) => {
-    const [defaultValueState, setDefaultValue] = useState(defaultValue);
+    const [defaultValueState, setDefaultValue] = useState("");
     const input = document.querySelector(`#input-${name}`);
     const theme = "light";
     const inputPrototype = Object.getOwnPropertyDescriptor(
