@@ -76,7 +76,12 @@ export function Login() {
         })
         .catch(function (err) {
           // Error Message
-          console.log("error is", err);
+          toast.error(err.response.data, {
+            theme: "colored",
+            hideProgressBar: true,
+            autoClose: 1000,
+            toastId: "log1",
+          });
         });
     },
     validationSchema: schema,
@@ -103,7 +108,7 @@ export function Login() {
             // error={errors.email}
             label={"Email"}
             placeholder="Enter your Email"
-            defaultValue={"ashwon2000bajracharya@gmail.com"}></TextField>
+            defaultValue={" "}></TextField>
           {errors.email && touched.email ? (
             <FormError>{errors.email}</FormError>
           ) : null}
@@ -115,7 +120,7 @@ export function Login() {
               // error={errors.password}
               label={"Password"}
               placeholder="Enter your Password"
-              defaultValue={"123123"}></TextField>
+              defaultValue={""}></TextField>
             <ToggleIcon>
               {type === "password" ? (
                 <AiOutlineEyeInvisible size={20} onClick={togglePassword} />
