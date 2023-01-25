@@ -11,11 +11,13 @@ import { SiderLogoDiv, SiderMainDiv, SiderButtonLabel, LogoutSetting, SettingDiv
 import SiderButton from '../../../Components/SiderButton/SiderButton'
 import {FiSettings} from 'react-icons/fi'
 import {HiOutlineLogout} from 'react-icons/hi'
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 import { title } from 'process'
 import { RiArrowDropDownLine } from 'react-icons/ri'
 import DashboardButton from '../../../Components/DashboardButton/DashboardButton'
+import { AiFillPrinter } from 'react-icons/ai'
+import ReportButton from '../../../Components/ReportButton/ReportButton'
 
 
 export default function Sider() {
@@ -41,10 +43,10 @@ export default function Sider() {
           <SiderButtonLabel>
               <SiderButtonTitle>analytics</SiderButtonTitle>
               <DashboardButton icon={<RxDashboard/>} title={"dashboard"}/>
+                <ReportButton />
           </SiderButtonLabel>
+
           <LogoutSetting>
-
-
             <SettingDiv  onClick={handleLogout}>
                 <SiderIcon>  <HiOutlineLogout fontSize="1.4rem"/> </SiderIcon>
                 <span>Logout</span>
