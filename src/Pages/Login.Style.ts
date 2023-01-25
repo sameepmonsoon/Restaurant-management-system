@@ -147,6 +147,7 @@ export const ForgetPassword = styled(Link)`
 
 export const FormError = styled("span")`
   color: #b00300;
+  margin-bottom: 15px;
 `;
 
 export const Caption = styled("p")`
@@ -160,10 +161,16 @@ export const Caption = styled("p")`
   margin-left: 15px;
   display: block;
 `;
+export const EmailContainer = styled("span")`
+  height: 84px;
+ 
+`;
 
 // for password field and toggle icon
 export const PasswordContainer = styled("span")`
-  height: 104px;
+  height: 84px;
+  margin-top: 0.9rem;
+ 
 `;
 
 // for eye on and off toggle icon

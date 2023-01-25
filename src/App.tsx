@@ -22,6 +22,11 @@ import Purchase from "./Pages/Purchase";
 import DashboardLayout from "./Layout/DashboardLayout";
 import StocksTable from "./PageComponent/Dashboard/Table/StocksTable";
 import { Filter } from "@mui/icons-material";
+import ReportButton from "./Components/ReportButton/ReportButton";
+import path from "node:path/win32";
+import PurchaseTable from "./PageComponent/Dashboard/Table/PurchaseTable";
+import ProfitAnalysis from "./Pages/ProfitAnalysis";
+import Reports from "./Pages/Reports";
 
 
 function App(props: any) {
@@ -52,10 +57,36 @@ function App(props: any) {
           element:<Stocks/>
         }
       ]
-    },  
+    },
+    
     {
-      path:"/home/purchase",
-      element:<Dashboard/>
+      path:"/report",
+      element:<Reports/>,
+      children: [
+       {
+        path: "purchase",
+        element: <Purchase/>
+       },
+       {
+        path: "sales",
+        element: <Sales/>
+       },
+       {
+        path: "stocks",
+        element: <Stocks/>
+       },
+       {
+        path: "profit_anaylze",
+        element: <ProfitAnalysis/>
+       },
+
+
+      ]
+    },
+
+    {
+      path:"purchaseTable",
+      element:<Purchase/>
     },  
     {
       path: "/components",
