@@ -1,10 +1,18 @@
 import styled from "@emotion/styled";
-
-export const SiderDiv = styled.div`
-  width: 270px;
+type Sider = {
+  openSider: boolean;
+};
+export const SiderDiv = styled.div<Sider>`
+  width: ${({ openSider }) => (openSider == true ? "260px" : "0px")};
   height: 936px;
-  background-color: #ffffff;
+  position: relative;
+  z-index: 1;
+  left: ${({ openSider }) => (openSider == true ? "0px" : "-500px")};
+  /* top given to make the transition ease with navbar height*/
+  top: ${({ openSider }) => (openSider == true ? "0px" : "15px")};
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
+  transition: width 1s ease;
+  transition: left 1s ease;
 `;
 export const SiderLogoDiv = styled.div`
   display: flex;

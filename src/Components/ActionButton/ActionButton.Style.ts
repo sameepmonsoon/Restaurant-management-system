@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+
 export const AddButtonMain = styled("div")`
   position: relative;
   width: 178px;
@@ -12,8 +13,8 @@ export const AddButtonMain = styled("div")`
   justify-content: center;
   cursor: pointer;
 `;
+
 export const AddCardItems = styled.div`
-  position: absolute;
   width: 128px;
   height: 41px;
   display: flex;
@@ -21,6 +22,7 @@ export const AddCardItems = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
 export const AddButtonIcon = styled.section`
   color: white;
 `;

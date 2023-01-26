@@ -18,7 +18,7 @@ import {
 } from "./DashboardLayout.style";
 
 // import {InventoryCardContainerDiv, LayoutContainerDiv } from './DashboardLayout.style'
-import { DashboardMainDiv } from "./DashboardLayout.styles";
+import { DashboardMainDiv } from "./DashboardLayout.style";
 import DrawerC from "../PageComponent/Dashboard/Drawer/Drawer";
 import { useDrawer } from "../Pages/states/Drawer.state";
 import { TextField } from "../Components/TextField";
@@ -107,15 +107,15 @@ export default function DashboardLayout({
   return (
     <>
       <DashboardMainDiv>
-        {openSider === true ? <Sider /> : null}
-        <LayoutContainerDiv>
+        <Sider />
+        <LayoutContainerDiv openSider={openSider}>
           <Navbar
             navTitle={"Dashboard"}
             navbarCardName={"Purchase"}
             arrowIcon={true}
             onClick={(e: React.MouseEvent<HTMLElement>) => openCloseSider()}
           />
-          <InventoryCardContainerDiv>
+          <InventoryCardContainerDiv openSider={openSider}>
             <Link
               to={"/home"}
               style={{ color: "#090909", textDecoration: "none" }}>

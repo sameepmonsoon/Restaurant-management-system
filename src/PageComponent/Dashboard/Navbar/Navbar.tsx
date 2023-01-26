@@ -6,7 +6,7 @@ import { RiArrowDownSLine } from "react-icons/ri";
 import { RiArrowRightSLine } from "react-icons/ri";
 import { NavbarTitles } from "../../../Types/Components/PageComponentNavbar";
 import { siderToggle } from "../../../Pages/states/NavBar.state";
-import { BsArrowDownSquareFill } from "react-icons/bs";
+import { RiMenuFoldLine, RiMenuLine } from "react-icons/ri";
 import {
   NavbarMainDiv,
   NavbarItemTextElementsArrow,
@@ -39,9 +39,9 @@ const Navbar = (props: NavbarTitles) => {
       <NavbarMainDiv>
         <NavbarItemIcon onClick={toggleSider}>
           {openSider === true ? (
-            <BsArrowDownSquareFill size={25} />
+            <RiMenuFoldLine size={25} />
           ) : (
-            <FaBars size={25} />
+            <RiMenuLine size={25} />
           )}
         </NavbarItemIcon>
         <NabarItemTextContainer>
