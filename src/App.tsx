@@ -23,6 +23,11 @@ import PurchaseTable from "./PageComponent/Dashboard/Table/PurchaseTable";
 import ProfitAnalysis from "./Pages/ProfitAnalysis";
 import Reports from "./Pages/Reports";
 import Menu from "./Pages/Menu";
+import Customer from "./Pages/Customer";
+import WebOrder from "./Pages/WebOrder";
+import Tables from "./Pages/Tables";
+import FloorSecond from "./Pages/FloorSecond";
+import FloorFirst from "./Pages/FloorFirst";
 
 function App(props: any) {
   const router = createBrowserRouter([
@@ -53,6 +58,28 @@ function App(props: any) {
         },
       ],
     },
+    {
+      path:"/customer",
+      element: <Customer/>
+    },
+
+    {
+      path:"/webOrder",
+      element: <WebOrder/>
+    },
+    {
+      path:"/tables",
+      element: <Tables/>,
+      children:[
+        {path:"floorFirst",
+        element:<FloorFirst/>
+      },
+        {
+          path:"floorSecond",
+        element:<FloorSecond/>
+        }
+      ]
+    },
 
     {
       path: "/report",
@@ -71,7 +98,7 @@ function App(props: any) {
           element: <Stocks />,
         },
         {
-          path: "profit_anaylze",
+          path: "profitAnaylze",
           element: <ProfitAnalysis />,
         },
       ],

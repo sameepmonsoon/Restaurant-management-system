@@ -15,7 +15,7 @@ import {
 } from "./Sider.Style";
 import SiderButton from "../../../Components/SiderButton/SiderButton";
 import { FiSettings } from "react-icons/fi";
-import { HiOutlineLogout } from "react-icons/hi";
+import { HiOutlineDocumentReport, HiOutlineLogout } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
 
 import { title } from "process";
@@ -56,10 +56,35 @@ export default function Sider() {
               title={"dashboard"}
             />
           </Link>
-          <ReportButton />
+          <ReportButton icon1={<img src="/assets/table.svg"/>} label={"Table"} icon2={<img src="/assets/controlDown.svg" alt="down"/>} icon3={<img src="/assets/controlUp.svg"/>}
+            options={[
+              {label: "1st Floor", link:"/tables/floorFirst"},
+              {label: "2nd Floor", link:"/tables/floorSecond"},
+           
+          
+          ]}
+          />
           <Link to="/menu" style={{ color: "#090909", textDecoration: "none" }}>
             <DashboardButton icon={<RxDashboard size={25} />} title={"Menu"} />
           </Link>
+
+          <Link to="/customer" style={{ color: "#090909", textDecoration: "none" }}>
+            <DashboardButton icon={<RxDashboard size={25} />} title={"Customer"} />
+          </Link>
+
+          <Link to="/webOrder" style={{ color: "#090909", textDecoration: "none" }}>
+            <DashboardButton icon={<RxDashboard size={25} />} title={"WebOrder"} />
+          </Link>
+
+          <ReportButton icon1={<HiOutlineDocumentReport size={20}/>} label={"Report"} icon2={<img src="/assets/controlDown.svg"/>} icon3={<img src="/assets/controlUp.svg"/>}
+            options={[
+              {label: "Purchase", link:"/report/purchase"},
+              {label: "Sell", link:"/report/sales"},
+              {label: "Stock", link:"/report/stocks"},
+              {label: "Profit Analysis", link:"/report/profitAnaylze"}
+          
+          ]}
+          />
         </SiderButtonLabel>
 
         <LogoutSetting>
