@@ -1,11 +1,6 @@
 import styled from "@emotion/styled";
 
 // div for whole dashboard
-export const DashboardMainDiv = styled('div')`
-display: flex;
-flex-flow:row nowrap;
-`;
-
 
 // div for sider only---- logo included inside sider
 // export const DashboardSiderDiv = styled('div')`
@@ -23,10 +18,9 @@ flex-flow:row nowrap;
 //     background:red;
 //     flex-flow: row nowrap;
 //     min-width: 1177px;
-//     width: 100%;    
+//     width: 100%;
 // }
 // `;
-
 
 // // div for navbar and dashboard body---- all components included inside this div
 // export const DashboardNavbarBody = styled('div')`

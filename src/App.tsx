@@ -1,16 +1,11 @@
-import {
-  createBrowserRouter,
-  RouterProvider} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Login, Register } from "./Pages";
 import Components from "./Pages/Components";
 import Dashboard from "./Pages/Dashboard";
-  import {
-  Route,
-  Link,
-} from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 import InventoryCard from "./Components/InventoryCard/InventoryCard";
 import { TextField } from "./Components/TextField";
-import {MdOutlineShoppingCart} from 'react-icons/md'
+import { MdOutlineShoppingCart } from "react-icons/md";
 
 import Sider from "./PageComponent/Dashboard/Sider/Sider";
 import Snackbar from "./Components/Snackbar/Snackbar";
@@ -27,7 +22,7 @@ import path from "node:path/win32";
 import PurchaseTable from "./PageComponent/Dashboard/Table/PurchaseTable";
 import ProfitAnalysis from "./Pages/ProfitAnalysis";
 import Reports from "./Pages/Reports";
-
+import Menu from "./Pages/Menu";
 
 function App(props: any) {
   const router = createBrowserRouter([
@@ -37,66 +32,65 @@ function App(props: any) {
     },
     {
       path: "/register",
-      element:<Register/>,
+      element: <Register />,
     },
-  
+
     {
-      path:"/home",
-      element:<Dashboard/>,
-      children:[
-        {
-          path:"purchase",
-          element:<Purchase/>
-        },
-        {
-          path:"sales",
-          element:<Sales/>
-        },
-        {
-          path:"stocks",
-          element:<Stocks/>
-        }
-      ]
-    },
-    
-    {
-      path:"/report",
-      element:<Reports/>,
+      path: "/home",
+      element: <Dashboard />,
       children: [
-       {
-        path: "purchase",
-        element: <Purchase/>
-       },
-       {
-        path: "sales",
-        element: <Sales/>
-       },
-       {
-        path: "stocks",
-        element: <Stocks/>
-       },
-       {
-        path: "profit_anaylze",
-        element: <ProfitAnalysis/>
-       },
-
-
-      ]
+        {
+          path: "purchase",
+          element: <Purchase />,
+        },
+        {
+          path: "sales",
+          element: <Sales />,
+        },
+        {
+          path: "stocks",
+          element: <Stocks />,
+        },
+      ],
     },
 
     {
-      path:"purchaseTable",
-      element:<Purchase/>
-    },  
+      path: "/report",
+      element: <Reports />,
+      children: [
+        {
+          path: "purchase",
+          element: <Purchase />,
+        },
+        {
+          path: "sales",
+          element: <Sales />,
+        },
+        {
+          path: "stocks",
+          element: <Stocks />,
+        },
+        {
+          path: "profit_anaylze",
+          element: <ProfitAnalysis />,
+        },
+      ],
+    },
+    {
+      path: "/menu",
+      element: <Menu />,
+    },
+
+    {
+      path: "purchaseTable",
+      element: <Purchase />,
+    },
     {
       path: "/components",
-      element:<Components/>,
-    }
-    
+      element: <Components />,
+    },
 
-    
-    
-    // ,  
+    // ,
     // {
     //   path: "/components/textfield",
     //   element:<TextField/>,
@@ -104,15 +98,12 @@ function App(props: any) {
     // {
     //   path:"/components/inventorycard",
     //   element:<InventoryCard  title={"purchase"} icon={<MdOutlineShoppingCart size={30}/>} amount={"10,000"} cardType="purchase" active={true}/>
-    // } 
-    , 
-   
+    // }
     {
       path: "pagecomponent/sider",
-      element: <Sider/>
-    }
+      element: <Sider />,
+    },
 
-,
     {
       path: "*",
       element: <h1>page not found</h1>,
@@ -120,11 +111,10 @@ function App(props: any) {
   ]);
   return (
     <>
-    <ToastContainer/>
-    <RouterProvider router={router} />
+      <ToastContainer />
+      <RouterProvider router={router} />
     </>
-   
-  )
+  );
 }
 
 export default App;

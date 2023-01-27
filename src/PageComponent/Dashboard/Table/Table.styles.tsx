@@ -45,21 +45,21 @@ export const TableDataStatus = styled("span")<TableStatusStyled>`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-left: 0.1rem;
+  /* padding-left: 0.1rem; */
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
   letter-spacing: 0.01em;
   ${({ status }) =>
-    status === "complete" || status === "cash"
+    status === "Completed" || status === "Cash"
       ? "color:#02844B; background-color: #E7FFF1;"
-      : status === "pre-order" || status === "Fonepay"
+      : status === "Pre-order" || status === "Fonepay"
       ? "color:#17BFB5;background: #E7FFF1;"
-      : status === "cancelled" || status === "due"
+      : status === "Cancelled" || status === "Due"
       ? "color:#E84A4A; background:#FAE8E9;"
       : "color:#E98C02;background:#FAE8E9;"};
-  width: 89px;
+  width: 9%;
   height: 27px;
   border-radius: 14px;
 `;

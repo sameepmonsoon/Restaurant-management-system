@@ -9,6 +9,7 @@ import { DashboardButtonTypes } from "../../Types/Components/DashboardButtonType
 
 const DashboardButton = (props: DashboardButtonTypes) => {
   const { icon, title } = props;
+
   return (
     <>
       <DashboardButtonMainDiv>

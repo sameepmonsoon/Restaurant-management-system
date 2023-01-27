@@ -5,27 +5,28 @@ import { ChildrenDiv, LayoutContainerDiv } from "./DashboardLayout.style";
 import { DashboardMainDiv } from "./DashboardLayout.style";
 import { siderToggle } from "../Pages/states/NavBar.state";
 
-export default function ReportLayout({
+const MenuLayout = ({
   children,
 }: {
   children: JSX.Element | JSX.Element[];
-}) {
-  const { openSider, toggleSider } = siderToggle();
+}) => {
+  const { openSider } = siderToggle();
   return (
     <>
       <DashboardMainDiv>
         <Sider />
         <LayoutContainerDiv openSider={openSider}>
           <Navbar
-            navTitle={"Report"}
-            navbarCardName={"Purchase"}
+            navTitle={"Menu"}
+            navbarCardName={"All Menu"}
             arrowIcon={true}
             onClick={() => {}}
           />
-
           <ChildrenDiv>{children}</ChildrenDiv>
         </LayoutContainerDiv>
       </DashboardMainDiv>
     </>
   );
-}
+};
+
+export default MenuLayout;

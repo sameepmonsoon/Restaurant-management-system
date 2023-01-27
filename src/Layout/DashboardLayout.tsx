@@ -8,6 +8,8 @@ import Navbar from "../PageComponent/Dashboard/Navbar/Navbar";
 import Sider from "../PageComponent/Dashboard/Sider/Sider";
 import { InventoryDataType } from "../Types/Components/InventoryDataTpes";
 import { HTTPMethods } from "../Utils/HTTPMock";
+import { siderToggle } from "../Pages/states/NavBar.state";
+
 import {
   ChildrenDiv,
   FilterComponentDiv,
@@ -16,15 +18,13 @@ import {
 } from "./DashboardLayout.style";
 
 // import {InventoryCardContainerDiv, LayoutContainerDiv } from './DashboardLayout.style'
-import { DashboardMainDiv } from "./DashboardLayout.styles";
+import { DashboardMainDiv } from "./DashboardLayout.style";
 import DrawerC from "../PageComponent/Dashboard/Drawer/Drawer";
 import { useDrawer } from "../Pages/states/Drawer.state";
 import { TextField } from "../Components/TextField";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import PurchaseForm from "../PageComponent/forms/PurchaseForm";
 import SalesForm from "../PageComponent/forms/SalesForm";
-import { useFilterStore } from "../store/filtered";
-
 
 export default function DashboardLayout({
   children,
@@ -37,13 +37,8 @@ export default function DashboardLayout({
   renderFilters?: JSX.Element;
   renderTotalitems?: JSX.Element;
 }) {
-
-
-  const clearSearchTerm =()=> useFilterStore((state: any)=> state.setSearchTerm(""))
-
   const [purchases, setPurchase] = useState<InventoryDataType>();
-
-  const {setDrawerData} =useDrawer()
+  const { setDrawerData } = useDrawer();
   useEffect(() => {
     HTTPMethods.get("/total/readTotal")
       .then(async (res) => {
@@ -59,20 +54,24 @@ export default function DashboardLayout({
       });
   }, []);
 
+  const { openSider, toggleSider } = siderToggle();
+  function openCloseSider() {
+    toggleSider();
+  }
+
   const totalPurchase = purchases
     ? ` Rs. ${purchases.totalpurchase} `
     : "loading";
-  const totalSales = purchases ? `Rs. ${purchases.total_sales}` : "loading";
-
-  const totalStocks = purchases 
-    ? `${purchases.total_stocks} purchase`   
+  const totalSales = purchases ? `Rs. ${purchases?.total_sales}` : "loading";
+  const totalStocks = purchases
+    ? `${purchases?.total_stocks} products`
     : "loading";
 
   const { open, toggleDrawer } = useDrawer();
   function closeDrawer() {
-    console.log("insode c;ose Drawer")
-    setDrawerData({})
-    console.log("outside Drawer")
+    console.log("insode c;ose Drawer");
+    setDrawerData({});
+    console.log("outside Drawer");
 
     toggleDrawer();
   }
@@ -106,17 +105,18 @@ export default function DashboardLayout({
     return "Title";
   }
   return (
-    <>          
+    <>
       <DashboardMainDiv>
         <Sider />
-        <LayoutContainerDiv>
+        <LayoutContainerDiv openSider={openSider}>
           <Navbar
             navTitle={"Dashboard"}
             navbarCardName={"Purchase"}
             arrowIcon={true}
+            onClick={(e: React.MouseEvent<HTMLElement>) => openCloseSider()}
           />
-          <InventoryCardContainerDiv>
-            <Link onClick={clearSearchTerm}
+          <InventoryCardContainerDiv openSider={openSider}>
+            <Link
               to={"/home"}
               style={{ color: "#090909", textDecoration: "none" }}>
               <InventoryCard
@@ -127,7 +127,7 @@ export default function DashboardLayout({
                 active={location.pathname === "/home/purchase"}
               />
             </Link>
-            <Link onClick={clearSearchTerm}
+            <Link
               to={"/home/sales"}
               style={{ color: "#090909", textDecoration: "none" }}>
               <InventoryCard
@@ -139,7 +139,7 @@ export default function DashboardLayout({
               />
             </Link>
 
-            <Link onClick={clearSearchTerm}
+            <Link
               to={"/home/stocks"}
               style={{ color: "#090909", textDecoration: "none" }}>
               <InventoryCard
@@ -152,12 +152,12 @@ export default function DashboardLayout({
             </Link>
             {renderActions}
           </InventoryCardContainerDiv>
-              <FilterComponentDiv>{renderFilters}</FilterComponentDiv>
-              <ChildrenDiv>
-                {renderTotalitems}
-                {children}
-              </ChildrenDiv>
-            </LayoutContainerDiv>         
+          <FilterComponentDiv>{renderFilters}</FilterComponentDiv>
+          <ChildrenDiv>
+            {renderTotalitems}
+            {children}
+          </ChildrenDiv>
+        </LayoutContainerDiv>
         <DrawerC
           cardtitle={manageTitle()}
           open={open}

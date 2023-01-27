@@ -7,7 +7,11 @@ export const FilterComponentDiv = styled("form")`
   width: 981px;
   height: 45px;
   justify-content: flex-start;
-  column-gap: 30px;
+  column-gap: 50px;
+  @media screen and (max-width: 1300px) {
+    column-gap: 10px;
+    transition: column-gap 1s ease;
+  }
   label {
     width: 53px;
     height: 19px;
