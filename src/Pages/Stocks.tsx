@@ -27,6 +27,6 @@ export default function Stocks() {
       fetchStocks()
       },[])
   return (
-     products.length? <StocksTable data={products} onDeleteSuccess={fetchStocks}/>:<div>Loading</div>
+     products?.length? <StocksTable data={products} onDeleteSuccess={fetchStocks}/>:<div>No data to show</div>
   )
 }

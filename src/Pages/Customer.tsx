@@ -1,13 +1,11 @@
+import ComingSoon from "../Components/comingSoon/ComingSoon";
 import CustomerLayout from "../Layout/CustomerLayout";
 
 const Customer = () => {
     return ( 
         <>
             <CustomerLayout>
-                <div>
-                    <img src="/assets/logo.png"  alt="logo" />
-                    <h3>Coming Soon</h3>
-                </div>
+                <ComingSoon/>
                 
             </CustomerLayout>
         </>

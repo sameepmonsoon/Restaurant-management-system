@@ -222,7 +222,8 @@ export default function PurchaseForm() {
         placeholder="1000"
         onChange={handleChange}
         error={touched.per_piece && errors.per_piece ? errors.per_piece : null}
-        label="Per Price"
+        label="Per Unit"
+        // prefix={"Rs"}
       />
 
       <TextField

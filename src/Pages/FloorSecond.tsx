@@ -1,6 +1,8 @@
+import ComingSoon from "../Components/comingSoon/ComingSoon";
+
 const FloorSnd = () => {
     return ( 
-        <>Second Floor</>
+        <ComingSoon/>
      );
 }
  
