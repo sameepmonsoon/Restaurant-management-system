@@ -1,4 +1,4 @@
 export type DashboardButtonTypes = {
-    icon:React.ReactNode,
-    title:String
-}
+  icon: React.ReactNode | null;
+  title: String | null;
+};

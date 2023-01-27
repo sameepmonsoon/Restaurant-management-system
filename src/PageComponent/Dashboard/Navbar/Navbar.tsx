@@ -27,6 +27,8 @@ function subtitle() {
     return "Sales";
   } else if (location.pathname === "/home/stocks") {
     return "Stocks";
+  } else if (location.pathname === "/report/purchase") {
+    return "Purchase";
   }
 }
 
@@ -52,6 +54,12 @@ const Navbar = (props: NavbarTitles) => {
             </NavbarItemTextElementsArrow>
           ) : null}
           <NavbarItemTextElementThree>{subtitle()}</NavbarItemTextElementThree>
+          {/* for additional submenu of report  */}
+          {location.pathname === "/report/purchase/" ? (
+            <NavbarItemTextElementsArrow>
+              <RiArrowRightSLine size={25} />
+            </NavbarItemTextElementsArrow>
+          ) : null}
         </NabarItemTextContainer>
         <NavbarLogoContainer>
           <NavbarIconNotification>

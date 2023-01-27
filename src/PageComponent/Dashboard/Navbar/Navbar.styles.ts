@@ -20,17 +20,10 @@ height: 86px; */
 
 //navbar bar icon-left
 export const NavbarItemIcon = styled("div")`
-  /* order:1; */
+  order: 1;
   position: relative;
   left: -8px;
   top: -1px;
-
-  /* width: 25px;
-  height: 30px;
-  color: #7d7c7c;
-  align-self: flex-start;
-  background: transparent;
-  box-shadow: 1px 0px 6px rgba(0, 0, 0, 0.08); */
 `;
 
 //navbar text--dashboard>
@@ -39,15 +32,18 @@ export const NabarItemTextContainer = styled("div")`
   order: 2;
   display: flex;
   flex: 1;
+  /* width: 60%; */
+
   height: 19px;
   flex-wrap: wrap;
   flex-direction: row;
   gap: 10;
+  /* background-color: red; */
 `;
 
 // for items inside nabar text like dashboard purchase
 export const NavbarItemTextElementOne = styled("div")`
-  order: 3;
+  /* order: 3; */
   align-items: center;
   padding-left: 2%;
   font-style: normal;
@@ -60,7 +56,7 @@ export const NavbarItemTextElementOne = styled("div")`
 
 //for items inside navbar --item arrow // for //only visible when clicked
 export const NavbarItemTextElementsArrow = styled("span")`
-  order: 4;
+  /* order: 4; */
   position: relative;
   bottom: 10%;
   margin-left: 10px;
@@ -69,7 +65,7 @@ export const NavbarItemTextElementsArrow = styled("span")`
 
 // for item inside navbar text after selection
 export const NavbarItemTextElementThree = styled("div")`
-  order: 5;
+  /* order: 5; */
   align-items: center;
   padding-left: 1%;
   font-style: normal;

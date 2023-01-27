@@ -4,13 +4,17 @@ type Sider = {
 };
 export const SiderDiv = styled.div<Sider>`
   width: ${({ openSider }) => (openSider == true ? "260px" : "0px")};
-  height: 936px;
-  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  position: fixed;
   z-index: 1;
   left: ${({ openSider }) => (openSider == true ? "0px" : "-500px")};
   /* top given to make the transition ease with navbar height*/
   top: ${({ openSider }) => (openSider == true ? "0px" : "15px")};
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
+  /* box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05); */
+  border-top: 2px solid rgba(0, 0, 0, 0.05);
+  border-right: 2px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.05);
   transition: width 1s ease;
   transition: left 1s ease;
 `;
@@ -19,7 +23,7 @@ export const SiderLogoDiv = styled.div`
   flex-flow: row nowrap;
   padding-left: 10%;
   padding-top: 5%;
-  border-bottom: 2px solid white;
+  /* border-bottom: 2px solid white; */
   line-height: 50px;
   width: 270px;
   height: 80px;
@@ -64,7 +68,7 @@ export const SiderMainDiv = styled.div`
   justify-content: space-between;
   height: 100vh;
   padding: 23px;
-  box-shadow: 0 -2px 4px -4px #333;
+  /* box-shadow: 0 -2px 4px -4px #333; */
 `;
 
 export const SiderButtonLabel = styled.div`
@@ -95,11 +99,12 @@ export const SettingDiv = styled.div`
   display: flex;
   flex-direction: row;
   cursor: pointer;
-
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
   color: #676767;
+  position: relative;
+  bottom: 50px;
 `;

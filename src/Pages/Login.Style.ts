@@ -13,6 +13,7 @@ export const MainLoginDiv = styled("div")`
   font-family: "Inter", sans-serif;
   input {
     padding-left: 5%;
+    padding-right: 13%;
     font-family: "Inter";
     font-style: normal;
     font-weight: 500;
@@ -163,14 +164,12 @@ export const Caption = styled("p")`
 `;
 export const EmailContainer = styled("span")`
   height: 84px;
- 
 `;
 
 // for password field and toggle icon
 export const PasswordContainer = styled("span")`
   height: 84px;
   margin-top: 0.9rem;
- 
 `;
 
 // for eye on and off toggle icon
