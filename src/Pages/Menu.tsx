@@ -6,6 +6,10 @@ export default function Menu() {
   return (
     <>
       <MenuLayout>
+                <div>
+                    <img src="/assets/logo.png"  alt="logo" />
+                    <h3>Coming Soon</h3>
+                </div>
         <Outlet />
       </MenuLayout>
     </>

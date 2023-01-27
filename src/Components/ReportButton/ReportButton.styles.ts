@@ -71,4 +71,6 @@ export const ReportLink = styled(Link)`
   li:hover {
     color: #000;
   }
+
+  
 `;
