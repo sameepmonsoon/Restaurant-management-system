@@ -3,6 +3,7 @@ import { AiFillPrinter } from "react-icons/ai";
 import { BsFileEarmarkBarGraph } from "react-icons/bs";
 import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
 import { Link, Outlet, useLocation } from "react-router-dom";
+import { ReportButtonTypes } from "../../Types/Components/ReportButtonTypes";
 import {
   DropdownHeader,
   DropDownOptions,
@@ -14,7 +15,8 @@ import {
   ReportLink,
 } from "./ReportButton.styles";
 
-const ReportButton = () => {
+const ReportButton = (props: ReportButtonTypes) => {
+    const {icon1, label, icon2, icon3, options} = props
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
@@ -26,36 +28,34 @@ const ReportButton = () => {
       <DropdownHeader onClick={handleClick}>
         <DropDownDiv>
           <DropDownIcon>
-            <AiFillPrinter size={25} />
+                {icon1}
           </DropDownIcon>
-          <DropDownText> Report</DropDownText>
+          <DropDownText> 
+                {label}
+          </DropDownText>
         </DropDownDiv>
         <DropDownArrow>
           {isOpen === true ? (
-            <RiArrowDropUpLine size={35} />
+            <div>{icon2} </div> 
           ) : (
-            <RiArrowDropDownLine size={35} />
+            <div>{icon3}</div>
           )}
         </DropDownArrow>
+       
       </DropdownHeader>
 
       {isOpen && (
         <DropDownOptions>
-          <ReportLink to="/report/purchase" className="link">
-            <li>Purchase</li>
-          </ReportLink>
+            {
+                options.map(option =>(
+                    <ReportLink key={option.label} to={option.link} className= {"link"}>
+                        <li>{option.label}</li>
+                    </ReportLink>
+                ))
+            }
+          
 
-          <ReportLink to="/report/sales" className="link">
-            <li>Sell</li>
-          </ReportLink>
-
-          <ReportLink to="/report/stocks" className="link">
-            <li>Stock</li>
-          </ReportLink>
-
-          <ReportLink to="/report/profit_anaylze" className="link">
-            <li>Profit Analysis</li>
-          </ReportLink>
+          
         </DropDownOptions>
       )}
     </ReportDiv>
