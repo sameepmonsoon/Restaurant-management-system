@@ -5,11 +5,7 @@ type SetTitle = {
 };
 
 export const DashboardButtonMainDiv = styled("div")<SetTitle>`
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  justify-content: flex-start;
-  background: ${({ activeSider }) =>
+  background-color: ${({ activeSider }) =>
     activeSider === true ? "#313131" : "white"};
   border: ${({ activeSider }) =>
     activeSider === true ? "1px solid #00020f" : "0"};
@@ -18,14 +14,28 @@ export const DashboardButtonMainDiv = styled("div")<SetTitle>`
   border-radius: 8px;
   width: 224px;
   height: 48px;
-  gap: 20px;
-  padding: 9px 0px;
   div {
     color: ${({ activeSider }) =>
       activeSider === true ? "#ffffff" : "#9a9a9a"};
   }
 `;
+export const DashboardButtonInnerDiv = styled("div")<SetTitle>`
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  padding: 9px 0px;
+  transition: all 300ms ease;
 
+  &:hover {
+    margin-left: ${({ activeSider }) => (activeSider === true ? "0" : "1rem;")};
+    cursor: pointer;
+    div {
+      color: ${({ activeSider }) => (activeSider != true ? "#313131" : "0")};
+    }
+  }
+`;
 export const DashboardButtonIcon = styled("div")`
   margin-left: 19px;
   color: #ffffff;

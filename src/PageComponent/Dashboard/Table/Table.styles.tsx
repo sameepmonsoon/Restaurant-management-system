@@ -24,7 +24,7 @@ export const TableHeader = styled("thead")`
   border-radius: 5px 5px 0px 0px;
 
   @media screen and (max-width: 1200px) {
-    width: 70vw;
+    width: 100%;
   }
 `;
 
@@ -45,7 +45,7 @@ export const TableRow = styled("tr")`
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15);
 
   @media screen and (max-width: 1200px) {
-    width: 70vw;
+    width: 100%;
   }
 `;
 
@@ -106,11 +106,12 @@ export const TableHeadData = styled("td")`
   column-gap: 20px;
   text-transform: uppercase;
   align-items: center;
-  width: 74vw;
+  width: 100%;
   padding-left: 5px;
 
   @media screen and (max-width: 1200px) {
-    width: 70vw;
+    width: 100%;
+    flex-direction: row;
     column-gap: 8px;
     padding-left: 2px;
   }
@@ -118,6 +119,38 @@ export const TableHeadData = styled("td")`
 
 export const TableDataAction = styled("td")`
   display: flex;
-  gap: 5%;
+  gap: 5px;
   padding: 0 10px;
+  button[type="submit"] {
+    height: 25px;
+    padding-top: 7px;
+    background-color: #313131;
+    width: 30px;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 19px;
+    border: 1px solid #00020f;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15);
+  }
+  button[type="submit"]:hover {
+    background-color: #5e5e5e;
+    cursor: pointer;
+    border: 0;
+  }
+  button[type="reset"] {
+    height: 25px;
+    background-color: #fafafa;
+    color: #9d9d9d;
+    width: 30px;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 19px;
+    border: 1px solid #fafafa;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15);
+  }
+  button[type="reset"]:hover {
+    background-color: #e8e8e8;
+    cursor: pointer;
+    border: 0;
+  }
 `;

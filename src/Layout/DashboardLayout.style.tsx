@@ -16,17 +16,7 @@ export const LayoutContainerDiv = styled("div")<Sider>`
   position: relative;
   left: ${({ openSider }) => (openSider === true ? "260px" : "0")};
   transition: left 0.8s ease;
-  overflow: auto;
   background: #fafafa;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-  &::-webkit-scrollbar-track {
-    background-color: red;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: aqua;
-  }
 
   @media screen and (min-width: 300px) and (max-width: 1450px) {
     overflow-x: hidden;
@@ -44,6 +34,7 @@ export const InventoryCardContainerDiv = styled("div")<Sider>`
   row-gap: 100px;
   column-gap: ${({ openSider }) => (openSider === true ? "50px" : "120px")};
   align-items: center;
+
   @media screen and (max-width: 1300px) and (min-width: 300px) {
     column-gap: ${({ openSider }) => (openSider === true ? "250px" : "50px")};
   }

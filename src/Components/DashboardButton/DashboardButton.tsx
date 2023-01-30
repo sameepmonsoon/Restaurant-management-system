@@ -3,6 +3,7 @@ import {
   DashboardButtonIcon,
   DashboardButtonMainDiv,
   DashboardButtonText,
+  DashboardButtonInnerDiv,
 } from "./DashboardButton.styles";
 
 import { DashboardButtonTypes } from "../../Types/Components/DashboardButtonTypes";
@@ -13,8 +14,10 @@ const DashboardButton = (props: DashboardButtonTypes) => {
   return (
     <>
       <DashboardButtonMainDiv activeSider={location}>
-        <DashboardButtonIcon>{icon}</DashboardButtonIcon>
-        <DashboardButtonText>{title}</DashboardButtonText>
+        <DashboardButtonInnerDiv activeSider={location}>
+          <DashboardButtonIcon>{icon}</DashboardButtonIcon>
+          <DashboardButtonText>{title}</DashboardButtonText>
+        </DashboardButtonInnerDiv>
       </DashboardButtonMainDiv>
     </>
   );

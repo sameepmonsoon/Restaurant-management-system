@@ -2,14 +2,38 @@ import styled from "@emotion/styled";
 
 export const ReportFilterMainDiv = styled("div")`
   display: flex;
-  width: 1105px;
-  height: 90px;
-  box-sizing: border-box;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-around;
+  flex: 7;
+  gap: 70px;
   background: #ffffff;
   border-radius: 5px;
+
+  @media screen and (max-width: 1450px) {
+    padding: 10px;
+    align-items: flex-start;
+    flex-flow: column wrap;
+    gap: 30px;
+  }
+`;
+
+export const ReportFilterInnerDiv = styled("div")`
+  display: flex;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  flex: 5;
+  flex-shrink: 0;
+  @media screen and (max-width: 900px) {
+    flex-flow: column wrap;
+  }
 `;
 
 export const ReportFilterType = styled("div")`
+  order: 1;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-around;
@@ -36,14 +60,21 @@ export const ReportFilterType = styled("div")`
     border-radius: 5px;
     padding: 0 19px;
   }
+  @media screen and (max-width: 1300px) {
+    align-items: flex-start;
+    flex-flow: column wrap;
+    padding: 0;
+  }
 `;
 
 export const ReportFilterTextDate = styled("div")`
   display: flex;
   flex: 2;
+  order: 2;
   align-items: center;
   justify-content: space-around;
   flex-flow: column nowrap;
+  min-width: 101px;
   div {
     text-transform: capitalize;
     font-family: "Inter";
@@ -53,8 +84,14 @@ export const ReportFilterTextDate = styled("div")`
     line-height: 19px;
     color: #424242;
   }
+
+  @media screen and (max-width: 900px) {
+    flex-flow: row wrap;
+    gap: 20px;
+  }
 `;
 export const ReportFilterDateBox = styled("div")`
+  order: 3;
   display: flex;
   flex: 3;
   flex-flow: row nowrap;
@@ -71,18 +108,27 @@ export const ReportFilterDateBox = styled("div")`
     text-transform: uppercase;
     letter-spacing: 1px;
   }
+  @media screen and (max-width: 900px) {
+    flex-flow: column wrap;
+    gap: 10px;
+  }
 `;
 
 export const ReportFilterPrintIcon = styled("div")`
+  order: 4;
   display: flex;
   align-items: center;
   justify-content: space-around;
   width: 43px;
   height: 45px;
   margin: 0 19px;
-  position: relative;
-  top: 22px;
   color: #4b4747;
   background: #eeeeee;
   border-radius: 5px;
+  transition: all 300ms ease;
+  &:hover {
+    background-color: grey;
+    color: #000000;
+    cursor: pointer;
+  }
 `;

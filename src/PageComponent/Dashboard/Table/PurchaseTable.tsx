@@ -9,6 +9,7 @@ import {
   TableHeader,
   TableHeadData,
   TableRow,
+  TableDataAction,
   TableDataStatus,
 } from "./Table.styles";
 import { useMenu } from "../../../Components/actionPopUp/ActionPopUp.state";
@@ -117,20 +118,20 @@ const PurchaseTable = (props: TableStatus) => {
                   <TableDataStatus status={product.status}>
                     <p>{product.status}</p>
                   </TableDataStatus>
-
-                  <TableData
-                    style={{ width: "500px", display: "flex", gap: "20px" }}>
+                  <TableDataAction>
                     <Button
+                      type="submit"
                       variant="contained"
                       onClick={() => editPurchase(product)}>
                       Edit
                     </Button>
                     <Button
+                      type="reset"
                       variant="contained"
                       onClick={() => deletePurchase(product)}>
                       Delete
                     </Button>
-                  </TableData>
+                  </TableDataAction>
                 </TableRow>
               ))}
         </TableBody>
