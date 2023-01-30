@@ -189,6 +189,7 @@ export default function SalesForm() {
         onChange={handleChange}
         error={touched.per_piece && errors.per_piece ? errors.per_piece : null}
         label="Per Unit"
+        
       />
 
       <div style={{ display: "flex", flexDirection: "column" }}>
