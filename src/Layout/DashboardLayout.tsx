@@ -9,7 +9,6 @@ import Sider from "../PageComponent/Dashboard/Sider/Sider";
 import { InventoryDataType } from "../Types/Components/InventoryDataTpes";
 import { HTTPMethods } from "../Utils/HTTPMock";
 import { siderToggle } from "../Pages/states/NavBar.state";
-
 import {
   ChildrenDiv,
   FilterComponentDiv,
@@ -84,6 +83,12 @@ export default function DashboardLayout({
     }
   }
   const location = useLocation();
+
+  function setSiderButtonStatus() {
+    if (location.pathname === "/home/purchase") {
+      return null;
+    }
+  }
 
   function handleActiveCard() {
     if (location.pathname) {

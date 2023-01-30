@@ -30,7 +30,11 @@ const FiltersReport = () => {
         </ReportFilterTextDate>
         <ReportFilterDateBox>
           <TextField type="date" label="" />
-          <DashboardButton icon={""} title={"GENERATE REPORT"} />
+          <DashboardButton
+            icon={""}
+            title={"GENERATE REPORT"}
+            location={location.pathname === "/home"}
+          />
         </ReportFilterDateBox>
         <ReportFilterPrintIcon>
           <AiOutlinePrinter size={35} />

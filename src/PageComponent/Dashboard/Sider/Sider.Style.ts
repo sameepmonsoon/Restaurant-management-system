@@ -17,12 +17,13 @@ export const SiderDiv = styled.div<Sider>`
   border-bottom: 2px solid rgba(0, 0, 0, 0.05);
   transition: width 1s ease;
   transition: left 1s ease;
+  background-color: #ffffff;
 `;
 export const SiderLogoDiv = styled.div`
   display: flex;
   flex-flow: row nowrap;
-  padding-left: 10%;
-  padding-top: 5%;
+  align-items: center;
+  padding-left: 20px;
   /* border-bottom: 2px solid white; */
   line-height: 50px;
   width: 270px;
@@ -64,21 +65,35 @@ export const SiderLogoSubHeader = styled("div")`
 
 export const SiderMainDiv = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-flow: column nowrap;
   justify-content: space-between;
-  height: 100vh;
-  padding: 23px;
+  align-items: flex-start;
+  padding-left: 20px;
+  height: 85vh;
+  padding-top: 30px;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 3px;
+    background-color: white;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: white;
+    border-radius: 10px;
+  }
   /* box-shadow: 0 -2px 4px -4px #333; */
 `;
 
 export const SiderButtonLabel = styled.div`
   cursor: pointer;
   width: 224px;
-  height: 85.91px;
+  height: 100%;
   display: flex;
   flex-flow: column nowrap;
-  margin-top: 9%;
-  gap: 14px;
+  row-gap: 14px;
 `;
 
 export const SiderButtonTitle = styled("div")`
@@ -91,20 +106,21 @@ export const SiderButtonTitle = styled("div")`
   color: #1e1e1e;
 `;
 
-export const LogoutSetting = styled.div`
-  width: 50%;
-`;
-
 export const SettingDiv = styled.div`
+  width: 50%;
+  margin-top: 150px;
   display: flex;
-  flex-direction: row;
+  flex-flow: row nowrap;
   cursor: pointer;
+  gap: 10px;
+  justify-content: flex-start;
+  align-items: center;
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
   color: #676767;
-  position: relative;
-  bottom: 50px;
+  /* position: relative; */
+  /* top: 0px; */
 `;

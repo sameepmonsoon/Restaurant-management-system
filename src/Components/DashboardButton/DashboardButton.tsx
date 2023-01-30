@@ -8,12 +8,11 @@ import {
 import { DashboardButtonTypes } from "../../Types/Components/DashboardButtonTypes";
 
 const DashboardButton = (props: DashboardButtonTypes) => {
-  const { icon, title } = props;
+  const { icon, title, location } = props;
 
   return (
     <>
-      <DashboardButtonMainDiv>
-        {/* <RxDashboard size={20}/> */}
+      <DashboardButtonMainDiv activeSider={location}>
         <DashboardButtonIcon>{icon}</DashboardButtonIcon>
         <DashboardButtonText>{title}</DashboardButtonText>
       </DashboardButtonMainDiv>

@@ -4,10 +4,6 @@ import Drawer from "react-modern-drawer";
 export const DrawerItem = styled(Drawer)`
   display: flex;
   flex-flow: column nowrap;
-  width: 400px;
-  height: 1024px;
-  justify-content: flex-start;
-  align-items: center;
   overflow: auto;
   box-shadow: 1px 10px 25px rgba(0, 0, 0, 0.47);
   border-radius: 30px 0px 0px 30px;
@@ -24,33 +20,13 @@ export const DrawerItem = styled(Drawer)`
 `;
 
 export const DrawerMainDiv = styled("form")`
-  /* width: 300px; */
-  /* background-color: yellow; */
-  height: 1024px;
+  height: 900px;
+  display: flex;
+  flex-flow: column nowrap;
+  row-gap: 50px;
   align-items: center;
   justify-content: center;
   margin-left: 10px;
-  /* display: flex;
-  flex-flow: column nowrap;
-  width: 490px;
-  height: 800px;
-  overflow: hidden;
-  z-index: -1;
-  justify-content: flex-start;
-  align-items: center;
-  box-shadow: 1px 10px 25px rgba(0, 0, 0, 0.47);
-  border-radius: 30px 0px 0px 30px;
-  */
-  /* input,
-  select {
-    padding-left: 1em;
-    padding-right: 1em;
-    width: 397.49px;
-    height: 42px;
-    background: #fafafa;
-    border: 1px solid #b5b5b5;
-    border-radius: 5px;
-  } */
 `;
 
 export const DrawerTitleDiv = styled("div")`
@@ -60,7 +36,7 @@ export const DrawerTitleDiv = styled("div")`
   color: #0000;
   padding-bottom: 20px;
   align-items: center;
-  top: 4%;
+  top: 30px;
   justify-content: space-between;
   width: 400px;
   height: 39px;
@@ -89,7 +65,6 @@ export const DrawerTitleCancelButton = styled("div")`
 `;
 
 export const DrawerInputContentDiv = styled("div")`
-  margin-top: 15%;
   order: 2;
   display: flex;
   height: 700px;
@@ -124,20 +99,10 @@ export const DrawerInputContentDiv = styled("div")`
   }
 `;
 
-// export const DrawerInputPriceDiv = styled('div')`margin: 0;
-// order: 2;
-// padding: 0;
-// display: flex;
-// flex-flow: column wrap;
-// column-gap:30px;
-// width: 397.49px;
-// height: 68px;
-// `;
-
 export const DrawerButtonDiv = styled("div")`
   order: 3;
   display: flex;
-  margin-top: 10%;
+  margin-top: 30px;
   flex-flow: row nowrap;
   column-gap: 27px;
 `;

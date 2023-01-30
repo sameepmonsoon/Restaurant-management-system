@@ -14,10 +14,10 @@ import {
   NavbarLogoContainer,
   NavbarIconNotification,
   NavbarLogoIcon,
-  NavbarIconDropdown,
   NavbarItemTextElementOne,
   NavbarItemTextElementThree,
   NabarItemTextContainer,
+  NavbarLogoAndDropdown,
 } from "./Navbar.styles";
 
 function subtitle() {
@@ -65,12 +65,12 @@ const Navbar = (props: NavbarTitles) => {
           <NavbarIconNotification>
             <VscBellDot size={20} />
           </NavbarIconNotification>
-          <NavbarLogoIcon>
-            <img src={logo} alt="logo" />
-          </NavbarLogoIcon>
-          <NavbarIconDropdown>
+          <NavbarLogoAndDropdown>
+            <NavbarLogoIcon>
+              <img src={logo} alt="logo" />
+            </NavbarLogoIcon>
             <RiArrowDownSLine size={30} />
-          </NavbarIconDropdown>
+          </NavbarLogoAndDropdown>
         </NavbarLogoContainer>
       </NavbarMainDiv>
     </>
