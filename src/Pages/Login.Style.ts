@@ -8,17 +8,22 @@ export const MainLoginDiv = styled("div")`
   position: fixed;
   padding: 0;
   margin: 0;
+
   display: flex;
   flex-flow: row nowrap;
   font-family: "Inter", sans-serif;
   input {
     padding-left: 5%;
+    padding-right: 13%;
     font-family: "Inter";
     font-style: normal;
     font-weight: 500;
     font-size: 15px;
     line-height: 10px;
     color: #515151;
+  }
+  @media screen and (max-width: 1100px) {
+    flex-flow: column wrap;
   }
 `;
 
@@ -38,7 +43,7 @@ export const Image = styled("div")`
   h1 {
     order: 1;
     font-weight: 600;
-    width: 496px;
+    width: 100%;
     height: 52px;
     font-size: 35px;
     line-height: 52px;
@@ -46,6 +51,7 @@ export const Image = styled("div")`
   }
   h2 {
     order: 2;
+    content: "";
     width: 154px;
     height: 1px;
     background-color: #ffffff;
@@ -60,12 +66,23 @@ export const Image = styled("div")`
     letter-spacing: -0.01em;
     color: #ffffff;
   }
+
+  @media screen and (max-width: 1100px) {
+    justify-content: center;
+    align-items: center;
+    /* width: 100%;
+    height: 500px; */
+    margin: 0;
+  }
 `;
 //div for image title
 export const ImageTitleDiv = styled("div")`
   position: relative;
-  top: 35%;
-  left: 5%;
+  top: 270px;
+  left: 50px;
+  display: flex;
+  flex-flow: column wrap;
+  gap: 10px;
 `;
 
 //container div for form
@@ -76,18 +93,26 @@ export const FormDiv = styled("form")`
   flex-flow: column nowrap;
   align-items: flex-start;
   justify-content: center;
+  row-gap: 10px;
+
+  @media screen and (max-width: 1100px) {
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 10px;
+    margin-right: 0;
+  }
 `;
 
 // login title inside form div
 export const Title = styled("p")`
-  width: 126px;
+  width: 150px;
   height: 52px;
   font-family: "Inter";
   font-style: normal;
   font-weight: 700;
   font-size: 52px;
   line-height: 52px;
-  letter-spacing: -0.06em;
+  letter-spacing: 0.01em;
   color: #1e1e1e;
   margin-bottom: 2rem;
   font-family: "Inter", sans-serif;
@@ -163,14 +188,12 @@ export const Caption = styled("p")`
 `;
 export const EmailContainer = styled("span")`
   height: 84px;
- 
 `;
 
 // for password field and toggle icon
 export const PasswordContainer = styled("span")`
   height: 84px;
   margin-top: 0.9rem;
- 
 `;
 
 // for eye on and off toggle icon

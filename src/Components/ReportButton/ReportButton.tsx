@@ -16,7 +16,7 @@ import {
 } from "./ReportButton.styles";
 
 const ReportButton = (props: ReportButtonTypes) => {
-    const {icon1, label, icon2, icon3, options} = props
+  const { icon1, label, icon2, icon3, options, activeSider } = props;
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
@@ -24,38 +24,24 @@ const ReportButton = (props: ReportButtonTypes) => {
     setIsOpen(!isOpen);
   };
   return (
-    <ReportDiv>
-      <DropdownHeader onClick={handleClick}>
+    <ReportDiv active={activeSider}>
+      <DropdownHeader onClick={handleClick} active={activeSider}>
         <DropDownDiv>
-          <DropDownIcon>
-                {icon1}
-          </DropDownIcon>
-          <DropDownText> 
-                {label}
-          </DropDownText>
+          <DropDownIcon>{icon1}</DropDownIcon>
+          <DropDownText>{label}</DropDownText>
         </DropDownDiv>
         <DropDownArrow>
-          {isOpen === true ? (
-            <div>{icon2} </div> 
-          ) : (
-            <div>{icon3}</div>
-          )}
+          {isOpen === true ? <>{icon2}</> : <> {icon3}</>}
         </DropDownArrow>
-       
       </DropdownHeader>
 
       {isOpen && (
         <DropDownOptions>
-            {
-                options.map(option =>(
-                    <ReportLink key={option.label} to={option.link} className= {"link"}>
-                        <li>{option.label}</li>
-                    </ReportLink>
-                ))
-            }
-          
-
-          
+          {options.map((option) => (
+            <ReportLink key={option.label} to={option.link} className={"link"}>
+              <li>{option.label}</li>
+            </ReportLink>
+          ))}
         </DropDownOptions>
       )}
     </ReportDiv>

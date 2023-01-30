@@ -9,7 +9,6 @@ import {
   TableHeader,
   TableHeadData,
   TableRow,
-  TableDataForDate,
   TableDataStatus,
 } from "./Table.styles";
 import { useMenu } from "../../../Components/actionPopUp/ActionPopUp.state";
@@ -28,7 +27,7 @@ const PurchaseTable = (props: TableStatus) => {
   const { open, toggleDrawer, setDrawerData } = useDrawer();
   const [clickedData, setClickedData] = useState(null);
 
-  const searchedTerm = useFilterStore((state: any)=> state.searchTerm)
+  const searchedTerm = useFilterStore((state: any) => state.searchTerm);
 
   const openMenu = (data: any) => {
     setClickedData(data);
@@ -51,7 +50,7 @@ const PurchaseTable = (props: TableStatus) => {
           hideProgressBar: true,
           autoClose: 1000,
         });
-        onDeleteSuccess()
+        onDeleteSuccess();
       })
       .catch(function (err) {
         toast.error("Error in deletion", {
@@ -61,10 +60,9 @@ const PurchaseTable = (props: TableStatus) => {
       });
   }
 
-
   return (
     <>
-      <MainTableDiv >
+      <MainTableDiv>
         <TableHeader>
           <TableHeadData>
             <input type="checkbox" name="" id="" />
@@ -99,40 +97,43 @@ const PurchaseTable = (props: TableStatus) => {
             <HiChevronDown />
           </TableHeadData>
         </TableHeader>
-          <TableBody>
-            {data && 
-            data.filter(product => product.name.toLowerCase().includes(searchedTerm.toLowerCase()))
-            .map((product, index) => (
-                  <TableRow key={index}>
-                    <TableData style={{ justifyContent: "center" }}>
-                      {" "}
-                      {index + 1 }
-                    </TableData>
-                    <TableData>{product.purchased_date} </TableData>
-                    <TableData>{product.name}</TableData>
-                    <TableData>{product.quantity + " packet"}</TableData>
-                    <TableData>{product.per_piece}</TableData>
-                    <TableData>{product.net_price}</TableData>
-                    <TableDataStatus status={product.status}>
-                      <TableData>{product.status}</TableData>
-                    </TableDataStatus>
+        <TableBody>
+          {data &&
+            data
+              .filter((product) =>
+                product.name.toLowerCase().includes(searchedTerm.toLowerCase())
+              )
+              .map((product, index) => (
+                <TableRow key={index}>
+                  <TableData style={{ justifyContent: "center" }}>
+                    {" "}
+                    {index + 1}
+                  </TableData>
+                  <TableData>{product.purchased_date} </TableData>
+                  <TableData>{product.name}</TableData>
+                  <TableData>{product.quantity + " packet"}</TableData>
+                  <TableData>{product.per_piece}</TableData>
+                  <TableData>{product.net_price}</TableData>
+                  <TableDataStatus status={product.status}>
+                    <p>{product.status}</p>
+                  </TableDataStatus>
 
-                    <TableData
-                      style={{ width: "500px", display: "flex", gap: "20px" }}>
-                      <Button
-                        variant="contained"
-                        onClick={() => editPurchase(product)}>
-                        Edit
-                      </Button>
-                      <Button
-                        variant="contained"
-                        onClick={() => deletePurchase(product)}>
-                        Delete
-                      </Button>
-                    </TableData>
-                </TableRow>              
+                  <TableData
+                    style={{ width: "500px", display: "flex", gap: "20px" }}>
+                    <Button
+                      variant="contained"
+                      onClick={() => editPurchase(product)}>
+                      Edit
+                    </Button>
+                    <Button
+                      variant="contained"
+                      onClick={() => deletePurchase(product)}>
+                      Delete
+                    </Button>
+                  </TableData>
+                </TableRow>
               ))}
-          </TableBody>
+        </TableBody>
       </MainTableDiv>
     </>
   );

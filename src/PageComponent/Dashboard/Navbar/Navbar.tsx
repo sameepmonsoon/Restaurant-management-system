@@ -14,10 +14,10 @@ import {
   NavbarLogoContainer,
   NavbarIconNotification,
   NavbarLogoIcon,
-  NavbarIconDropdown,
   NavbarItemTextElementOne,
   NavbarItemTextElementThree,
   NabarItemTextContainer,
+  NavbarLogoAndDropdown,
 } from "./Navbar.styles";
 
 function subtitle() {
@@ -27,6 +27,8 @@ function subtitle() {
     return "Sales";
   } else if (location.pathname === "/home/stocks") {
     return "Stocks";
+  } else if (location.pathname === "/report/purchase") {
+    return "Purchase";
   }
 }
 
@@ -52,17 +54,23 @@ const Navbar = (props: NavbarTitles) => {
             </NavbarItemTextElementsArrow>
           ) : null}
           <NavbarItemTextElementThree>{subtitle()}</NavbarItemTextElementThree>
+          {/* for additional submenu of report  */}
+          {location.pathname === "/report/purchase/" ? (
+            <NavbarItemTextElementsArrow>
+              <RiArrowRightSLine size={25} />
+            </NavbarItemTextElementsArrow>
+          ) : null}
         </NabarItemTextContainer>
         <NavbarLogoContainer>
           <NavbarIconNotification>
             <VscBellDot size={20} />
           </NavbarIconNotification>
-          <NavbarLogoIcon>
-            <img src={logo} alt="logo" />
-          </NavbarLogoIcon>
-          <NavbarIconDropdown>
+          <NavbarLogoAndDropdown>
+            <NavbarLogoIcon>
+              <img src={logo} alt="logo" />
+            </NavbarLogoIcon>
             <RiArrowDownSLine size={30} />
-          </NavbarIconDropdown>
+          </NavbarLogoAndDropdown>
         </NavbarLogoContainer>
       </NavbarMainDiv>
     </>

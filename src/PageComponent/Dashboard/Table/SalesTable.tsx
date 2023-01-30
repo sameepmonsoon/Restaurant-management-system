@@ -9,7 +9,6 @@ import {
   TableHeader,
   TableHeadData,
   TableRow,
-  TableDataForDate,
   TableDataStatus,
   TableDataAction,
 } from "./Table.styles";
@@ -28,7 +27,7 @@ const SalesTable = (props: TableStatus) => {
   const { open, toggleDrawer, setDrawerData } = useDrawer();
   const [clickedData, setClickedData] = useState(null);
   const [val, setVal] = useState(true);
-  const searchedTerm = useFilterStore((state:any)=> state.searchTerm)
+  const searchedTerm = useFilterStore((state: any) => state.searchTerm);
   const openMenu = (data: any) => {
     setClickedData(data);
     toggleMenu();
@@ -50,7 +49,7 @@ const SalesTable = (props: TableStatus) => {
           hideProgressBar: true,
           autoClose: 1000,
         });
-        onDeleteSuccess()
+        onDeleteSuccess();
       })
 
       .catch(function (err) {
@@ -100,36 +99,41 @@ const SalesTable = (props: TableStatus) => {
         </TableHeader>
         <TableBody>
           {data &&
-            data.filter(product => product.item_name.toLowerCase().includes(searchedTerm.toLowerCase()))
-            .map((product, index) => (
-              <TableRow>
-                <TableData style={{ justifyContent: "center" }}>
-                  {" "}
-                  {index + 1}
-                </TableData>
-                <TableData>{product.date}</TableData>
-                <TableData>{product.item_name}</TableData>
-                <TableData>{product.quantity}</TableData>
-                <TableData>{product.per_piece}</TableData>
-                <TableData>{product.total_amount}</TableData>
+            data
+              .filter((product) =>
+                product.item_name
+                  .toLowerCase()
+                  .includes(searchedTerm.toLowerCase())
+              )
+              .map((product, index) => (
+                <TableRow>
+                  <TableData style={{ justifyContent: "center" }}>
+                    {" "}
+                    {index + 1}
+                  </TableData>
+                  <TableData>{product.date}</TableData>
+                  <TableData>{product.item_name}</TableData>
+                  <TableData>{product.quantity}</TableData>
+                  <TableData>{product.per_piece}</TableData>
+                  <TableData>{product.total_amount}</TableData>
 
-                <TableDataStatus status={product.status}>
-                  <TableData>{product.status}</TableData>
-                </TableDataStatus>
-                <TableDataAction>
-                  <Button
-                    variant="contained"
-                    onClick={() => editSales(product)}>
-                    Edit
-                  </Button>
-                  <Button
-                    variant="contained"
-                    onClick={() => deleteSales(product)}>
-                    Delete
-                  </Button>
-                </TableDataAction>
-              </TableRow>
-            ))}
+                  <TableDataStatus status={product.status}>
+                    <p>{product.status}</p>
+                  </TableDataStatus>
+                  <TableDataAction>
+                    <Button
+                      variant="contained"
+                      onClick={() => editSales(product)}>
+                      Edit
+                    </Button>
+                    <Button
+                      variant="contained"
+                      onClick={() => deleteSales(product)}>
+                      Delete
+                    </Button>
+                  </TableDataAction>
+                </TableRow>
+              ))}
         </TableBody>
       </MainTableDiv>
     </>

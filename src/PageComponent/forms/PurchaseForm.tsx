@@ -11,10 +11,10 @@ import { type } from "os";
 import { DOMToggleButtonName } from "../../Utils/DOMToggleButtonName";
 import { useProductStore } from "../../store/filtered";
 export default function PurchaseForm() {
-  const { open, toggleDrawer, drawerToEditData ,setDrawerData} = useDrawer();
+  const { open, toggleDrawer, drawerToEditData, setDrawerData } = useDrawer();
   const [render, setRender] = useState(false);
 
-  const fetchProducts = useProductStore((state:any)=> (state.fetchProducts))
+  const fetchProducts = useProductStore((state: any) => state.fetchProducts);
 
   // const [products, setProducts] = useProductStore ((state:any)=> [state.products, state.setProducts])
   let schema = yup.object().shape({
@@ -43,35 +43,37 @@ export default function PurchaseForm() {
       per_piece: "",
       date: "",
       status: "",
-      unit:''
+      unit: "",
     },
     onSubmit: (values, action) => {
-      if(Object.keys(drawerToEditData).length){
+      if (Object.keys(drawerToEditData).length) {
         // Edit data
-         HTTPMethods.put(`/purchase/update/${drawerToEditData.data.purchase_id} `, values)
-        .then(function (resp) {
-          action.resetForm();
-          toast.success("Purcahse edit successfully", {
-            theme: "colored",
-            hideProgressBar: true,
-            autoClose: 1000,
+        HTTPMethods.put(
+          `/purchase/update/${drawerToEditData.data.purchase_id} `,
+          values
+        )
+          .then(function (resp) {
+            action.resetForm();
+            toast.success("Purcahse edit successfully", {
+              theme: "colored",
+              hideProgressBar: true,
+              autoClose: 1000,
+            });
+            fetchProducts();
+            toggleDrawer();
+          })
+          .catch(function (err) {
+            toast.success("Error in purchase creation", {
+              theme: "colored",
+              hideProgressBar: true,
+              autoClose: 1000,
+            });
+          })
+          .finally(function () {
+            toggleDrawer();
+            setDrawerData({});
           });
-          fetchProducts()
-          toggleDrawer();
-
-        })
-        .catch(function (err) {
-          toast.success("Error in purchase creation", {
-            theme: "colored",
-            hideProgressBar: true,
-            autoClose: 1000,
-          });
-        })
-        .finally(function(){
-          toggleDrawer();
-          setDrawerData({})
-        })
-        return
+        return;
       }
 
       HTTPMethods.post("/purchase/create", values)
@@ -81,10 +83,9 @@ export default function PurchaseForm() {
             hideProgressBar: true,
             autoClose: 1000,
           });
-          fetchProducts()
+          fetchProducts();
           toggleDrawer();
           action.resetForm();
-
         })
 
         .catch(function (err) {
@@ -94,22 +95,21 @@ export default function PurchaseForm() {
             autoClose: 1000,
           });
         });
-        
     },
     validationSchema: schema,
   });
   useEffect(() => {
-    const product_type=document.getElementById("input-product_type")
-    const name=document.getElementById("input-name")
+    const product_type = document.getElementById("input-product_type");
+    const name = document.getElementById("input-name");
     // const net_price=document.getElementById("input-net_price")
-    const purchased_date=document.getElementById("input-date")
-    const quantity=document.getElementById("input-quantity")
-    const status =document.getElementById("input-status")
-    const unit=document.getElementById("input-unit")
-    const per_piece=document.getElementById("input-per_piece")
+    const purchased_date = document.getElementById("input-date");
+    const quantity = document.getElementById("input-quantity");
+    const status = document.getElementById("input-status");
+    const unit = document.getElementById("input-unit");
+    const per_piece = document.getElementById("input-per_piece");
 
     if (drawerToEditData && drawerToEditData.type === "purchase") {
-      const {data}=drawerToEditData
+      const { data } = drawerToEditData;
       setValues({
         product_type: drawerToEditData.data.product_type,
         name: drawerToEditData.data.name,
@@ -117,57 +117,55 @@ export default function PurchaseForm() {
         per_piece: drawerToEditData.data.per_piece,
         date: drawerToEditData.data.purchased_date,
         status: drawerToEditData.data.status,
-        unit: drawerToEditData.data.unit
+        unit: drawerToEditData.data.unit,
       });
-     
+
       // Change the add button name to edit
-      DOMToggleButtonName("Edit")
+      DOMToggleButtonName("Edit");
       // @ts-ignore
-      product_type.value=data.product_type
-      // @ts-ignore
-
-      name.value=data.name
+      product_type.value = data.product_type;
       // @ts-ignore
 
-      // net_price.value=data.net_price
-      // // @ts-ignore
-
-      purchased_date.value=data.purchased_date
-      // @ts-ignore
-
-      quantity.value=data.quantity
-      // @ts-ignore
-
-      status.value=data.status
-      // @ts-ignore
-      unit.value=data.unit
-      // @ts-ignore
-      per_piece.value=data.per_piece
-    }
-    else{
-      // @ts-ignore
-      product_type.value=""
-      // @ts-ignore
-
-      name.value=""
+      name.value = data.name;
       // @ts-ignore
 
       // net_price.value=data.net_price
       // // @ts-ignore
 
-      purchased_date.value=""
+      purchased_date.value = data.purchased_date;
       // @ts-ignore
 
-      quantity.value=""
+      quantity.value = data.quantity;
       // @ts-ignore
 
-      status.value=""
+      status.value = data.status;
       // @ts-ignore
-      unit.value=""
+      unit.value = data.unit;
       // @ts-ignore
-      per_piece.value=""
+      per_piece.value = data.per_piece;
+    } else {
+      // @ts-ignore
+      product_type.value = "";
+      // @ts-ignore
+
+      name.value = "";
+      // @ts-ignore
+
+      // net_price.value=data.net_price
+      // // @ts-ignore
+
+      purchased_date.value = "";
+      // @ts-ignore
+
+      quantity.value = "";
+      // @ts-ignore
+
+      status.value = "";
+      // @ts-ignore
+      unit.value = "";
+      // @ts-ignore
+      per_piece.value = "";
     }
-    
   }, [drawerToEditData]);
   return (
     <form onSubmit={handleSubmit}>
@@ -194,26 +192,26 @@ export default function PurchaseForm() {
         error={touched.name && errors.name ? errors.name : null}
         onChange={handleChange}
       />
-      <div style={{display:"flex",gap:"10px"}}>
-      <TextField
-        name="quantity"
-        type="number"
-        defaultValue=""
-        placeholder="Quantity"
-        onChange={handleChange}
-        error={touched.quantity && errors.quantity ? errors.quantity : null}
-        // @ts-ignore
-        style={{width:"300px" }}
-      />
-      <TextField
-        name="unit"
-        defaultValue=""
-        placeholder="unit"
-        onChange={handleChange}
-        error={touched.unit && errors.unit ? errors.unit : null}
-        // @ts-ignore
-        style={{width:"100px" }}
-      />
+      <div style={{ display: "flex", gap: "10px" }}>
+        <TextField
+          name="quantity"
+          type="number"
+          defaultValue=""
+          placeholder="Quantity"
+          onChange={handleChange}
+          error={touched.quantity && errors.quantity ? errors.quantity : null}
+          // @ts-ignore
+          style={{ width: "300px" }}
+        />
+        <TextField
+          name="unit"
+          defaultValue=""
+          placeholder="unit"
+          onChange={handleChange}
+          error={touched.unit && errors.unit ? errors.unit : null}
+          // @ts-ignore
+          style={{ width: "100px" }}
+        />
       </div>
       <TextField
         name="per_piece"
@@ -252,7 +250,7 @@ export default function PurchaseForm() {
             e.preventDefault();
             handleSubmit();
           }}>
-          add
+          Submit
         </Button>
 
         {/* initially type="" was not specified. So, the clear button was not working */}

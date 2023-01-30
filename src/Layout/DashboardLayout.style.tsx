@@ -6,30 +6,46 @@ type Sider = {
 
 export const DashboardMainDiv = styled("div")`
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
+  /*during transition --a horizontal scroll bar appears */
+  overflow: hidden;
 `;
 
 export const LayoutContainerDiv = styled("div")<Sider>`
-  width: ${({ openSider }) => (openSider === true ? "82vw" : "100vw")};
-  position: ${({ openSider }) =>
-    openSider === true ? "absolute" : "relative"};
+  width: ${({ openSider }) => (openSider === true ? "83vw" : "100vw")};
+  position: relative;
   left: ${({ openSider }) => (openSider === true ? "260px" : "0")};
   transition: left 0.8s ease;
+  overflow: auto;
+  background: #fafafa;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: red;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: aqua;
+  }
+
+  @media screen and (min-width: 300px) and (max-width: 1450px) {
+    overflow-x: hidden;
+    width: ${({ openSider }) => (openSider === true ? "80vw" : "100vw")};
+  }
 `;
 
 export const InventoryCardContainerDiv = styled("div")<Sider>`
   display: flex;
-  flex-direction: row;
-  gap: ${({ openSider }) => (openSider === true ? "3.5%" : "8.6%")};
-  transition: gap 0.8s ease;
-  margin-top: 3%;
-  margin-left: 5%;
-  margin-bottom: 4%;
+  flex-flow: row wrap;
+  margin-top: 45px;
+  /* inventory filters not aligned vertically if sider is hidden*/
+  margin-left: ${({ openSider }) => (openSider === true ? "60px" : "50px")};
+  margin-bottom: 50px;
+  row-gap: 100px;
+  column-gap: ${({ openSider }) => (openSider === true ? "50px" : "120px")};
   align-items: center;
-
-  @media screen and (max-width: 1300px) and (min-width: 700px) {
-    gap: 4%;
-    margin-left: 10px;
+  @media screen and (max-width: 1300px) and (min-width: 300px) {
+    column-gap: ${({ openSider }) => (openSider === true ? "250px" : "50px")};
   }
 `;
 
@@ -37,12 +53,12 @@ export const ChildrenDiv = styled("div")`
   display: flex;
   flex-flow: column wrap;
   gap: 10px;
-  margin-top: 3%;
-  margin-left: 5%;
+  margin-top: 40px;
+  margin-left: 60px;
   align-items: flex-start;
 
-  @media screen and (max-width: 1300px) and (min-width: 700px) {
-    margin-left: 10px;
+  @media screen and (max-width: 1400px) and (min-width: 300px) {
+    margin-left: 50px;
   }
 `;
 
@@ -52,10 +68,10 @@ export const FilterComponentDiv = styled("div")`
   justify-content: flex-start;
   align-items: flex-start;
   row-gap: 40px;
-  margin-top: 3%;
-  margin-left: 5%;
+  margin-top: 50px;
+  margin-left: 55px;
 
-  @media screen and (max-width: 1300px) and (min-width: 700px) {
-    margin-left: 10px;
+  @media screen and (max-width: 1400px) and (min-width: 300px) {
+    margin-left: 55px;
   }
 `;
