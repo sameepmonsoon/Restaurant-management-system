@@ -1,19 +1,29 @@
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
+type SetTitle = {
+  activeSider: boolean;
+};
 
-export const DashboardButtonMainDiv = styled("div")`
+export const DashboardButtonMainDiv = styled("div")<SetTitle>`
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
   justify-content: flex-start;
-  background: #313131;
-  border: 1px solid #00020f;
-  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15);
+  background: ${({ activeSider }) =>
+    activeSider === true ? "#313131" : "white"};
+  border: ${({ activeSider }) =>
+    activeSider === true ? "1px solid #00020f" : "0"};
+  box-shadow: ${({ activeSider }) =>
+    activeSider === true ? "  0px 0px 2px rgba(0, 0, 0, 0.15)" : "0"};
   border-radius: 8px;
   width: 224px;
   height: 48px;
   gap: 20px;
   padding: 9px 0px;
+  div {
+    color: ${({ activeSider }) =>
+      activeSider === true ? "#ffffff" : "#9a9a9a"};
+  }
 `;
 
 export const DashboardButtonIcon = styled("div")`

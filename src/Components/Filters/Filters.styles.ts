@@ -2,15 +2,16 @@ import styled from "@emotion/styled";
 
 export const FilterComponentDiv = styled("form")`
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   align-items: center;
-  width: 981px;
-  height: 45px;
+  flex: 1;
+  row-gap: 10px;
+  column-gap: 30px;
   justify-content: flex-start;
-  column-gap: 50px;
   @media screen and (max-width: 1300px) {
-    column-gap: 10px;
-    transition: column-gap 1s ease;
+    align-items: flex-start;
+    flex-flow: column wrap;
+    row-gap: 30px;
   }
   label {
     width: 53px;
@@ -37,6 +38,8 @@ export const InputDiv = styled("div")`
   width: 379px;
   height: 45px;
   text-transform: capitalize;
+  background: #ffffff;
+
   input {
     font-weight: 400;
     font-size: 14px;
@@ -76,6 +79,7 @@ export const DateAndSelectDiv = styled("div")`
     font-weight: 400;
     font-size: 14px;
     line-height: 19px;
+    background: #ffffff;
   }
   input {
     font-weight: 400;
@@ -85,7 +89,7 @@ export const DateAndSelectDiv = styled("div")`
     border: none;
     width: 180px;
     height: 40px;
-    background: transparent;
+    background: #ffffff;
   }
   input:focus {
     outline: none;

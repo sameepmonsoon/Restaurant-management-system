@@ -1,14 +1,20 @@
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
-
-export const ReportDiv = styled("div")`
+type ActiveSider = {
+  active: boolean;
+};
+export const ReportDiv = styled("div")<ActiveSider>`
+  div {
+    background-color: ${({ active }) =>
+      active === true ? "#313131" : "#ffffff"};
+    color: ${({ active }) => (active === true ? "#ffffff" : "#9a9a9a")};
+  }
   width: 100%;
 `;
 
-export const DropdownHeader = styled("div")`
-  background-color: #313131;
+export const DropdownHeader = styled("div")<ActiveSider>`
   color: white;
-  border: 1px solid #00020f;
+  border: ${({ active }) => (active === true ? "1px solid #00020f" : "0")};
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   display: flex;
@@ -18,6 +24,9 @@ export const DropdownHeader = styled("div")`
   align-items: center;
   padding: 3px;
   height: 50.95px;
+  div {
+    color: ${({ active }) => (active === true ? "#ffffff" : "#9a9a9a")};
+  }
 `;
 export const DropDownDiv = styled("div")`
   display: flex;
@@ -71,6 +80,4 @@ export const ReportLink = styled(Link)`
   li:hover {
     color: #000;
   }
-
-  
 `;

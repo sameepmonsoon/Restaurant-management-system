@@ -9,7 +9,6 @@ import {
   TableHeader,
   TableHeadData,
   TableRow,
-  TableDataForDate,
   TableDataStatus,
 } from "./Table.styles";
 import { useState } from "react";
@@ -18,7 +17,7 @@ import { useFilterStore } from "../../../store/filtered";
 
 const StocksTable = (props: TableStatus) => {
   const { data } = props;
-  const searchedTerm = useFilterStore((state:any)=>state.searchTerm)
+  const searchedTerm = useFilterStore((state: any) => state.searchTerm);
 
   return (
     <>
@@ -40,16 +39,20 @@ const StocksTable = (props: TableStatus) => {
         </TableHeader>
         <TableBody>
           {data &&
-            data.filter(product=> product.name.toLowerCase().includes(searchedTerm.toLowerCase())).map((product, index) => (
-              <TableRow>
-                <TableData style={{ justifyContent: "center" }}>
-                  {" "}
-                  {index + 1}
-                </TableData>
-                <TableData>{product.name}</TableData>
-                <TableData>{product.initial_quantity}</TableData>
-              </TableRow>
-            ))}
+            data
+              .filter((product) =>
+                product.name.toLowerCase().includes(searchedTerm.toLowerCase())
+              )
+              .map((product, index) => (
+                <TableRow>
+                  <TableData style={{ justifyContent: "center" }}>
+                    {" "}
+                    {index + 1}
+                  </TableData>
+                  <TableData>{product.name}</TableData>
+                  <TableData>{product.initial_quantity}</TableData>
+                </TableRow>
+              ))}
         </TableBody>
       </MainTableDiv>
     </>
