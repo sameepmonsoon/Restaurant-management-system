@@ -109,10 +109,19 @@ export const DrawerButtonDiv = styled("div")`
 
 export const DrawerButton = styled("button")`
   background-color: transparent;
-  border: none;
-  color: #424242;
+  border: 1px solid #eaeaea;
+  color: #5f7161;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   line-height: 20px;
-  font-size: 20px;
+  font-size: 15px;
   width: 30px;
   height: 30px;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    color: #424242;
+    transition: background-color 0.5s ease;
+  }
 `;

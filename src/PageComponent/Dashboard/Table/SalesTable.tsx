@@ -122,11 +122,13 @@ const SalesTable = (props: TableStatus) => {
                   </TableDataStatus>
                   <TableDataAction>
                     <Button
+                      type="submit"
                       variant="contained"
                       onClick={() => editSales(product)}>
                       Edit
                     </Button>
                     <Button
+                      type="reset"
                       variant="contained"
                       onClick={() => deleteSales(product)}>
                       Delete

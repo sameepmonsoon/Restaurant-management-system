@@ -1,6 +1,5 @@
 import React from "react";
 import logo from "../../../../public/vite.svg";
-import { FaBars } from "react-icons/fa";
 import { VscBellDot } from "react-icons/vsc";
 import { RiArrowDownSLine } from "react-icons/ri";
 import { RiArrowRightSLine } from "react-icons/ri";
@@ -29,6 +28,23 @@ function subtitle() {
     return "Stocks";
   } else if (location.pathname === "/report/purchase") {
     return "Purchase";
+  } else if (location.pathname === "/report/sales") {
+    return "sales";
+  }
+}
+function title() {
+  if (location.pathname.includes("/home")) {
+    return "Dashboard";
+  } else if (location.pathname.includes("/report")) {
+    return "Report";
+  } else if (location.pathname.includes("/weborder")) {
+    return "Web Order";
+  } else if (location.pathname.includes("/table")) {
+    return "Table";
+  } else if (location.pathname.includes("/customer")) {
+    return "Customer";
+  } else if (location.pathname.includes("/menu")) {
+    return "menu";
   }
 }
 
@@ -47,19 +63,13 @@ const Navbar = (props: NavbarTitles) => {
           )}
         </NavbarItemIcon>
         <NabarItemTextContainer>
-          <NavbarItemTextElementOne>{navTitle}</NavbarItemTextElementOne>
+          <NavbarItemTextElementOne>{title()}</NavbarItemTextElementOne>
           {arrowIcon === true ? (
             <NavbarItemTextElementsArrow>
               <RiArrowRightSLine size={25} />
             </NavbarItemTextElementsArrow>
           ) : null}
           <NavbarItemTextElementThree>{subtitle()}</NavbarItemTextElementThree>
-          {/* for additional submenu of report  */}
-          {location.pathname === "/report/purchase/" ? (
-            <NavbarItemTextElementsArrow>
-              <RiArrowRightSLine size={25} />
-            </NavbarItemTextElementsArrow>
-          ) : null}
         </NabarItemTextContainer>
         <NavbarLogoContainer>
           <NavbarIconNotification>

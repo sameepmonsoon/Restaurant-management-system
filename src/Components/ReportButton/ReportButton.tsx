@@ -13,6 +13,7 @@ import {
   DropDownArrow,
   DropDownDiv,
   ReportLink,
+  ReportInnerDiv,
 } from "./ReportButton.styles";
 
 const ReportButton = (props: ReportButtonTypes) => {
@@ -26,13 +27,15 @@ const ReportButton = (props: ReportButtonTypes) => {
   return (
     <ReportDiv active={activeSider}>
       <DropdownHeader onClick={handleClick} active={activeSider}>
-        <DropDownDiv>
-          <DropDownIcon>{icon1}</DropDownIcon>
-          <DropDownText>{label}</DropDownText>
-        </DropDownDiv>
-        <DropDownArrow>
-          {isOpen === true ? <>{icon2}</> : <> {icon3}</>}
-        </DropDownArrow>
+        <ReportInnerDiv active={activeSider}>
+          <DropDownDiv>
+            <DropDownIcon>{icon1}</DropDownIcon>
+            <DropDownText>{label}</DropDownText>
+          </DropDownDiv>
+          <DropDownArrow>
+            {isOpen === true ? <>{icon2}</> : <> {icon3}</>}
+          </DropDownArrow>
+        </ReportInnerDiv>
       </DropdownHeader>
 
       {isOpen && (

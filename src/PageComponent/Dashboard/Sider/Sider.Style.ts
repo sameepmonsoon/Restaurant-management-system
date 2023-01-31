@@ -11,8 +11,6 @@ export const SiderDiv = styled.div<Sider>`
   left: ${({ openSider }) => (openSider == true ? "0px" : "-500px")};
   /* top given to make the transition ease with navbar height*/
   top: ${({ openSider }) => (openSider == true ? "0px" : "15px")};
-  /* box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05); */
-  border-top: 2px solid rgba(0, 0, 0, 0.05);
   border-right: 2px solid rgba(0, 0, 0, 0.05);
   border-bottom: 2px solid rgba(0, 0, 0, 0.05);
   transition: width 1s ease;
@@ -24,7 +22,6 @@ export const SiderLogoDiv = styled.div`
   flex-flow: row nowrap;
   align-items: center;
   padding-left: 20px;
-  /* border-bottom: 2px solid white; */
   line-height: 50px;
   width: 270px;
   height: 80px;
@@ -80,11 +77,11 @@ export const SiderMainDiv = styled.div`
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 10px;
   }
-  &::-webkit-scrollbar-track {
+  &::-webkit-scrollbar-track:hover {
     background-color: white;
     border-radius: 10px;
   }
-  /* box-shadow: 0 -2px 4px -4px #333; */
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
 `;
 
 export const SiderButtonLabel = styled.div`
@@ -121,6 +118,9 @@ export const SettingDiv = styled.div`
   font-size: 18px;
   line-height: 22px;
   color: #676767;
-  /* position: relative; */
-  /* top: 0px; */
+  transition: all 300ms ease;
+  &:hover {
+    margin-left: 1rem;
+    color: #313131;
+  }
 `;
