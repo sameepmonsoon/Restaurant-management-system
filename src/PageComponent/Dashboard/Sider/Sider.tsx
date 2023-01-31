@@ -13,12 +13,12 @@ import {
   SiderButtonTitle,
 } from "./Sider.Style";
 import SiderButton from "../../../Components/SiderButton/SiderButton";
-import { FiSettings } from "react-icons/fi";
+import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { HiOutlineDocumentReport, HiOutlineLogout } from "react-icons/hi";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation, matchPath } from "react-router-dom";
 
 import { title } from "process";
-import { RiArrowDropDownLine } from "react-icons/ri";
+import { GiRoundTable } from "react-icons/gi";
 import DashboardButton from "../../../Components/DashboardButton/DashboardButton";
 import { AiFillPrinter } from "react-icons/ai";
 import ReportButton from "../../../Components/ReportButton/ReportButton";
@@ -28,14 +28,11 @@ export default function Sider() {
   const handleLogout = () => {
     navigate("/");
   };
+  const { pathname } = useLocation();
+  const isPath = matchPath("/home/*", pathname);
   const { openSider } = siderToggle();
-
   function getStatus() {
-    if (location.pathname === "/home/purchase") {
-      return true;
-    } else if (location.pathname === "home/sales") {
-      return true;
-    } else if (location.pathname === "home/stocks") {
+    if (location.pathname.includes("/home")) {
       return true;
     } else {
       return false;
@@ -43,9 +40,7 @@ export default function Sider() {
   }
 
   function getLocation() {
-    if (location.pathname === "/report/purchase") {
-      return true;
-    } else if (location.pathname === "/report/sales") {
+    if (location.pathname.includes("/report")) {
       return true;
     } else {
       return false;
@@ -53,9 +48,7 @@ export default function Sider() {
   }
 
   function getReport() {
-    if (location.pathname === "/tables/floorFirst") {
-      return true;
-    } else if (location.pathname === "/tables/floorSecond") {
+    if (location.pathname.includes("/tables")) {
       return true;
     } else {
       return false;
@@ -87,17 +80,22 @@ export default function Sider() {
               location={getStatus()}
             />
           </Link>
-          <ReportButton
-            icon1={<img src="/assets/table.svg" />}
-            label={"Table"}
-            icon2={<img src="/assets/controlDown.svg" alt="down" />}
-            icon3={<img src="/assets/controlUp.svg" />}
-            options={[
-              { label: "1st Floor", link: "/tables/floorFirst" },
-              { label: "2nd Floor", link: "/tables/floorSecond" },
-            ]}
-            activeSider={getReport()}
-          />
+          <Link
+            to="/tables"
+            style={{ color: "#090909", textDecoration: "none" }}>
+            <ReportButton
+              icon1={<GiRoundTable size={30} />}
+              label={"Table"}
+              icon2={<IoIosArrowUp size={25} />}
+              icon3={<IoIosArrowDown size={25} />}
+              activeSider={getReport()}
+              options={[
+                { label: "1st Floor", link: "/tables/floorFirst" },
+                { label: "2nd Floor", link: "/tables/floorSecond" },
+              ]}
+            />
+          </Link>
+
           <Link to="/menu" style={{ color: "#090909", textDecoration: "none" }}>
             <DashboardButton
               icon={<RxDashboard size={25} />}
@@ -117,28 +115,31 @@ export default function Sider() {
           </Link>
 
           <Link
-            to="/webOrder"
+            to="/weborder"
             style={{ color: "#090909", textDecoration: "none" }}>
             <DashboardButton
               icon={<RxDashboard size={25} />}
-              title={"WebOrder"}
-              location={location.pathname === "/webOrder"}
+              title={"Web Order"}
+              location={location.pathname === "/weborder"}
             />
           </Link>
-
-          <ReportButton
-            icon1={<HiOutlineDocumentReport size={20} />}
-            label={"Report"}
-            icon2={<img src="/assets/controlDown.svg" />}
-            icon3={<img src="/assets/controlUp.svg" />}
-            options={[
-              { label: "Purchase", link: "/report/purchase" },
-              { label: "Sell", link: "/report/sales" },
-              { label: "Stock", link: "/report/stocks" },
-              { label: "Profit Analysis", link: "/report/profitAnaylze" },
-            ]}
-            activeSider={getLocation()}
-          />
+          <Link
+            to="/report"
+            style={{ color: "#090909", textDecoration: "none" }}>
+            <ReportButton
+              icon1={<HiOutlineDocumentReport size={30} />}
+              label={"Report"}
+              icon2={<IoIosArrowUp size={25} />}
+              icon3={<IoIosArrowDown size={25} />}
+              activeSider={getLocation()}
+              options={[
+                { label: "Purchase", link: "/report/purchase" },
+                { label: "Sell", link: "/report/sales" },
+                { label: "Stock", link: "/report/stocks" },
+                { label: "Profit Analysis", link: "/report/profitAnaylze" },
+              ]}
+            />
+          </Link>
 
           <SettingDiv onClick={handleLogout}>
             <HiOutlineLogout fontSize="2rem" />

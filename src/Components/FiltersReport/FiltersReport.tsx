@@ -9,25 +9,28 @@ import {
   ReportFilterPrintIcon,
   ReportFilterTextDate,
   ReportFilterType,
+  ReportFilterInnerDiv,
 } from "./FiltersReport.styles";
 
 const FiltersReport = () => {
   return (
     <>
       <ReportFilterMainDiv>
-        <ReportFilterType>
-          <p> Report Type </p>
-          <select name="select" id="">
-            <option value="Name">Daily</option>
-            <option value="Name">Weekly</option>
-            <option value="Name">Monthly</option>
-          </select>
-        </ReportFilterType>
-        <ReportFilterTextDate>
-          <div>start date</div>
-          <HiArrowLongDown />
-          <div>end date</div>
-        </ReportFilterTextDate>
+        <ReportFilterInnerDiv>
+          <ReportFilterType>
+            <p> Report Type </p>
+            <select name="select" id="">
+              <option value="Name">Daily</option>
+              <option value="Name">Weekly</option>
+              <option value="Name">Monthly</option>
+            </select>
+          </ReportFilterType>
+          <ReportFilterTextDate>
+            <div>start date</div>
+            <HiArrowLongDown />
+            <div>end date</div>
+          </ReportFilterTextDate>
+        </ReportFilterInnerDiv>
         <ReportFilterDateBox>
           <TextField type="date" label="" />
           <DashboardButton

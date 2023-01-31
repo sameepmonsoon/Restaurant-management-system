@@ -22,10 +22,9 @@ export const MainLoginDiv = styled("div")`
     line-height: 10px;
     color: #515151;
   }
-  @media screen and (max-width: 1100px) {
-    flex-flow: column wrap;
-  }
-  
+    @media screen and (max-width: 1100px) {
+      flex-flow: column wrap;
+    }
   `;
 
 //image container

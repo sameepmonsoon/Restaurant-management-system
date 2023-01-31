@@ -59,26 +59,24 @@ function App(props: any) {
       ],
     },
     {
-      path:"/customer",
-      element: <Customer/>
+      path: "/customer",
+      element: <Customer />,
     },
 
     {
-      path:"/webOrder",
-      element: <WebOrder/>
+      path: "/weborder",
+      element: <WebOrder />,
     },
     {
-      path:"/tables",
-      element: <Tables/>,
-      children:[
-        {path:"floorFirst",
-        element:<FloorFirst/>
-      },
+      path: "/tables",
+      element: <Tables />,
+      children: [
+        { path: "floorFirst", element: <FloorFirst /> },
         {
-          path:"floorSecond",
-        element:<FloorSecond/>
-        }
-      ]
+          path: "floorSecond",
+          element: <FloorSecond />,
+        },
+      ],
     },
 
     {
