@@ -1,8 +1,10 @@
+import { ReactNode } from "react"
+
 // for inventory card titlese
 export type InventoryTitles = {
     title:String,
     icon: React.ReactNode,
-    amount?:string | React.ReactNode
+    amount?:string | React.ReactNode ,
     cardType:String,
     active:boolean 
 }

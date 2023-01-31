@@ -42,6 +42,7 @@ export default function DashboardLayout({
     HTTPMethods.get("/total/readTotal")
       .then(async (res) => {
         setPurchase(res.data);
+        console.log(res.data)
       })
       .catch(async (err) => {
         toast.info("Server is down to display the data.", {
@@ -58,17 +59,13 @@ export default function DashboardLayout({
     toggleSider();
   }
 
-  const totalPurchase = purchases
-    ? ` Rs. ${purchases.totalpurchase} `
-    : "loading";
+  const totalPurchase = purchases? ` Rs. ${purchases.totalpurchase} `: "loading";
   const totalSales = purchases ? `Rs. ${purchases?.total_sales}` : "loading";
-  const totalStocks = purchases
-    ? `${purchases?.total_stocks} products`
-    : "loading";
+  const totalStocks = purchases ? `${purchases?.total_stocks} products`: "loading";
 
   const { open, toggleDrawer } = useDrawer();
   function closeDrawer() {
-    console.log("insode c;ose Drawer");
+    console.log("insode close Drawer");
     setDrawerData({});
     console.log("outside Drawer");
 
@@ -127,7 +124,7 @@ export default function DashboardLayout({
               <InventoryCard
                 title={"Purchase"}
                 icon={<MdOutlineShoppingCart size={30} />}
-                amount={`${totalPurchase}`}
+                amount={totalPurchase}
                 cardType="purchase"
                 active={location.pathname === "/home/purchase"}
               />
@@ -138,7 +135,7 @@ export default function DashboardLayout({
               <InventoryCard
                 title={"Sales"}
                 icon={<BsTag size={30} />}
-                amount={`${totalSales}`}
+                amount={totalSales}
                 cardType="sales"
                 active={location.pathname === "/home/sales"}
               />

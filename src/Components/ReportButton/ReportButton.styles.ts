@@ -65,13 +65,12 @@ export const DropDownArrow = styled("div")``;
 export const DropDownOptions = styled("ul")`
   color: #000;
   width: 100%;
-  height: 160px;
   overflow: hidden;
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-around;
   align-items: flex-start;
-  padding: 3px 0 5px 20%;
+  padding: 1px 0 5px 20%;
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15);
   border-radius: 0px 0px 8px 8px;
 `;
