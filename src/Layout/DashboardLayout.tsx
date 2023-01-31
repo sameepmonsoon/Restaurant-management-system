@@ -24,6 +24,7 @@ import { TextField } from "../Components/TextField";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import PurchaseForm from "../PageComponent/forms/PurchaseForm";
 import SalesForm from "../PageComponent/forms/SalesForm";
+import { useFilterStore } from "../store/filtered";
 
 export default function DashboardLayout({
   children,
@@ -38,6 +39,11 @@ export default function DashboardLayout({
 }) {
   const [purchases, setPurchase] = useState<InventoryDataType>();
   const { setDrawerData } = useDrawer();
+  const {setSearchTerm} = useFilterStore((state:any)=> ({setSearchTerm: state.setSearchTerm}))
+
+  const clearFilter =()=>{
+    setSearchTerm('')
+  }
   useEffect(() => {
     HTTPMethods.get("/total/readTotal")
       .then(async (res) => {
@@ -119,7 +125,7 @@ export default function DashboardLayout({
           />
           <InventoryCardContainerDiv openSider={openSider}>
             <Link
-              to={"/home"}
+              to={"/home"}    onClick={clearFilter}
               style={{ color: "#090909", textDecoration: "none" }}>
               <InventoryCard
                 title={"Purchase"}
@@ -130,7 +136,7 @@ export default function DashboardLayout({
               />
             </Link>
             <Link
-              to={"/home/sales"}
+              to={"/home/sales"} onClick={clearFilter}
               style={{ color: "#090909", textDecoration: "none" }}>
               <InventoryCard
                 title={"Sales"}
@@ -142,7 +148,7 @@ export default function DashboardLayout({
             </Link>
 
             <Link
-              to={"/home/stocks"}
+              to={"/home/stocks"} onClick={clearFilter}
               style={{ color: "#090909", textDecoration: "none" }}>
               <InventoryCard
                 title={"Stocks"}
