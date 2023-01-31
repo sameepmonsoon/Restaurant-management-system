@@ -113,7 +113,7 @@ const SalesTable = (props: TableStatus) => {
                   </TableData>
                   <TableData>{product.date}</TableData>
                   <TableData>{product.item_name}</TableData>
-                  <TableData>{product.quantity}</TableData>
+                  <TableData>{product.quantity} <span style={{marginLeft:"3px"}}>{product.unit}</span></TableData>
                   <TableData>{product.per_piece}</TableData>
                   <TableData>{product.total_amount}</TableData>
 

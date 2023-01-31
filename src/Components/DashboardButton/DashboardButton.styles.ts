@@ -21,7 +21,7 @@ export const DashboardButtonMainDiv = styled("div")<SetTitle>`
 `;
 export const DashboardButtonInnerDiv = styled("div")<SetTitle>`
   display: flex;
-  flex-flow: row nowrap;
+  /* flex-flow: row nowrap; */
   align-items: center;
   justify-content: flex-start;
   gap: 20px;

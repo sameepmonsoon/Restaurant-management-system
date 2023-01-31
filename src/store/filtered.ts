@@ -16,6 +16,8 @@ export const useProductStore = create (set => ({
         HTTPMethods.get("/purchase/read?page=1&offset=10")
         .then(async (res:any) => {
             set((state:any)=> ({products: res.data.payload.data, loading:false}))
+            console.log(res.data)
+
         })
         .catch(async (err) => {
             set((state:any)=> ({loading:false}))
