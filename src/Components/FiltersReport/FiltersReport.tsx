@@ -36,7 +36,8 @@ const FiltersReport = () => {
           <DashboardButton
             icon={""}
             title={"GENERATE REPORT"}
-            location={location.pathname === "/home"}
+            location={location.pathname === "/report"}
+            disableTransition={true}
           />
         </ReportFilterDateBox>
         <ReportFilterPrintIcon>

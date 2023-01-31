@@ -9,12 +9,14 @@ import {
 import { DashboardButtonTypes } from "../../Types/Components/DashboardButtonTypes";
 
 const DashboardButton = (props: DashboardButtonTypes) => {
-  const { icon, title, location } = props;
+  const { icon, title, location, disableTransition, ...rest } = props;
 
   return (
     <>
-      <DashboardButtonMainDiv activeSider={location}>
-        <DashboardButtonInnerDiv activeSider={location}>
+      <DashboardButtonMainDiv activeSider={location} {...rest}>
+        <DashboardButtonInnerDiv
+          activeSider={location}
+          disableTransition={disableTransition}>
           <DashboardButtonIcon>{icon}</DashboardButtonIcon>
           <DashboardButtonText>{title}</DashboardButtonText>
         </DashboardButtonInnerDiv>

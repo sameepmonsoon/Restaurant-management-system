@@ -96,7 +96,7 @@ function App(props: any) {
           element: <Stocks />,
         },
         {
-          path: "profitAnaylze",
+          path: "profitanalysis",
           element: <ProfitAnalysis />,
         },
       ],

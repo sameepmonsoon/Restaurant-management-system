@@ -44,7 +44,7 @@ function title() {
   } else if (location.pathname.includes("/customer")) {
     return "Customer";
   } else if (location.pathname.includes("/menu")) {
-    return "menu";
+    return "menu  ";
   }
 }
 
