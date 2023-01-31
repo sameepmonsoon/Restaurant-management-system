@@ -20,6 +20,7 @@ export const useProductStore = create((set) => ({
           products: res.data.payload.data,
           loading: false,
         }));
+        console.log(res.data);
       })
       .catch(async (err) => {
         set((state: any) => ({ loading: false }));

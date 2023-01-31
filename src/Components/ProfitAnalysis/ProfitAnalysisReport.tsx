@@ -40,15 +40,15 @@ const ProfitAnalysisReport = (props: ProfitAnalysisTypes) => {
           <StockCardMainDiv>
             <StockCardDiv>
               <StockCardItemText>Total stock items</StockCardItemText>
-              <StockCardAmount>123</StockCardAmount>
+              <StockCardAmount>{amount1}</StockCardAmount>
             </StockCardDiv>
             <StockCardDiv>
-              <StockCardItemText>Total stock items</StockCardItemText>
-              <StockCardAmount>123</StockCardAmount>
+              <StockCardItemText>Low stock items</StockCardItemText>
+              <StockCardAmount>{amount2}</StockCardAmount>
             </StockCardDiv>
             <StockCardDiv>
-              <StockCardItemText>Total stock items</StockCardItemText>
-              <StockCardAmount>123</StockCardAmount>
+              <StockCardItemText>Product type</StockCardItemText>
+              <StockCardAmount>{amount3}100070999</StockCardAmount>
             </StockCardDiv>
           </StockCardMainDiv>
         ) : (

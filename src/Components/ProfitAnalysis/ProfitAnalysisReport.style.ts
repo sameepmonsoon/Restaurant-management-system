@@ -43,6 +43,7 @@ export const InnerDiv = styled("div")<CardTitleTypes>`
       grid-template-rows: auto auto;  justify-content: end;\
       column-gap: 137px;\
       row-gap: 39px;"}
+  max-width: 100%;
 `;
 export const InnerDivElements = styled("div")`
   display: flex;
@@ -107,13 +108,15 @@ export const StockCardMainDiv = styled("div")`
 `;
 export const StockCardDiv = styled("div")`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-flow: row nowrap;
   border-bottom: 1px solid #f2f2f2;
-  height: 32px;
-  flex: 1;
+  /* position: relative; */
+  height: 100%;
+  /* width: 100%; */
   column-gap: 133px;
+
   position: relative;
   &:last-child {
     border-bottom: 0;
@@ -123,6 +126,7 @@ export const StockCardDiv = styled("div")`
 export const StockCardItemText = styled("p")`
   margin: 0;
   padding: 0;
+
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
@@ -131,14 +135,19 @@ export const StockCardItemText = styled("p")`
   letter-spacing: -1px;
   padding: 16px 0;
   color: #424242;
+  position: relative;
+  background-color: red;
 `;
 export const StockCardAmount = styled("p")`
   margin: 0;
   padding: 0;
+  flex: 2;
   font-family: "Inter";
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
   line-height: 19px;
   color: #424242;
+  display: flex;
+  justify-content: flex-end;
 `;

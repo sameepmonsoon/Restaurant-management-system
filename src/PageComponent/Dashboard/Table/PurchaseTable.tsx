@@ -112,7 +112,7 @@ const PurchaseTable = (props: TableStatus) => {
                   </TableData>
                   <TableData>{product.purchased_date} </TableData>
                   <TableData>{product.name}</TableData>
-                  <TableData>{product.quantity + " packet"}</TableData>
+                <TableData>{product.quantity } <span style={{marginLeft:"3px"}}>{product.unit}</span></TableData>
                   <TableData>{product.per_piece}</TableData>
                   <TableData>{product.net_price}</TableData>
                   <TableDataStatus status={product.status}>
