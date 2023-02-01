@@ -90,7 +90,7 @@ export const ReportFilterTextDate = styled("div")`
     gap: 20px;
   }
 `;
-export const ReportFilterDateBox = styled("div")`
+export const ReportFilterDateBox = styled("span")`
   order: 3;
   display: flex;
   flex: 3;
@@ -108,6 +108,7 @@ export const ReportFilterDateBox = styled("div")`
     text-transform: uppercase;
     letter-spacing: 1px;
   }
+
   @media screen and (max-width: 900px) {
     flex-flow: column wrap;
     gap: 10px;

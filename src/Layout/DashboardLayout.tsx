@@ -102,7 +102,6 @@ export default function DashboardLayout({
       return true;
     }
   }
-  function getLocation() {}
   function manageTitle() {
     if (location.pathname === "/home/purchase") {
       return "New Purchase";

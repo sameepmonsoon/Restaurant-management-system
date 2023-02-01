@@ -136,7 +136,7 @@ export default function Sider() {
                 { label: "Purchase", link: "/report/purchase" },
                 { label: "Sell", link: "/report/sales" },
                 { label: "Stock", link: "/report/stocks" },
-                { label: "Profit Analysis", link: "/report/profitAnaylze" },
+                { label: "Profit Analysis", link: "/report/profitanalysis" },
               ]}
             />
           </Link>
