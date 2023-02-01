@@ -75,6 +75,7 @@ export default function DashboardLayout({
     ? `${purchases?.total_stocks} products`
     : "loading";
 
+
   const { open, toggleDrawer } = useDrawer();
   function closeDrawer() {
     console.log("insode close Drawer");
