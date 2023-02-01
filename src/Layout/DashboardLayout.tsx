@@ -24,7 +24,7 @@ import { TextField } from "../Components/TextField";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import PurchaseForm from "../PageComponent/forms/PurchaseForm";
 import SalesForm from "../PageComponent/forms/SalesForm";
-import { useFilterStore } from "../store/filtered";
+import { useFilterStore, useTotalAmountStore } from "../store/filtered";
 
 export default function DashboardLayout({
   children,
@@ -161,7 +161,7 @@ export default function DashboardLayout({
               <InventoryCard
                 title={"Stocks"}
                 icon={<CiBoxes size={35} />}
-                amount={`${totalStocks}`}
+                amount={totalStocks}
                 cardType="stock"
                 active={location.pathname === "/home/stocks"}
               />
