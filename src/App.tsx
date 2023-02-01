@@ -28,6 +28,7 @@ import WebOrder from "./Pages/WebOrder";
 import Tables from "./Pages/Tables";
 import FloorSecond from "./Pages/FloorSecond";
 import FloorFirst from "./Pages/FloorFirst";
+import DailyPurchase from "./Components/Report/DailyPurchase";
 
 function App(props: any) {
   const router = createBrowserRouter([
@@ -129,7 +130,6 @@ function App(props: any) {
       element: <Sider />,
     },
 
-  
 
     {
       path: "*",
