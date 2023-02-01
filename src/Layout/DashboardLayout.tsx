@@ -24,6 +24,7 @@ import { TextField } from "../Components/TextField";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import PurchaseForm from "../PageComponent/forms/PurchaseForm";
 import SalesForm from "../PageComponent/forms/SalesForm";
+import { useFilterStore } from "../store/filtered";
 
 export default function DashboardLayout({
   children,
@@ -38,10 +39,16 @@ export default function DashboardLayout({
 }) {
   const [purchases, setPurchase] = useState<InventoryDataType>();
   const { setDrawerData } = useDrawer();
+  const {setSearchTerm} = useFilterStore((state:any)=> ({setSearchTerm: state.setSearchTerm}))
+
+  const clearFilter =()=>{
+    setSearchTerm('')
+  }
   useEffect(() => {
     HTTPMethods.get("/total/readTotal")
       .then(async (res) => {
         setPurchase(res.data);
+        console.log(res.data)
       })
       .catch(async (err) => {
         toast.info("Server is down to display the data.", {
@@ -58,17 +65,13 @@ export default function DashboardLayout({
     toggleSider();
   }
 
-  const totalPurchase = purchases
-    ? ` Rs. ${purchases.totalpurchase} `
-    : "loading";
+  const totalPurchase = purchases? ` Rs. ${purchases.totalpurchase} `: "loading";
   const totalSales = purchases ? `Rs. ${purchases?.total_sales}` : "loading";
-  const totalStocks = purchases
-    ? `${purchases?.total_stocks} products`
-    : "loading";
+  const totalStocks = purchases ? `${purchases?.total_stocks} products`: "loading";
 
   const { open, toggleDrawer } = useDrawer();
   function closeDrawer() {
-    console.log("insode c;ose Drawer");
+    console.log("insode close Drawer");
     setDrawerData({});
     console.log("outside Drawer");
 
@@ -122,30 +125,30 @@ export default function DashboardLayout({
           />
           <InventoryCardContainerDiv openSider={openSider}>
             <Link
-              to={"/home"}
+              to={"/home"}    onClick={clearFilter}
               style={{ color: "#090909", textDecoration: "none" }}>
               <InventoryCard
                 title={"Purchase"}
                 icon={<MdOutlineShoppingCart size={30} />}
-                amount={`${totalPurchase}`}
+                amount={totalPurchase}
                 cardType="purchase"
                 active={location.pathname === "/home/purchase"}
               />
             </Link>
             <Link
-              to={"/home/sales"}
+              to={"/home/sales"} onClick={clearFilter}
               style={{ color: "#090909", textDecoration: "none" }}>
               <InventoryCard
                 title={"Sales"}
                 icon={<BsTag size={30} />}
-                amount={`${totalSales}`}
+                amount={totalSales}
                 cardType="sales"
                 active={location.pathname === "/home/sales"}
               />
             </Link>
 
             <Link
-              to={"/home/stocks"}
+              to={"/home/stocks"} onClick={clearFilter}
               style={{ color: "#090909", textDecoration: "none" }}>
               <InventoryCard
                 title={"Stocks"}

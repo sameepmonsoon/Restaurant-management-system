@@ -8,6 +8,7 @@ export type productObjectType={
     product_type:string,
     purchase_id:number,
     id:number,
+    unit: string,
     purchased_date:string,
     date: string,
     quantity:number,
