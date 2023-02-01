@@ -25,10 +25,10 @@ const ProfitAnalysis = () => {
           title2={"Cancel Order "}
           title3={"Cost"}
           title4={"Pre order"}
-          amount1={123}
-          amount2={111}
-          amount3={1233}
-          amount4={123}
+          amount1={500}
+          amount2={110}
+          amount3={120}
+          amount4={120}
         />
         <br />
 
@@ -42,13 +42,18 @@ const ProfitAnalysis = () => {
           title2={"Total Due"}
           title3={"Cost"}
           title4={"Profit"}
-          amount1={10000000111100}
-          amount2={111}
-          amount3={1233}
-          amount4={123}
+          amount1={143111}
+          amount2={1221}
+          amount3={11}
+          amount4={1111}
         />
         <br />
-        <ProfitAnalysisReport cardTitle={"stock"} />
+        <ProfitAnalysisReport
+          cardTitle={"stock"}
+          amount1={111}
+          amount2={121}
+          amount3={1333}
+        />
 
         <br />
       </div>

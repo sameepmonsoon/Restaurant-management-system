@@ -82,6 +82,7 @@ export const ReportLink = styled(Link)`
     color: red;
   }
   li {
+    padding: 7px 0;
     font-family: "Inter";
     font-style: normal;
     font-weight: 500;
