@@ -13,7 +13,7 @@ import {
   StockCardAmount,
   StockCardMainDiv,
 } from "./ProfitAnalysisReport.style";
-import { ProfitAnalysisTypes } from "../../Types/Components/ProfitAnalysisReport";
+import { ProfitAnalysisTypes } from "../../Types/Components/ProfitAnalysisTypes";
 
 const ProfitAnalysisReport = (props: ProfitAnalysisTypes) => {
   const {

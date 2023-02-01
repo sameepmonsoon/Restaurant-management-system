@@ -82,7 +82,7 @@ export default function Sider() {
             />
           </Link>
           <Link
-            to="/tables"
+            to="/tables/floorFirst"
             style={{ color: "#090909", textDecoration: "none" }}>
             <ReportButton
               icon1={<GiRoundTable size={30} />}

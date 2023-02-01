@@ -78,6 +78,7 @@ export const DropDownOptions = styled("ul")`
 export const ReportLink = styled(Link)`
   text-decoration: none;
   color: #000;
+
   li.active {
     color: red;
   }

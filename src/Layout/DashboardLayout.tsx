@@ -39,16 +39,18 @@ export default function DashboardLayout({
 }) {
   const [purchases, setPurchase] = useState<InventoryDataType>();
   const { setDrawerData } = useDrawer();
-  const {setSearchTerm} = useFilterStore((state:any)=> ({setSearchTerm: state.setSearchTerm}))
+  const { setSearchTerm } = useFilterStore((state: any) => ({
+    setSearchTerm: state.setSearchTerm,
+  }));
 
-  const clearFilter =()=>{
-    setSearchTerm('')
-  }
+  const clearFilter = () => {
+    setSearchTerm("");
+  };
   useEffect(() => {
     HTTPMethods.get("/total/readTotal")
       .then(async (res) => {
         setPurchase(res.data);
-        console.log(res.data)
+        console.log(res.data);
       })
       .catch(async (err) => {
         toast.info("Server is down to display the data.", {
@@ -65,9 +67,13 @@ export default function DashboardLayout({
     toggleSider();
   }
 
-  const totalPurchase = purchases? ` Rs. ${purchases.totalpurchase} `: "loading";
+  const totalPurchase = purchases
+    ? ` Rs. ${purchases.totalpurchase} `
+    : "loading";
   const totalSales = purchases ? `Rs. ${purchases?.total_sales}` : "loading";
-  const totalStocks = purchases ? `${purchases?.total_stocks} products`: "loading";
+  const totalStocks = purchases
+    ? `${purchases?.total_stocks} products`
+    : "loading";
 
   const { open, toggleDrawer } = useDrawer();
   function closeDrawer() {
@@ -124,7 +130,8 @@ export default function DashboardLayout({
           />
           <InventoryCardContainerDiv openSider={openSider}>
             <Link
-              to={"/home"}    onClick={clearFilter}
+              to={"/home"}
+              onClick={clearFilter}
               style={{ color: "#090909", textDecoration: "none" }}>
               <InventoryCard
                 title={"Purchase"}
@@ -135,7 +142,8 @@ export default function DashboardLayout({
               />
             </Link>
             <Link
-              to={"/home/sales"} onClick={clearFilter}
+              to={"/home/sales"}
+              onClick={clearFilter}
               style={{ color: "#090909", textDecoration: "none" }}>
               <InventoryCard
                 title={"Sales"}
@@ -147,7 +155,8 @@ export default function DashboardLayout({
             </Link>
 
             <Link
-              to={"/home/stocks"} onClick={clearFilter}
+              to={"/home/stocks"}
+              onClick={clearFilter}
               style={{ color: "#090909", textDecoration: "none" }}>
               <InventoryCard
                 title={"Stocks"}
