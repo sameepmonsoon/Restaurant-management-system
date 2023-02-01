@@ -24,7 +24,7 @@ import { TextField } from "../Components/TextField";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import PurchaseForm from "../PageComponent/forms/PurchaseForm";
 import SalesForm from "../PageComponent/forms/SalesForm";
-import { useFilterStore } from "../store/filtered";
+import { useFilterStore, useTotalAmountStore } from "../store/filtered";
 
 export default function DashboardLayout({
   children,
@@ -37,37 +37,34 @@ export default function DashboardLayout({
   renderFilters?: JSX.Element;
   renderTotalitems?: JSX.Element;
 }) {
-  const [purchases, setPurchase] = useState<InventoryDataType>();
+
   const { setDrawerData } = useDrawer();
   const {setSearchTerm} = useFilterStore((state:any)=> ({setSearchTerm: state.setSearchTerm}))
+
+  const {totalAmount, fetchTotalAmounts} = useTotalAmountStore((state:any)=>({
+    totalAmount: state.totalAmounts,
+    fetchTotalAmounts: state.fetchTotalAmounts,
+  }))
 
   const clearFilter =()=>{
     setSearchTerm('')
   }
+
   useEffect(() => {
-    HTTPMethods.get("/total/readTotal")
-      .then(async (res) => {
-        setPurchase(res.data);
-        console.log(res.data)
-      })
-      .catch(async (err) => {
-        toast.info("Server is down to display the data.", {
-          theme: "colored",
-          hideProgressBar: true,
-          autoClose: 2000,
-          toastId: "info1",
-        });
-      });
-  }, []);
+      fetchTotalAmounts();
+  }, [ totalAmount]);
+
 
   const { openSider, toggleSider } = siderToggle();
   function openCloseSider() {
     toggleSider();
   }
 
-  const totalPurchase = purchases? ` Rs. ${purchases.totalpurchase} `: "loading";
-  const totalSales = purchases ? `Rs. ${purchases?.total_sales}` : "loading";
-  const totalStocks = purchases ? `${purchases?.total_stocks} products`: "loading";
+  const totalPurchase = totalAmount.totalpurchase? ` Rs. ${totalAmount.totalpurchase} `: "loading";
+  const totalSales = totalAmount.total_sales ? `Rs. ${totalAmount.total_sales}` : "loading";
+  const totalStocks = totalAmount.total_stocks ? `${totalAmount.total_stocks} products`: "loading";
+  console.log(totalPurchase,"updated")
+
 
   const { open, toggleDrawer } = useDrawer();
   function closeDrawer() {
@@ -152,7 +149,7 @@ export default function DashboardLayout({
               <InventoryCard
                 title={"Stocks"}
                 icon={<CiBoxes size={35} />}
-                amount={`${totalStocks}`}
+                amount={totalStocks}
                 cardType="stock"
                 active={location.pathname === "/home/stocks"}
               />
