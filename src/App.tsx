@@ -8,18 +8,12 @@ import { TextField } from "./Components/TextField";
 import { MdOutlineShoppingCart } from "react-icons/md";
 
 import Sider from "./PageComponent/Dashboard/Sider/Sider";
-import Snackbar from "./Components/Snackbar/Snackbar";
 import { ToastContainer } from "react-toastify";
-import Table from "./PageComponent/Dashboard/Table/PurchaseTable";
 import Sales from "./Pages/Sales";
 import Stocks from "./Pages/Stocks";
 import Purchase from "./Pages/Purchase";
-import DashboardLayout from "./Layout/DashboardLayout";
-import StocksTable from "./PageComponent/Dashboard/Table/StocksTable";
-import { Filter } from "@mui/icons-material";
-import ReportButton from "./Components/ReportButton/ReportButton";
+
 import path from "node:path/win32";
-import PurchaseTable from "./PageComponent/Dashboard/Table/PurchaseTable";
 import ProfitAnalysis from "./Pages/ProfitAnalysis";
 import Reports from "./Pages/Reports";
 import Menu from "./Pages/Menu";
@@ -28,8 +22,13 @@ import WebOrder from "./Pages/WebOrder";
 import Tables from "./Pages/Tables";
 import FloorSecond from "./Pages/FloorSecond";
 import FloorFirst from "./Pages/FloorFirst";
+import { useTotalAmountStore } from "./store/filtered";
+import TableTotalAmount from "./Components/TableTotalAmount/TableTotalAmount";
+// import TableWithTotalAmount from "./Components/TableWithTotalAmount/TableWithTotalAmount";
 
 function App(props: any) {
+
+  const {totalAmount} = useTotalAmountStore((state:any)=> ({totalAmount: state.totalAmounts}))
   const router = createBrowserRouter([
     {
       path: "/",
@@ -85,15 +84,15 @@ function App(props: any) {
       children: [
         {
           path: "purchase",
-          element: <Purchase />,
+          element: <TableTotalAmount reportLabel={"Purchase"} reportAmount={totalAmount.totalpurchase} /> ,
         },
         {
           path: "sales",
-          element: <Sales />,
+          element: <TableTotalAmount reportLabel={"Sales"} reportAmount={totalAmount.total_sales} /> ,
         },
         {
           path: "stocks",
-          element: <Stocks />,
+          element: <TableTotalAmount reportLabel={"Stocks"} reportAmount={totalAmount.total_stocks} />,
         },
         {
           path: "profitanalysis",
