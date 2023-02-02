@@ -10,8 +10,9 @@ export default function Sales() {
   const [salesProducts, loading, fetchSales] = useSalesStore((state: any)=> ([state.salesProducts, state.loading, state.fetchSales]))
   
   useEffect(() => {
-   fetchSales()
-  }, []);
+    fetchSales()
+   }, []);
+
 
   return loading ? (
     <div>Loading</div>
