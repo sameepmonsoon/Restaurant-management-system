@@ -1,13 +1,20 @@
+import { useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import Purchase from "../../Pages/Purchase";
 import Sales from "../../Pages/Sales";
 import Stocks from "../../Pages/Stocks";
+import { useTotalAmountStore } from "../../store/filtered";
 import { TableTotalAmountType } from "../../Types/Components/TableTotalAmount";
 import { TotalAmountDiv, TotalAmountLabel, TotalAmountPrice } from "./TableTotalAmount.styles";
 
 const TableTotalAmount = (props: TableTotalAmountType) => {
     const {reportLabel, reportAmount} = props
-    let component;
+    const { totalAmount,fetchTotalAmounts} = useTotalAmountStore((state:any)=> ({
+        totalAmount: state.totalAmount,
+        fetchTotalAmounts: state.fetchTotalAmounts
+    }))
+
+   let component;
     const location = useLocation()
 
    if(location.pathname=== "/report/purchase" ){
@@ -27,7 +34,7 @@ const TableTotalAmount = (props: TableTotalAmountType) => {
                 </TotalAmountLabel>
 
                 <TotalAmountPrice>
-                    Rs. <span> {reportAmount} </span>
+                    Rs. <span> {reportAmount ?  reportAmount: 0} </span>
                 </TotalAmountPrice>
             </TotalAmountDiv>
         </>

@@ -124,7 +124,7 @@ export default function Sider() {
             />
           </Link>
           <Link
-            to="/report"
+            to="/report/purchase"
             style={{ color: "#090909", textDecoration: "none" }}>
             <ReportButton
               icon1={<HiOutlineDocumentReport size={30} />}

@@ -1,13 +1,10 @@
-import { Navigate, Outlet, useLocation } from "react-router-dom";
+import {  Outlet } from "react-router-dom";
 import ReportLayout from "../Layout/ReportLayout";
 import FiltersReport from "../Components/FiltersReport/FiltersReport";
 
-export default function Reports() {
-  const location = useLocation()
+export default function Reports() {  
 
-  return (location.pathname=="/report")?
-    (<Navigate to ={"/report/purchase"}/>)
-  :(
+  return (
     <ReportLayout>
       <FiltersReport />
 

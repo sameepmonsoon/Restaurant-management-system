@@ -24,11 +24,14 @@ import FloorSecond from "./Pages/FloorSecond";
 import FloorFirst from "./Pages/FloorFirst";
 import { useTotalAmountStore } from "./store/filtered";
 import TableTotalAmount from "./Components/TableTotalAmount/TableTotalAmount";
-// import TableWithTotalAmount from "./Components/TableWithTotalAmount/TableWithTotalAmount";
+import { useEffect } from "react";
 
 function App(props: any) {
 
-  const {totalAmount} = useTotalAmountStore((state:any)=> ({totalAmount: state.totalAmounts}))
+  const {totalAmount, fetchTotalAmounts} = useTotalAmountStore((state:any)=> ({totalAmount: state.totalAmounts, fetchTotalAmounts:state.fetchTotalAmounts}))
+  useEffect(()=>{
+    fetchTotalAmounts()
+},[totalAmount])
   const router = createBrowserRouter([
     {
       path: "/",
