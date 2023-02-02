@@ -17,7 +17,7 @@ export default function Sales() {
   return loading ? (
     <div>Loading</div>
   ) : salesProducts && salesProducts.length? (
-    <SalesTable data={salesProducts} onDeleteSuccess={fetchSales}/>
+    <SalesTable data={salesProducts} onDeleteSuccess={fetchSales}/> 
   ) : (
     <div>No Data to Show</div>
   );
