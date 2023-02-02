@@ -2,6 +2,18 @@ import styled from "@emotion/styled";
 import Drawer from "react-modern-drawer";
 
 export const DrawerItem = styled(Drawer)`
+  &::-webkit-scrollbar {
+    width: 6px;
+    background-color: white;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-track:hover {
+    background-color: white;
+    border-radius: 10px;
+  }
   display: flex;
   flex-flow: column nowrap;
   overflow: auto;

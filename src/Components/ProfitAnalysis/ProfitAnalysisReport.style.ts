@@ -11,7 +11,7 @@ export const MainDiv = styled("div")<CardTitleTypes>`
   ${({ cardTitle }) =>
     cardTitle === "stock"
       ? "width: 323px;\
-height: 225px;background-color:red;"
+height: 225px;"
       : "width: 538px;\
 height: 245px;"};
   background: #ffffff;
@@ -39,11 +39,11 @@ export const InnerDiv = styled("div")<CardTitleTypes>`
   ${({ cardTitle }) =>
     cardTitle === "stock"
       ? "display:flex; flex-flow:column  nowrap;"
-      : " display: grid; grid-template-columns: auto auto;\
+      : " display: grid; grid-template-columns: 200px 200px;\
       grid-template-rows: auto auto;  justify-content: end;\
-      column-gap: 137px;\
+      column-gap: 99px;\
       row-gap: 39px;"}
-  max-width: 100%;
+  overflow: hidden;
 `;
 export const InnerDivElements = styled("div")`
   display: flex;
@@ -73,16 +73,18 @@ export const DivELementsIcon = styled("div")<IconTypes>`
 `;
 export const DivELementsStats = styled("div")`
   font-family: "Inter";
-  flex: 1;
+  position: relative;
+  overflow: hidden;
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
   line-height: 19px;
+  max-width: 91px;
+  max-height: 50px;
   color: #424242;
 `;
 
 export const DivELementsTitle = styled("div")`
-  flex: 1;
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
@@ -91,42 +93,50 @@ export const DivELementsTitle = styled("div")`
   letter-spacing: -1px;
   color: #424242;
   text-transform: capitalize;
+  min-width: 120px;
+  max-height: 20px;
+
+  overflow: hidden;
 `;
 
 export const DivELementsStatBox = styled("div")`
   display: flex;
   flex-flow: column nowrap;
   row-gap: 7px;
+  max-width: 90px;
+  max-height: 50px;
 `;
 
 export const StockCardMainDiv = styled("div")`
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 30px;
+  display: grid;
+  box-sizing: border-box;
+  grid-template-columns: 300px;
+  grid-template-rows: 45px 45px 45px;
+  row-gap: 2px;
 `;
-export const StockCardDiv = styled("div")`
+export const StockCardInnerDiv = styled("div")`
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   flex-flow: row nowrap;
   border-bottom: 1px solid #f2f2f2;
-  /* position: relative; */
-  height: 100%;
-  /* width: 100%; */
-  column-gap: 133px;
+  width: 100%;
+  padding-right: 10px;
 
-  position: relative;
   &:last-child {
     border-bottom: 0;
   }
 `;
 
 export const StockCardItemText = styled("p")`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-flow: row nowrap;
   margin: 0;
   padding: 0;
-
+  width: 200px;
+  height: 10px;
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
@@ -135,13 +145,10 @@ export const StockCardItemText = styled("p")`
   letter-spacing: -1px;
   padding: 16px 0;
   color: #424242;
-  position: relative;
-  background-color: red;
 `;
 export const StockCardAmount = styled("p")`
   margin: 0;
   padding: 0;
-  flex: 2;
   font-family: "Inter";
   font-style: normal;
   font-weight: 600;

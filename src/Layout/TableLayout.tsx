@@ -1,0 +1,52 @@
+import React from "react";
+import Navbar from "../PageComponent/Dashboard/Navbar/Navbar";
+import Sider from "../PageComponent/Dashboard/Sider/Sider";
+import { ChildrenDiv, LayoutContainerDiv } from "./DashboardLayout.style";
+import { DashboardMainDiv } from "./DashboardLayout.style";
+import { siderToggle } from "../Pages/states/NavBar.state";
+import DrawerC from "../PageComponent/Dashboard/Drawer/Drawer";
+import { useDrawer } from "../Pages/states/Drawer.state";
+import FloorTableForm from "../PageComponent/forms/FloorTableForm";
+export default function TableLayout({
+  children,
+}: {
+  children: JSX.Element | JSX.Element[];
+}) {
+  const { openSider, toggleSider } = siderToggle();
+  const { open, setDrawerData, toggleDrawer } = useDrawer();
+  function closeDrawer() {
+    console.log("insode close Drawer");
+    setDrawerData({});
+    console.log("outside Drawer");
+
+    toggleDrawer();
+  }
+  function manageForm() {
+    return <FloorTableForm />;
+  }
+
+  return (
+    <>
+      <DashboardMainDiv>
+        <Sider />
+        <LayoutContainerDiv openSider={openSider}>
+          <Navbar
+            navTitle={"Report"}
+            navbarCardName={"Purchase"}
+            arrowIcon={true}
+            onClick={() => {}}
+          />
+
+          <ChildrenDiv>{children}</ChildrenDiv>
+        </LayoutContainerDiv>
+
+        <DrawerC
+          cardtitle={"New Table"}
+          open={open}
+          closeDrawer={() => closeDrawer()}>
+          {manageForm()}
+        </DrawerC>
+      </DashboardMainDiv>
+    </>
+  );
+}
