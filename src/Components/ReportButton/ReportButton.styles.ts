@@ -78,10 +78,12 @@ export const DropDownOptions = styled("ul")`
 export const ReportLink = styled(Link)`
   text-decoration: none;
   color: #000;
+
   li.active {
     color: red;
   }
   li {
+    padding: 7px 0;
     font-family: "Inter";
     font-style: normal;
     font-weight: 500;

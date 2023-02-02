@@ -37,34 +37,43 @@ export default function DashboardLayout({
   renderFilters?: JSX.Element;
   renderTotalitems?: JSX.Element;
 }) {
-
+  const [purchases, setPurchase] = useState<InventoryDataType>();
   const { setDrawerData } = useDrawer();
-  const {setSearchTerm} = useFilterStore((state:any)=> ({setSearchTerm: state.setSearchTerm}))
+  const { setSearchTerm } = useFilterStore((state: any) => ({
+    setSearchTerm: state.setSearchTerm,
+  }));
 
-  const {totalAmount, fetchTotalAmounts} = useTotalAmountStore((state:any)=>({
-    totalAmount: state.totalAmounts,
-    fetchTotalAmounts: state.fetchTotalAmounts,
-  }))
-
-  const clearFilter =()=>{
-    setSearchTerm('')
-  }
-
+  const clearFilter = () => {
+    setSearchTerm("");
+  };
   useEffect(() => {
-      fetchTotalAmounts();
-  }, [ totalAmount]);
-
+    HTTPMethods.get("/total/readTotal")
+      .then(async (res) => {
+        setPurchase(res.data);
+        console.log(res.data);
+      })
+      .catch(async (err) => {
+        toast.info("Server is down to display the data.", {
+          theme: "colored",
+          hideProgressBar: true,
+          autoClose: 2000,
+          toastId: "info1",
+        });
+      });
+  }, []);
 
   const { openSider, toggleSider } = siderToggle();
   function openCloseSider() {
     toggleSider();
   }
 
-  const totalPurchase = totalAmount.totalpurchase? ` Rs. ${totalAmount.totalpurchase} `: "loading";
-  const totalSales = totalAmount.total_sales ? `Rs. ${totalAmount.total_sales}` : "loading";
-  const totalStocks = totalAmount.total_stocks ? `${totalAmount.total_stocks} products`: "loading";
-  console.log(totalPurchase,"updated")
-
+  const totalPurchase = purchases
+    ? ` Rs. ${purchases.totalpurchase} `
+    : "loading";
+  const totalSales = purchases ? `Rs. ${purchases?.total_sales}` : "loading";
+  const totalStocks = purchases
+    ? `${purchases?.total_stocks} products`
+    : "loading";
 
   const { open, toggleDrawer } = useDrawer();
   function closeDrawer() {
@@ -121,7 +130,8 @@ export default function DashboardLayout({
           />
           <InventoryCardContainerDiv openSider={openSider}>
             <Link
-              to={"/home"}    onClick={clearFilter}
+              to={"/home"}
+              onClick={clearFilter}
               style={{ color: "#090909", textDecoration: "none" }}>
               <InventoryCard
                 title={"Purchase"}
@@ -132,7 +142,8 @@ export default function DashboardLayout({
               />
             </Link>
             <Link
-              to={"/home/sales"} onClick={clearFilter}
+              to={"/home/sales"}
+              onClick={clearFilter}
               style={{ color: "#090909", textDecoration: "none" }}>
               <InventoryCard
                 title={"Sales"}
@@ -144,7 +155,8 @@ export default function DashboardLayout({
             </Link>
 
             <Link
-              to={"/home/stocks"} onClick={clearFilter}
+              to={"/home/stocks"}
+              onClick={clearFilter}
               style={{ color: "#090909", textDecoration: "none" }}>
               <InventoryCard
                 title={"Stocks"}

@@ -14,7 +14,8 @@ import {
 } from "./Sider.Style";
 import SiderButton from "../../../Components/SiderButton/SiderButton";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
-import { HiOutlineDocumentReport, HiOutlineLogout } from "react-icons/hi";
+import { HiOutlineLogout } from "react-icons/hi";
+import { BsFileEarmarkBarGraph } from "react-icons/bs";
 import { Link, useNavigate, useLocation, matchPath } from "react-router-dom";
 
 import { title } from "process";
@@ -81,7 +82,7 @@ export default function Sider() {
             />
           </Link>
           <Link
-            to="/tables"
+            to="/tables/floorFirst"
             style={{ color: "#090909", textDecoration: "none" }}>
             <ReportButton
               icon1={<GiRoundTable size={30} />}
@@ -127,7 +128,7 @@ export default function Sider() {
             to="/report"
             style={{ color: "#090909", textDecoration: "none" }}>
             <ReportButton
-              icon1={<HiOutlineDocumentReport size={30} />}
+              icon1={<BsFileEarmarkBarGraph size={25} />}
               label={"Report"}
               icon2={<IoIosArrowUp size={25} />}
               icon3={<IoIosArrowDown size={25} />}

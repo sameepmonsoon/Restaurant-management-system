@@ -8,12 +8,12 @@ import {
   DivELementsStats,
   DivELementsTitle,
   DivELementsStatBox,
-  StockCardDiv,
+  StockCardInnerDiv,
   StockCardItemText,
   StockCardAmount,
   StockCardMainDiv,
 } from "./ProfitAnalysisReport.style";
-import { ProfitAnalysisTypes } from "../../Types/Components/ProfitAnalysisReport";
+import { ProfitAnalysisTypes } from "../../Types/Components/ProfitAnalysisTypes";
 
 const ProfitAnalysisReport = (props: ProfitAnalysisTypes) => {
   const {
@@ -38,18 +38,18 @@ const ProfitAnalysisReport = (props: ProfitAnalysisTypes) => {
       <InnerDiv cardTitle={cardTitle}>
         {cardTitle == "stock" ? (
           <StockCardMainDiv>
-            <StockCardDiv>
-              <StockCardItemText>Total stock items</StockCardItemText>
+            <StockCardInnerDiv>
+              <StockCardItemText>Total Stock Items</StockCardItemText>
               <StockCardAmount>{amount1}</StockCardAmount>
-            </StockCardDiv>
-            <StockCardDiv>
-              <StockCardItemText>Low stock items</StockCardItemText>
+            </StockCardInnerDiv>
+            <StockCardInnerDiv>
+              <StockCardItemText>Low Stock Items</StockCardItemText>
               <StockCardAmount>{amount2}</StockCardAmount>
-            </StockCardDiv>
-            <StockCardDiv>
-              <StockCardItemText>Product type</StockCardItemText>
-              <StockCardAmount>{amount3}100070999</StockCardAmount>
-            </StockCardDiv>
+            </StockCardInnerDiv>
+            <StockCardInnerDiv>
+              <StockCardItemText>Product Type</StockCardItemText>
+              <StockCardAmount>{amount3}</StockCardAmount>
+            </StockCardInnerDiv>
           </StockCardMainDiv>
         ) : (
           <>
