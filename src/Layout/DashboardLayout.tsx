@@ -41,13 +41,6 @@ export default function DashboardLayout({
   const { setDrawerData } = useDrawer();
   const {setSearchTerm} = useFilterStore((state:any)=> ({setSearchTerm: state.setSearchTerm}))
 
-  const {totalAmount, fetchTotalAmounts} = useTotalAmountStore((state:any)=>({
-    totalAmount: state.totalAmounts,
-    fetchTotalAmounts: state.fetchTotalAmounts,
-  }))
-
-
-
   const clearFilter = () => {
     setSearchTerm("");
   };
