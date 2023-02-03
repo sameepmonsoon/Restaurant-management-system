@@ -51,6 +51,9 @@ export default function DashboardLayout({
   const clearFilter = () => {
     setSearchTerm("");
   };
+  const {totalAmount,fetchTotalAmounts} = useTotalAmountStore((state:any)=> (
+    {totalAmount: state.totalAmounts, fetchTotalAmounts: state.fetchTotalAmounts
+  }))
   useEffect(() => {
       fetchTotalAmounts();
   }, []);
