@@ -21,6 +21,7 @@ import { HTTPMethods } from "../../../Utils/HTTPMock";
 import { toast } from "react-toastify";
 import { DOMToggleButtonName } from "../../../Utils/DOMToggleButtonName";
 import { useFilterStore } from "../../../store/filtered";
+import { useLocation } from "react-router-dom";
 
 const PurchaseTable = (props: TableStatus) => {
   const { data, onDeleteSuccess } = props;
@@ -29,7 +30,8 @@ const PurchaseTable = (props: TableStatus) => {
   const [clickedData, setClickedData] = useState(null);
 
   const searchedTerm = useFilterStore((state: any) => state.searchTerm);
-
+  const location = useLocation()
+  const isPurchase = location.pathname.includes("home" )
   const openMenu = (data: any) => {
     setClickedData(data);
     toggleMenu();
@@ -93,10 +95,13 @@ const PurchaseTable = (props: TableStatus) => {
             status
             <HiChevronDown />
           </TableHeadData>
-          <TableHeadData>
+          {
+            isPurchase &&  <TableHeadData>
             Actions
             <HiChevronDown />
           </TableHeadData>
+          }
+         
         </TableHeader>
         <TableBody>
           {data &&
@@ -118,20 +123,23 @@ const PurchaseTable = (props: TableStatus) => {
                   <TableDataStatus status={product.status}>
                     <p>{product.status}</p>
                   </TableDataStatus>
-                  <TableDataAction>
-                    <Button
-                      type="submit"
-                      variant="contained"
-                      onClick={() => editPurchase(product)}>
-                      Edit
-                    </Button>
-                    <Button
-                      type="reset"
-                      variant="contained"
-                      onClick={() => deletePurchase(product)}>
-                      Delete
-                    </Button>
-                  </TableDataAction>
+                  {
+                      isPurchase &&  <TableDataAction>
+                      <Button
+                        type="submit"
+                        variant="contained"
+                        onClick={() => editPurchase(product)}>
+                        Edit
+                      </Button>
+                      <Button
+                        type="reset"
+                        variant="contained"
+                        onClick={() => deletePurchase(product)}>
+                        Delete
+                      </Button>
+                    </TableDataAction>
+                    }
+                 
                 </TableRow>
               ))}
         </TableBody>

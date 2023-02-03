@@ -29,9 +29,9 @@ import { useEffect } from "react";
 function App(props: any) {
 
   const {totalAmount, fetchTotalAmounts} = useTotalAmountStore((state:any)=> ({totalAmount: state.totalAmounts, fetchTotalAmounts:state.fetchTotalAmounts}))
-  useEffect(()=>{
-    fetchTotalAmounts()
-},[totalAmount])
+//   useEffect(()=>{
+//     fetchTotalAmounts()
+// },[])
   const router = createBrowserRouter([
     {
       path: "/",
@@ -87,14 +87,18 @@ function App(props: any) {
       children: [
         {
           path: "purchase",
+          // element: <Purchase/>
           element: <TableTotalAmount reportLabel={"Purchase"} reportAmount={totalAmount.totalpurchase} /> ,
         },
         {
           path: "sales",
+          // element: <Sales/>
           element: <TableTotalAmount reportLabel={"Sales"} reportAmount={totalAmount.total_sales} /> ,
         },
         {
           path: "stocks",
+          // element: <Stocks/>
+
           element: <TableTotalAmount reportLabel={"Stocks"} reportAmount={totalAmount.total_stocks} />,
         },
         {
