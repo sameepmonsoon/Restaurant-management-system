@@ -1,10 +1,10 @@
-import Table from "../Components/Table/Table";
-import { tabelState } from "./states/Table.state";
+import FloorTable from "../Components/FloorTable/FloorTable";
+import { floorTabelState } from "./states/FloorTable.state";
 const FloorSecond = () => {
-  const { select, onSelect } = tabelState();
+  const { select, onSelect } = floorTabelState();
   return (
     <>
-      <Table
+      <FloorTable
         tableNames={[
           "Table 11",
           "Table 12",

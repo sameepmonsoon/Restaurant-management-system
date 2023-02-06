@@ -9,6 +9,7 @@ export const DashboardMainDiv = styled("div")`
   flex-flow: row wrap;
   /*during transition --a horizontal scroll bar appears */
   overflow: hidden;
+  background: #fafafa;
 `;
 
 export const LayoutContainerDiv = styled("div")<Sider>`

@@ -3,5 +3,5 @@ export type TableType = {
   karaokeList?: string[] | null;
   selected: boolean;
   image?: String;
-  onClick: () => void;
+  onClick: (e: React.MouseEvent<HTMLElement>) => void;
 };

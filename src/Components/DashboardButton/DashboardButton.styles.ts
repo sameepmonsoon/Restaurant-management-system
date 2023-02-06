@@ -26,17 +26,21 @@ export const DashboardButtonMainDiv = styled("div")<SetTitle>`
 `;
 export const DashboardButtonInnerDiv = styled("div")<SetTitle>`
   display: flex;
-  /* flex-flow: row nowrap; */
+  flex-flow: row nowrap;
   align-items: center;
   justify-content: flex-end;
   gap: 20px;
+  /* gap: ${({ disableTransition }) =>
+    disableTransition === true ? "20px" : "20px"}; */
   transition: all 300ms ease;
   &:hover {
     margin-left: ${({ activeSider, disableTransition }) =>
       activeSider === true || disableTransition ? "0" : "1rem;"};
     cursor: pointer;
+
     div {
-      color: ${({ activeSider }) => (activeSider != true ? "#313131" : "0")};
+      color: ${({ activeSider, disableTransition }) =>
+        activeSider === true || disableTransition ? "0" : "#313131"};
     }
   }
 `;
