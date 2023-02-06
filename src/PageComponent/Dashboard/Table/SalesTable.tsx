@@ -20,6 +20,7 @@ import { useMenu } from "../../../Components/actionPopUp/ActionPopUp.state";
 import { toast } from "react-toastify";
 import { left } from "@popperjs/core";
 import { useFilterStore } from "../../../store/filtered";
+import { useLocation } from "react-router-dom";
 
 const SalesTable = (props: TableStatus) => {
   const { data, onDeleteSuccess } = props;
@@ -28,6 +29,9 @@ const SalesTable = (props: TableStatus) => {
   const [clickedData, setClickedData] = useState(null);
   const [val, setVal] = useState(true);
   const searchedTerm = useFilterStore((state: any) => state.searchTerm);
+
+  const location = useLocation()
+  const isSales = location.pathname.includes("home" )
   const openMenu = (data: any) => {
     setClickedData(data);
     toggleMenu();
@@ -92,10 +96,13 @@ const SalesTable = (props: TableStatus) => {
             Payment
             <HiChevronDown />
           </TableHeadData>
-          <TableHeadData>
+          {
+            isSales && <TableHeadData>
             Actions
             <HiChevronDown />
           </TableHeadData>
+          }
+          
         </TableHeader>
         <TableBody>
           {data &&
@@ -120,7 +127,8 @@ const SalesTable = (props: TableStatus) => {
                   <TableDataStatus status={product.status}>
                     <p>{product.status}</p>
                   </TableDataStatus>
-                  <TableDataAction>
+                  {
+                    isSales && <TableDataAction>
                     <Button
                       type="submit"
                       variant="contained"
@@ -134,6 +142,8 @@ const SalesTable = (props: TableStatus) => {
                       Delete
                     </Button>
                   </TableDataAction>
+                  }
+                  
                 </TableRow>
               ))}
         </TableBody>

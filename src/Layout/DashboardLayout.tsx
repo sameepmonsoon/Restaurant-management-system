@@ -39,41 +39,27 @@ export default function DashboardLayout({
 }) {
   const [purchases, setPurchase] = useState<InventoryDataType>();
   const { setDrawerData } = useDrawer();
-  const { setSearchTerm } = useFilterStore((state: any) => ({
-    setSearchTerm: state.setSearchTerm,
-  }));
+  const {setSearchTerm} = useFilterStore((state:any)=> ({setSearchTerm: state.setSearchTerm}))
 
   const clearFilter = () => {
     setSearchTerm("");
   };
+  const {totalAmount,fetchTotalAmounts} = useTotalAmountStore((state:any)=> (
+    {totalAmount: state.totalAmounts, fetchTotalAmounts: state.fetchTotalAmounts
+  }))
   useEffect(() => {
-    HTTPMethods.get("/total/readTotal")
-      .then(async (res) => {
-        setPurchase(res.data);
-        console.log(res.data);
-      })
-      .catch(async (err) => {
-        toast.info("Server is down to display the data.", {
-          theme: "colored",
-          hideProgressBar: true,
-          autoClose: 2000,
-          toastId: "info1",
-        });
-      });
+      fetchTotalAmounts();
   }, []);
+
 
   const { openSider, toggleSider } = siderToggle();
   function openCloseSider() {
     toggleSider();
   }
 
-  const totalPurchase = purchases
-    ? ` Rs. ${purchases.totalpurchase} `
-    : "loading";
-  const totalSales = purchases ? `Rs. ${purchases?.total_sales}` : "loading";
-  const totalStocks = purchases
-    ? `${purchases?.total_stocks} products`
-    : "loading";
+  const totalPurchase = (totalAmount.totalpurchase || totalAmount.totalpurchase===0)? ` Rs. ${totalAmount.totalpurchase} `: "loading"
+  const totalSales = (totalAmount.total_sales ||totalAmount.total_sales===0) ?  `Rs. ${totalAmount.total_sales}` : "loading";
+  const totalStocks = totalAmount.total_stocks!==undefined ? (totalAmount.total_stocks!==0? `${totalAmount.total_stocks} products`: "0 products"): "loading";
 
   const { open, toggleDrawer } = useDrawer();
   function closeDrawer() {

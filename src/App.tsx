@@ -35,7 +35,7 @@ function App(props: any) {
   );
   useEffect(() => {
     fetchTotalAmounts();
-  }, []);
+  }, [totalAmount]);
   const router = createBrowserRouter([
     {
       path: "/",
@@ -91,6 +91,7 @@ function App(props: any) {
       children: [
         {
           path: "purchase",
+          // element: <Purchase/>
           element: (
             <TableTotalAmount
               reportLabel={"Purchase"}
@@ -100,6 +101,7 @@ function App(props: any) {
         },
         {
           path: "sales",
+          // element: <Sales/>
           element: (
             <TableTotalAmount
               reportLabel={"Sales"}
@@ -109,6 +111,8 @@ function App(props: any) {
         },
         {
           path: "stocks",
+          // element: <Stocks/>
+
           element: (
             <TableTotalAmount
               reportLabel={"Stocks"}
