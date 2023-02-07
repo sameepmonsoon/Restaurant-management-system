@@ -3,16 +3,11 @@ import { Navigate, useLocation } from "react-router-dom";
 import Purchase from "../../Pages/Purchase";
 import Sales from "../../Pages/Sales";
 import Stocks from "../../Pages/Stocks";
-import { useTotalAmountStore } from "../../store/filtered";
 import { TableTotalAmountType } from "../../Types/Components/TableTotalAmount";
 import { TotalAmountDiv, TotalAmountLabel, TotalAmountPrice } from "./TableTotalAmount.styles";
 
 const TableTotalAmount = (props: TableTotalAmountType) => {
     const {reportLabel, reportAmount} = props
-    const { totalAmount,fetchTotalAmounts} = useTotalAmountStore((state:any)=> ({
-        totalAmount: state.totalAmount,
-        fetchTotalAmounts: state.fetchTotalAmounts
-    }))
 
    let component;
     const location = useLocation()

@@ -11,18 +11,58 @@ import {
   ReportFilterType,
   ReportFilterInnerDiv,
 } from "./FiltersReport.styles";
+import { MyContext } from "../../Pages/Reports";
 
 const FiltersReport = () => {
   return (
-    <>
-      <ReportFilterMainDiv>
+    <MyContext.Consumer>
+      {
+        value=>{
+          function changeValue(e:any){
+            if(e.target.value==="daily"){
+                console.log("inside change value",value,e.target.value)
+                return value?.setDateAndTime({
+                  date1:null,
+                  date2:null,
+                  isMonthly:false,
+                  isWeekly:false,
+                  isDaily:true
+                })
+              // value.isMonthly=false
+              // value.isWeekly=false
+              // return value.isDaily=true// change to daily
+            }
+            if(e.target.value==="monthly"){
+              return value?.setDateAndTime({
+                date1:null,
+                date2:null,
+                isMonthly:true,
+                isWeekly:false,
+                isDaily:false
+              })
+            }
+            if(e.target.value==="weekly"){
+              return value?.setDateAndTime({
+                date1:null,
+                date2:null,
+                isMonthly:false,
+                isWeekly:true,
+                isDaily:false
+              })
+             }
+          }
+        return <ReportFilterMainDiv>
+          {/* @ts-ignore */}
         <ReportFilterInnerDiv>
+          {
+            console.log("value inside consumer",value)
+          }
           <ReportFilterType>
             <p> Report Type </p>
-            <select name="select" id="">
-              <option value="Name">Daily</option>
-              <option value="Name">Weekly</option>
-              <option value="Name">Monthly</option>
+            <select name="select" id="" onChange={changeValue}>
+              <option value="daily">Daily</option>
+              <option value="weekly">Weekly</option>
+              <option value="monthly">Monthly</option>
             </select>
           </ReportFilterType>
           <ReportFilterTextDate>
@@ -43,8 +83,10 @@ const FiltersReport = () => {
         <ReportFilterPrintIcon>
           <AiOutlinePrinter size={35} />
         </ReportFilterPrintIcon>
-      </ReportFilterMainDiv>
-    </>
+      </ReportFilterMainDiv>}
+      }
+
+      </MyContext.Consumer>
   );
 };
 
