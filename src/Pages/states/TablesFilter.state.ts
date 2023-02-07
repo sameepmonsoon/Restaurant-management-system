@@ -1,9 +1,9 @@
 import create from "zustand";
 import { toast } from "react-toastify";
-import { productObjectType } from "../Types/Components/ProductListsType";
-import { HTTPMethods } from "../Utils/HTTPMock";
+import { productObjectType } from "../../Types/Components/ProductListsType";
+import { HTTPMethods } from "../../Utils/HTTPMock";
 import { number, string } from "yup";
-import { InventoryDataType } from "../Types/Components/InventoryDataTpes";
+import { InventoryDataType } from "../../Types/Components/InventoryDataTpes";
 
 export const useFilterStore = create((set) => ({
   searchTerm: "",

@@ -22,8 +22,7 @@ import WebOrder from "./Pages/WebOrder";
 import Tables from "./Pages/Tables";
 import FloorSecond from "./Pages/FloorSecond";
 import FloorFirst from "./Pages/FloorFirst";
-import { useTotalAmountStore } from "./store/filtered";
-import TableTotalAmount from "./Components/TableTotalAmount/TableTotalAmount";
+import { useTotalAmountStore } from "./Pages/states/TablesFilter.state";
 import { useEffect } from "react";
 import ReportTable from "./Components/reportTable/ReportTable";
 
@@ -112,7 +111,6 @@ function App(props: any) {
         },
         {
           path: "stocks",
-          // element: <Stocks/>
 
           element: (
             <ReportTable

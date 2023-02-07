@@ -13,7 +13,7 @@ import {
 } from "./Table.styles";
 import { useState } from "react";
 import { HTTPMethods } from "../../../Utils/HTTPMock";
-import { useFilterStore } from "../../../store/filtered";
+import { useFilterStore } from "../../../Pages/states/TablesFilter.state";
 
 const StocksTable = (props: TableStatus) => {
   const { data } = props;

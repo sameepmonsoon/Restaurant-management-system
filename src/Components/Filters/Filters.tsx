@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { useFilterStore, useStatusPaymentStore } from "../../store/filtered";
+import { useFilterStore, useStatusPaymentStore } from "../../Pages/states/TablesFilter.state";
 import { FilterTypes } from "../../Types/Components/Filters";
 import {
   FilterComponentDiv,

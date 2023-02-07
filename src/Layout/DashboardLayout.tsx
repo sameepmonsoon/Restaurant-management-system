@@ -24,7 +24,7 @@ import { TextField } from "../Components/TextField";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import PurchaseForm from "../PageComponent/forms/PurchaseForm";
 import SalesForm from "../PageComponent/forms/SalesForm";
-import { useFilterStore, useTotalAmountStore } from "../store/filtered";
+import { useFilterStore, useTotalAmountStore } from "../Pages/states/TablesFilter.state";
 
 export default function DashboardLayout({
   children,

@@ -9,7 +9,7 @@ import { useDrawer } from "../../Pages/states/Drawer.state";
 import { toast } from "react-toastify";
 import { type } from "os";
 import { DOMToggleButtonName } from "../../Utils/DOMToggleButtonName";
-import { useProductStore } from "../../store/filtered";
+import { useProductStore } from "../../Pages/states/TablesFilter.state";
 export default function PurchaseForm() {
   const { open, toggleDrawer, drawerToEditData, setDrawerData } = useDrawer();
   const [render, setRender] = useState(false);

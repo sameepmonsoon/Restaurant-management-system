@@ -20,7 +20,7 @@ import { Button } from "@mui/material";
 import { HTTPMethods } from "../../../Utils/HTTPMock";
 import { toast } from "react-toastify";
 import { DOMToggleButtonName } from "../../../Utils/DOMToggleButtonName";
-import { useFilterStore } from "../../../store/filtered";
+import { useFilterStore } from "../../../Pages/states/TablesFilter.state";
 import { useLocation } from "react-router-dom";
 
 const PurchaseTable = (props: TableStatus) => {
