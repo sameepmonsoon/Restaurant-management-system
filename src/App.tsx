@@ -35,7 +35,7 @@ function App(props: any) {
   );
   useEffect(() => {
     fetchTotalAmounts();
-  }, [totalAmount]);
+  }, []);
   const router = createBrowserRouter([
     {
       path: "/",

@@ -55,6 +55,20 @@ export default function Sider() {
       return false;
     }
   }
+
+  function getListLocation() {
+    if (location.pathname === "/report/stocks") {
+      return true;
+    } else if (location.pathname === "/report/purchase") {
+      return true;
+    } else if (location.pathname === "/report/sales") {
+      return true;
+    } else if (location.pathname === "/report/profitanalysis") {
+      return true;
+    } else {
+      return false;
+    }
+  }
   return (
     <SiderDiv openSider={openSider}>
       <SiderLogoDiv>
@@ -91,8 +105,14 @@ export default function Sider() {
               icon3={<IoIosArrowDown size={25} />}
               activeSider={getReport()}
               options={[
-                { label: "1st Floor", link: "/tables/floorFirst" },
-                { label: "2nd Floor", link: "/tables/floorSecond" },
+                {
+                  label: "1st Floor",
+                  link: "/tables/floorFirst",
+                },
+                {
+                  label: "2nd Floor",
+                  link: "/tables/floorSecond",
+                },
               ]}
             />
           </Link>
@@ -134,10 +154,22 @@ export default function Sider() {
               icon3={<IoIosArrowDown size={25} />}
               activeSider={getLocation()}
               options={[
-                { label: "Purchase", link: "/report/purchase" },
-                { label: "Sell", link: "/report/sales" },
-                { label: "Stock", link: "/report/stocks" },
-                { label: "Profit Analysis", link: "/report/profitanalysis" },
+                {
+                  label: "Purchase",
+                  link: "/report/purchase",
+                },
+                {
+                  label: "Sell",
+                  link: "/report/sales",
+                },
+                {
+                  label: "Stock",
+                  link: "/report/stocks",
+                },
+                {
+                  label: "Profit Analysis",
+                  link: "/report/profitanalysis",
+                },
               ]}
             />
           </Link>

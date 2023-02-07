@@ -5,4 +5,5 @@ export const ProfitAnalysisDiv = styled("div")`
   flex-flow: row wrap;
   row-gap: 38px;
   column-gap: 46px;
+  margin-bottom: 50px;
 `;

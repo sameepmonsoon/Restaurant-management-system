@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { AiOutlinePrinter } from "react-icons/ai";
 import { TextField } from "../TextField";
 import { RxDividerVertical } from "react-icons/rx";
@@ -19,11 +19,17 @@ import {
   ReportWeeklyDiv,
   ReportDaily,
 } from "./FiltersReport.styles";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { Box } from "@mui/material";
 const FiltersReport = () => {
   const { searchTerm, setSearchTerm } = useFilterStore((state: any) => ({
     searchTerm: state.searchTerm,
     setSearchTerm: state.setSearchTerm,
   }));
+
+  const [value, setValue] = useState([null, null]);
   return (
     <>
       <ReportFilterMainDiv>
@@ -65,13 +71,7 @@ const FiltersReport = () => {
         </ReportFilterInnerDiv>
         <DateButtonBox>
           {searchTerm === "weekly" || searchTerm === "monthly" ? (
-            <>
-              <ReportFilterDateBox>
-                <TextField type="date" label="" />
-                <b>-</b>
-                <TextField type="date" label="" />
-              </ReportFilterDateBox>
-            </>
+            <></>
           ) : (
             <>
               <ReportFilterDateBox>

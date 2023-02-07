@@ -9,7 +9,6 @@ export const ReportFilterMainDiv = styled("div")`
   background: #ffffff;
   border-radius: 5px;
   gap: 10px;
-
   @media screen and (max-width: 1400px) {
     padding: 10px;
     height: 100%;

@@ -20,7 +20,8 @@ const ProfitAnalysis = () => {
     searchTerm: state.searchTerm,
     setSearchTerm: state.setSearchTerm,
   }));
-  let reportType = searchTerm === "" ? "daily" : `${searchTerm}`;
+
+  const reportType = searchTerm === "" ? "daily" : `${searchTerm}`;
 
   useEffect(() => {
     HTTPMethods.get(`/profit-analysis/${reportType}`)
