@@ -3,9 +3,8 @@ import { toast } from "react-toastify";
 import PurchaseTable from "../../../PageComponent/Dashboard/Table/PurchaseTable";
 import { MyContext } from "../../../Pages/Reports";
 import { HTTPMethods } from "../../../Utils/HTTPMock";
-import "react-toastify/dist/ReactToastify.css";
 
-export default function ReportPurchase() {
+export default function ReportSales() {
 
 const context=useContext(MyContext)
 // @ts-ignore
@@ -19,25 +18,22 @@ const isWeekly=dateAndTime.isWeekly
 const [data,setData]=useState([])
 const [loading,setLoading]=useState(false)
 
-    function fetchReportPurchase(){
+    function fetchReportSales(){
         setLoading(true)
         // API CALL 
-        HTTPMethods.get(`/report/purchase?page=1&offset=50&date1=${date1}&date2=${date2}&daily=${isDaily}&monthly=${isMonthly}&weekly=${isWeekly}`)
+        HTTPMethods.get(`/report/purchase?page=1&offset=500&date1=${date1}&date2=${date2}&daily=${isDaily}&monthly=${isMonthly}&weekly=${isWeekly}`)
         .then(function(resp){
             // something
-            console.log("inside report purrchase")
-            // setData(resp.data)
+            setData(resp.data)
         })
         .catch(function(err){
             // Show Toast
-            console.log(err)
             toast.error(err.message, {
-              theme: "colored",
-              hideProgressBar: true,
-              autoClose: 2000,
-              toastId: "log1",
-            })
-            
+                theme: "colored",
+                hideProgressBar: true,
+                autoClose: 1000,
+                toastId: "log1",
+              })
         })
         .finally(function(){
             setLoading(false)
@@ -46,7 +42,7 @@ const [loading,setLoading]=useState(false)
     }
   useEffect(() => {
 
-    fetchReportPurchase()
+    fetchReportSales()
     // fetchProducts();
   }, [date1,date2,isDaily,isMonthly,isWeekly]);
 

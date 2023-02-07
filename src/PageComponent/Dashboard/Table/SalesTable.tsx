@@ -19,7 +19,7 @@ import { useEffect, useState } from "react";
 import { useMenu } from "../../../Components/actionPopUp/ActionPopUp.state";
 import { toast } from "react-toastify";
 import { left } from "@popperjs/core";
-import { useFilterStore } from "../../../store/filtered";
+import { useFilterStore } from "../../../Pages/states/TablesFilter.state";
 import { useLocation } from "react-router-dom";
 
 const SalesTable = (props: TableStatus) => {

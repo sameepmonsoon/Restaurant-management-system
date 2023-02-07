@@ -9,7 +9,7 @@ import { useDrawer } from "../../Pages/states/Drawer.state";
 import { toast } from "react-toastify";
 import { useRef } from "react";
 import { DOMToggleButtonName } from "../../Utils/DOMToggleButtonName";
-import { useSalesStore } from "../../store/filtered";
+import { useSalesStore } from "../../Pages/states/TablesFilter.state";
 export default function SalesForm() {
   const { open, toggleDrawer, drawerToEditData, setDrawerData } = useDrawer();
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import SalesTable from "../PageComponent/Dashboard/Table/SalesTable";
-import { useSalesStore } from "../store/filtered";
+import { useSalesStore } from "./states/TablesFilter.state";
 import { productObjectType } from "../Types/Components/ProductListsType";
 import { HTTPMethods } from "../Utils/HTTPMock";
 
