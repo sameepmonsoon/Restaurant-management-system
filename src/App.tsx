@@ -28,11 +28,15 @@ import { useEffect } from "react";
 import ReportTable from "./Components/reportTable/ReportTable";
 
 function App(props: any) {
-
-  const {totalAmount, fetchTotalAmounts} = useTotalAmountStore((state:any)=> ({totalAmount: state.totalAmounts, fetchTotalAmounts:state.fetchTotalAmounts}))
-//   useEffect(()=>{
-//     fetchTotalAmounts()
-// },[])
+  const { totalAmount, fetchTotalAmounts } = useTotalAmountStore(
+    (state: any) => ({
+      totalAmount: state.totalAmounts,
+      fetchTotalAmounts: state.fetchTotalAmounts,
+    })
+  );
+  useEffect(() => {
+    fetchTotalAmounts();
+  }, []);
   const router = createBrowserRouter([
     {
       path: "/",
@@ -89,18 +93,33 @@ function App(props: any) {
         {
           path: "purchase",
           // element: <Purchase/>
-          element: <ReportTable reportLabel={"Purchase"} reportAmount={totalAmount.totalpurchase} /> ,
+          element: (
+            <ReportTable
+              reportLabel={"Purchase"}
+              reportAmount={totalAmount.totalpurchase}
+            />
+          ),
         },
         {
           path: "sales",
           // element: <Sales/>
-          element: <ReportTable reportLabel={"Sales"} reportAmount={totalAmount.total_sales} /> ,
+          element: (
+            <ReportTable
+              reportLabel={"Sales"}
+              reportAmount={totalAmount.total_sales}
+            />
+          ),
         },
         {
           path: "stocks",
           // element: <Stocks/>
 
-          element: <ReportTable reportLabel={"Stocks"} reportAmount={totalAmount.total_stocks} />,
+          element: (
+            <ReportTable
+              reportLabel={"Stocks"}
+              reportAmount={totalAmount.total_stocks}
+            />
+          ),
         },
         {
           path: "profitanalysis",
@@ -135,7 +154,6 @@ function App(props: any) {
       path: "pagecomponent/sider",
       element: <Sider />,
     },
-
 
     {
       path: "*",

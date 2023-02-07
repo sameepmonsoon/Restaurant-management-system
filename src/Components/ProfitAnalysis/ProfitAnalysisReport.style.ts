@@ -59,7 +59,7 @@ export const DivELementsIcon = styled("div")<IconTypes>`
   align-items: center;
   width: 52px;
   height: 52px;
-  ${({ icontype }) =>
+  ${({ icontype, title }) =>
     icontype === "icon1"
       ? "background-color:#E7FFF1; color:#02844B;"
       : icontype === "icon2"
@@ -77,8 +77,9 @@ export const DivELementsStats = styled("div")`
   overflow: hidden;
   font-style: normal;
   font-weight: 600;
-  font-size: 20px;
-  line-height: 19px;
+  font-size: 19px;
+  line-height: 21px;
+  padding-bottom: 1px;
   max-width: 91px;
   max-height: 50px;
   color: #424242;
@@ -89,7 +90,8 @@ export const DivELementsTitle = styled("div")`
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
-  line-height: 19px;
+  line-height: 20px;
+  padding-bottom: 1px;
   letter-spacing: -1px;
   color: #424242;
   text-transform: capitalize;

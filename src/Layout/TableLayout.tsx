@@ -7,6 +7,15 @@ import { siderToggle } from "../Pages/states/NavBar.state";
 import DrawerC from "../PageComponent/Dashboard/Drawer/Drawer";
 import { useDrawer } from "../Pages/states/Drawer.state";
 import FloorTableForm from "../PageComponent/forms/FloorTableForm";
+import {
+  TableCheck,
+  TableCheckText,
+  TableDiv,
+  TableMain,
+} from "./TableLayout.style";
+import { BsCircleFill } from "react-icons/bs";
+import ActionButton from "../Components/ActionButton/ActionButton";
+import { MdAdd } from "react-icons/md";
 export default function TableLayout({
   children,
 }: {
@@ -19,6 +28,11 @@ export default function TableLayout({
     setDrawerData({});
     console.log("outside Drawer");
 
+    toggleDrawer();
+  }
+
+  function openDrawer() {
+    console.log("inside open drawer", open);
     toggleDrawer();
   }
   function manageForm() {
@@ -37,7 +51,24 @@ export default function TableLayout({
             onClick={() => {}}
           />
 
-          <ChildrenDiv>{children}</ChildrenDiv>
+          <ChildrenDiv>
+            <TableMain>
+              <TableCheck>
+                <BsCircleFill />
+                <TableCheckText>Order on Table</TableCheckText>
+              </TableCheck>
+              <TableDiv>
+                {children}
+                <ActionButton
+                  icon={<MdAdd size={25} />}
+                  label={"Add Table"}
+                  onClick={(e: React.MouseEvent<HTMLElement>) => {
+                    openDrawer();
+                  }}
+                />
+              </TableDiv>
+            </TableMain>
+          </ChildrenDiv>
         </LayoutContainerDiv>
 
         <DrawerC

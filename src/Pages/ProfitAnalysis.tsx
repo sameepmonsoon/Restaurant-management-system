@@ -9,18 +9,27 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { ProfitAnalysisListTypes } from "../Types/Components/ProfitAnalysisTypes";
 import { HTTPMethods } from "../Utils/HTTPMock";
 import { toast } from "react-toastify";
+import { ProfitAnalysisDiv } from "./ProfitAnalysis.style";
+import { useFilterStore } from "../store/filtered";
 
 const ProfitAnalysis = () => {
   const [purchaseProfit, setpurchaseProfit] =
     useState<ProfitAnalysisListTypes>();
   const [stockProfit, setStockProfit] = useState<ProfitAnalysisListTypes>();
+  const { searchTerm, setSearchTerm } = useFilterStore((state: any) => ({
+    searchTerm: state.searchTerm,
+    setSearchTerm: state.setSearchTerm,
+  }));
+
+  const reportType = searchTerm === "" ? "daily" : `${searchTerm}`;
 
   useEffect(() => {
-    HTTPMethods.get("/profit-analysis/daily")
+    HTTPMethods.get(`/profit-analysis/${reportType}`)
       .then(async (res: any) => {
         setpurchaseProfit(res.data.payload.data);
-        console.log(res.data.payload.data);
+        console.log(`${reportType}`, res.data.payload.data);
       })
+
       .catch(async (err) => {
         toast.info("Server is down to display the table data.", {
           theme: "colored",
@@ -31,10 +40,12 @@ const ProfitAnalysis = () => {
         });
       });
   }, []);
+
   useEffect(() => {
     HTTPMethods.get("/profit-analysis/stock")
       .then(async (res: any) => {
         setStockProfit(res.data.payload.data);
+        console.log(res.data.payload.data);
       })
       .catch(async (err) => {
         toast.info("Server is down to display the table data.", {
@@ -81,12 +92,7 @@ const ProfitAnalysis = () => {
 
   return (
     <>
-      <div
-        style={{
-          display: "flex;",
-          flexFlow: "row wrap;",
-          backgroundColor: "red;",
-        }}>
+      <ProfitAnalysisDiv>
         <ProfitAnalysisReport
           cardTitle={"Purchase"}
           icon1={<MdOutlineShoppingCart size={30} />}
@@ -102,7 +108,6 @@ const ProfitAnalysis = () => {
           amount3={purchaseCost}
           amount4={preOrder}
         />
-        <br />
 
         <ProfitAnalysisReport
           cardTitle={"Sales"}
@@ -119,15 +124,13 @@ const ProfitAnalysis = () => {
           amount3={salesCost}
           amount4={profitAmount}
         />
-        <br />
         <ProfitAnalysisReport
           cardTitle={"stock"}
           amount1={totalStock}
           amount2={lowStock}
           amount3={stockType}
         />
-        <br />
-      </div>
+      </ProfitAnalysisDiv>
     </>
   );
 };

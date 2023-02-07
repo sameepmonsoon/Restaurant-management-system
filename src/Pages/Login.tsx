@@ -62,7 +62,7 @@ export function Login() {
       setIsLoading(true);
       HTTPMethods.post("/auth/login", values)
         .then(async function (resp: any) {
-          console.log(resp.data);
+          console.log(resp.data.token);
           const { payload } = resp.data;
           const { token } = payload;
           localStorage.setItem("token", token);

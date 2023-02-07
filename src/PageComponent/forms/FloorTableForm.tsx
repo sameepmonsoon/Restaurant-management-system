@@ -21,13 +21,19 @@ const FloorTableForm = () => {
   //
   return (
     <>
-      {/* <form onSubmit={handleSubmit}>
-        <TextField type="text" label="Table name" name="table_name" error={errors} onChange={handleChange} />
+      <form>
+        <TextField
+          type="text"
+          label="Table name"
+          name="table_name"
+          // error={errors}
+          // onChange={handleChange}
+        />
         <TextField type="file" label="Image" name="table_image" />
         <Button>Add</Button>
         <br />
         <Button>Clear</Button>
-      </form> */}
+      </form>
     </>
   );
 };
