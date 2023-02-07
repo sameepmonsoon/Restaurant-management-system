@@ -19,10 +19,8 @@ import {
   ReportWeeklyDiv,
   ReportDaily,
 } from "./FiltersReport.styles";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { Box } from "@mui/material";
+import { MyContext } from "../../Pages/Reports";
+
 const FiltersReport = () => {
   const { searchTerm, setSearchTerm } = useFilterStore((state: any) => ({
     searchTerm: state.searchTerm,
@@ -34,63 +32,39 @@ const FiltersReport = () => {
     <>
       <ReportFilterMainDiv>
         <ReportFilterInnerDiv>
+          {
+            console.log("value inside consumer",value)
+          }
           <ReportFilterType>
-            <ReportType> Report Type </ReportType>
-            <Select
-              name="select"
-              id="status"
-              onChange={(e) => {
-                setSearchTerm(e.target.value);
-              }}>
-              <option value="daily" selected>
-                Daily
-              </option>
+            <p> Report Type </p>
+            <select name="select" id="" onChange={changeValue}>
+              <option value="daily">Daily</option>
               <option value="weekly">Weekly</option>
               <option value="monthly">Monthly</option>
-            </Select>
+            </select>
           </ReportFilterType>
           <ReportFilterTextDate>
-            {searchTerm === "weekly" || searchTerm === "monthly" ? (
-              <>
-                <ReportWeekly>
-                  <ReportWeeklyDiv>start date</ReportWeeklyDiv>
-                  <RxDividerVertical />
-                  <ReportWeeklyDiv>end date</ReportWeeklyDiv>
-                </ReportWeekly>
-              </>
-            ) : (
-              <>
-                <ReportDaily>
-                  <FiArrowLeftCircle size={25} />
-                  single date
-                  <FiArrowRightCircle size={25} />
-                </ReportDaily>
-              </>
-            )}
+            <div>start date</div>
+            <HiArrowLongDown />
+            <div>end date</div>
           </ReportFilterTextDate>
         </ReportFilterInnerDiv>
-        <DateButtonBox>
-          {searchTerm === "weekly" || searchTerm === "monthly" ? (
-            <></>
-          ) : (
-            <>
-              <ReportFilterDateBox>
-                <TextField type="date" label="" />
-              </ReportFilterDateBox>
-            </>
-          )}
+        <ReportFilterDateBox>
+          <TextField type="date" label="" />
           <DashboardButton
             icon={""}
-            title={"Generate Report"}
-            location={location.pathname.includes("/reports")}
+            title={"GENERATE REPORT"}
+            location={location.pathname === "/report"}
             disableTransition={true}
           />
-        </DateButtonBox>
+        </ReportFilterDateBox>
         <ReportFilterPrintIcon>
           <AiOutlinePrinter size={35} />
         </ReportFilterPrintIcon>
-      </ReportFilterMainDiv>
-    </>
+      </ReportFilterMainDiv>}
+      }
+
+      </MyContext.Consumer>
   );
 };
 

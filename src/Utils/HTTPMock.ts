@@ -13,7 +13,7 @@ function post(url:string,data:any){
         throw new Error("Url not provided")
     }
 
-    return axios.post(BASE_URL+url,data)
+    return  axios.post(BASE_URL+url,data)
 }
 
 function put(url:string,data:any){

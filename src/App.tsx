@@ -25,6 +25,7 @@ import FloorFirst from "./Pages/FloorFirst";
 import { useTotalAmountStore } from "./store/filtered";
 import TableTotalAmount from "./Components/TableTotalAmount/TableTotalAmount";
 import { useEffect } from "react";
+import ReportTable from "./Components/reportTable/ReportTable";
 
 function App(props: any) {
   const { totalAmount, fetchTotalAmounts } = useTotalAmountStore(
@@ -93,7 +94,7 @@ function App(props: any) {
           path: "purchase",
           // element: <Purchase/>
           element: (
-            <TableTotalAmount
+            <ReportTable
               reportLabel={"Purchase"}
               reportAmount={totalAmount.totalpurchase}
             />
@@ -103,7 +104,7 @@ function App(props: any) {
           path: "sales",
           // element: <Sales/>
           element: (
-            <TableTotalAmount
+            <ReportTable
               reportLabel={"Sales"}
               reportAmount={totalAmount.total_sales}
             />
@@ -114,7 +115,7 @@ function App(props: any) {
           // element: <Stocks/>
 
           element: (
-            <TableTotalAmount
+            <ReportTable
               reportLabel={"Stocks"}
               reportAmount={totalAmount.total_stocks}
             />
