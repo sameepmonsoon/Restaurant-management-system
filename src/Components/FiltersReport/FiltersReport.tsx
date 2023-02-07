@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { AiOutlinePrinter } from "react-icons/ai";
 // import { TextField } from "../TextField";
-import { Dayjs } from "dayjs";
 import { RxDividerVertical } from "react-icons/rx";
 import DashboardButton from "../DashboardButton/DashboardButton";
-import { useFilterStore } from "../../store/filtered";
 import { FiArrowRightCircle, FiArrowLeftCircle } from "react-icons/fi";
 import {
   ReportFilterDateBox,
@@ -22,22 +20,44 @@ import {
 } from "./FiltersReport.styles";
 import { MyContext } from "../../Pages/Reports";
 import TextField from "@mui/material/TextField";
-import { LocalizationProvider } from "@mui/x-date-pickers-pro";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { StaticDateRangePicker } from "@mui/x-date-pickers-pro/StaticDateRangePicker";
-import { DateRange } from "@mui/x-date-pickers-pro/DateRangePicker";
+import { DateRange, DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import Box from "@mui/material/Box";
+import { useFilterStore } from "../../Pages/states/TablesFilter.state";
+import { Stack } from "@mui/material";
+import dayjs, { Dayjs } from 'dayjs';
+// Date picker 
+// import TextField from '@mui/material/TextField';
+// import Stack from '@mui/material/Stack';
+// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+// import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+
+// End of date picker 
+
+
 
 const FiltersReport = () => {
   const { searchTerm, setSearchTerm } = useFilterStore((state: any) => ({
     searchTerm: state.searchTerm,
     setSearchTerm: state.setSearchTerm,
   }));
+  const todayDate=`2022-04-07`
 
-  const [value, setValue] = React.useState<DateRange<Dayjs>>([null, null]);
+  const [date, setDate] = React.useState<Dayjs | null>(dayjs(todayDate))
+  const [range, setRange] = React.useState<DateRange<Dayjs>>([null, null]);
+  function generateReport(){
+    // API Call
+
+  }
+
   return (
     <MyContext.Consumer>
       {(value) => {
+        // @ts-ignore
+        const {dateAndTime}=value
         function changeValue(e: any) {
           if (e.target.value === "daily") {
             console.log("inside change value", value, e.target.value);
@@ -71,6 +91,9 @@ const FiltersReport = () => {
             });
           }
         }
+        function doubleDigitDate(value:any){
+          return value
+        }
         return (
           <ReportFilterMainDiv>
             {/* @ts-ignore */}
@@ -84,7 +107,7 @@ const FiltersReport = () => {
                   <option value="monthly">Monthly</option>
                 </select>
               </ReportFilterType>
-              <ReportFilterTextDate>
+              {/* <ReportFilterTextDate>
                 {searchTerm === "weekly" || searchTerm === "monthly" ? (
                   <>
                     <ReportWeekly>
@@ -102,21 +125,75 @@ const FiltersReport = () => {
                     </ReportDaily>
                   </>
                 )}
-              </ReportFilterTextDate>
+              </ReportFilterTextDate> */}
             </ReportFilterInnerDiv>
             <DateButtonBox>
-              {searchTerm === "weekly" || searchTerm === "monthly" ? (
-                <></>
-              ) : (
-                <>
-                  <ReportFilterDateBox></ReportFilterDateBox>
-                </>
-              )}
+                      {
+                                  dateAndTime.isDaily? <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                              <DatePicker
+                                                openTo="day"
+                                                views={['day']}
+                                                // label="Today"
+                                                value={date}
+                                                onChange={(newValue) => {
+                                                  // @ts-ignore
+                                                  let finalDate=`${doubleDigitDate(newValue.$D)}-${doubleDigitDate(newValue.$M)}-${doubleDigitDate(newValue.$y)}`
+                                                  setDate(newValue)
+                                                  value?.setDateAndTime({
+                                                    ...value.dateAndTime,
+                                                    date1: finalDate,
+                                                    date2: "",
+                                                  });
+                                                }}
+                                                renderInput={(params) => <TextField {...params} helperText={null} />}
+                                              />
+                                  </LocalizationProvider>
+                  :
+                            <LocalizationProvider
+                            dateAdapter={AdapterDayjs}
+                            localeText={{ start: 'Check-in', end: 'Check-out' }}
+                          >
+                            <DateRangePicker
+                              value={range}
+                              onChange={(newValue) => {
+                                newValue.map((dateValue,idx)=>{
+                                    if(dateValue){
+                                      // @ts-ignore
+                                      let finalDate=`${doubleDigitDate(dateValue.$D)}-${doubleDigitDate(dateValue.$M)}-${doubleDigitDate(dateValue.$y)}`
+                                      idx===0? 
+                                      // Logical errror month is 1 less
+                                      value?.setDateAndTime({
+                                        ...value.dateAndTime,
+                                        date1: finalDate,
+                                      })
+                                      // set date1
+                                      :
+                                      // Logical errror month is 1 less
+                                      value?.setDateAndTime({
+                                        ...value.dateAndTime,
+                                        date2: finalDate,
+                                      })
+                                      // set date2
+                                    }
+                                })
+                                setRange(newValue); 
+                              }}
+                              renderInput={(startProps, endProps) => (
+                                <React.Fragment>
+                                  <TextField {...startProps} />
+                                  <Box sx={{ mx: 2 }}> to </Box>
+                                  <TextField {...endProps} />
+                                </React.Fragment>
+                              )}
+                            />
+                            </LocalizationProvider>
+                      }
               <DashboardButton
                 icon={""}
                 title={"Generate Report"}
                 location={location.pathname.includes("/reports")}
                 disableTransition={true}
+                onClick={()=>{ value?.setGenerateReport(true)}}
               />
             </DateButtonBox>
             <ReportFilterPrintIcon>

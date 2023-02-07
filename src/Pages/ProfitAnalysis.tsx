@@ -10,7 +10,7 @@ import { ProfitAnalysisListTypes } from "../Types/Components/ProfitAnalysisTypes
 import { HTTPMethods } from "../Utils/HTTPMock";
 import { toast } from "react-toastify";
 import { ProfitAnalysisDiv } from "./ProfitAnalysis.style";
-import { useFilterStore } from "../store/filtered";
+import { useFilterStore } from "./states/TablesFilter.state";
 
 const ProfitAnalysis = () => {
   const [purchaseProfit, setpurchaseProfit] =

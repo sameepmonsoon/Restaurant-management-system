@@ -5,50 +5,53 @@ import { MyContext } from "../../../Pages/Reports";
 import { HTTPMethods } from "../../../Utils/HTTPMock";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function ReportPurchase() {
+export default function ReportPurchase({setReportAmount}:any) {
 
 const context=useContext(MyContext)
 // @ts-ignore
-const {dateAndTime}=context
-console.log("context value is",context)
+const {dateAndTime,generateReport,setGenerateReport}=context
 const date1=dateAndTime.date1
 const date2=dateAndTime.date2
 const isDaily=dateAndTime.isDaily
 const isMonthly=dateAndTime.isMonthly 
 const isWeekly=dateAndTime.isWeekly
+
+
 const [data,setData]=useState([])
 const [loading,setLoading]=useState(false)
-
+const [firstRender,setFirstRender]=useState(true)
     function fetchReportPurchase(){
-        setLoading(true)
-        // API CALL 
-        HTTPMethods.get(`/report/purchase?page=1&offset=50&date1=${date1}&date2=${date2}&daily=${isDaily}&monthly=${isMonthly}&weekly=${isWeekly}`)
-        .then(function(resp){
-            // something
-            console.log("inside report purrchase")
-            // setData(resp.data)
-        })
-        .catch(function(err){
-            // Show Toast
-            console.log(err)
-            toast.error(err.message, {
-              theme: "colored",
-              hideProgressBar: true,
-              autoClose: 2000,
-              toastId: "log1",
-            })
-            
-        })
-        .finally(function(){
-            setLoading(false)
-        })
+        if(isDaily || isMonthly || isWeekly){
+          setLoading(true)
+          // API CALL 
+          HTTPMethods.get(`/report/purchase?page=1&offset=50&date1=${date1}&date2=${date2}&daily=${isDaily}&monthly=${isMonthly}&weekly=${isWeekly}`)
+          .then(function(resp){
+            const {payload}=resp.data
+              setData(payload.data.purchase.totalPurchaseData)
+              setReportAmount(payload.data.purchase.totalPurchase)
+          })
+          .catch(function(err){
+              // Show Toast
+              toast.error(err.message, {
+                theme: "colored",
+                hideProgressBar: true,
+                autoClose: 2000,
+                toastId: "log1",
+              })
+          })
+          .finally(function(){
+              setLoading(false)
+              setGenerateReport(!generateReport)
+              setFirstRender(false)
+          })
+        }
 
     }
   useEffect(() => {
-
-    fetchReportPurchase()
-    // fetchProducts();
-  }, [date1,date2,isDaily,isMonthly,isWeekly]);
+        if(generateReport) fetchReportPurchase()
+        if(firstRender)  fetchReportPurchase()
+        // fetchProducts();
+  }, [generateReport]);
 
   return loading ? (
     <div>loading...</div>

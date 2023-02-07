@@ -11,6 +11,8 @@ type contextType={
     isDaily:false
   },
   setDateAndTime:any
+  generateReport:boolean
+  setGenerateReport:any
 }
 export const MyContext = React.createContext<contextType | null >(null);
 export default function Reports() {  
@@ -19,11 +21,12 @@ export default function Reports() {
     date2:null,
     isMonthly:false,
     isWeekly:false,
-    isDaily:false
+    isDaily:true
   })
+  const [generateReport,setGenerateReport]=useState(false)
   return (
     // @ts-ignore
-    <MyContext.Provider value={{dateAndTime,setDateAndTime}}>
+    <MyContext.Provider value={{dateAndTime,setDateAndTime,generateReport,setGenerateReport}}>
         <ReportLayout>
           <FiltersReport />
               <Outlet />

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom';
 import Purchase from '../../Pages/Purchase';
 import Sales from '../../Pages/Sales';
@@ -8,13 +8,13 @@ import { TotalAmountDiv, TotalAmountLabel, TotalAmountPrice } from './ReportTabl
 import ReportPurchase from './reportPurchase/ReportPurchase';
 
 export default function ReportTable(props:ReportTotalAmountType) {
-    const {reportLabel, reportAmount} = props
-
+    const {reportLabel} = props
+    const [reportAmount,setReportAmount]=useState<number |null>(null)
     let component;
      const location = useLocation()
- 
+    
     if(location.pathname=== "/report/purchase" ){
-         component =  <ReportPurchase/>
+         component =  <ReportPurchase setReportAmount={setReportAmount}/>
         // component = <Purchase/>
      }else if (location.pathname==="/report/sales"){
          component = <Sales/>
