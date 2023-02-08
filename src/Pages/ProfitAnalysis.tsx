@@ -1,6 +1,6 @@
 import ProfitAnalysisReport from "../Components/ProfitAnalysis/ProfitAnalysisReport";
 import { BsTag } from "react-icons/bs";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { AiOutlineLineChart } from "react-icons/ai";
 import { HiOutlineCurrencyRupee } from "react-icons/hi";
 import { BsCartX, BsCartCheck } from "react-icons/bs";
@@ -11,8 +11,21 @@ import { HTTPMethods } from "../Utils/HTTPMock";
 import { toast } from "react-toastify";
 import { ProfitAnalysisDiv } from "./ProfitAnalysis.style";
 import { useFilterStore } from "./states/TablesFilter.state";
+import { MyContext } from "../Pages/Reports";
 
 const ProfitAnalysis = () => {
+  const context = useContext(MyContext);
+  // @ts-ignore
+  const { dateAndTime, generateReport, setGenerateReport } = context;
+  const date1 = dateAndTime.date1;
+  const date2 = dateAndTime.date2;
+  const isDaily = dateAndTime.isDaily;
+  const isMonthly = dateAndTime.isMonthly;
+  const isWeekly = dateAndTime.isWeekly;
+
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [firstRender, setFirstRender] = useState(true);
   const [purchaseProfit, setpurchaseProfit] =
     useState<ProfitAnalysisListTypes>();
   const [stockProfit, setStockProfit] = useState<ProfitAnalysisListTypes>();
@@ -21,25 +34,42 @@ const ProfitAnalysis = () => {
     setSearchTerm: state.setSearchTerm,
   }));
 
-  const reportType = searchTerm === "" ? "daily" : `${searchTerm}`;
+  console.log("profit analysis report");
+
+  function fetchProfitAnalysis() {
+    if (isDaily || isMonthly || isWeekly) {
+      setLoading(true);
+      HTTPMethods.get(
+        `/profit-analysis/report?date1=${date1}&date2=${date2}&daily=${isDaily}&monthly=${isMonthly}&weekly=${isWeekly}`
+      )
+        .then(function (res: any) {
+          console.log("after report");
+          setpurchaseProfit(res.data.payload.data);
+          console.log(`${date1} ${date2}`, res.data.payload.data);
+        })
+
+        .catch(function (err) {
+          toast.info("Server is down to display the table data.", {
+            theme: "colored",
+            hideProgressBar: true,
+            autoClose: 2000,
+            position: "bottom-right",
+            toastId: "info1",
+          });
+        })
+
+        .finally(function () {
+          setLoading(false);
+          setGenerateReport(!generateReport);
+          setFirstRender(false);
+        });
+    }
+  }
 
   useEffect(() => {
-    HTTPMethods.get(`/profit-analysis/${reportType}`)
-      .then(async (res: any) => {
-        setpurchaseProfit(res.data.payload.data);
-        console.log(`${reportType}`, res.data.payload.data);
-      })
-
-      .catch(async (err) => {
-        toast.info("Server is down to display the table data.", {
-          theme: "colored",
-          hideProgressBar: true,
-          autoClose: 2000,
-          position: "bottom-right",
-          toastId: "info1",
-        });
-      });
-  }, []);
+    if (generateReport) fetchProfitAnalysis();
+    if (firstRender) fetchProfitAnalysis();
+  }, [generateReport]);
 
   useEffect(() => {
     HTTPMethods.get("/profit-analysis/stock")
@@ -57,6 +87,7 @@ const ProfitAnalysis = () => {
         });
       });
   }, []);
+
   const totalPurchase = purchaseProfit
     ? `${purchaseProfit.PurchaseOverview.TotalPurchase}`
     : "Loading";

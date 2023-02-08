@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { TableStatusStyled } from "../../../Types/Components/DashboardTableStyles";
 
 export const MainTableDiv = styled("table")`
+  border-collapse: collapse;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
