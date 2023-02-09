@@ -1,13 +1,8 @@
 import React from "react";
-import {
-  Children,
-  ChildrenItem,
-  ChildrenCard,
-  MainCard,
-} from "./SiderButton.Style";
+import { Children, ChildrenCard, ChildrenItem, MainCard } from "./SiderButton.Style";
 import { TitleCard } from "./SiderButton.Style";
-import { Icon } from "./SiderButton.Style";
-import { Icon2 } from "./SiderButton.Style";
+import { TitleIcon } from "./SiderButton.Style";
+import { ChildrenIcon } from "./SiderButton.Style";
 import { FaBeer } from "react-icons/fa";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { Title } from "./SiderButton.Style";
@@ -26,26 +21,22 @@ const SiderButton = (props: card) => {
     <>
       <MainCard>
         <TitleCard>
-          <Icon>{titleIcon}</Icon>
+          <TitleIcon>{titleIcon}</TitleIcon>
           <Title>{title}</Title>
-          {childrenIcon && (
-            <Icon2>
+          {
+            childrenIcon && 
+            <ChildrenIcon>
               <RiArrowDropDownLine />
-            </Icon2>
-          )}
+            </ChildrenIcon>
+          }
         </TitleCard>
-        {childrenIcon}
-
         <ChildrenCard>
-          <Children>
-            <ChildrenItem>Purchase</ChildrenItem>
-            <ChildrenItem>Sales</ChildrenItem>
-            <ChildrenItem>Stock</ChildrenItem>
-          </Children>
-        </ChildrenCard>
-        {/* {
-          children
-        } */}
+       <Children>
+        <ChildrenItem>Purchase</ChildrenItem>
+        <ChildrenItem>Sales</ChildrenItem>
+        <ChildrenItem>Stock</ChildrenItem>
+       </Children>
+       </ChildrenCard>
       </MainCard>
     </>
   );

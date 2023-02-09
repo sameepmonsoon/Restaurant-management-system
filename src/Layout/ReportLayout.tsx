@@ -19,7 +19,7 @@ export default function ReportLayout({
           <Navbar
             navTitle={"Report"}
             navbarCardName={"Purchase"}
-            arrowIcon={true}
+            // arrowIcon={true}
             onClick={() => {}}
           />
 

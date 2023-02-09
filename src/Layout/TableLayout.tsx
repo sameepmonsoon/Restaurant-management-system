@@ -47,7 +47,7 @@ export default function TableLayout({
           <Navbar
             navTitle={"Report"}
             navbarCardName={"Purchase"}
-            arrowIcon={true}
+            // arrowIcon={true}
             onClick={() => {}}
           />
 

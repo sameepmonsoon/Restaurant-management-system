@@ -111,7 +111,7 @@ export default function DashboardLayout({
           <Navbar
             navTitle={"Dashboard"}
             navbarCardName={"Purchase"}
-            arrowIcon={true}
+            // arrowIcon={true}
             onClick={(e: React.MouseEvent<HTMLElement>) => openCloseSider()}
           />
           <InventoryCardContainerDiv openSider={openSider}>

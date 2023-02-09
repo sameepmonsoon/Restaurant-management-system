@@ -106,11 +106,14 @@ export const SiderButtonTitle = styled("div")`
 
 export const SettingDiv = styled.div`
   width: 50%;
-  margin-top: 150px;
   display: flex;
   flex-flow: row nowrap;
+  margin-top: 150px;
   cursor: pointer;
   gap: 10px;
+  /* position:absolute;
+  bottom: 0;
+  margin-bottom: 28px; */
   justify-content: flex-start;
   align-items: center;
   font-family: "Inter";
