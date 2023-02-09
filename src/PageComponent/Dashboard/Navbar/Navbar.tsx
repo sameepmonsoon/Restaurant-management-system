@@ -52,7 +52,7 @@ function title() {
 }
 
 const Navbar = (props: NavbarTitles) => {
-  const { navTitle, arrowIcon } = props;
+  const { navTitle } = props;
   const { openSider, toggleSider } = siderToggle();
 
   return (
@@ -67,7 +67,7 @@ const Navbar = (props: NavbarTitles) => {
         </NavbarItemIcon>
         <NabarItemTextContainer>
           <NavbarItemTextElementOne>{title()}</NavbarItemTextElementOne>
-          {arrowIcon === true ? (
+          {subtitle()!=="" ? (
             <NavbarItemTextElementsArrow>
               <RiArrowRightSLine size={25} />
             </NavbarItemTextElementsArrow>
