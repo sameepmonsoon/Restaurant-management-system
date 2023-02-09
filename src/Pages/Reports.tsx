@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import ReportLayout from "../Layout/ReportLayout";
 import FiltersReport from "../Components/FiltersReport/FiltersReport";
 import React, { useState } from "react";
@@ -26,6 +26,8 @@ export default function Reports() {
     isDaily: true,
   });
   const [generateReport, setGenerateReport] = useState(false);
+  const {pathname}=useLocation()
+  const showReport=!pathname.includes("stocks")
   return (
     // @ts-ignore
     <MyContext.Provider
@@ -36,7 +38,10 @@ export default function Reports() {
         setGenerateReport,
       }}>
       <ReportLayout>
-        <FiltersReport />
+        {
+          showReport ? <FiltersReport />:<></> 
+        }
+       
         <Outlet />
       </ReportLayout>
     </MyContext.Provider>
