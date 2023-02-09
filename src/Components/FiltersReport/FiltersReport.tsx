@@ -30,8 +30,6 @@ import {
 import Box from "@mui/material/Box";
 import { useFilterStore } from "../../Pages/states/TablesFilter.state";
 import dayjs, { Dayjs } from "dayjs";
-import { HTTPMethods } from "../../Utils/HTTPMock";
-import { toast } from "react-toastify";
 // Date picker
 // import TextField from '@mui/material/TextField';
 // import Stack from '@mui/material/Stack';
@@ -54,18 +52,7 @@ const FiltersReport = () => {
     // API Call
   }
   function printReport(){
-  HTTPMethods.get("")
-  .then(function(){
-    console.log("report downlaod successfully")
-  })
-  .catch(function(err){
-    toast.error("Error in report generation", {
-      theme: "colored",
-      hideProgressBar: true,
-      autoClose: 2000,
-      toastId: "log1",
-    });
-  })
+    window.open(`http://backend.hq.kpop.com.np/excel/download`, "_blank");
   }
 
   return (
