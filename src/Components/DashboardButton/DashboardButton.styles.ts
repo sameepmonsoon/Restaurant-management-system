@@ -5,11 +5,11 @@ type SetTitle = {
   disableTransition?: boolean;
 };
 
-export const DashboardButtonMainDiv = styled("div")<SetTitle>`
+export const DashboardButtonMainDiv = styled("button")<SetTitle>`
   background-color: ${({ activeSider, disableTransition }) =>
     activeSider === true || disableTransition ? "#313131" : "white"};
-  border: ${({ activeSider }) =>
-    activeSider === true ? "1px solid #00020f" : "0"};
+  border: ${({ activeSider, disableTransition }) =>
+    disableTransition === true ? "1px solid #00020f" : "red"};
   box-shadow: ${({ activeSider }) =>
     activeSider === true ? "  0px 0px 2px rgba(0, 0, 0, 0.15)" : "0"};
   border-radius: 8px;

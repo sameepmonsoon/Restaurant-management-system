@@ -95,7 +95,16 @@ export const Select = styled("select")`
   border-radius: 5px;
   padding: 0 19px;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
-
+  ::after {
+    content: "red";
+    background-color: red;
+    font-size: large;
+  }
+  &::before {
+    content: "red";
+    background-color: red;
+    font-size: large;
+  }
   option {
     background: #fafafa;
   }

@@ -51,7 +51,8 @@ const FiltersReport = () => {
   function generateReport() {
     // API Call
   }
-  function printReport(){
+
+  function printReport() {
     window.open(`http://backend.hq.kpop.com.np/excel/download`, "_blank");
   }
 
@@ -62,7 +63,7 @@ const FiltersReport = () => {
         const { dateAndTime } = value;
         function changeValue(e: any) {
           if (e.target.value === "daily") {
-            console.log("inside change value", value, e.target.value);
+            // console.log("inside change value", value, e.target.value);
             return value?.setDateAndTime({
               date1: null,
               date2: null,
@@ -123,7 +124,7 @@ const FiltersReport = () => {
                         // @ts-ignore
 
                         newValue.$D // @ts-ignore
-                      )}-${doubleDigitDate(newValue.$M)}-${doubleDigitDate(
+                      )}-${doubleDigitDate(newValue.$M + 1)}-${doubleDigitDate(
                         // @ts-ignore
 
                         newValue.$y

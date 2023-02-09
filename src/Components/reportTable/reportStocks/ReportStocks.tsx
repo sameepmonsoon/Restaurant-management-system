@@ -13,7 +13,7 @@ export default function ReportStocks({ setReportAmount }: any) {
   const context = useContext(MyContext);
   // @ts-ignore
   const { dateAndTime, setGenerateReport, generateReport } = context;
-  console.log("context value is", context);
+  // console.log("context value is", context);
   const date1 = dateAndTime.date1;
   const date2 = dateAndTime.date2;
   const isDaily = dateAndTime.isDaily;
@@ -32,14 +32,14 @@ export default function ReportStocks({ setReportAmount }: any) {
         `/report/stock?page=1&offset=50&daily=${isDaily}&monthly=${isMonthly}&weekly=${isWeekly}`
       )
         .then(function (resp) {
-          console.log("stock response", resp);
+          // console.log("stock response", resp);
 
           // something
           const { payload } = resp.data;
-          console.log(
-            "value inside stock response",
-            payload.data.stock.totalStock
-          );
+          // console.log(
+          //   "value inside stock response",
+          //   payload.data.stock.totalStock
+          // );
           setData(payload.data.stock.totalStockData);
           setReportAmount(payload.data.stock.totalStock);
         })
