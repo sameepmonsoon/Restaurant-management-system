@@ -18,9 +18,7 @@ export const DropdownHeader = styled("div")<ActiveSider>`
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   height: 48px;
-
   overflow: hidden;
-
   div {
     padding: 0;
     color: ${({ active }) => (active === true ? "#ffffff" : "#9a9a9a")};
@@ -31,7 +29,7 @@ export const ReportInnerDiv = styled("div")<ActiveSider>`
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-around;
-  gap: 30px;
+  gap: 0px;
   align-items: center;
   padding-left: 0px;
   transition: all 300ms ease;
@@ -46,10 +44,13 @@ export const ReportInnerDiv = styled("div")<ActiveSider>`
 export const DropDownDiv = styled("div")`
   display: flex;
   justify-content: space-between;
-  gap: 19px;
+  gap: 20px;
   align-items: center;
 `;
-export const DropDownIcon = styled("span")``;
+export const DropDownIcon = styled("span")`
+  max-width: 30px;
+  max-height: 30px;
+`;
 export const DropDownText = styled("div")`
   font-family: "Inter";
   font-style: normal;
@@ -58,6 +59,8 @@ export const DropDownText = styled("div")`
   line-height: 22px;
   color: #ffffff;
   text-transform: capitalize;
+  min-width: 60px;
+  max-width: 90px;
 `;
 
 export const DropDownArrow = styled("div")``;

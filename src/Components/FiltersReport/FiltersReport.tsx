@@ -151,9 +151,9 @@ const FiltersReport = () => {
                       newValue.map((dateValue, idx) => {
                         if (dateValue) {
                           // @ts-ignore
+
                           let finalDate = `${doubleDigitDate(
                             // @ts-ignore
-
                             dateValue.$D
                             // @ts-ignore
                           )}-${doubleDigitDate(dateValue.$M)}-${doubleDigitDate(
@@ -195,6 +195,7 @@ const FiltersReport = () => {
                 disableTransition={true}
                 onClick={() => {
                   value?.setGenerateReport(true);
+                  value?.setDateAndTime(dateAndTime);
                 }}
               />
             </DateButtonBox>

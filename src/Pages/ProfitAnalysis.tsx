@@ -44,13 +44,6 @@ const ProfitAnalysis = () => {
           // console.log("Response from profit analysis.");
           setpurchaseProfit(res.data.payload.data);
           console.log(`${date1} ${date2}`, res.data.payload.data);
-          toast.info("Generated report successfully.", {
-            theme: "colored",
-            hideProgressBar: true,
-            autoClose: 1000,
-            position: "top-right",
-            toastId: "info4",
-          });
         })
 
         .catch(function (err) {

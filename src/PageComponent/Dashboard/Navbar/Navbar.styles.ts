@@ -1,4 +1,7 @@
 import styled from "@emotion/styled";
+type NavbarLogoTypes = {
+  openSider: boolean;
+};
 
 // main navbar div
 export const NavbarMainDiv = styled("div")`
@@ -10,7 +13,6 @@ export const NavbarMainDiv = styled("div")`
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  flex: 1;
   padding: 15px;
   height: 80px;
 `;
@@ -65,12 +67,21 @@ export const NavbarItemTextElementThree = styled("div")`
 `;
 
 //navbar--inner logo Container (bell,image,dropdown)
-export const NavbarLogoContainer = styled("div")`
+export const NavbarLogoContainer = styled("div")<NavbarLogoTypes>`
   display: flex;
   align-items: center;
   justify-content: flex-end;
   flex-flow: row nowrap;
   flex: 1;
+  position: relative;
+  right: 18rem;
+
+  @media screen and (min-width: 500px) and (max-width: 1550px) {
+    right: ${({ openSider }) => (openSider === true ? "18rem" : "2rem")};
+  }
+  @media screen and (min-width: 1550px) and (max-width: 2000px) {
+    right: ${({ openSider }) => (openSider === true ? "18rem" : "2rem")};
+  }
 `;
 
 //navbar notification(bell)

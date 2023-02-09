@@ -21,19 +21,18 @@ import {
 import { useLocation } from "react-router-dom";
 
 function subtitle() {
-  const location = useLocation()
+  const location = useLocation();
   const pathnameMap = {
-    "/home/purchase" : "Purchase",
+    "/home/purchase": "Purchase",
     "/home/sales": "Sales",
     "/tables/floorFirst": "First floor",
     "/tables/floorSecond": "second floor",
     "/report/purchase": "Purchase",
     "/report/sales": "Sales",
     "/report/stocks": "Stocks",
-    "/report/profitanalysis": "Profit Analysis"
-  }
+    "/report/profitanalysis": "Profit Analysis",
+  };
   return pathnameMap[location.pathname as keyof typeof pathnameMap] || "";
-
 }
 
 function title() {
@@ -74,9 +73,8 @@ const Navbar = (props: NavbarTitles) => {
             </NavbarItemTextElementsArrow>
           ) : null}
           <NavbarItemTextElementThree>{subtitle()}</NavbarItemTextElementThree>
-          
         </NabarItemTextContainer>
-        <NavbarLogoContainer>
+        <NavbarLogoContainer openSider={openSider}>
           <NavbarIconNotification>
             <VscBellDot size={20} />
           </NavbarIconNotification>

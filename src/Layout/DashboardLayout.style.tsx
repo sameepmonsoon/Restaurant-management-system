@@ -6,22 +6,28 @@ type Sider = {
 
 export const DashboardMainDiv = styled("div")`
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
   /*during transition --a horizontal scroll bar appears */
   overflow: hidden;
   background: #fafafa;
 `;
 
 export const LayoutContainerDiv = styled("div")<Sider>`
-  width: ${({ openSider }) => (openSider === true ? "83vw" : "100vw")};
+  max-width: 100%;
+  width: ${({ openSider }) => (openSider === true ? "100rem" : "100%")};
   position: relative;
   left: ${({ openSider }) => (openSider === true ? "260px" : "0")};
   transition: left 0.8s ease;
   background: #fafafa;
 
-  @media screen and (min-width: 300px) and (max-width: 1450px) {
+  @media screen and (min-width: 300px) and (max-width: 1550px) {
     overflow-x: hidden;
-    width: ${({ openSider }) => (openSider === true ? "80vw" : "100vw")};
+
+    width: ${({ openSider }) => (openSider === true ? "100vw" : "100vw")};
+  }
+  @media screen and (min-width: 1480px) and (max-width: 2000px) {
+    overflow-x: hidden;
+    width: ${({ openSider }) => (openSider === true ? "100vw" : "100vw")};
   }
 `;
 
@@ -33,11 +39,16 @@ export const InventoryCardContainerDiv = styled("div")<Sider>`
   margin-left: ${({ openSider }) => (openSider === true ? "60px" : "50px")};
   margin-bottom: 50px;
   row-gap: 100px;
-  column-gap: ${({ openSider }) => (openSider === true ? "50px" : "120px")};
+  transition: all 200ms ease;
+  column-gap: ${({ openSider }) => (openSider === true ? "40px" : "120px")};
   align-items: center;
 
-  @media screen and (max-width: 1300px) and (min-width: 300px) {
-    column-gap: ${({ openSider }) => (openSider === true ? "250px" : "50px")};
+  @media screen and (max-width: 1550px) and (min-width: 300px) {
+    column-gap: ${({ openSider }) => (openSider === true ? "50px" : "100px")};
+  }
+  @media screen and (min-width: 1550px) and (max-width: 2000px) {
+    flex-wrap: wrap;
+    column-gap: ${({ openSider }) => (openSider === true ? "80px" : "200px")};
   }
 `;
 

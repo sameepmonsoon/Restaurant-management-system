@@ -23,6 +23,12 @@ export const DashboardButtonMainDiv = styled("button")<SetTitle>`
     color: ${({ activeSider, disableTransition }) =>
       activeSider === true || disableTransition ? "#ffffff" : "#9a9a9a"};
   }
+  &:hover {
+    ${({ disableTransition }) =>
+      disableTransition
+        ? "background-color:red;transition:all 300ms ease;"
+        : ""};
+  }
 `;
 export const DashboardButtonInnerDiv = styled("div")<SetTitle>`
   display: flex;

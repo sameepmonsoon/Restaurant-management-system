@@ -17,6 +17,14 @@ export const ReportFilterMainDiv = styled("div")`
     flex-flow: column wrap;
     row-gap: 30px;
   }
+  @media screen and (min-width: 1551px) and (max-width: 2000px) {
+    padding: 10px;
+    height: 100%;
+    gap: 100px;
+    display: flex;
+    align-items: center;
+    flex-flow: row nowrap;
+  }
 `;
 
 export const ReportDaily = styled("span")`

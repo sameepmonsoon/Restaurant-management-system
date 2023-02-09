@@ -66,7 +66,7 @@ export const SiderMainDiv = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   padding-left: 20px;
-  height: 85vh;
+  height: 88vh;
   padding-top: 30px;
   overflow-y: scroll;
   scroll-behavior: smooth;
@@ -83,6 +83,9 @@ export const SiderMainDiv = styled.div`
     border-radius: 10px;
   }
   border-top: 1px solid rgba(0, 0, 0, 0.05);
+  @media screen and (min-width: 500px) and (max-width: 1300px) {
+    height: 80%;
+  }
 `;
 
 export const SiderButtonLabel = styled.div`
@@ -106,7 +109,9 @@ export const SiderButtonTitle = styled("div")`
 
 export const SettingDiv = styled.div`
   width: 50%;
-  margin-top: 150px;
+  left: 10px;
+  position: relative;
+  top: 160px;
   display: flex;
   flex-flow: row nowrap;
   cursor: pointer;
@@ -123,5 +128,8 @@ export const SettingDiv = styled.div`
   &:hover {
     margin-left: 1rem;
     color: #313131;
+  }
+  @media screen and (min-width: 500px) and (max-width: 1500px) {
+    top: 100px;
   }
 `;

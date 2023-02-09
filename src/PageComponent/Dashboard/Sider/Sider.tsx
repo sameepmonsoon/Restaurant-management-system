@@ -99,7 +99,7 @@ export default function Sider() {
             to="/tables/floorFirst"
             style={{ color: "#090909", textDecoration: "none" }}>
             <ReportButton
-              icon1={<GiRoundTable size={30} />}
+              icon1={<GiRoundTable size={25} />}
               label={"Table"}
               icon2={<IoIosArrowUp size={25} />}
               icon3={<IoIosArrowDown size={25} />}
@@ -116,7 +116,6 @@ export default function Sider() {
               ]}
             />
           </Link>
-
           <Link to="/menu" style={{ color: "#090909", textDecoration: "none" }}>
             <DashboardButton
               icon={<RxDashboard size={25} />}
@@ -124,7 +123,6 @@ export default function Sider() {
               location={location.pathname === "/menu"}
             />
           </Link>
-
           <Link
             to="/customer"
             style={{ color: "#090909", textDecoration: "none" }}>
@@ -134,7 +132,6 @@ export default function Sider() {
               location={location.pathname === "/customer"}
             />
           </Link>
-
           <Link
             to="/weborder"
             style={{ color: "#090909", textDecoration: "none" }}>
@@ -173,7 +170,6 @@ export default function Sider() {
               ]}
             />
           </Link>
-
           <SettingDiv onClick={handleLogout}>
             <HiOutlineLogout fontSize="2rem" />
             <span>Logout</span>
