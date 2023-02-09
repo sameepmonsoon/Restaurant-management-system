@@ -29,8 +29,9 @@ import {
 } from "@mui/x-date-pickers-pro/DateRangePicker";
 import Box from "@mui/material/Box";
 import { useFilterStore } from "../../Pages/states/TablesFilter.state";
-import { Stack } from "@mui/material";
 import dayjs, { Dayjs } from "dayjs";
+import { HTTPMethods } from "../../Utils/HTTPMock";
+import { toast } from "react-toastify";
 // Date picker
 // import TextField from '@mui/material/TextField';
 // import Stack from '@mui/material/Stack';
@@ -47,11 +48,24 @@ const FiltersReport = () => {
   }));
   const current = new Date();
   const todayDate = `${current.getMonth()}/${current.getDate()}/${current.getFullYear()}`;
-  console.log("Date todays", todayDate);
   const [date, setDate] = React.useState<Dayjs | null>(dayjs(todayDate));
   const [range, setRange] = React.useState<DateRange<Dayjs>>([null, null]);
   function generateReport() {
     // API Call
+  }
+  function printReport(){
+  HTTPMethods.get("")
+  .then(function(){
+    console.log("report downlaod successfully")
+  })
+  .catch(function(err){
+    toast.error("Error in report generation", {
+      theme: "colored",
+      hideProgressBar: true,
+      autoClose: 2000,
+      toastId: "log1",
+    });
+  })
   }
 
   return (
@@ -99,7 +113,6 @@ const FiltersReport = () => {
           <ReportFilterMainDiv>
             {/* @ts-ignore */}
             <ReportFilterInnerDiv>
-              {console.log("value inside consumer", value)}
               <ReportFilterType>
                 <ReportType> Report Type </ReportType>
                 <Select name="select" id="" onChange={changeValue}>
@@ -108,25 +121,6 @@ const FiltersReport = () => {
                   <option value="monthly">Monthly</option>
                 </Select>
               </ReportFilterType>
-              {/* <ReportFilterTextDate>
-                {searchTerm === "weekly" || searchTerm === "monthly" ? (
-                  <>
-                    <ReportWeekly>
-                      <ReportWeeklyDiv>start date</ReportWeeklyDiv>
-                      <RxDividerVertical />
-                      <ReportWeeklyDiv>end date</ReportWeeklyDiv>
-                    </ReportWeekly>
-                  </>
-                ) : (
-                  <>
-                    <ReportDaily>
-                      <FiArrowLeftCircle size={25} />
-                      single date
-                      <FiArrowRightCircle size={25} />
-                    </ReportDaily>
-                  </>
-                )}
-              </ReportFilterTextDate> */}
             </ReportFilterInnerDiv>
             <DateButtonBox>
               {dateAndTime.isDaily ? (
@@ -216,7 +210,7 @@ const FiltersReport = () => {
                 }}
               />
             </DateButtonBox>
-            <ReportFilterPrintIcon>
+            <ReportFilterPrintIcon onClick={printReport}>
               <AiOutlinePrinter size={35} />
             </ReportFilterPrintIcon>
           </ReportFilterMainDiv>
