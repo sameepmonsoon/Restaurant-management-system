@@ -52,6 +52,10 @@ const FiltersReport = () => {
     // API Call
   }
 
+  function printReport() {
+    window.open(`http://backend.hq.kpop.com.np/excel/download`, "_blank");
+  }
+
   return (
     <MyContext.Consumer>
       {(value) => {
