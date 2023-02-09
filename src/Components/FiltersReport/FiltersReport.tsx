@@ -47,7 +47,7 @@ const FiltersReport = () => {
   }));
   const current = new Date();
   const todayDate = `${current.getMonth()}/${current.getDate()}/${current.getFullYear()}`;
-  console.log("Date todays", todayDate);
+  // console.log("Date todays", todayDate);
   const [date, setDate] = React.useState<Dayjs | null>(dayjs(todayDate));
   const [range, setRange] = React.useState<DateRange<Dayjs>>([null, null]);
   function generateReport() {
@@ -61,7 +61,7 @@ const FiltersReport = () => {
         const { dateAndTime } = value;
         function changeValue(e: any) {
           if (e.target.value === "daily") {
-            console.log("inside change value", value, e.target.value);
+            // console.log("inside change value", value, e.target.value);
             return value?.setDateAndTime({
               date1: null,
               date2: null,
@@ -99,7 +99,7 @@ const FiltersReport = () => {
           <ReportFilterMainDiv>
             {/* @ts-ignore */}
             <ReportFilterInnerDiv>
-              {console.log("value inside consumer", value)}
+              {/* {console.log("value inside consumer", value)} */}
               <ReportFilterType>
                 <ReportType> Report Type </ReportType>
                 <Select name="select" id="" onChange={changeValue}>
@@ -142,7 +142,7 @@ const FiltersReport = () => {
                         // @ts-ignore
 
                         newValue.$D // @ts-ignore
-                      )}-${doubleDigitDate(newValue.$M)}-${doubleDigitDate(
+                      )}-${doubleDigitDate(newValue.$M + 1)}-${doubleDigitDate(
                         // @ts-ignore
 
                         newValue.$y
