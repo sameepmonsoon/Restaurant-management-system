@@ -78,10 +78,7 @@ function App(props: any) {
       element: <Tables />,
       children: [
         { path: "floorFirst", element: <FloorFirst /> },
-        {
-          path: "floorSecond",
-          element: <FloorSecond />,
-        },
+      
       ],
     },
 
