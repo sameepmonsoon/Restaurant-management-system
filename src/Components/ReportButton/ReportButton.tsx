@@ -41,8 +41,10 @@ const ReportButton = (props: ReportButtonTypes) => {
       {isOpen && (
         <DropDownOptions>
           {options.map((option) => (
-            <ReportLink key={option.label} to={option.link} className={"link"}>
-              <li>{option.label}</li>
+            <ReportLink key={option.label} to={option.link} >
+              <li style={{color: location.pathname=== option.link? "#313131": "#9A9A9A"}}>
+                {option.label}
+              </li>
             </ReportLink>
           ))}
         </DropDownOptions>

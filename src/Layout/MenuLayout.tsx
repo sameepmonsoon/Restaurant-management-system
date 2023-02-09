@@ -19,7 +19,7 @@ const MenuLayout = ({
           <Navbar
             navTitle={"Menu"}
             navbarCardName={"All Menu"}
-            arrowIcon={true}
+            // arrowIcon={true}
             onClick={() => {}}
           />
           <ChildrenDiv>{children}</ChildrenDiv>
