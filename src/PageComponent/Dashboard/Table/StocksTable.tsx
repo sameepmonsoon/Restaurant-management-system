@@ -24,7 +24,6 @@ const StocksTable = (props: TableStatus) => {
       <MainTableDiv>
         <TableHeader>
           <TableHeadData>
-            {" "}
             <input type="checkbox" name="" id="" />
             id <HiChevronDown />
           </TableHeadData>
@@ -46,7 +45,6 @@ const StocksTable = (props: TableStatus) => {
               .map((product, index) => (
                 <TableRow>
                   <TableData style={{ justifyContent: "center" }}>
-                    {" "}
                     {index + 1}
                   </TableData>
                   <TableData>{product.name}</TableData>

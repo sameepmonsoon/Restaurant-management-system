@@ -159,7 +159,7 @@ export default function Sider() {
                   link: "/report/purchase",
                 },
                 {
-                  label: "Sell",
+                  label: "Sales",
                   link: "/report/sales",
                 },
                 {
