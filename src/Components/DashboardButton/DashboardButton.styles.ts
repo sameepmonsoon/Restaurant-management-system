@@ -26,7 +26,7 @@ export const DashboardButtonMainDiv = styled("button")<SetTitle>`
   &:hover {
     ${({ disableTransition }) =>
       disableTransition
-        ? "background-color:red;transition:all 300ms ease;"
+        ? "background-color:#9a9a9a; transition:all 500ms ease-out;"
         : ""};
   }
 `;

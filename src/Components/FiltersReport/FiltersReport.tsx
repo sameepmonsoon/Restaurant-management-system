@@ -46,7 +46,7 @@ const FiltersReport = () => {
   }));
   const current = new Date();
   const todayDate = `${current.getMonth()}/${current.getDate()}/${current.getFullYear()}`;
-  const [date, setDate] = React.useState<Dayjs | null>(dayjs(todayDate));
+  const [date, setDate] = React.useState<Dayjs | null>(null);
   const [range, setRange] = React.useState<DateRange<Dayjs>>([null, null]);
   function generateReport() {
     // API Call
@@ -116,8 +116,9 @@ const FiltersReport = () => {
                   <DatePicker
                     openTo="day"
                     views={["day", "month", "year"]}
-                    // label="Today"
+                    label="Select a Date"
                     value={date}
+                    minDate={dayjs("2018-12-30")}
                     onChange={(newValue) => {
                       // @ts-ignore
                       let finalDate = `${doubleDigitDate(
@@ -129,6 +130,7 @@ const FiltersReport = () => {
 
                         newValue.$y
                       )}`;
+                      console.log("filter report", newValue);
                       setDate(newValue);
                       value?.setDateAndTime({
                         ...value.dateAndTime,
@@ -146,6 +148,7 @@ const FiltersReport = () => {
                   dateAdapter={AdapterDayjs}
                   localeText={{ start: "Check-in", end: "Check-out" }}>
                   <DateRangePicker
+                    minDate={dayjs("2018-12-30")}
                     value={range}
                     onChange={(newValue) => {
                       newValue.map((dateValue, idx) => {
@@ -156,7 +159,10 @@ const FiltersReport = () => {
                             // @ts-ignore
                             dateValue.$D
                             // @ts-ignore
-                          )}-${doubleDigitDate(dateValue.$M)}-${doubleDigitDate(
+                          )}-${doubleDigitDate(
+                            // @ts-ignore
+                            dateValue.$M + 1
+                          )}-${doubleDigitDate(
                             // @ts-ignore
                             dateValue.$y
                           )}`;
@@ -194,7 +200,7 @@ const FiltersReport = () => {
                 disableTransition={true}
                 onClick={() => {
                   value?.setGenerateReport(true);
-                  value?.setDateAndTime(dateAndTime);
+                  setDate(null);
                 }}
               />
             </DateButtonBox>
