@@ -151,13 +151,11 @@ const FiltersReport = () => {
                         if (dateValue) {
                           // @ts-ignore
                           let finalDate = `${doubleDigitDate(
-                            // @ts-ignore
-
-                            dateValue.$D
-                            // @ts-ignore
+                              // @ts-ignore
+                              dateValue.$D
+                              // @ts-ignore
                           )}-${doubleDigitDate(dateValue.$M)}-${doubleDigitDate(
                             // @ts-ignore
-
                             dateValue.$y
                           )}`;
                           idx === 0
