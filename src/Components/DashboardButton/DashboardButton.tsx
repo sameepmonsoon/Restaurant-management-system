@@ -13,7 +13,10 @@ const DashboardButton = (props: DashboardButtonTypes) => {
 
   return (
     <>
-      <DashboardButtonMainDiv activeSider={location} {...rest}>
+      <DashboardButtonMainDiv
+        activeSider={location}
+        {...rest}
+        disableTransition={disableTransition}>
         <DashboardButtonInnerDiv
           activeSider={location}
           disableTransition={disableTransition}>

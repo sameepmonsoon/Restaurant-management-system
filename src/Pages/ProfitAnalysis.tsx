@@ -34,8 +34,6 @@ const ProfitAnalysis = () => {
     setSearchTerm: state.setSearchTerm,
   }));
 
-  console.log("profit analysis report");
-
   function fetchProfitAnalysis() {
     if (isDaily || isMonthly || isWeekly) {
       setLoading(true);
@@ -43,9 +41,16 @@ const ProfitAnalysis = () => {
         `/profit-analysis/report?date1=${date1}&date2=${date2}&daily=${isDaily}&monthly=${isMonthly}&weekly=${isWeekly}`
       )
         .then(function (res: any) {
-          console.log("after report");
+          // console.log("Response from profit analysis.");
           setpurchaseProfit(res.data.payload.data);
           console.log(`${date1} ${date2}`, res.data.payload.data);
+          toast.info("Generated report successfully.", {
+            theme: "colored",
+            hideProgressBar: true,
+            autoClose: 1000,
+            position: "top-right",
+            toastId: "info4",
+          });
         })
 
         .catch(function (err) {
@@ -74,6 +79,8 @@ const ProfitAnalysis = () => {
   useEffect(() => {
     HTTPMethods.get("/profit-analysis/stock")
       .then(async (res: any) => {
+        // console.log("Response from stock pa.");
+
         setStockProfit(res.data.payload.data);
         console.log(res.data.payload.data);
       })
@@ -85,6 +92,12 @@ const ProfitAnalysis = () => {
           position: "bottom-right",
           toastId: "info1",
         });
+      })
+
+      .finally(function () {
+        setLoading(false);
+        setGenerateReport(!generateReport);
+        setFirstRender(false);
       });
   }, []);
 
