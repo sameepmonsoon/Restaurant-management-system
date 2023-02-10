@@ -115,7 +115,7 @@ const FiltersReport = () => {
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
                     openTo="day"
-                    views={["day", "month", "year"]}
+                    views={["day"]}
                     label="Select a Date"
                     value={date}
                     minDate={dayjs("2018-12-30")}

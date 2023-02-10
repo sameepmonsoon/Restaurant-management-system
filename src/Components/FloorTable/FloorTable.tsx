@@ -1,6 +1,14 @@
 import React from "react";
 import { MdAdd } from "react-icons/md";
-import { Tables, TableNum, TableContainer, Image } from "./FloorTable.style";
+import {
+  Tables,
+  TableNum,
+  TableContainer,
+  TableImage,
+  KaraokeImage,
+} from "./FloorTable.style";
+import dinningTableImage from "../../../public/assets/dinningTable.svg";
+import iconKaraoke from "../../../public/assets/iconKaraoke.svg";
 
 import { TableType } from "../../Types/Components/TableTypes";
 
@@ -15,7 +23,7 @@ const FLoorTable = (props: TableType) => {
             <>
               <TableContainer>
                 <Tables select={selected}>
-                  <Image src="" />
+                  <TableImage src={dinningTableImage} />
                 </Tables>
                 <TableNum>{table}</TableNum>
               </TableContainer>
@@ -27,7 +35,7 @@ const FLoorTable = (props: TableType) => {
                 <>
                   <TableContainer>
                     <Tables select={selected}>
-                      <Image src="" />
+                      <KaraokeImage src={iconKaraoke} alt="" />
                     </Tables>
                     <TableNum>{table}</TableNum>
                   </TableContainer>

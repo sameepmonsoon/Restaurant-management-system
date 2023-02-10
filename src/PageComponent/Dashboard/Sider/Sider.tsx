@@ -171,7 +171,7 @@ export default function Sider() {
             />
           </Link>
           <SettingDiv onClick={handleLogout}>
-            <HiOutlineLogout fontSize="2rem" />
+            <HiOutlineLogout size={30} />
             <span>Logout</span>
           </SettingDiv>
         </SiderButtonLabel>

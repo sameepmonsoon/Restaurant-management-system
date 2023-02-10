@@ -27,7 +27,11 @@ export const TableMain = styled("div")`
   align-items: flex-start;
   row-gap: 15px;
   flex: 1;
-  /* background-color: red; */
+  width: 80%;
+  @media screen and (min-width: 300px) and (max-width: 1550px) {
+    /* column-gap: 100px; */
+    width: 90%;
+  }
 `;
 
 export const TableDiv = styled("div")`

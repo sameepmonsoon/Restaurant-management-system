@@ -23,29 +23,44 @@ export const DropdownHeader = styled("div")<ActiveSider>`
     padding: 0;
     color: ${({ active }) => (active === true ? "#ffffff" : "#9a9a9a")};
   }
+  &:hover {
+    div {
+      color: ${({ active }) => (active === true ? "#ffffff" : "#313131")};
+    }
+  }
 `;
 
 export const ReportInnerDiv = styled("div")<ActiveSider>`
   display: flex;
   flex-flow: row nowrap;
-  justify-content: space-around;
-  gap: 0px;
+  justify-content: flex-start;
   align-items: center;
   padding-left: 0px;
+  margin-left: 24px;
+  gap: 16px;
   transition: all 300ms ease;
   height: 50.95px;
+  width: 100%;
+
+  & {
+    transition: all 300ms ease;
+    color: ${({ active }) => (active != true ? "#313131" : "0")};
+  }
   &:hover {
-    margin-left: ${({ active }) => (active === true ? "0" : "1rem")};
-    div {
-      color: ${({ active }) => (active != true ? "#313131" : "0")};
-    }
+    column-gap: ${({ active }) => (active === true ? "16px" : "21px;")};
   }
 `;
-export const DropDownDiv = styled("div")`
+export const DropDownDiv = styled("div")<ActiveSider>`
   display: flex;
-  justify-content: space-between;
-  gap: 20px;
   align-items: center;
+  width: 30px;
+`;
+export const DropDownLabelDiv = styled("div")`
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 25px;
 `;
 export const DropDownIcon = styled("span")`
   max-width: 30px;
@@ -93,10 +108,10 @@ export const ReportLink = styled(Link)`
     font-size: 15px;
     line-height: 22px;
     color: #313131;
-    transition: all 300ms ease;
+    transition: all 400ms ease;
   }
   li:hover {
     color: #000;
-    margin-left: 1rem;
+    padding-left: 5px;
   }
 `;

@@ -66,10 +66,13 @@ export const SiderMainDiv = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   padding-left: 20px;
-  height: 88vh;
+  height: 87vh;
   padding-top: 30px;
   overflow-y: scroll;
+  overflow-x: hidden;
   scroll-behavior: smooth;
+  scrollbar-color: white;
+  scrollbar-width: thin !important;
   &::-webkit-scrollbar {
     width: 3px;
     background-color: white;
@@ -112,6 +115,7 @@ export const SettingDiv = styled.div`
   display: flex;
   flex-flow: row nowrap;
   margin-top: 150px;
+  margin-left: 10px;
   cursor: pointer;
   gap: 10px;
   /* position:absolute;
@@ -127,7 +131,7 @@ export const SettingDiv = styled.div`
   color: #676767;
   transition: all 300ms ease;
   &:hover {
-    margin-left: 1rem;
+    gap: 20px;
     color: #313131;
   }
   @media screen and (min-width: 500px) and (max-width: 1500px) {

@@ -14,6 +14,7 @@ import {
   DropDownDiv,
   ReportLink,
   ReportInnerDiv,
+  DropDownLabelDiv,
 } from "./ReportButton.styles";
 
 const ReportButton = (props: ReportButtonTypes) => {
@@ -28,21 +29,28 @@ const ReportButton = (props: ReportButtonTypes) => {
     <ReportDiv active={activeSider}>
       <DropdownHeader onClick={handleClick} active={activeSider}>
         <ReportInnerDiv active={activeSider}>
-          <DropDownDiv>
+          <DropDownDiv active={activeSider}>
             <DropDownIcon>{icon1}</DropDownIcon>
-            <DropDownText>{label}</DropDownText>
           </DropDownDiv>
-          <DropDownArrow>
-            {isOpen === true ? <>{icon2}</> : <> {icon3}</>}
-          </DropDownArrow>
+          <DropDownLabelDiv>
+            <DropDownText>{label}</DropDownText>
+
+            <DropDownArrow>
+              {isOpen === true ? <>{icon2}</> : <> {icon3}</>}
+            </DropDownArrow>
+          </DropDownLabelDiv>
         </ReportInnerDiv>
       </DropdownHeader>
 
       {isOpen && (
         <DropDownOptions>
           {options.map((option) => (
-            <ReportLink key={option.label} to={option.link} >
-              <li style={{color: location.pathname=== option.link? "#313131": "#9A9A9A"}}>
+            <ReportLink key={option.label} to={option.link}>
+              <li
+                style={{
+                  color:
+                    location.pathname === option.link ? "#313131" : "#9A9A9A",
+                }}>
                 {option.label}
               </li>
             </ReportLink>

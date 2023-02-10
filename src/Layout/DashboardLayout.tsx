@@ -24,7 +24,10 @@ import { TextField } from "../Components/TextField";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import PurchaseForm from "../PageComponent/forms/PurchaseForm";
 import SalesForm from "../PageComponent/forms/SalesForm";
-import { useFilterStore, useTotalAmountStore } from "../Pages/states/TablesFilter.state";
+import {
+  useFilterStore,
+  useTotalAmountStore,
+} from "../Pages/states/TablesFilter.state";
 
 export default function DashboardLayout({
   children,
@@ -39,27 +42,42 @@ export default function DashboardLayout({
 }) {
   const [purchases, setPurchase] = useState<InventoryDataType>();
   const { setDrawerData } = useDrawer();
-  const {setSearchTerm} = useFilterStore((state:any)=> ({setSearchTerm: state.setSearchTerm}))
+  const { setSearchTerm } = useFilterStore((state: any) => ({
+    setSearchTerm: state.setSearchTerm,
+  }));
 
   const clearFilter = () => {
     setSearchTerm("");
   };
-  const {totalAmount,fetchTotalAmounts} = useTotalAmountStore((state:any)=> (
-    {totalAmount: state.totalAmounts, fetchTotalAmounts: state.fetchTotalAmounts
-  }))
+  const { totalAmount, fetchTotalAmounts } = useTotalAmountStore(
+    (state: any) => ({
+      totalAmount: state.totalAmounts,
+      fetchTotalAmounts: state.fetchTotalAmounts,
+    })
+  );
   useEffect(() => {
-      fetchTotalAmounts();
+    fetchTotalAmounts();
   }, []);
-
 
   const { openSider, toggleSider } = siderToggle();
   function openCloseSider() {
     toggleSider();
   }
 
-  const totalPurchase = (totalAmount.totalpurchase || totalAmount.totalpurchase===0)? ` Rs. ${totalAmount.totalpurchase} `: "loading"
-  const totalSales = (totalAmount.total_sales ||totalAmount.total_sales===0) ?  `Rs. ${totalAmount.total_sales}` : "loading";
-  const totalStocks = totalAmount.total_stocks!==undefined ? (totalAmount.total_stocks!==0? `${totalAmount.total_stocks} products`: "0 products"): "loading";
+  const totalPurchase =
+    totalAmount.totalpurchase || totalAmount.totalpurchase === 0
+      ? ` Rs. ${totalAmount.totalpurchase} `
+      : "loading";
+  const totalSales =
+    totalAmount.total_sales || totalAmount.total_sales === 0
+      ? `Rs. ${totalAmount.total_sales}`
+      : "loading";
+  const totalStocks =
+    totalAmount.total_stocks !== undefined
+      ? totalAmount.total_stocks !== 0
+        ? `${totalAmount.total_stocks} products`
+        : "0 products"
+      : "loading";
 
   const { open, toggleDrawer } = useDrawer();
   function closeDrawer() {
@@ -158,8 +176,10 @@ export default function DashboardLayout({
           <ChildrenDiv>
             {renderTotalitems}
             {children}
+            <br />
           </ChildrenDiv>
         </LayoutContainerDiv>
+
         <DrawerC
           cardtitle={manageTitle()}
           open={open}
