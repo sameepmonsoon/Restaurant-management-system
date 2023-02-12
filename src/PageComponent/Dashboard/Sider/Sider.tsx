@@ -18,6 +18,8 @@ import { HiOutlineLogout } from "react-icons/hi";
 import { BsFileEarmarkBarGraph } from "react-icons/bs";
 import { Link, useNavigate, useLocation, matchPath } from "react-router-dom";
 
+// import { ReactComponent as TableIcon } from "/assets/tableIcon.svg";
+import Tables from "/assets/tableIcon.svg"
 import { title } from "process";
 import { GiRoundTable } from "react-icons/gi";
 import {BiDish} from "react-icons/bi";
@@ -26,6 +28,9 @@ import {BiFoodMenu} from "react-icons/bi"
 import DashboardButton from "../../../Components/DashboardButton/DashboardButton";
 import ReportButton from "../../../Components/ReportButton/ReportButton";
 import { siderToggle } from "../../../Pages/states/NavBar.state";
+
+
+
 export default function Sider() {
   const navigate = useNavigate();
   const handleLogout = () => {
@@ -100,9 +105,12 @@ export default function Sider() {
           <Link
             to="/tables/floorFirst"
             style={{ color: "#090909", textDecoration: "none" }}>
-            <DashboardButton
-              // icon={<img src="/assets/tableIcon.svg"/>}
-              icon={<GiRoundTable size={25}/>}
+            <DashboardButton 
+              icon={<img src="/assets/tableIcon.svg"
+                    alt="Icon"
+                    
+              />}
+              // icon={<Tables />}
               title={"Table"}
               location={getReport()}
             />
@@ -165,7 +173,6 @@ export default function Sider() {
               ]}
             />
           </Link>
-
           <SettingDiv onClick={handleLogout}>
             <HiOutlineLogout fontSize="2rem" />
             <span>Logout</span>

@@ -25,6 +25,7 @@ import FloorFirst from "./Pages/FloorFirst";
 import { useTotalAmountStore } from "./Pages/states/TablesFilter.state";
 import { useEffect } from "react";
 import ReportTable from "./Components/reportTable/ReportTable";
+import OrderTableForm from "./PageComponent/forms/OrderTableForm";
 
 function App(props: any) {
   const { totalAmount, fetchTotalAmounts } = useTotalAmountStore(
@@ -130,6 +131,10 @@ function App(props: any) {
     {
       path: "purchaseTable",
       element: <Purchase />,
+    },
+    {
+      path:"tableForm"
+      ,element: <OrderTableForm/>
     },
     {
       path: "/components",
