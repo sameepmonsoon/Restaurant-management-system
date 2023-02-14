@@ -25,8 +25,6 @@ function subtitle() {
   const pathnameMap = {
     "/home/purchase" : "Purchase",
     "/home/sales": "Sales",
-    "/tables/floorFirst": "First floor",
-    "/tables/floorSecond": "second floor",
     "/report/purchase": "Purchase",
     "/report/sales": "Sales",
     "/report/stocks": "Stocks",

@@ -18,12 +18,19 @@ import { HiOutlineLogout } from "react-icons/hi";
 import { BsFileEarmarkBarGraph } from "react-icons/bs";
 import { Link, useNavigate, useLocation, matchPath } from "react-router-dom";
 
+// import { ReactComponent as TableIcon } from "/assets/tableIcon.svg";
+import Tables from "/assets/tableIcon.svg"
 import { title } from "process";
 import { GiRoundTable } from "react-icons/gi";
+import {BiDish} from "react-icons/bi";
+import {HiUserGroup} from "react-icons/hi"
+import {BiFoodMenu} from "react-icons/bi"
 import DashboardButton from "../../../Components/DashboardButton/DashboardButton";
-import { AiFillPrinter } from "react-icons/ai";
 import ReportButton from "../../../Components/ReportButton/ReportButton";
 import { siderToggle } from "../../../Pages/states/NavBar.state";
+
+
+
 export default function Sider() {
   const navigate = useNavigate();
   const handleLogout = () => {
@@ -98,38 +105,21 @@ export default function Sider() {
           <Link
             to="/tables/floorFirst"
             style={{ color: "#090909", textDecoration: "none" }}>
-            <ReportButton
-              icon1={<GiRoundTable size={30} />}
-              label={"Table"}
-              icon2={<IoIosArrowUp size={25} />}
-              icon3={<IoIosArrowDown size={25} />}
-              activeSider={getReport()}
-              options={[
-                {
-                  label: "1st Floor",
-                  link: "/tables/floorFirst",
-                },
-                {
-                  label: "2nd Floor",
-                  link: "/tables/floorSecond",
-                },
-              ]}
+            <DashboardButton 
+              icon={<img src="/assets/tableIcon.svg"
+                    alt="Icon"
+                    
+              />}
+              // icon={<Tables />}
+              title={"Table"}
+              location={getReport()}
             />
           </Link>
-
-          <Link to="/menu" style={{ color: "#090909", textDecoration: "none" }}>
-            <DashboardButton
-              icon={<RxDashboard size={25} />}
-              title={"Menu"}
-              location={location.pathname === "/menu"}
-            />
-          </Link>
-
           <Link
             to="/customer"
             style={{ color: "#090909", textDecoration: "none" }}>
             <DashboardButton
-              icon={<RxDashboard size={25} />}
+              icon={<HiUserGroup size={26} />}
               title={"Customer"}
               location={location.pathname === "/customer"}
             />
@@ -139,11 +129,21 @@ export default function Sider() {
             to="/weborder"
             style={{ color: "#090909", textDecoration: "none" }}>
             <DashboardButton
-              icon={<RxDashboard size={25} />}
+              icon={<BiDish size={28} />}
               title={"Web Order"}
               location={location.pathname === "/weborder"}
             />
           </Link>
+
+          <Link to="/menu" style={{ color: "#090909", textDecoration: "none" }}>
+            <DashboardButton
+              icon={<BiFoodMenu size={28} />}
+              title={"Menu"}
+              location={location.pathname === "/menu"}
+            />
+          </Link>
+
+          
           <Link
             to="/report/purchase"
             style={{ color: "#090909", textDecoration: "none" }}>
@@ -173,7 +173,6 @@ export default function Sider() {
               ]}
             />
           </Link>
-
           <SettingDiv onClick={handleLogout}>
             <HiOutlineLogout fontSize="2rem" />
             <span>Logout</span>

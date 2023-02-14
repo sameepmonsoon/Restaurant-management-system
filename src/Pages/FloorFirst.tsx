@@ -2,20 +2,22 @@ import { MdAdd } from "react-icons/md";
 import ActionButton from "../Components/ActionButton/ActionButton";
 import FloorTable from "../Components/FloorTable/FloorTable";
 import DrawerC from "../PageComponent/Dashboard/Drawer/Drawer";
+import FloorTableForm from "../PageComponent/forms/FloorTableForm";
+import OrderTableForm from "../PageComponent/forms/OrderTableForm";
 import { useDrawer } from "./states/Drawer.state";
 import { floorTabelState } from "./states/FloorTable.state";
 const FloorFirst = () => {
   const { open, setDrawerData, toggleDrawer } = useDrawer();
-
+  console.log(open)
   const { select, onSelect } = floorTabelState();
   const selectTable = () => {
     if (select === false) {
-      onSelect;
+      onSelect();
     }
   };
 
   function openDrawer() {
-    console.log("inside open drawer", open);
+    console.log("inside open drawer of each table", open);
     toggleDrawer();
   }
   function closeDrawer() {
@@ -24,6 +26,10 @@ const FloorFirst = () => {
     console.log("outside Drawer");
 
     toggleDrawer();
+  }
+  function manageForm() {
+     return <OrderTableForm />
+
   }
 
   return (
@@ -45,14 +51,18 @@ const FloorFirst = () => {
         karaokeList={["Karaoke A", "Karaoke B", "Karaoke C"]}
         selected={false}
         onClick={(e: React.MouseEvent<HTMLElement>) => {
-          openDrawer();
+          openDrawer()
         }}
       />
 
       <DrawerC
         cardtitle={"New"}
         open={open}
-        closeDrawer={() => closeDrawer()}></DrawerC>
+        closeDrawer={() => closeDrawer()}>
+        {
+          manageForm()
+        }    
+      </DrawerC> 
     </>
   );
 };

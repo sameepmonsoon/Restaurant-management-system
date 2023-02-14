@@ -33,11 +33,11 @@ export const Input = styled("input")`
 `;
 export const Button = styled("button")`
   border: 1.2px solid #000000;
-  border-radius: 10px;
+  border-radius: 6px;
   /* width: 15.625rem; */
   /* height: 2.813rem; */
-  width: 22rem;
-  height: 3rem;
+  width: 145px;
+  height: 40px;
   background: #1e1e1e;
   color: white;
   margin-top: 0.5em;

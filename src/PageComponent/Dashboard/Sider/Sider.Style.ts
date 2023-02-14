@@ -107,13 +107,13 @@ export const SiderButtonTitle = styled("div")`
 export const SettingDiv = styled.div`
   width: 50%;
   display: flex;
-  flex-flow: row nowrap;
-  margin-top: 150px;
+  /* flex-flow: row nowrap;
+  margin-top: 150px; */
   cursor: pointer;
   gap: 10px;
-  /* position:absolute;
+  position:absolute;
   bottom: 0;
-  margin-bottom: 28px; */
+  margin-bottom: 28px;
   justify-content: flex-start;
   align-items: center;
   font-family: "Inter";
@@ -128,3 +128,4 @@ export const SettingDiv = styled.div`
     color: #313131;
   }
 `;
+
