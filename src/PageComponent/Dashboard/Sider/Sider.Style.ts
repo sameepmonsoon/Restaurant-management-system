@@ -113,14 +113,13 @@ export const SiderButtonTitle = styled("div")`
 export const SettingDiv = styled.div`
   width: 50%;
   display: flex;
-  flex-flow: row nowrap;
-  margin-top: 150px;
-  margin-left: 10px;
+  /* flex-flow: row nowrap;
+  margin-top: 150px; */
   cursor: pointer;
   gap: 10px;
   /* position:absolute;
   bottom: 0;
-  margin-bottom: 28px; */
+  margin-bottom: 28px;
   justify-content: flex-start;
   align-items: center;
   font-family: "Inter";
@@ -136,5 +135,5 @@ export const SettingDiv = styled.div`
   }
   @media screen and (min-width: 500px) and (max-width: 1500px) {
     top: 100px;
-  }
+  } */
 `;

@@ -14,14 +14,13 @@ import {
 } from "./Sider.Style";
 import SiderButton from "../../../Components/SiderButton/SiderButton";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
-import { HiOutlineLogout } from "react-icons/hi";
+import { HiOutlineLogout, HiUserGroup } from "react-icons/hi";
 import { BsFileEarmarkBarGraph } from "react-icons/bs";
 import { Link, useNavigate, useLocation, matchPath } from "react-router-dom";
 
 import { title } from "process";
-import { GiRoundTable } from "react-icons/gi";
+import { BiDish } from "react-icons/bi";
 import DashboardButton from "../../../Components/DashboardButton/DashboardButton";
-import { AiFillPrinter } from "react-icons/ai";
 import ReportButton from "../../../Components/ReportButton/ReportButton";
 import { siderToggle } from "../../../Pages/states/NavBar.state";
 export default function Sider() {
@@ -99,23 +98,17 @@ export default function Sider() {
             to="/tables/floorFirst"
             style={{ color: "#090909", textDecoration: "none" }}>
             <DashboardButton
-              icon={<GiRoundTable size={25} />}
+              icon={<img src="/assets/tableIcon.svg" alt="Icon" />}
+              // icon={<Tables />}
               title={"Table"}
               location={getReport()}
-            />
-          </Link>
-          <Link to="/menu" style={{ color: "#090909", textDecoration: "none" }}>
-            <DashboardButton
-              icon={<RxDashboard size={25} />}
-              title={"Menu"}
-              location={location.pathname === "/menu"}
             />
           </Link>
           <Link
             to="/customer"
             style={{ color: "#090909", textDecoration: "none" }}>
             <DashboardButton
-              icon={<RxDashboard size={25} />}
+              icon={<HiUserGroup size={26} />}
               title={"Customer"}
               location={location.pathname === "/customer"}
             />
@@ -124,7 +117,7 @@ export default function Sider() {
             to="/weborder"
             style={{ color: "#090909", textDecoration: "none" }}>
             <DashboardButton
-              icon={<RxDashboard size={25} />}
+              icon={<BiDish size={28} />}
               title={"Web Order"}
               location={location.pathname === "/weborder"}
             />

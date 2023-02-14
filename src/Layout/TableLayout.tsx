@@ -16,6 +16,7 @@ import {
 import { BsCircleFill } from "react-icons/bs";
 import ActionButton from "../Components/ActionButton/ActionButton";
 import { MdAdd } from "react-icons/md";
+import OrderTableForm from "../PageComponent/forms/OrderTableForm";
 export default function TableLayout({
   children,
 }: {
@@ -35,7 +36,9 @@ export default function TableLayout({
     toggleDrawer();
   }
   function manageForm() {
-    return <FloorTableForm />;
+    // return <FloorTableForm />;
+    return <OrderTableForm />;
+
   }
 
   return (
@@ -56,7 +59,7 @@ export default function TableLayout({
                 <TableCheckText>Order on Table</TableCheckText>
               </TableCheck>
               <TableDiv>
-                {children}
+                {children }
                 <ActionButton
                   icon={<MdAdd size={25} />}
                   label={"Add Table"}

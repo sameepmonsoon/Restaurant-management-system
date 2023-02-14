@@ -49,7 +49,7 @@ const ReportButton = (props: ReportButtonTypes) => {
               <li
                 style={{
                   color:
-                    location.pathname === option.link ? "#313131" : "#9A9A9A",
+                    location.pathname === option.link ? "#313131" : "#979797",
                 }}>
                 {option.label}
               </li>
