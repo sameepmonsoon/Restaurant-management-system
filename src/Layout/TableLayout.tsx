@@ -25,20 +25,16 @@ export default function TableLayout({
   const { openSider, toggleSider } = siderToggle();
   const { open, setDrawerData, toggleDrawer } = useDrawer();
   function closeDrawer() {
-    console.log("table button Drawer");
     setDrawerData({});
-    console.log("outside table button Drawer");
     toggleDrawer();
   }
 
   function openDrawer() {
-    console.log("inside table  drawer", open);
+    console.log("table  drawer", open);
     toggleDrawer();
   }
   function manageForm() {
-    // return <FloorTableForm />;
-    return <OrderTableForm />;
-
+    return <FloorTableForm />;
   }
 
   return (
@@ -59,7 +55,7 @@ export default function TableLayout({
                 <TableCheckText>Order on Table</TableCheckText>
               </TableCheck>
               <TableDiv>
-                {children }
+                {children}
                 <ActionButton
                   icon={<MdAdd size={25} />}
                   label={"Add Table"}
@@ -76,9 +72,7 @@ export default function TableLayout({
         <DrawerC
           cardtitle={"New Table"}
           open={open}
-          closeDrawer={() => {
-            closeDrawer();
-          }}>
+          closeDrawer={() => closeDrawer()}>
           {manageForm()}
         </DrawerC>
       </DashboardMainDiv>

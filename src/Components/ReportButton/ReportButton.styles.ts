@@ -108,10 +108,10 @@ export const ReportLink = styled(Link)`
     font-size: 15px;
     line-height: 22px;
     color: #313131;
-    transition: all 400ms ease;
+    transition: padding-left 200ms ease, color 100ms ease;
   }
   li:hover {
     color: #000;
-    padding-left: 5px;
+    padding-left: 7px;
   }
 `;

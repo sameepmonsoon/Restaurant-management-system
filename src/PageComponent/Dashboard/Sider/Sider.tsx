@@ -16,6 +16,7 @@ import SiderButton from "../../../Components/SiderButton/SiderButton";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { HiOutlineLogout, HiUserGroup } from "react-icons/hi";
 import { BsFileEarmarkBarGraph } from "react-icons/bs";
+import { RiFileListLine } from "react-icons/ri";
 import { Link, useNavigate, useLocation, matchPath } from "react-router-dom";
 
 import { title } from "process";
@@ -108,7 +109,7 @@ export default function Sider() {
             to="/customer"
             style={{ color: "#090909", textDecoration: "none" }}>
             <DashboardButton
-              icon={<HiUserGroup size={26} />}
+              icon={<HiUserGroup size={25} />}
               title={"Customer"}
               location={location.pathname === "/customer"}
             />
@@ -117,9 +118,16 @@ export default function Sider() {
             to="/weborder"
             style={{ color: "#090909", textDecoration: "none" }}>
             <DashboardButton
-              icon={<BiDish size={28} />}
+              icon={<BiDish size={25} />}
               title={"Web Order"}
               location={location.pathname === "/weborder"}
+            />
+          </Link>
+          <Link to="/menu" style={{ color: "#090909", textDecoration: "none" }}>
+            <DashboardButton
+              icon={<RiFileListLine size={25} />}
+              title={"Menu"}
+              location={location.pathname === "/menu"}
             />
           </Link>
           <Link

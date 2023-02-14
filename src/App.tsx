@@ -79,7 +79,10 @@ function App(props: any) {
       element: <Tables />,
       children: [
         { path: "floorFirst", element: <FloorFirst /> },
-      
+        {
+          path: "floorSecond",
+          element: <FloorSecond />,
+        },
       ],
     },
 
@@ -132,14 +135,8 @@ function App(props: any) {
       path: "purchaseTable",
       element: <Purchase />,
     },
-    {
-      path:"tableForm"
-      ,element: <OrderTableForm/>
-    },
-    {
-      path: "/components",
-      element: <Components />,
-    },
+    { path: "tableForm", element: <OrderTableForm /> },
+    { path: "/components", element: <Components /> },
 
     // ,
     // {

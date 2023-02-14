@@ -30,9 +30,9 @@ export const TableMain = styled("div")`
   row-gap: 15px;
   flex: 1;
   width: 80%;
-  @media screen and (min-width: 300px) and (max-width: 1550px) {
-    /* column-gap: 100px; */
-    width: 90%;
+  margin-bottom: 10px;
+  @media screen and (min-width: 300px) and (max-width: 1500px) {
+    width: 77%;
   }
 `;
 

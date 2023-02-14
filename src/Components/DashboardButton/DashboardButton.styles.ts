@@ -22,7 +22,7 @@ export const DashboardButtonMainDiv = styled("button")<SetTitle>`
   div {
     color: ${({ activeSider, disableTransition }) =>
       activeSider === true || disableTransition ? "#ffffff" : "#9a9a9a"};
-    transition: gap 200ms ease, color 200ms ease-in;
+    transition: gap 200ms ease, color 100ms ease-in;
   }
   div:hover {
     column-gap: ${({ disableTransition, activeSider }) =>

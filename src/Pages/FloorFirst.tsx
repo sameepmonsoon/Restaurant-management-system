@@ -8,7 +8,7 @@ import { useDrawer } from "./states/Drawer.state";
 import { floorTabelState } from "./states/FloorTable.state";
 const FloorFirst = () => {
   const { open, setDrawerData, toggleDrawer } = useDrawer();
-  console.log(open)
+  console.log(open);
   const { select, onSelect } = floorTabelState();
   const selectTable = () => {
     if (select === false) {
@@ -28,8 +28,7 @@ const FloorFirst = () => {
     toggleDrawer();
   }
   function manageForm() {
-     return <OrderTableForm />
-
+    return <OrderTableForm />;
   }
 
   return (
@@ -51,18 +50,13 @@ const FloorFirst = () => {
         karaokeList={["Karaoke A", "Karaoke B", "Karaoke C"]}
         selected={false}
         onClick={(e: React.MouseEvent<HTMLElement>) => {
-          openDrawer()
+          openDrawer();
         }}
       />
 
-      <DrawerC
-        cardtitle={"New"}
-        open={open}
-        closeDrawer={() => closeDrawer()}>
-        {
-          manageForm()
-        }    
-      </DrawerC> 
+      <DrawerC cardtitle={"New"} open={open} closeDrawer={() => closeDrawer()}>
+        {manageForm()}
+      </DrawerC>
     </>
   );
 };

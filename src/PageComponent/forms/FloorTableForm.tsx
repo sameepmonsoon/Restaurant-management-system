@@ -11,27 +11,48 @@ import {
   FloorTableButtons,
   TextFieldImageUpload,
 } from "./FloorTableForm.style";
+import { HTTPMethods } from "../../Utils/HTTPMock";
+import { toast } from "react-toastify";
+import { useDrawer } from "../../Pages/states/Drawer.state";
 const FloorTableForm = () => {
   let schema = yup.object().shape({
     table_name: yup.string().required("is required"),
     table_image: yup.mixed().required("is required"),
   });
+
+  const { open, toggleDrawer, drawerToEditData, setDrawerData } = useDrawer();
+
   const [file, setFile] = useState<any>([]);
 
-  // const fileReader = new FileReader();
-  // fileReader.readAsDataURL(file);
-  // fileReader.onload = () => {
-  //   setFile(fileReader.result);
-  // };
   const { values, handleSubmit, handleChange, errors, touched, resetForm } =
     useFormik({
       initialValues: {
         table_name: "",
-        table_image: "",
+        table_image: "image",
       },
-      onSubmit: (values, action) => {
-        console.log(values);
+      onSubmit: (values) => {
         console.log("submitted");
+        HTTPMethods.post("/tables/create", values)
+          .then(function (resp) {
+            toast.success("Table added successfully.", {
+              theme: "colored",
+              hideProgressBar: true,
+              autoClose: 1000,
+            });
+            toggleDrawer();
+          })
+          .catch(function (err) {
+            toast.success("Error in adding table", {
+              theme: "colored",
+              hideProgressBar: true,
+              autoClose: 1000,
+            });
+          })
+          .finally(function () {
+            toggleDrawer();
+            setDrawerData({});
+          });
+        return;
       },
       validationSchema: schema,
     });
@@ -55,8 +76,8 @@ const FloorTableForm = () => {
                   ? errors.table_name
                   : null
               }
-              onChange={(e) => console.log(e.target.value)}
-            />{" "}
+              onChange={handleChange}
+            />
             <FloorTableButtons>
               <Button
                 type="submit"
@@ -70,11 +91,11 @@ const FloorTableForm = () => {
                 type="reset"
                 onClick={() => {
                   resetForm();
-                  setFile([]);
                 }}>
                 Clear
               </Button>
             </FloorTableButtons>
+
             {/* <TextFieldImageUpload>
               <p>
                 <img src={file} alt="" />
