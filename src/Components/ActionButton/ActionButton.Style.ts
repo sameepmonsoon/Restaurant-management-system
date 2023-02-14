@@ -1,13 +1,20 @@
 import styled from "@emotion/styled";
+type disableActionColorType = {
+  disableColor?: boolean | undefined;
+};
 
-export const AddButtonMain = styled("div")`
+export const AddButtonMain = styled("div")<disableActionColorType>`
   position: relative;
   width: 178px;
   height: 90px;
   border-radius: 5px;
-  background-color: #313131;
+  /* remaining */
+  background-color: ${(disableColor) => (disableColor ? "#313131" : "white")};
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
-  color: #ffffff;
+  div,
+  svg {
+    color: ${(diableColor) => (diableColor ? "white" : "red")};
+  }
   display: flex;
   align-items: center;
   justify-content: center;

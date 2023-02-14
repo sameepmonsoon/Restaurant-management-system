@@ -17,11 +17,11 @@ const ProfitAnalysis = () => {
   const context = useContext(MyContext);
   // @ts-ignore
   const { dateAndTime, generateReport, setGenerateReport } = context;
-  const date1 = dateAndTime.date1;
-  const date2 = dateAndTime.date2;
-  const isDaily = dateAndTime.isDaily;
-  const isMonthly = dateAndTime.isMonthly;
-  const isWeekly = dateAndTime.isWeekly;
+  const date1 = dateAndTime?.date1;
+  const date2 = dateAndTime?.date2;
+  const isDaily = dateAndTime?.isDaily;
+  const isMonthly = dateAndTime?.isMonthly;
+  const isWeekly = dateAndTime?.isWeekly;
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);

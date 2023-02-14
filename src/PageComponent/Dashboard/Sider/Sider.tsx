@@ -98,22 +98,10 @@ export default function Sider() {
           <Link
             to="/tables/floorFirst"
             style={{ color: "#090909", textDecoration: "none" }}>
-            <ReportButton
-              icon1={<GiRoundTable size={25} />}
-              label={"Table"}
-              icon2={<IoIosArrowUp size={25} />}
-              icon3={<IoIosArrowDown size={25} />}
-              activeSider={getReport()}
-              options={[
-                {
-                  label: "1st Floor",
-                  link: "/tables/floorFirst",
-                },
-                {
-                  label: "2nd Floor",
-                  link: "/tables/floorSecond",
-                },
-              ]}
+            <DashboardButton
+              icon={<GiRoundTable size={25} />}
+              title={"Table"}
+              location={getReport()}
             />
           </Link>
           <Link to="/menu" style={{ color: "#090909", textDecoration: "none" }}>

@@ -41,7 +41,6 @@ export default function DashboardLayout({
   renderTotalitems?: JSX.Element;
 }) {
   const [purchases, setPurchase] = useState<InventoryDataType>();
-  const { setDrawerData } = useDrawer();
   const { setSearchTerm } = useFilterStore((state: any) => ({
     setSearchTerm: state.setSearchTerm,
   }));
@@ -79,7 +78,7 @@ export default function DashboardLayout({
         : "0 products"
       : "loading";
 
-  const { open, toggleDrawer } = useDrawer();
+  const { open, toggleDrawer, setDrawerData } = useDrawer();
   function closeDrawer() {
     console.log("insode close Drawer");
     setDrawerData({});

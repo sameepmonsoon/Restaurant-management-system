@@ -24,15 +24,14 @@ export default function TableLayout({
   const { openSider, toggleSider } = siderToggle();
   const { open, setDrawerData, toggleDrawer } = useDrawer();
   function closeDrawer() {
-    console.log("insode close Drawer");
+    console.log("table button Drawer");
     setDrawerData({});
-    console.log("outside Drawer");
-
+    console.log("outside table button Drawer");
     toggleDrawer();
   }
 
   function openDrawer() {
-    console.log("inside open drawer", open);
+    console.log("inside table  drawer", open);
     toggleDrawer();
   }
   function manageForm() {
@@ -50,7 +49,6 @@ export default function TableLayout({
             // arrowIcon={true}
             onClick={() => {}}
           />
-
           <ChildrenDiv>
             <TableMain>
               <TableCheck>
@@ -62,6 +60,7 @@ export default function TableLayout({
                 <ActionButton
                   icon={<MdAdd size={25} />}
                   label={"Add Table"}
+                  disableColor={location.pathname.includes("tables")}
                   onClick={(e: React.MouseEvent<HTMLElement>) => {
                     openDrawer();
                   }}
@@ -74,7 +73,9 @@ export default function TableLayout({
         <DrawerC
           cardtitle={"New Table"}
           open={open}
-          closeDrawer={() => closeDrawer()}>
+          closeDrawer={() => {
+            closeDrawer();
+          }}>
           {manageForm()}
         </DrawerC>
       </DashboardMainDiv>

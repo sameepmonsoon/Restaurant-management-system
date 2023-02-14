@@ -10,7 +10,6 @@ import { RiLoader2Fill } from "react-icons/ri";
 import TotalItems from "../Components/TotalItems/TotalItems";
 import { DOMToggleButtonName } from "../Utils/DOMToggleButtonName";
 
-
 function Dashboard() {
   const location = useLocation();
 

@@ -131,7 +131,7 @@ export const SettingDiv = styled.div`
   color: #676767;
   transition: all 300ms ease;
   &:hover {
-    gap: 20px;
+    gap: 16px;
     color: #313131;
   }
   @media screen and (min-width: 500px) and (max-width: 1500px) {

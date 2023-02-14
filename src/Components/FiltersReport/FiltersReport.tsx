@@ -115,7 +115,7 @@ const FiltersReport = () => {
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
                     openTo="day"
-                    views={["day"]}
+                    views={["day", "month", "year"]}
                     label="Select a Date"
                     value={date}
                     minDate={dayjs("2018-12-30")}
@@ -123,12 +123,15 @@ const FiltersReport = () => {
                       // @ts-ignore
                       let finalDate = `${doubleDigitDate(
                         // @ts-ignore
-
-                        newValue.$D // @ts-ignore
-                      )}-${doubleDigitDate(newValue.$M + 1)}-${doubleDigitDate(
+                        newValue?.$M + 1
+                      )}-${doubleDigitDate(
                         // @ts-ignore
 
-                        newValue.$y
+                        newValue?.$D // @ts-ignore
+                      )}-${doubleDigitDate(
+                        // @ts-ignore
+
+                        newValue?.$y
                       )}`;
                       console.log("filter report", newValue);
                       setDate(newValue);
@@ -157,14 +160,14 @@ const FiltersReport = () => {
 
                           let finalDate = `${doubleDigitDate(
                             // @ts-ignore
-                            dateValue.$D
+                            dateValue?.$M + 1
+                          )}-${doubleDigitDate(
+                            // @ts-ignore
+                            dateValue?.$D
                             // @ts-ignore
                           )}-${doubleDigitDate(
                             // @ts-ignore
-                            dateValue.$M + 1
-                          )}-${doubleDigitDate(
-                            // @ts-ignore
-                            dateValue.$y
+                            dateValue?.$y
                           )}`;
                           idx === 0
                             ? // Logical errror month is 1 less

@@ -9,7 +9,9 @@ export const TableCheck = styled("div")`
   width: 190px;
   height: 19px;
   svg {
-    color: #4aa6f7;
+    color: #ffe7e7;
+    border: 1px solid #9a9a9a;
+    border-radius: 50%;
   }
 `;
 
