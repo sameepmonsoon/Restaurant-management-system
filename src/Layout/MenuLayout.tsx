@@ -42,22 +42,22 @@ const MenuLayout = ({
                 <Title>Categories</Title>
                 <MenuLayoutCategoryContent>
                   {categories}
-                  <ActionButton
+                  {/* <ActionButton
                     icon={"+"}
                     label={"Add Sub category"}
                     onClick={(e: React.MouseEvent<HTMLElement>) => {}}
-                  />
+                  /> */}
                 </MenuLayoutCategoryContent>
               </MenuLayoutCategory>
               <MenuLayoutSubCategory>
                 <Title>sub categories</Title>
                 <MenuLayoutSubCategoryContent>
                   {children}
-                  <ActionButton
+                  {/* <ActionButton
                     icon={"+"}
                     label={"Add Sub category"}
                     onClick={(e: React.MouseEvent<HTMLElement>) => {}}
-                  />
+                  /> */}
                 </MenuLayoutSubCategoryContent>
               </MenuLayoutSubCategory>
             </MenuLayoutMainDiv>

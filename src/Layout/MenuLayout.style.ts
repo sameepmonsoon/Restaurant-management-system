@@ -19,11 +19,11 @@ export const MenuLayoutCategory = styled("div")`
 `;
 export const MenuLayoutSubCategory = styled("div")`
   display: flex;
-  flex: 2;
   flex-flow: column nowrap;
   align-items: flex-start;
   justify-content: flex-start;
   row-gap: 10px;
+  width: 100%;
 `;
 export const MenuLayoutSubCategoryContent = styled("div")`
   display: flex;
@@ -33,7 +33,7 @@ export const MenuLayoutSubCategoryContent = styled("div")`
   align-items: center;
   justify-content: flex-start;
   column-gap: 21px;
-  row-gap: 40px;
+  row-gap: 20px;
   height: 100%;
   @media screen and (max-width: 1300px) {
     width: 70%;

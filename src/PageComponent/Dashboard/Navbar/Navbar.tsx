@@ -18,13 +18,14 @@ import {
   NabarItemTextContainer,
   NavbarLogoAndDropdown,
 } from "./Navbar.styles";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function subtitle() {
   const location = useLocation();
   const pathnameMap = {
     "/home/purchase": "Purchase",
     "/home/sales": "Sales",
+    "/home/stocks": "Stocks",
     "/report/purchase": "Purchase",
     "/report/sales": "Sales",
     "/report/stocks": "Stocks",
@@ -35,9 +36,9 @@ function subtitle() {
 
 function title() {
   if (location.pathname.includes("/home")) {
-    return "Dashboard";
+    return "dashboard";
   } else if (location.pathname.includes("/report")) {
-    return "Report";
+    return "report";
   } else if (location.pathname.includes("/weborder")) {
     return "Web Order";
   } else if (location.pathname.includes("/tables")) {
@@ -64,8 +65,8 @@ const Navbar = (props: NavbarTitles) => {
           )}
         </NavbarItemIcon>
         <NabarItemTextContainer>
-          <NavbarItemTextElementOne>{title()}</NavbarItemTextElementOne>
-          {subtitle()!=="" ? (
+          <NavbarItemTextElementOne>{title()} </NavbarItemTextElementOne>
+          {subtitle() !== "" ? (
             <NavbarItemTextElementsArrow>
               <RiArrowRightSLine size={25} />
             </NavbarItemTextElementsArrow>

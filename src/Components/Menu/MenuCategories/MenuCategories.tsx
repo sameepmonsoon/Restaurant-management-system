@@ -5,48 +5,49 @@ import {
   MenuCategoriesDiv,
   Icon,
 } from "./MenuCategories.style";
-import { HiOutlinePencil } from "react-icons/hi";
-import { MdDeleteOutline } from "react-icons/md";
-import { MenuCategoriesTypes } from "../../../Types/Components/MenuCategoriesTypes";
 
+import { MenuCategoriesTypes } from "../../../Types/Components/MenuCategoriesTypes";
+import { useMenuCategory } from "../../../Pages/states/MenuCategory.state";
 const MenuCategories = (props: MenuCategoriesTypes) => {
-  const { title, deleteIcon, editIcon, clicked, ...rest } = props;
+  const {
+    title,
+    deleteIcon,
+    editIcon,
+    clicked,
+    categoryList,
+    visible,
+
+    ...rest
+  } = props;
+  const { setCategoryData, categoryData } = useMenuCategory();
+
+  const handleEdit = () => {
+    console.log(categoryData);
+  };
+  const handleDelete = () => {
+    console.log("Menu Item Delete");
+  };
+
   return (
-    <>
-      <MenuCategoriesDiv clicked={clicked} {...rest}>
-        <CategoryTitle>{title}</CategoryTitle>
-        {clicked === true ? (
-          <EditCategory>
-            <Icon>{editIcon}</Icon>
-            <Icon>{deleteIcon}</Icon>
-          </EditCategory>
-        ) : (
-          <></>
-        )}
-      </MenuCategoriesDiv>
-      <MenuCategoriesDiv clicked={clicked} {...rest}>
-        <CategoryTitle>{title}</CategoryTitle>
-        {clicked === true ? (
-          <EditCategory>
-            <Icon>{editIcon}</Icon>
-            <Icon>{deleteIcon}</Icon>
-          </EditCategory>
-        ) : (
-          <></>
-        )}
-      </MenuCategoriesDiv>
-      <MenuCategoriesDiv clicked={clicked} {...rest}>
-        <CategoryTitle>{title}</CategoryTitle>
-        {clicked === true ? (
-          <EditCategory>
-            <Icon>{editIcon}</Icon>
-            <Icon>{deleteIcon}</Icon>
-          </EditCategory>
-        ) : (
-          <></>
-        )}
-      </MenuCategoriesDiv>
-    </>
+    <div {...rest}>
+      {categoryList
+        // .filter((item, id) => item.cat === "korean")
+        .map((item, id) => (
+          <MenuCategoriesDiv
+            clicked={clicked}
+            onClick={() => setCategoryData(item.cat)}>
+            <CategoryTitle key={id}>{item.cat}</CategoryTitle>
+            {visible || clicked === true ? (
+              <EditCategory>
+                <Icon onClick={handleEdit}>{editIcon}</Icon>
+                <Icon onClick={handleDelete}>{deleteIcon}</Icon>
+              </EditCategory>
+            ) : (
+              <></>
+            )}
+          </MenuCategoriesDiv>
+        ))}
+    </div>
   );
 };
 

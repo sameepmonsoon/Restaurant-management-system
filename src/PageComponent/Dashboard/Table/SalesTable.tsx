@@ -25,13 +25,13 @@ import { useLocation } from "react-router-dom";
 const SalesTable = (props: TableStatus) => {
   const { data, onDeleteSuccess } = props;
   const { menuOpen, toggleMenu } = useMenu();
-  const { open, toggleDrawer, setDrawerData } = useDrawer();
+  const { open, toggleDrawer, setDrawerData, drawerToEditData } = useDrawer();
   const [clickedData, setClickedData] = useState(null);
   const [val, setVal] = useState(true);
   const searchedTerm = useFilterStore((state: any) => state.searchTerm);
 
-  const location = useLocation()
-  const isSales = location.pathname.includes("home" )
+  const location = useLocation();
+  const isSales = location.pathname.includes("home");
   const openMenu = (data: any) => {
     setClickedData(data);
     toggleMenu();
@@ -41,7 +41,7 @@ const SalesTable = (props: TableStatus) => {
     toggleMenu();
   };
   const editSales = (data: any) => {
-    console.log("inside");
+    console.log("edit sales ", drawerToEditData);
     setDrawerData({ data, type: "purchase" });
     toggleDrawer();
   };
@@ -96,13 +96,12 @@ const SalesTable = (props: TableStatus) => {
             Payment
             <HiChevronDown />
           </TableHeadData>
-          {
-            isSales && <TableHeadData>
-            Actions
-            <HiChevronDown />
-          </TableHeadData>
-          }
-          
+          {isSales && (
+            <TableHeadData>
+              Actions
+              <HiChevronDown />
+            </TableHeadData>
+          )}
         </TableHeader>
         <TableBody>
           {data &&
@@ -120,30 +119,32 @@ const SalesTable = (props: TableStatus) => {
                   </TableData>
                   <TableData>{product.date}</TableData>
                   <TableData>{product.item_name}</TableData>
-                  <TableData>{product.quantity} <span style={{marginLeft:"3px"}}>{product.unit}</span></TableData>
+                  <TableData>
+                    {product.quantity}{" "}
+                    <span style={{ marginLeft: "3px" }}>{product.unit}</span>
+                  </TableData>
                   <TableData>{product.per_piece}</TableData>
                   <TableData>{product.total_amount}</TableData>
 
                   <TableDataStatus status={product.status}>
                     <p>{product.status}</p>
                   </TableDataStatus>
-                  {
-                    isSales && <TableDataAction>
-                    <Button
-                      type="submit"
-                      variant="contained"
-                      onClick={() => editSales(product)}>
-                      Edit
-                    </Button>
-                    <Button
-                      type="reset"
-                      variant="contained"
-                      onClick={() => deleteSales(product)}>
-                      Delete
-                    </Button>
-                  </TableDataAction>
-                  }
-                  
+                  {isSales && (
+                    <TableDataAction>
+                      <Button
+                        type="submit"
+                        variant="contained"
+                        onClick={() => editSales(product)}>
+                        Edit
+                      </Button>
+                      <Button
+                        type="reset"
+                        variant="contained"
+                        onClick={() => deleteSales(product)}>
+                        Delete
+                      </Button>
+                    </TableDataAction>
+                  )}
                 </TableRow>
               ))}
         </TableBody>

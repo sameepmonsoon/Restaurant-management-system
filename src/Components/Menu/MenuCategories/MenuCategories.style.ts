@@ -9,6 +9,7 @@ export const MenuCategoriesDiv = styled("div")<MenuCategoriesStylesType>`
   justify-content: space-around;
   width: 167px;
   height: 71px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
 
   &,
   div {
@@ -22,7 +23,6 @@ export const MenuCategoriesDiv = styled("div")<MenuCategoriesStylesType>`
     }
     cursor: pointer;
   }
-  border: 1px solid rgba(0, 0, 0, 0.06);
 `;
 export const CategoryTitle = styled("div")`
   flex: 1 0 92px;
@@ -58,5 +58,6 @@ export const Icon = styled("span")`
   overflow: hidden;
   svg:hover {
     padding: 1px;
+    transition: all 300ms ease;
   }
 `;

@@ -8,8 +8,29 @@ import MenuSubCategories from "../Components/Menu/MenuSubCategories/MenuSubCateg
 import MenuLayout from "../Layout/MenuLayout";
 import { HiOutlinePencil } from "react-icons/hi";
 import { MdDeleteOutline } from "react-icons/md";
+import { useMenuCategory } from "./states/MenuCategory.state";
 export default function Menu() {
-  const [selectCategory, setSelectCategory] = useState(true);
+  const [iconVisible, setIconVisible] = useState<any>();
+  const [selectCategory, setSelectCategory] = useState(false);
+
+  const [iconSubVisible, setIconSubVisible] = useState<any>();
+  const [selectSubCategory, setSelectSubCategory] = useState(false);
+  const { setCategoryData, categoryData } = useMenuCategory();
+  const category = [
+    { cat: "korean", subcat: "ramyen" },
+    { cat: "indian", subcat: "dosa" },
+    { cat: "thakali", subcat: "daal vaat" },
+    { cat: "Korean", subcat: "ramyen" },
+    { cat: "Korean", subcat: "ramyen" },
+    { cat: "Korean", subcat: "ramyen" },
+  ];
+  const onmouseover = () => {
+    setIconVisible(true);
+  };
+
+  const onMouseLeave = () => {
+    setIconVisible(false);
+  };
   return (
     <>
       <MenuLayout
@@ -31,6 +52,10 @@ export default function Menu() {
               setSelectCategory(!selectCategory);
             }}
             clicked={selectCategory}
+            onMouseOver={onmouseover}
+            onMouseLeave={onMouseLeave}
+            visible={iconVisible}
+            categoryList={category}
           />
         }>
         <MenuSubCategories
@@ -39,9 +64,17 @@ export default function Menu() {
           deleteIcon={<MdDeleteOutline size={25} />}
           editIcon={<HiOutlinePencil size={25} />}
           onClick={() => {
-            setSelectCategory(!selectCategory);
+            setSelectSubCategory(!selectSubCategory);
           }}
-          clicked={selectCategory}
+          clicked={selectSubCategory}
+          onMouseOver={() => setIconSubVisible(true)}
+          onMouseLeave={() => setIconSubVisible(false)}
+          visible={iconSubVisible}
+          categoryList={[
+            { cat: "Korean", subcat: "ramyen" },
+            { cat: "indian", subcat: "dosa" },
+            { cat: "thakali", subcat: "daal vaat" },
+          ]}
         />
 
         <Outlet />

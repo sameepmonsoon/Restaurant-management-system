@@ -3,8 +3,8 @@ type MenuCategoriesStylesType = {
   clicked?: boolean;
 };
 export const MenuSubCategoriesDiv = styled("div")<MenuCategoriesStylesType>`
-  width: 171px;
-  height: 97px;
+  min-width: 171px;
+  min-height: 97px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -78,5 +78,6 @@ export const Icon = styled("span")`
   overflow: hidden;
   svg:hover {
     padding: 1px;
+    transition: all 300ms ease;
   }
 `;

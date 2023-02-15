@@ -117,23 +117,38 @@ export const SettingDiv = styled.div`
   margin-top: 150px; */
   cursor: pointer;
   gap: 10px;
-  /* position:absolute;
-  bottom: 0;
-  margin-bottom: 28px;
-  justify-content: flex-start;
-  align-items: center;
+  position: relative;
+  top: 170px;
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
   color: #676767;
-  transition: all 300ms ease;
+  left: 10px;
+  transition: color 100ms ease;
+  transition: gap 200ms ease;
+  justify-content: flex-start;
+  align-items: center;
   &:hover {
     gap: 16px;
     color: #313131;
   }
-  @media screen and (min-width: 500px) and (max-width: 1500px) {
-    top: 100px;
-  } */
+  /* 
+  bottom: 0;
+  margin-bottom: 28px;
+  
+ 
+  
+ 
+  */
+  @media screen and (max-width: 1550px) {
+    top: 170px;
+  }
+  @media screen and (max-width: 1350px) {
+    top: 120px;
+  }
+  @media screen and (max-width: 1250px) {
+    top: 80px;
+  }
 `;
