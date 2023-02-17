@@ -1,12 +1,23 @@
 import styled from "@emotion/styled";
 
 export const MenuLayoutMainDiv = styled("div")`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 100px 800px;
+  justify-content: flex-start;
+  align-content: center;
+  row-gap: 10px;
+  margin: 10px 0 0 50px;
+  overflow: hidden;
+  @media screen and (max-width: 1300px) {
+    padding-top: 25px;
+  }
+`;
+export const MenuCatSubcatDiv = styled("div")`
   display: flex;
   flex-flow: row nowrap;
   align-items: flex-start;
-  justify-content: space-around;
-  column-gap: 10px;
-  flex: 1;
+  column-gap: 50px;
 `;
 export const MenuLayoutCategory = styled("div")`
   display: flex;
@@ -22,7 +33,7 @@ export const MenuLayoutSubCategory = styled("div")`
   flex-flow: column nowrap;
   align-items: flex-start;
   justify-content: flex-start;
-  row-gap: 10px;
+  row-gap: 0px;
   width: 100%;
 `;
 export const MenuLayoutSubCategoryContent = styled("div")`
@@ -47,6 +58,15 @@ export const MenuLayoutCategoryContent = styled("div")`
   justify-content: flex-start;
   column-gap: 21px;
 `;
-export const Title = styled("div")`
+export const SubcategoryTitle = styled("div")`
   text-transform: capitalize;
+  width: 200px;
+  height: 19px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+  margin-bottom: 20px;
 `;

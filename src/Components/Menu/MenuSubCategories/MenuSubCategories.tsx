@@ -1,5 +1,5 @@
 import { LocationOn, Title } from "@mui/icons-material";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   EditCategory,
   Icon,
@@ -8,39 +8,61 @@ import {
   ItemTitleAmount,
   MenuSubCategoriesDiv,
 } from "./MenuSubCategories.style";
-import { useMenuCategory } from "../../../Pages/states/MenuCategory.state";
 
-import { MenuCategoriesTypes } from "../../../Types/Components/MenuCategoriesTypes";
+import { MenuSubCategoriesTypes } from "../../../Types/Components/MenuSubCategoriesTypes";
+import { useNavigate, useParams } from "react-router-dom";
 
-const MenuSubCategories = (props: MenuCategoriesTypes) => {
-  const { setCategoryData, categoryData } = useMenuCategory();
-  const { title, amount, deleteIcon, clicked, editIcon, visible, ...rest } =
-    props;
+const MenuSubCategories = (props: MenuSubCategoriesTypes) => {
+  const {
+    title,
+    amount,
+    deleteIcon,
+    clicked,
+    categoryList,
+    editIcon,
+    visible,
+    ...rest
+  } = props;
+
+  const [category, setCategory] = useState(categoryList);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null | any>(null);
+  const navigate = useNavigate();
+  const { id } = useParams();
   const handleEdit = () => {
     console.log("Menu sub category Item edit");
   };
   const handleDelete = () => {
     console.log("Menu  sub category  Item Delete");
   };
-
+  const [click, setClick] = useState(clicked);
   return (
     <>
-      {categoryData === "korean" && (
-        <MenuSubCategoriesDiv clicked={clicked} {...rest}>
-          <ItemTitleAmount>
-            <ItemTitle>{title}</ItemTitle>
-            <ItemAmount>Rs. {amount}</ItemAmount>
-          </ItemTitleAmount>
-          {visible === true || clicked === true ? (
-            <EditCategory>
-              <Icon onClick={handleEdit}>{editIcon}</Icon>
-              <Icon onClick={handleDelete}>{deleteIcon}</Icon>
-            </EditCategory>
-          ) : (
-            <></>
-          )}
-        </MenuSubCategoriesDiv>
-      )}
+      <MenuSubCategoriesDiv
+        clicked={click}
+        {...rest}
+        onClick={() => {
+          // navigate(`/menu/${visible}`);
+          setClick(!click);
+        }}
+        onMouseEnter={() => {
+          setHoveredIndex(`${visible}`);
+        }}
+        onMouseLeave={() => {
+          setHoveredIndex(null);
+        }}>
+        <ItemTitleAmount>
+          <ItemTitle>{title}</ItemTitle>
+          <ItemAmount>Rs. {visible}</ItemAmount>
+        </ItemTitleAmount>
+        {hoveredIndex == visible || click === true ? (
+          <EditCategory>
+            <Icon onClick={handleEdit}>{editIcon}</Icon>
+            <Icon onClick={handleDelete}>{deleteIcon}</Icon>
+          </EditCategory>
+        ) : (
+          <></>
+        )}
+      </MenuSubCategoriesDiv>
     </>
   );
 };

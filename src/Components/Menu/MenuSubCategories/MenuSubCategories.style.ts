@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 type MenuCategoriesStylesType = {
   clicked?: boolean;
 };
+
 export const MenuSubCategoriesDiv = styled("div")<MenuCategoriesStylesType>`
   min-width: 171px;
   min-height: 97px;
@@ -47,6 +48,7 @@ export const ItemTitle = styled("div")`
   overflow: hidden;
   color: #313131;
   text-align: center;
+  text-transform: capitalize;
 `;
 export const ItemAmount = styled("div")`
   width: 100px;
@@ -73,6 +75,7 @@ export const Icon = styled("span")`
   align-items: center;
   justify-content: center;
   background: #ffffff;
+  opacity: 0.8;
   box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.1);
   border-radius: 3px;
   overflow: hidden;

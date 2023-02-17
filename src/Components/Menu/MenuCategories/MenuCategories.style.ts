@@ -3,6 +3,14 @@ import styled from "@emotion/styled";
 type MenuCategoriesStylesType = {
   clicked?: boolean;
 };
+
+export const MenuCategoryMainDIv = styled("div")`
+  display: flex;
+  flex-flow: column nowrap;
+  max-height: 100%;
+  justify-content: flex-start;
+  align-items: flex-start;
+`;
 export const MenuCategoriesDiv = styled("div")<MenuCategoriesStylesType>`
   display: flex;
   align-items: center;
@@ -53,6 +61,7 @@ export const Icon = styled("span")`
   align-items: center;
   justify-content: center;
   background: #ffffff;
+  opacity: 0.8;
   box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.1);
   border-radius: 3px;
   overflow: hidden;
@@ -60,4 +69,16 @@ export const Icon = styled("span")`
     padding: 1px;
     transition: all 300ms ease;
   }
+`;
+export const MenuTitleName = styled("div")`
+  text-transform: capitalize;
+  width: 83px;
+  height: 19px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #000000;
+  margin-bottom: 20px;
 `;

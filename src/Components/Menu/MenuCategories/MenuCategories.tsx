@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   CategoryTitle,
   EditCategory,
   MenuCategoriesDiv,
   Icon,
+  MenuTitleName,
+  MenuCategoryMainDIv,
 } from "./MenuCategories.style";
 
 import { MenuCategoriesTypes } from "../../../Types/Components/MenuCategoriesTypes";
-import { useMenuCategory } from "../../../Pages/states/MenuCategory.state";
+import { useNavigate, useParams } from "react-router-dom";
 const MenuCategories = (props: MenuCategoriesTypes) => {
   const {
     title,
@@ -15,29 +17,50 @@ const MenuCategories = (props: MenuCategoriesTypes) => {
     editIcon,
     clicked,
     categoryList,
-    visible,
 
     ...rest
   } = props;
-  const { setCategoryData, categoryData } = useMenuCategory();
+  const [category, setCategory] = useState(categoryList);
+  const [hoveredIndex, setHoveredIndex] = useState<null | number>(null);
+  const navigate = useNavigate();
+  const { id } = useParams();
 
   const handleEdit = () => {
-    console.log(categoryData);
+    // console.log(categoryData);
   };
+
   const handleDelete = () => {
     console.log("Menu Item Delete");
   };
 
+  useEffect(() => {
+    setCategory(
+      category.map((cat: any, index: number) => {
+        // @ts-ignore
+        if (parseInt(id) === cat.id) {
+          cat.active = true;
+        } else cat.active = false;
+        return cat;
+      })
+    );
+    console.log("inside menu cat", category);
+  }, [id]);
+
   return (
-    <div {...rest}>
-      {categoryList
-        // .filter((item, id) => item.cat === "korean")
-        .map((item, id) => (
+    <>
+      <MenuCategoryMainDIv {...rest}>
+        <MenuTitleName>Categories</MenuTitleName>
+
+        {categoryList.map((item, idx) => (
           <MenuCategoriesDiv
-            clicked={clicked}
-            onClick={() => setCategoryData(item.cat)}>
-            <CategoryTitle key={id}>{item.cat}</CategoryTitle>
-            {visible || clicked === true ? (
+            clicked={item.active}
+            onClick={() => {
+              navigate(`/menu/${item.id}`);
+            }}
+            onMouseEnter={() => setHoveredIndex(idx)}
+            onMouseLeave={() => setHoveredIndex(null)}>
+            <CategoryTitle key={idx}>{item.category}</CategoryTitle>
+            {hoveredIndex === idx || item.active ? (
               <EditCategory>
                 <Icon onClick={handleEdit}>{editIcon}</Icon>
                 <Icon onClick={handleDelete}>{deleteIcon}</Icon>
@@ -47,7 +70,8 @@ const MenuCategories = (props: MenuCategoriesTypes) => {
             )}
           </MenuCategoriesDiv>
         ))}
-    </div>
+      </MenuCategoryMainDIv>
+    </>
   );
 };
 

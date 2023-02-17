@@ -10,7 +10,8 @@ import {
   MenuLayoutMainDiv,
   MenuLayoutSubCategory,
   MenuLayoutSubCategoryContent,
-  Title,
+  MenuCatSubcatDiv,
+  SubcategoryTitle,
 } from "./MenuLayout.style";
 import ActionButton from "../Components/ActionButton/ActionButton";
 
@@ -26,46 +27,20 @@ const MenuLayout = ({
   const { openSider } = siderToggle();
   return (
     <>
-      <DashboardMainDiv>
-        <Sider />
-        <LayoutContainerDiv openSider={openSider}>
-          <Navbar
-            navTitle={"Menu"}
-            navbarCardName={"All Menu"}
-            // arrowIcon={true}
-            onClick={() => {}}
-          />
-          <ChildrenDiv>
-            {filter}
-            <MenuLayoutMainDiv>
-              <MenuLayoutCategory>
-                <Title>Categories</Title>
-                <MenuLayoutCategoryContent>
-                  {categories}
-                  {/* <ActionButton
-                    icon={"+"}
-                    label={"Add Sub category"}
-                    onClick={(e: React.MouseEvent<HTMLElement>) => {}}
-                  /> */}
-                </MenuLayoutCategoryContent>
-              </MenuLayoutCategory>
-              <MenuLayoutSubCategory>
-                <Title>sub categories</Title>
-                <MenuLayoutSubCategoryContent>
-                  {children}
-                  {/* <ActionButton
-                    icon={"+"}
-                    label={"Add Sub category"}
-                    onClick={(e: React.MouseEvent<HTMLElement>) => {}}
-                  /> */}
-                </MenuLayoutSubCategoryContent>
-              </MenuLayoutSubCategory>
-            </MenuLayoutMainDiv>
-            <br />
-            <br />
-          </ChildrenDiv>
-        </LayoutContainerDiv>
-      </DashboardMainDiv>
+      <MenuLayoutMainDiv>
+        {filter}
+        <MenuCatSubcatDiv>
+          <MenuLayoutCategory>
+            <MenuLayoutCategoryContent>{categories}</MenuLayoutCategoryContent>
+          </MenuLayoutCategory>
+          <MenuLayoutSubCategory>
+            <SubcategoryTitle>Sub Category</SubcategoryTitle>
+            <MenuLayoutSubCategoryContent>
+              {children}
+            </MenuLayoutSubCategoryContent>
+          </MenuLayoutSubCategory>
+        </MenuCatSubcatDiv>
+      </MenuLayoutMainDiv>
     </>
   );
 };

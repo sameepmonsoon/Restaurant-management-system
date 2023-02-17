@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FiSearch } from "react-icons/fi";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 import ComingSoon from "../Components/comingSoon/ComingSoon";
 import Filters from "../Components/Filters/Filters";
 import MenuCategories from "../Components/Menu/MenuCategories/MenuCategories";
@@ -8,77 +8,119 @@ import MenuSubCategories from "../Components/Menu/MenuSubCategories/MenuSubCateg
 import MenuLayout from "../Layout/MenuLayout";
 import { HiOutlinePencil } from "react-icons/hi";
 import { MdDeleteOutline } from "react-icons/md";
-import { useMenuCategory } from "./states/MenuCategory.state";
+import {
+  DashboardMainDiv,
+  LayoutContainerDiv,
+} from "../Layout/DashboardLayout.style";
+import Sider from "../PageComponent/Dashboard/Sider/Sider";
+import Navbar from "../PageComponent/Dashboard/Navbar/Navbar";
+import { siderToggle } from "./states/NavBar.state";
 export default function Menu() {
   const [iconVisible, setIconVisible] = useState<any>();
   const [selectCategory, setSelectCategory] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false);
   const [iconSubVisible, setIconSubVisible] = useState<any>();
-  const [selectSubCategory, setSelectSubCategory] = useState(false);
-  const { setCategoryData, categoryData } = useMenuCategory();
-  const category = [
-    { cat: "korean", subcat: "ramyen" },
-    { cat: "indian", subcat: "dosa" },
-    { cat: "thakali", subcat: "daal vaat" },
-    { cat: "Korean", subcat: "ramyen" },
-    { cat: "Korean", subcat: "ramyen" },
-    { cat: "Korean", subcat: "ramyen" },
-  ];
-  const onmouseover = () => {
-    setIconVisible(true);
-  };
+  const [selectSubCategory, setSelectSubCategory] = useState(true);
+  const { openSider } = siderToggle();
+  const navigate = useNavigate();
 
-  const onMouseLeave = () => {
-    setIconVisible(false);
-  };
+  const uniqueCategory = (x: any, i: any, a: any) => a.indexOf(x) === i;
+  const filteredCat = categoryList
+    .map((item, id) => item.category.toLowerCase())
+    .filter(uniqueCategory);
+  console.log("inside menu filter", filteredCat);
+  console.log("inside category list", categoryList);
+  const [category, setCategory] = useState(categoryList);
+
+  useEffect(() => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      // ON SUCCESS CALL
+      // Take id of fist category
+      navigate("/menu/1");
+    }, 2500);
+    // API CALL
+  }, []);
+
   return (
     <>
-      <MenuLayout
-        filter={
-          <Filters
-            title={"a"}
-            icon={<FiSearch size={20} />}
-            dateIcon={""}
-            statusIcon={""}
+      <DashboardMainDiv>
+        <Sider />
+        <LayoutContainerDiv openSider={openSider}>
+          <Navbar
+            navTitle={"Menu"}
+            navbarCardName={"All Menu"}
+            // arrowIcon={true}
+            onClick={() => {}}
           />
-        }
-        categories={
-          <MenuCategories
-            title={"Special Dish"}
-            amount={200}
-            deleteIcon={<MdDeleteOutline size={25} />}
-            editIcon={<HiOutlinePencil size={25} />}
-            onClick={() => {
-              setSelectCategory(!selectCategory);
-            }}
-            clicked={selectCategory}
-            onMouseOver={onmouseover}
-            onMouseLeave={onMouseLeave}
-            visible={iconVisible}
-            categoryList={category}
-          />
-        }>
-        <MenuSubCategories
-          title={"Ramyen"}
-          amount={200}
-          deleteIcon={<MdDeleteOutline size={25} />}
-          editIcon={<HiOutlinePencil size={25} />}
-          onClick={() => {
-            setSelectSubCategory(!selectSubCategory);
-          }}
-          clicked={selectSubCategory}
-          onMouseOver={() => setIconSubVisible(true)}
-          onMouseLeave={() => setIconSubVisible(false)}
-          visible={iconSubVisible}
-          categoryList={[
-            { cat: "Korean", subcat: "ramyen" },
-            { cat: "indian", subcat: "dosa" },
-            { cat: "thakali", subcat: "daal vaat" },
-          ]}
-        />
+          {isLoading ? (
+            <div>loading.....</div>
+          ) : (
+            <MenuLayout
+              filter={
+                <Filters
+                  title={"a"}
+                  icon={<FiSearch size={20} />}
+                  dateIcon={""}
+                  statusIcon={""}
+                />
+              }
+              categories={
+                <MenuCategories
+                  title={"Special Dish"}
+                  amount={200}
+                  deleteIcon={<MdDeleteOutline size={25} />}
+                  editIcon={<HiOutlinePencil size={25} />}
+                  onClick={() => {
+                    // setSelectCategory(!selectCategory);
+                    console.log("cat clicked", categoryList);
+                  }}
+                  clicked={selectCategory}
+                  categoryList={categoryList}
+                />
+              }>
+              <Outlet />
+            </MenuLayout>
+          )}
 
-        <Outlet />
-      </MenuLayout>
+          {/* <Outlet /> */}
+          {/* <ChildrenDiv>
+            {filter}
+            <MenuLayoutMainDiv>
+              <MenuLayoutCategory>
+                <Title>Categories</Title>
+                <MenuLayoutCategoryContent>
+                  {categories}
+                </MenuLayoutCategoryContent>
+              </MenuLayoutCategory>
+              <MenuLayoutSubCategory>
+                <Title>sub categories</Title>
+                <MenuLayoutSubCategoryContent>
+                  {children}
+                </MenuLayoutSubCategoryContent>
+              </MenuLayoutSubCategory>
+            </MenuLayoutMainDiv>
+            <br />
+            <br />
+          </ChildrenDiv> */}
+        </LayoutContainerDiv>
+      </DashboardMainDiv>
     </>
   );
 }
+
+const categoryList = [
+  { category: "Special Dish", subcategory: "ramyen", active: false, id: 1 },
+  { category: "Basic Korean", subcategory: "dosa", active: false, id: 2 },
+  { category: "Side Dish", subcategory: "daal vaat", active: false, id: 3 },
+  { category: "Breakfast", subcategory: "ramyen", active: false, id: 4 },
+  { category: "Appetizers", subcategory: "gimbap", active: false, id: 5 },
+  { category: "Hard Drinks", subcategory: "noodles", active: false, id: 6 },
+  { category: "Soft Drinks", subcategory: "chowmein", active: false, id: 7 },
+  { category: "japanese", subcategory: "soba", active: false, id: 8 },
+  { category: "JAPANESE", subcategory: "wine", active: false, id: 9 },
+  { category: "CHINESE", subcategory: "eggs", active: false, id: 10 },
+  { category: "JAPANese", subcategory: "wine", active: false, id: 11 },
+  { category: "CHInese", subcategory: "eggs", active: false, id: 12 },
+];

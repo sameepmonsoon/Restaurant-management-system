@@ -127,7 +127,7 @@ export default function Sider() {
             <DashboardButton
               icon={<RiFileListLine size={25} />}
               title={"Menu"}
-              location={location.pathname === "/menu"}
+              location={location.pathname.includes("menu")}
             />
           </Link>
           <Link
