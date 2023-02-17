@@ -10,6 +10,8 @@ import {
 
 import { MenuCategoriesTypes } from "../../../Types/Components/MenuCategoriesTypes";
 import { useNavigate, useParams } from "react-router-dom";
+import ActionButton from "../../ActionButton/ActionButton";
+import { MdAdd } from "react-icons/md";
 const MenuCategories = (props: MenuCategoriesTypes) => {
   const {
     title,
@@ -24,13 +26,13 @@ const MenuCategories = (props: MenuCategoriesTypes) => {
   const [hoveredIndex, setHoveredIndex] = useState<null | number>(null);
   const navigate = useNavigate();
   const { id } = useParams();
-
+  const uniqueCategory = (x: any, i: any, a: any) => a.indexOf(x) === i;
   const handleEdit = () => {
     // console.log(categoryData);
   };
 
   const handleDelete = () => {
-    console.log("Menu Item Delete");
+    // console.log("Menu Item Delete");
   };
 
   useEffect(() => {
@@ -43,7 +45,7 @@ const MenuCategories = (props: MenuCategoriesTypes) => {
         return cat;
       })
     );
-    console.log("inside menu cat", category);
+    console.log("menu id received from params", category);
   }, [id]);
 
   return (
@@ -56,6 +58,7 @@ const MenuCategories = (props: MenuCategoriesTypes) => {
             clicked={item.active}
             onClick={() => {
               navigate(`/menu/${item.id}`);
+              // alert(item.category);
             }}
             onMouseEnter={() => setHoveredIndex(idx)}
             onMouseLeave={() => setHoveredIndex(null)}>
@@ -70,6 +73,12 @@ const MenuCategories = (props: MenuCategoriesTypes) => {
             )}
           </MenuCategoriesDiv>
         ))}
+        <ActionButton
+          icon={<MdAdd size={25} />}
+          label={"add category"}
+          onClick={() => {}}
+          forMenuCat={true}
+        />
       </MenuCategoryMainDIv>
     </>
   );

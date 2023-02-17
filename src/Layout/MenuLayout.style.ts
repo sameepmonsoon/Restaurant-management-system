@@ -3,11 +3,11 @@ import styled from "@emotion/styled";
 export const MenuLayoutMainDiv = styled("div")`
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 100px 800px;
+  grid-template-rows: 100px 90%;
   justify-content: flex-start;
   align-content: center;
   row-gap: 10px;
-  margin: 10px 0 0 50px;
+  margin: 10px 0 20px 50px;
   overflow: hidden;
   @media screen and (max-width: 1300px) {
     padding-top: 25px;
@@ -21,12 +21,13 @@ export const MenuCatSubcatDiv = styled("div")`
 `;
 export const MenuLayoutCategory = styled("div")`
   display: flex;
-  width: 167px;
+  min-width: 167px;
   flex-flow: column nowrap;
   align-items: flex-start;
   justify-content: flex-start;
   column-gap: 21px;
   row-gap: 10px;
+  overflow: hidden;
 `;
 export const MenuLayoutSubCategory = styled("div")`
   display: flex;
@@ -67,6 +68,6 @@ export const SubcategoryTitle = styled("div")`
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
-  color: #000000;
+  color: #676767;
   margin-bottom: 20px;
 `;

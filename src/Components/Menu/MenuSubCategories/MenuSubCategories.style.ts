@@ -2,32 +2,52 @@ import styled from "@emotion/styled";
 type MenuCategoriesStylesType = {
   clicked?: boolean;
 };
-
-export const MenuSubCategoriesDiv = styled("div")<MenuCategoriesStylesType>`
-  min-width: 171px;
-  min-height: 97px;
+export const MenuSubcatMainDiv = styled("div")`
   display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 131px;
+  width: 171px;
+  row-gap: 6px;
+`;
+export const MenuSubCategoriesDiv = styled("div")<MenuCategoriesStylesType>`
+  min-width: 100%;
+  min-height: 105px;
+  display: flex;
+  flex-flow: column nowrap;
   align-items: center;
   justify-content: space-evenly;
-
+  position: relative;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
   &,
   div {
-    background: ${({ clicked }) => (clicked === true ? "#DFDEDE" : "#ffffff")};
+    /* background: ${({ clicked }) =>
+      clicked === true ? "#DFDEDE" : "#ffffff"}; */
   }
 
   &:hover {
-    div,
-    & {
-      background-color: #dfdede;
+    img {
+      opacity: 0.7;
+      transform: scale3d(1.1, 1.1, 1);
     }
     cursor: pointer;
   }
-  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  border-bottom: 3px solid #313131;
-  position: relative;
+
+  img {
+    border-radius: 5px;
+    position: absolute;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    transition: transform 400ms ease-in-out;
+  }
 `;
 export const ItemTitleAmount = styled("div")`
+  z-index: 2;
   display: flex;
   margin: auto;
   flex-flow: column nowrap;
@@ -38,22 +58,24 @@ export const ItemTitleAmount = styled("div")`
   overflow: hidden;
 `;
 export const ItemTitle = styled("div")`
+  vertical-align: bottom;
   font-family: "Inter";
   font-style: normal;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 15px;
   line-height: 19px;
   width: 100%;
   height: 20px;
   overflow: hidden;
-  color: #313131;
-  text-align: center;
+  color: #000000;
   text-transform: capitalize;
+  background: transparent;
 `;
 export const ItemAmount = styled("div")`
   width: 100px;
   height: 20px;
   text-align: center;
+  color: #ffffff;
 `;
 export const EditCategory = styled("div")`
   position: absolute;
@@ -70,12 +92,12 @@ export const EditCategory = styled("div")`
 `;
 export const Icon = styled("span")`
   height: 17px;
+  z-index: 3;
   width: 17px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: #ffffff;
-  opacity: 0.8;
   box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.1);
   border-radius: 3px;
   overflow: hidden;

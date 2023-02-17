@@ -23,13 +23,12 @@ export const MenuCategoriesDiv = styled("div")<MenuCategoriesStylesType>`
   div {
     background: ${({ clicked }) => (clicked === true ? "#DFDEDE" : "#ffffff")};
   }
-
   &:hover {
+    cursor: pointer;
     div,
     & {
       background-color: #dfdede;
     }
-    cursor: pointer;
   }
 `;
 export const CategoryTitle = styled("div")`
@@ -79,6 +78,6 @@ export const MenuTitleName = styled("div")`
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
-  color: #000000;
+  color: #676767;
   margin-bottom: 20px;
 `;

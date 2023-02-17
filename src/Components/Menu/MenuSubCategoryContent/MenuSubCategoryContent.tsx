@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { HiOutlinePencil } from "react-icons/hi";
-import { MdDeleteOutline } from "react-icons/md";
+import { MdAdd, MdDeleteOutline } from "react-icons/md";
 import { useLocation, useParams } from "react-router-dom";
+import ActionButton from "../../ActionButton/ActionButton";
 import MenuSubCategories from "../MenuSubCategories/MenuSubCategories";
-import { MenuSubCategoryContentDiv } from "./MenuSubCategoryContent.style";
+import MenuSubCategoryItem from "../MenuSubCategoryItem/MenuSubCategoryItem";
+import {
+  MenuSubCategoryContentMain,
+  MenuSubCategoryContentDiv,
+} from "./MenuSubCategoryContent.style";
 
 export default function MenuSubCategoryContent() {
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
   const [subCatList, setSubCatList] = useState(subCategoryList);
+  const [mapSubcatId, setMapSubcatId] = useState<number | any>(1);
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
@@ -16,7 +22,7 @@ export default function MenuSubCategoryContent() {
     }, 1000);
   }, [id]);
   return (
-    <div>
+    <MenuSubCategoryContentMain>
       {loading ? (
         <h1>Loading.....</h1>
       ) : (
@@ -29,16 +35,30 @@ export default function MenuSubCategoryContent() {
               editIcon={<HiOutlinePencil size={25} />}
               onClick={() => {
                 console.log("fas");
+                setMapSubcatId(subcat.id);
+                console.log(mapSubcatId);
                 // setSelectSubCategory(!selectSubCategory);
               }}
               clicked={subcat.active}
-              visible={subcat.id}
+              subcatId={subcat.id}
               categoryList={subCatList}
             />
           ))}
+          <ActionButton
+            icon={<MdAdd size={25} />}
+            label={"Add SUBCATEGORY "}
+            onClick={() => {}}
+            forMenuSubcat={true}
+          />
         </MenuSubCategoryContentDiv>
       )}
-    </div>
+      {mapSubcatId && (
+        <MenuSubCategoryItem
+          subcatParentId={mapSubcatId}
+          itemName={`Spicy Ramen ${mapSubcatId}`}
+        />
+      )}
+    </MenuSubCategoryContentMain>
   );
 }
 const subCategoryList = [

@@ -25,11 +25,27 @@ export default function Menu() {
   const navigate = useNavigate();
 
   const uniqueCategory = (x: any, i: any, a: any) => a.indexOf(x) === i;
-  const filteredCat = categoryList
-    .map((item, id) => item.category.toLowerCase())
-    .filter(uniqueCategory);
-  console.log("inside menu filter", filteredCat);
-  console.log("inside category list", categoryList);
+
+  let filteredCat = [];
+  let data = categoryList.map((item) => item.category.toLocaleLowerCase());
+  filteredCat = categoryList
+    .filter((item, idx) => categoryList.indexOf(item) === idx)
+    .sort(function (a, b) {
+      let x = a.category.toLowerCase();
+      let y = b.category.toLowerCase();
+      if (x < y) {
+        return -1;
+      }
+      if (x > y) {
+        return 1;
+      }
+      return 0;
+    });
+  // .filter((item) => item.category === item.category)
+  // .map((item, id) => item.category.toLowerCase());
+
+  console.log("inside menu filter cat cat", data);
+  // console.log("inside category list", categoryList);
   const [category, setCategory] = useState(categoryList);
 
   useEffect(() => {
@@ -39,6 +55,7 @@ export default function Menu() {
       // ON SUCCESS CALL
       // Take id of fist category
       navigate("/menu/1");
+      // console.log("menu");
     }, 2500);
     // API CALL
   }, []);
@@ -72,12 +89,9 @@ export default function Menu() {
                   amount={200}
                   deleteIcon={<MdDeleteOutline size={25} />}
                   editIcon={<HiOutlinePencil size={25} />}
-                  onClick={() => {
-                    // setSelectCategory(!selectCategory);
-                    console.log("cat clicked", categoryList);
-                  }}
+                  onClick={() => {}}
                   clicked={selectCategory}
-                  categoryList={categoryList}
+                  categoryList={filteredCat}
                 />
               }>
               <Outlet />
@@ -112,6 +126,7 @@ export default function Menu() {
 
 const categoryList = [
   { category: "Special Dish", subcategory: "ramyen", active: false, id: 1 },
+  { category: "Special Dish", subcategory: "ramyen", active: false, id: 11 },
   { category: "Basic Korean", subcategory: "dosa", active: false, id: 2 },
   { category: "Side Dish", subcategory: "daal vaat", active: false, id: 3 },
   { category: "Breakfast", subcategory: "ramyen", active: false, id: 4 },

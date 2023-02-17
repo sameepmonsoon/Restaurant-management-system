@@ -7,7 +7,7 @@ type SetTitle = {
 
 export const DashboardButtonMainDiv = styled("button")<SetTitle>`
   background-color: ${({ activeSider, disableTransition }) =>
-    activeSider === true || disableTransition ? "#313131" : "white"};
+    activeSider === true || disableTransition ? "#313131" : "#ffffff"};
   border: ${({ activeSider, disableTransition }) =>
     disableTransition === true ? "1px solid #00020f" : "red"};
   box-shadow: ${({ activeSider }) =>

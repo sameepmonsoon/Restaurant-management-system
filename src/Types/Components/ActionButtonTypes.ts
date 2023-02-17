@@ -3,4 +3,6 @@ export type ActionButtonProps = {
   label?: String;
   onClick: (e: React.MouseEvent<HTMLElement>) => void;
   disableColor?: boolean;
+  forMenuSubcat?: boolean;
+  forMenuCat?: boolean;
 };

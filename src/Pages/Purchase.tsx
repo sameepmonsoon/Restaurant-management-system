@@ -20,8 +20,7 @@ export default function Purchase() {
     <div>Loading</div>
   ) : products && products.length ? (
     <PurchaseTable data={products} onDeleteSuccess={fetchProducts} />
-  ) 
-   : (
+  ) : (
     <>
       {/* <FiltersReport /> */}
       <div>No Data to Show</div>

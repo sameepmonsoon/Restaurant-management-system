@@ -6,12 +6,13 @@ import {
   ItemAmount,
   ItemTitle,
   ItemTitleAmount,
+  MenuSubcatMainDiv,
   MenuSubCategoriesDiv,
 } from "./MenuSubCategories.style";
 
 import { MenuSubCategoriesTypes } from "../../../Types/Components/MenuSubCategoriesTypes";
 import { useNavigate, useParams } from "react-router-dom";
-
+import image from "../../../../public/assets/KBLimage.jpg";
 const MenuSubCategories = (props: MenuSubCategoriesTypes) => {
   const {
     title,
@@ -20,7 +21,7 @@ const MenuSubCategories = (props: MenuSubCategoriesTypes) => {
     clicked,
     categoryList,
     editIcon,
-    visible,
+    subcatId,
     ...rest
   } = props;
 
@@ -28,33 +29,35 @@ const MenuSubCategories = (props: MenuSubCategoriesTypes) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null | any>(null);
   const navigate = useNavigate();
   const { id } = useParams();
+
   const handleEdit = () => {
-    console.log("Menu sub category Item edit");
+    // console.log("Menu sub category Item edit");
   };
   const handleDelete = () => {
-    console.log("Menu  sub category  Item Delete");
+    // console.log("Menu  sub category  Item Delete");
   };
   const [click, setClick] = useState(clicked);
   return (
-    <>
+    <MenuSubcatMainDiv {...rest}>
       <MenuSubCategoriesDiv
         clicked={click}
         {...rest}
         onClick={() => {
           // navigate(`/menu/${visible}`);
+
           setClick(!click);
         }}
         onMouseEnter={() => {
-          setHoveredIndex(`${visible}`);
+          setHoveredIndex(`${subcatId}`);
         }}
         onMouseLeave={() => {
           setHoveredIndex(null);
         }}>
-        <ItemTitleAmount>
-          <ItemTitle>{title}</ItemTitle>
+        <img src={image} alt="Sub Category" />
+        {/* <ItemTitleAmount>
           <ItemAmount>Rs. {visible}</ItemAmount>
-        </ItemTitleAmount>
-        {hoveredIndex == visible || click === true ? (
+        </ItemTitleAmount> */}
+        {hoveredIndex == subcatId || click === true ? (
           <EditCategory>
             <Icon onClick={handleEdit}>{editIcon}</Icon>
             <Icon onClick={handleDelete}>{deleteIcon}</Icon>
@@ -63,7 +66,8 @@ const MenuSubCategories = (props: MenuSubCategoriesTypes) => {
           <></>
         )}
       </MenuSubCategoriesDiv>
-    </>
+      <ItemTitle>{title}</ItemTitle>
+    </MenuSubcatMainDiv>
   );
 };
 
