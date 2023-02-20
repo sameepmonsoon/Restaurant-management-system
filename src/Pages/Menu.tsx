@@ -15,6 +15,7 @@ import {
 import Sider from "../PageComponent/Dashboard/Sider/Sider";
 import Navbar from "../PageComponent/Dashboard/Navbar/Navbar";
 import { siderToggle } from "./states/NavBar.state";
+import { HTTPMethods } from "../Utils/HTTPMock";
 export default function Menu() {
   const [iconVisible, setIconVisible] = useState<any>();
   const [selectCategory, setSelectCategory] = useState(false);
@@ -57,6 +58,14 @@ export default function Menu() {
       navigate("/menu/1");
       // console.log("menu");
     }, 2500);
+
+    HTTPMethods.get("backend1.kpop.com.np/category/readallcategory")
+      .then(async (res: any) => {
+        console.log("data received fro cat", res);
+      })
+      .catch(async (err) => {
+        console.log(err);
+      });
     // API CALL
   }, []);
 
