@@ -12,7 +12,7 @@ export const ItemContentDivContainer = styled("div")`
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   column-gap: 24px;
 `;
 export const ItemTitle = styled("div")`

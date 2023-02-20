@@ -22,7 +22,7 @@ export default function Purchase() {
     <PurchaseTable data={products} onDeleteSuccess={fetchProducts} />
   ) : (
     <>
-      {/* <FiltersReport /> */}
+      {/* <FiltersReport /> */}   
       <div>No Data to Show</div>
     </>
   );

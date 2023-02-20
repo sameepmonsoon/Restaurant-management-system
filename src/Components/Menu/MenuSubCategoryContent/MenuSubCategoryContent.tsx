@@ -34,14 +34,13 @@ export default function MenuSubCategoryContent() {
               deleteIcon={<MdDeleteOutline size={25} />}
               editIcon={<HiOutlinePencil size={25} />}
               onClick={() => {
-                console.log("fas");
                 setMapSubcatId(subcat.id);
-                console.log(mapSubcatId);
                 // setSelectSubCategory(!selectSubCategory);
               }}
-              clicked={subcat.active}
+              clicked={mapSubcatId}
               subcatId={subcat.id}
               categoryList={subCatList}
+              active={subcat.active}
             />
           ))}
           <ActionButton
@@ -56,13 +55,14 @@ export default function MenuSubCategoryContent() {
         <MenuSubCategoryItem
           subcatParentId={mapSubcatId}
           itemName={`Spicy Ramen ${mapSubcatId}`}
+          subCatItemList={subCatItemList}
         />
       )}
     </MenuSubCategoryContentMain>
   );
 }
 const subCategoryList = [
-  { category: "Special Dish", subcategory: "ramyen", active: true, id: 1 },
+  { category: "Special Dish", subcategory: "ramyen", active: false, id: 1 },
   { category: "Basic Korean", subcategory: "dosa", active: false, id: 2 },
   { category: "Side Dish", subcategory: "daal vaat", active: false, id: 3 },
   { category: "Breakfast", subcategory: "ramyen", active: false, id: 4 },
@@ -72,4 +72,17 @@ const subCategoryList = [
   { category: "japanese", subcategory: "soba", active: false, id: 8 },
   { category: "JAPANESE", subcategory: "wine", active: false, id: 9 },
   { category: "CHINESE", subcategory: "eggs", active: false, id: 10 },
+];
+
+const subCatItemList = [
+  { subCatItem: "ramyen", active: false, id: 1 },
+  { subCatItem: "dosa", active: false, id: 2 },
+  { subCatItem: "daal vaat", active: false, id: 3 },
+  { subCatItem: "ramyen", active: false, id: 4 },
+  { subCatItem: "gimbap", active: false, id: 5 },
+  { subCatItem: "noodles", active: false, id: 6 },
+  { subCatItem: "chowmein", active: false, id: 7 },
+  { subCatItem: "soba", active: false, id: 8 },
+  { subCatItem: "wine", active: false, id: 9 },
+  { subCatItem: "eggs", active: false, id: 10 },
 ];

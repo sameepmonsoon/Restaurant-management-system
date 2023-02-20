@@ -23,11 +23,6 @@ export const MenuSubCategoriesDiv = styled("div")<MenuCategoriesStylesType>`
   border-radius: 5px;
   position: relative;
   overflow: hidden;
-  &,
-  div {
-    /* background: ${({ clicked }) =>
-      clicked === true ? "#DFDEDE" : "#ffffff"}; */
-  }
 
   &:hover {
     img {
@@ -41,8 +36,11 @@ export const MenuSubCategoriesDiv = styled("div")<MenuCategoriesStylesType>`
     border-radius: 5px;
     position: absolute;
     z-index: 1;
+    opacity: ${({ clicked }) => (clicked === true ? "0.7" : "1")};
     height: 100%;
     width: 100%;
+    transform: ${({ clicked }) =>
+      clicked === true ? "scale3d(1.1, 1.1, 1)" : "0"};
     transition: transform 400ms ease-in-out;
   }
 `;

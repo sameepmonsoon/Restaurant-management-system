@@ -1,5 +1,5 @@
 import { Icon } from "@mui/material";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { HiOutlinePencil } from "react-icons/hi";
 import { MdAdd, MdDeleteOutline } from "react-icons/md";
 import image from "../../../../public/assets/KBLimage.jpg";
@@ -13,7 +13,15 @@ import {
 } from "./MenuSubCategoryItem.style";
 
 const MenuSubCategoryItem = (props: MenuSubCategoryItemTypes) => {
-  const { subcatParentId, itemName } = props;
+  const { subcatParentId, itemName, subCatItemList } = props;
+  const [category, setCategory] = useState(subCatItemList);
+  const [hoveredIndex, setHoveredIndex] = useState();
+
+  // useEffect(() => {
+  //   setCategory(category.map((item,idx)=>{
+  //     if
+  //   }))
+  // }, []);
   return (
     <>
       <MenuSubCatItemDiv>
@@ -25,14 +33,13 @@ const MenuSubCategoryItem = (props: MenuSubCategoryItemTypes) => {
             deleteIcon={<MdDeleteOutline size={25} />}
             editIcon={<HiOutlinePencil size={25} />}
             onClick={() => {
-              console.log("fas");
+              console.log("submenu item", subcatParentId);
               // setSelectSubCategory(!selectSubCategory);
             }}
             clicked={true}
             subcatId={""}
             categoryList={[]}
           />
-
           <ActionButton
             icon={<MdAdd size={25} />}
             label={"Add ITEM"}

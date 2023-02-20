@@ -22,6 +22,7 @@ const MenuSubCategories = (props: MenuSubCategoriesTypes) => {
     categoryList,
     editIcon,
     subcatId,
+    active,
     ...rest
   } = props;
 
@@ -36,7 +37,18 @@ const MenuSubCategories = (props: MenuSubCategoriesTypes) => {
   const handleDelete = () => {
     // console.log("Menu  sub category  Item Delete");
   };
-  const [click, setClick] = useState(clicked);
+
+  const [click, setClick] = useState<any>(false);
+  useEffect(() => {
+    setClick(() => {
+      if (clicked === subcatId) {
+        console.log(clicked, subcatId);
+        return !click;
+      } else click;
+    });
+
+    return () => setClick(false);
+  }, [clicked]);
   return (
     <MenuSubcatMainDiv {...rest}>
       <MenuSubCategoriesDiv
@@ -44,8 +56,6 @@ const MenuSubCategories = (props: MenuSubCategoriesTypes) => {
         {...rest}
         onClick={() => {
           // navigate(`/menu/${visible}`);
-
-          setClick(!click);
         }}
         onMouseEnter={() => {
           setHoveredIndex(`${subcatId}`);
