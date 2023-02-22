@@ -47,6 +47,16 @@ function App(props: any) {
       path: "/register",
       element: <Register />,
     },
+    {
+      path: "/menu",
+      element: <Menu />,
+      children: [
+        {
+          path: ":id",
+          element: <MenuSubCategoryContent />,
+        },
+      ],
+    },
 
     {
       path: "/home",
@@ -127,20 +137,7 @@ function App(props: any) {
         },
       ],
     },
-    {
-      path: "/menu",
-      element: <Menu />,
-      children: [
-        {
-          path: ":id",
-          element: <MenuSubCategoryContent />,
-        },
-        {
-          path: ":id",
-          element: <MenuSubCategoryContent />,
-        },
-      ],
-    },
+
     // {
     //   path: "/menu",
     //   element: <Menu />,

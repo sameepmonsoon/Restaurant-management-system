@@ -7,21 +7,14 @@ import {
   MenuTitleName,
   MenuCategoryMainDIv,
 } from "./MenuCategories.style";
-
+import { useSubCategoryIdStore } from "../../../Pages/states/MenuCategory.state";
 import { MenuCategoriesTypes } from "../../../Types/Components/MenuCategoriesTypes";
 import { useNavigate, useParams } from "react-router-dom";
 import ActionButton from "../../ActionButton/ActionButton";
 import { MdAdd } from "react-icons/md";
 const MenuCategories = (props: MenuCategoriesTypes) => {
-  const {
-    title,
-    deleteIcon,
-    editIcon,
-    clicked,
-    categoryList,
-
-    ...rest
-  } = props;
+  const { drawerSubCatId, setDrawerSubCatId } = useSubCategoryIdStore();
+  const { title, deleteIcon, editIcon, clicked, categoryList, ...rest } = props;
   const [category, setCategory] = useState(categoryList);
   const [hoveredIndex, setHoveredIndex] = useState<null | number>(null);
   const navigate = useNavigate();
@@ -36,18 +29,18 @@ const MenuCategories = (props: MenuCategoriesTypes) => {
   };
 
   useEffect(() => {
+    console.log("inside categoryList ", category);
     setCategory(
       category.map((cat: any, index: number) => {
         // @ts-ignore
-        if (parseInt(id) === cat.id) {
+        if (parseInt(id) === index) {
           cat.active = true;
         } else cat.active = false;
         return cat;
       })
     );
-    console.log("menu id received from params", category);
+    console.log("menu id received from params", id);
   }, [id]);
-
   return (
     <>
       <MenuCategoryMainDIv {...rest}>
@@ -57,12 +50,14 @@ const MenuCategories = (props: MenuCategoriesTypes) => {
           <MenuCategoriesDiv
             clicked={item.active}
             onClick={() => {
-              navigate(`/menu/${item.id}`);
-              // alert(item.category);
+              navigate(`/menu/${idx}`);
+              // @ts-ignore
+              setDrawerSubCatId(item.category_id);
+              // @ts-ignore
             }}
             onMouseEnter={() => setHoveredIndex(idx)}
             onMouseLeave={() => setHoveredIndex(null)}>
-            <CategoryTitle key={idx}>{item.category}</CategoryTitle>
+            <CategoryTitle key={idx}>{item.category_name}</CategoryTitle>
             {hoveredIndex === idx || item.active ? (
               <EditCategory>
                 <Icon onClick={handleEdit}>{editIcon}</Icon>

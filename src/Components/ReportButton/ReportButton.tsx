@@ -18,15 +18,25 @@ import {
 } from "./ReportButton.styles";
 
 const ReportButton = (props: ReportButtonTypes) => {
-  const { icon1, label, icon2, icon3, options, activeSider } = props;
+  const {
+    icon1,
+    label,
+    icon2,
+    icon3,
+    options,
+    activeSider,
+    openDropDown,
+    ...rest
+  } = props;
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
   const handleClick = () => {
     setIsOpen(!isOpen);
+    // console.log(onClick);
   };
   return (
-    <ReportDiv active={activeSider}>
+    <ReportDiv active={activeSider} {...rest}>
       <DropdownHeader onClick={handleClick} active={activeSider}>
         <ReportInnerDiv active={activeSider}>
           <DropDownDiv active={activeSider}>

@@ -13,7 +13,7 @@ import {
 } from "./MenuSubCategoryItem.style";
 
 const MenuSubCategoryItem = (props: MenuSubCategoryItemTypes) => {
-  const { subcatParentId, itemName, subCatItemList } = props;
+  const { subcatParentId, itemName, subCatItemList, subCatItemImage } = props;
   const [category, setCategory] = useState(subCatItemList);
   const [hoveredIndex, setHoveredIndex] = useState();
 
@@ -39,6 +39,8 @@ const MenuSubCategoryItem = (props: MenuSubCategoryItemTypes) => {
             clicked={true}
             subcatId={""}
             categoryList={[]}
+            key={subcatParentId}
+            subCatImage={subCatItemImage}
           />
           <ActionButton
             icon={<MdAdd size={25} />}

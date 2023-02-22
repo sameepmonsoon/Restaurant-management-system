@@ -7,7 +7,7 @@ export type MenuCategoriesTypes = {
   clicked?: boolean;
 
   categoryList: Array<{
-    category: String;
+    category_name: String;
     subcategory: String;
     active: boolean;
     id: number;

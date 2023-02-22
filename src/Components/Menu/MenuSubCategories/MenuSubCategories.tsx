@@ -12,7 +12,7 @@ import {
 
 import { MenuSubCategoriesTypes } from "../../../Types/Components/MenuSubCategoriesTypes";
 import { useNavigate, useParams } from "react-router-dom";
-import image from "../../../../public/assets/KBLimage.jpg";
+// import image from "../../../../public/assets/KBLimage.jpg";
 const MenuSubCategories = (props: MenuSubCategoriesTypes) => {
   const {
     title,
@@ -22,6 +22,7 @@ const MenuSubCategories = (props: MenuSubCategoriesTypes) => {
     categoryList,
     editIcon,
     subcatId,
+    subCatImage,
     active,
     ...rest
   } = props;
@@ -42,13 +43,14 @@ const MenuSubCategories = (props: MenuSubCategoriesTypes) => {
   useEffect(() => {
     setClick(() => {
       if (clicked === subcatId) {
-        console.log(clicked, subcatId);
+        // console.log(clicked, subcatId);
         return !click;
       } else click;
     });
 
     return () => setClick(false);
   }, [clicked]);
+  console.log(subCatImage);
   return (
     <MenuSubcatMainDiv {...rest}>
       <MenuSubCategoriesDiv
@@ -62,8 +64,9 @@ const MenuSubCategories = (props: MenuSubCategoriesTypes) => {
         }}
         onMouseLeave={() => {
           setHoveredIndex(null);
-        }}>
-        <img src={image} alt="Sub Category" />
+        }}
+        key={subcatId}>
+        <img src={subCatImage} alt="Sub Category" />
         {/* <ItemTitleAmount>
           <ItemAmount>Rs. {visible}</ItemAmount>
         </ItemTitleAmount> */}

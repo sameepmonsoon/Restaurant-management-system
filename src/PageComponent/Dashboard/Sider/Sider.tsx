@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { RxDashboard } from "react-icons/rx";
 import {
   SiderLogoDiv,
@@ -25,6 +25,8 @@ import DashboardButton from "../../../Components/DashboardButton/DashboardButton
 import ReportButton from "../../../Components/ReportButton/ReportButton";
 import { siderToggle } from "../../../Pages/states/NavBar.state";
 export default function Sider() {
+  const [isOpen, setIsOpen] = useState(false);
+
   const navigate = useNavigate();
   const handleLogout = () => {
     navigate("/");
@@ -132,8 +134,15 @@ export default function Sider() {
           </Link>
           <Link
             to="/report/purchase"
-            style={{ color: "#090909", textDecoration: "none" }}>
+            style={{ color: "#090909", textDecoration: "none" }}
+            onClick={() => {
+              setIsOpen(!isOpen);
+            }}>
             <ReportButton
+              onClick={() => {
+                console.log(isOpen);
+              }}
+              openDropDown={true}
               icon1={<BsFileEarmarkBarGraph size={25} />}
               label={"Report"}
               icon2={<IoIosArrowUp size={25} />}

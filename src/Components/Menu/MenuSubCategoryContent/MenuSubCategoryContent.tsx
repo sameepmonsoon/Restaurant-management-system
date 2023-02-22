@@ -2,45 +2,105 @@ import React, { useEffect, useState } from "react";
 import { HiOutlinePencil } from "react-icons/hi";
 import { MdAdd, MdDeleteOutline } from "react-icons/md";
 import { useLocation, useParams } from "react-router-dom";
+import { HTTPMethods } from "../../../Utils/HTTPMock";
 import ActionButton from "../../ActionButton/ActionButton";
 import MenuSubCategories from "../MenuSubCategories/MenuSubCategories";
 import MenuSubCategoryItem from "../MenuSubCategoryItem/MenuSubCategoryItem";
+import { useSubCategoryIdStore } from "../../../Pages/states/MenuCategory.state";
 import {
   MenuSubCategoryContentMain,
   MenuSubCategoryContentDiv,
 } from "./MenuSubCategoryContent.style";
-
+import { toast } from "react-toastify";
+import image from "../../../../public/assets/KBLimage.jpg";
 export default function MenuSubCategoryContent() {
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
-  const [subCatList, setSubCatList] = useState(subCategoryList);
+  const [category, setCategory] = useState([]);
+  const { drawerSubCatId, setDrawerSubCatId } = useSubCategoryIdStore();
+  // const [subCatList, setSubCatList] = useState(subCategoryList);
   const [mapSubcatId, setMapSubcatId] = useState<number | any>(1);
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
     }, 1000);
+
+    HTTPMethods.getMenu(`/menu/readsubcatgory/${drawerSubCatId}`)
+      .then(async (res: any) => {
+        console.log("data received from subcat", res.data.payload);
+        setCategory(res.data.payload.dish);
+        console.log("getting sub category", category);
+        setDrawerSubCatId(null);
+      })
+      .catch(async (err) => {
+        toast.info("Server is down to display the table data.", {
+          theme: "colored",
+          hideProgressBar: true,
+          autoClose: 2000,
+          position: "bottom-right",
+          toastId: "info1",
+        });
+      })
+      .finally(function () {
+        setDrawerSubCatId("");
+        console.log("drawer data from menu", drawerSubCatId);
+      });
   }, [id]);
+  // @ts-ignore
+
+  let filteredCat = [];
+  // @ts-ignore
+  let data = category.map((item) => item.subcategory_name.toLocaleLowerCase());
+  filteredCat = category
+    .filter((item, idx) => category.indexOf(item) === idx)
+    .sort(function (a, b) {
+      // @ts-ignore
+      let x = a.subcategory_name.toLowerCase();
+      // @ts-ignore
+      let y = b.subcategory_name.toLowerCase();
+      if (x < y) {
+        return -1;
+      }
+      if (x > y) {
+        return 1;
+      }
+      return 0;
+    });
+
   return (
     <MenuSubCategoryContentMain>
       {loading ? (
         <h1>Loading.....</h1>
       ) : (
         <MenuSubCategoryContentDiv>
-          {subCatList.map((subcat) => (
+          {category.map((subcat, index) => (
             <MenuSubCategories
-              title={subcat.subcategory}
+              // @ts-ignore
+              title={subcat.subcategory_name}
+              // @ts-ignore
               amount={subcat.id}
               deleteIcon={<MdDeleteOutline size={25} />}
               editIcon={<HiOutlinePencil size={25} />}
               onClick={() => {
-                setMapSubcatId(subcat.id);
+                // @ts-ignore
+                setMapSubcatId(index);
+                // @ts-ignore
+
                 // setSelectSubCategory(!selectSubCategory);
               }}
               clicked={mapSubcatId}
-              subcatId={subcat.id}
-              categoryList={subCatList}
+              // @ts-ignore
+              subcatId={index}
+              // @ts-ignore
+
+              categoryList={filteredCat}
+              // @ts-ignore
               active={subcat.active}
+              // @ts-ignore
+              key={subcat.id}
+              // @ts-ignore
+              subCatImage={`http://backend1.kpop.com.np/public/SubCategory_Images/${subcat.subcategory_image}`}
             />
           ))}
           <ActionButton
@@ -51,28 +111,17 @@ export default function MenuSubCategoryContent() {
           />
         </MenuSubCategoryContentDiv>
       )}
-      {mapSubcatId && (
+      {mapSubcatId.length != 0 && (
         <MenuSubCategoryItem
           subcatParentId={mapSubcatId}
           itemName={`Spicy Ramen ${mapSubcatId}`}
           subCatItemList={subCatItemList}
+          subCatItemImage={image}
         />
       )}
     </MenuSubCategoryContentMain>
   );
 }
-const subCategoryList = [
-  { category: "Special Dish", subcategory: "ramyen", active: false, id: 1 },
-  { category: "Basic Korean", subcategory: "dosa", active: false, id: 2 },
-  { category: "Side Dish", subcategory: "daal vaat", active: false, id: 3 },
-  { category: "Breakfast", subcategory: "ramyen", active: false, id: 4 },
-  { category: "Appetizers", subcategory: "gimbap", active: false, id: 5 },
-  { category: "Hard Drinks", subcategory: "noodles", active: false, id: 6 },
-  { category: "Soft Drinks", subcategory: "chowmein", active: false, id: 7 },
-  { category: "japanese", subcategory: "soba", active: false, id: 8 },
-  { category: "JAPANESE", subcategory: "wine", active: false, id: 9 },
-  { category: "CHINESE", subcategory: "eggs", active: false, id: 10 },
-];
 
 const subCatItemList = [
   { subCatItem: "ramyen", active: false, id: 1 },

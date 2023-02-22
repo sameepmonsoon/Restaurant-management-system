@@ -39,14 +39,14 @@ export const MenuSubCategoriesDiv = styled("div")<MenuCategoriesStylesType>`
     opacity: ${({ clicked }) => (clicked === true ? "0.7" : "1")};
     height: 100%;
     width: 100%;
+    object-fit: cover;
     transform: ${({ clicked }) =>
       clicked === true ? "scale3d(1.1, 1.1, 1)" : "0"};
     transition: transform 400ms ease-in-out;
   }
 `;
 export const ItemTitleAmount = styled("div")`
-  z-index: 2;
-  display: flex;
+  /* display: flex; */
   margin: auto;
   flex-flow: column nowrap;
   justify-content: center;

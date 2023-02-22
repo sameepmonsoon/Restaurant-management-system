@@ -72,7 +72,7 @@ export const AddButtonLabel = styled.div<disableActionColorType>`
       ? "#0060B5"
       : "#ffffff"};
   font-size: ${({ forMenuSubcat }) =>
-    forMenuSubcat === true ? "15px" : "15px"};
+    forMenuSubcat === true ? "15px" : "14px"};
   width: ${({ forMenuCat }) => (forMenuCat === true ? "115px" : "134px")};
   letter-spacing: ${({ forMenuSubcat, forMenuCat }) =>
     forMenuSubcat === true || forMenuCat ? "-1px" : "0"};

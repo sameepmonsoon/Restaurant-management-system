@@ -6,6 +6,7 @@ export type MenuSubCategoriesTypes = {
   deleteIcon?: React.ReactNode | null;
   active?: boolean;
   clicked?: boolean;
+  subCatImage?: string;
   subcatId?: boolean | any;
   categoryList: Array<{
     category: String;
