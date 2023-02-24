@@ -43,14 +43,12 @@ const MenuSubCategories = (props: MenuSubCategoriesTypes) => {
   useEffect(() => {
     setClick(() => {
       if (clicked === subcatId) {
-        // console.log(clicked, subcatId);
         return !click;
       } else click;
     });
 
     return () => setClick(false);
   }, [clicked]);
-  console.log(subCatImage);
   return (
     <MenuSubcatMainDiv {...rest}>
       <MenuSubCategoriesDiv

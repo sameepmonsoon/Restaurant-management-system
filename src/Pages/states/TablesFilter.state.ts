@@ -19,7 +19,6 @@ export const useTotalAmountStore = create((set) => ({
     HTTPMethods.get("/total/readTotal")
       .then(async (res: any) => {
         set((state: any) => ({ totalAmounts: res.data, loading: false }));
-        console.log(res.data, "inisde zustand");
       })
       .catch(async (err) => {
         toast.info("Server is down to display the data.", {

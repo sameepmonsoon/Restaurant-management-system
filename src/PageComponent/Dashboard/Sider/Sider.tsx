@@ -125,7 +125,9 @@ export default function Sider() {
               location={location.pathname === "/weborder"}
             />
           </Link>
-          <Link to="/menu" style={{ color: "#090909", textDecoration: "none" }}>
+          <Link
+            to="/menu/0"
+            style={{ color: "#090909", textDecoration: "none" }}>
             <DashboardButton
               icon={<RiFileListLine size={25} />}
               title={"Menu"}
@@ -137,12 +139,13 @@ export default function Sider() {
             style={{ color: "#090909", textDecoration: "none" }}
             onClick={() => {
               setIsOpen(!isOpen);
+              console.log(isOpen);
             }}>
             <ReportButton
               onClick={() => {
-                console.log(isOpen);
+                console.log("inside rb", isOpen);
               }}
-              openDropDown={true}
+              openDropDown={isOpen}
               icon1={<BsFileEarmarkBarGraph size={25} />}
               label={"Report"}
               icon2={<IoIosArrowUp size={25} />}

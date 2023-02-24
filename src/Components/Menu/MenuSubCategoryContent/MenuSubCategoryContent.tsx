@@ -28,13 +28,11 @@ export default function MenuSubCategoryContent() {
 
     HTTPMethods.getMenu(`/menu/readsubcatgory/${drawerSubCatId}`)
       .then(async (res: any) => {
-        console.log("data received from subcat", res.data.payload);
         setCategory(res.data.payload.dish);
-        console.log("getting sub category", category);
-        setDrawerSubCatId(null);
+        setDrawerSubCatId("");
       })
       .catch(async (err) => {
-        toast.info("Server is down to display the table data.", {
+        toast.info("cannot fetch sub cat.", {
           theme: "colored",
           hideProgressBar: true,
           autoClose: 2000,
@@ -44,7 +42,6 @@ export default function MenuSubCategoryContent() {
       })
       .finally(function () {
         setDrawerSubCatId("");
-        console.log("drawer data from menu", drawerSubCatId);
       });
   }, [id]);
   // @ts-ignore

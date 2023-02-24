@@ -39,7 +39,6 @@ const MenuCategories = (props: MenuCategoriesTypes) => {
         return cat;
       })
     );
-    console.log("menu id received from params", id);
   }, [id]);
   return (
     <>
@@ -52,7 +51,8 @@ const MenuCategories = (props: MenuCategoriesTypes) => {
             onClick={() => {
               navigate(`/menu/${idx}`);
               // @ts-ignore
-              setDrawerSubCatId(item.category_id);
+              setDrawerSubCatId(item.category_id); // @ts-ignore
+
               // @ts-ignore
             }}
             onMouseEnter={() => setHoveredIndex(idx)}

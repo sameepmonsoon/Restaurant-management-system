@@ -3,14 +3,14 @@ import styled from "@emotion/styled";
 export const MenuLayoutMainDiv = styled("div")`
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 100px 90%;
+  grid-template-rows: 100px 89%;
   justify-content: flex-start;
   align-content: center;
   row-gap: 10px;
-  margin: 10px 0 20px 50px;
+  margin: 20px 0 20px 50px;
   overflow: hidden;
+  padding-top: 30px;
   @media screen and (max-width: 1300px) {
-    padding-top: 25px;
   }
 `;
 export const MenuCatSubcatDiv = styled("div")`
@@ -35,7 +35,7 @@ export const MenuLayoutSubCategory = styled("div")`
   align-items: flex-start;
   justify-content: flex-start;
   row-gap: 0px;
-  width: 100%;
+  width: 60%;
 `;
 export const MenuLayoutSubCategoryContent = styled("div")`
   display: flex;

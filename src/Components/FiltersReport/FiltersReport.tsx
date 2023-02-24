@@ -1,28 +1,19 @@
 import React, { useState } from "react";
 import { AiOutlinePrinter } from "react-icons/ai";
-// import { TextField } from "../TextField";
-import { RxDividerVertical } from "react-icons/rx";
 import DashboardButton from "../DashboardButton/DashboardButton";
-import { FiArrowRightCircle, FiArrowLeftCircle } from "react-icons/fi";
 import {
-  ReportFilterDateBox,
   DateButtonBox,
   ReportFilterMainDiv,
   ReportFilterPrintIcon,
-  ReportFilterTextDate,
   ReportFilterType,
   ReportFilterInnerDiv,
   ReportType,
   Select,
-  ReportWeekly,
-  ReportWeeklyDiv,
-  ReportDaily,
 } from "./FiltersReport.styles";
 import { MyContext } from "../../Pages/Reports";
 import TextField from "@mui/material/TextField";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
-import { StaticDateRangePicker } from "@mui/x-date-pickers-pro/StaticDateRangePicker";
 import {
   DateRange,
   DateRangePicker,

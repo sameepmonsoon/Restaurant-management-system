@@ -33,7 +33,6 @@ const MenuSubCategoryItem = (props: MenuSubCategoryItemTypes) => {
             deleteIcon={<MdDeleteOutline size={25} />}
             editIcon={<HiOutlinePencil size={25} />}
             onClick={() => {
-              console.log("submenu item", subcatParentId);
               // setSelectSubCategory(!selectSubCategory);
             }}
             clicked={true}

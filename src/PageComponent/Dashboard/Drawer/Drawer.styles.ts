@@ -121,7 +121,7 @@ export const DrawerButtonDiv = styled("div")`
 
 export const DrawerButton = styled("button")`
   background-color: transparent;
-  border: 1px solid #eaeaea;
+  border: 1px solid rgba(0, 0, 0, 0.3);
   color: #5f7161;
   display: flex;
   align-items: center;
@@ -131,7 +131,8 @@ export const DrawerButton = styled("button")`
   width: 30px;
   height: 30px;
   &:hover {
-    background-color: rgba(0, 0, 0, 0.15);
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    background-color: rgba(222, 241, 209), 1;
     cursor: pointer;
     color: #424242;
     transition: background-color 0.5s ease;

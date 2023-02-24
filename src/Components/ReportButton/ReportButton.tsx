@@ -33,7 +33,6 @@ const ReportButton = (props: ReportButtonTypes) => {
 
   const handleClick = () => {
     setIsOpen(!isOpen);
-    // console.log(onClick);
   };
   return (
     <ReportDiv active={activeSider} {...rest}>

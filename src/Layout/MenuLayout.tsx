@@ -20,9 +20,9 @@ const MenuLayout = ({
   filter,
   children,
 }: {
-  children: JSX.Element | JSX.Element[];
-  categories: JSX.Element | JSX.Element[];
-  filter: JSX.Element | JSX.Element[];
+  children?: JSX.Element | JSX.Element[];
+  categories?: JSX.Element | JSX.Element[];
+  filter?: JSX.Element | JSX.Element[];
 }) => {
   const { openSider } = siderToggle();
   return (
