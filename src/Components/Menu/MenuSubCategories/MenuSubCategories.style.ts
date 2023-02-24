@@ -26,7 +26,7 @@ export const MenuSubCategoriesDiv = styled("div")<MenuCategoriesStylesType>`
 
   &:hover {
     img {
-      opacity: 0.7;
+      opacity: ${({ clicked }) => (clicked === true ? "1" : "0.7")};
       transform: scale3d(1.1, 1.1, 1);
     }
     cursor: pointer;
@@ -36,7 +36,7 @@ export const MenuSubCategoriesDiv = styled("div")<MenuCategoriesStylesType>`
     border-radius: 5px;
     position: absolute;
     z-index: 1;
-    opacity: ${({ clicked }) => (clicked === true ? "0.7" : "1")};
+    filter: blur(${({ clicked }) => (clicked === true ? "1.5px" : "0")});
     height: 100%;
     width: 100%;
     object-fit: cover;
