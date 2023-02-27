@@ -10,7 +10,7 @@ export const TableContainer = styled("div")`
   row-gap: 12px;
 `;
 export const Tables = styled("div")<TableType>`
-  background: ${({ select }) => (select === true ? " #4aa6f7" : "#ffffff")};
+  background: ${({ select }) => (select === true ? "  #FFE7E7" : "#ffffff")};
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   width: 186px;
@@ -20,14 +20,21 @@ export const Tables = styled("div")<TableType>`
 
   justify-content: center;
   &:hover {
-    background-color: whitesmoke;
+    background-color: #ffe7e7;
     cursor: pointer;
   }
 `;
-export const Image = styled("img")`
+export const TableImage = styled("img")`
   margin-top: 1px;
-  width: 104px;
-  height: 104px;
+  width: 90px;
+  height: 90px;
+  background-color: t ransparent;
+  border: 0;
+`;
+export const KaraokeImage = styled("img")`
+  margin: auto;
+  width: 60px;
+  height: 60px;
   background-color: t ransparent;
   border: 0;
 `;

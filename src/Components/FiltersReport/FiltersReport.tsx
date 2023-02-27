@@ -1,28 +1,19 @@
 import React, { useState } from "react";
 import { AiOutlinePrinter } from "react-icons/ai";
-// import { TextField } from "../TextField";
-import { RxDividerVertical } from "react-icons/rx";
 import DashboardButton from "../DashboardButton/DashboardButton";
-import { FiArrowRightCircle, FiArrowLeftCircle } from "react-icons/fi";
 import {
-  ReportFilterDateBox,
   DateButtonBox,
   ReportFilterMainDiv,
   ReportFilterPrintIcon,
-  ReportFilterTextDate,
   ReportFilterType,
   ReportFilterInnerDiv,
   ReportType,
   Select,
-  ReportWeekly,
-  ReportWeeklyDiv,
-  ReportDaily,
 } from "./FiltersReport.styles";
 import { MyContext } from "../../Pages/Reports";
 import TextField from "@mui/material/TextField";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
-import { StaticDateRangePicker } from "@mui/x-date-pickers-pro/StaticDateRangePicker";
 import {
   DateRange,
   DateRangePicker,
@@ -46,7 +37,7 @@ const FiltersReport = () => {
   }));
   const current = new Date();
   const todayDate = `${current.getMonth()}/${current.getDate()}/${current.getFullYear()}`;
-  const [date, setDate] = React.useState<Dayjs | null>(dayjs(todayDate));
+  const [date, setDate] = React.useState<Dayjs | null>(null);
   const [range, setRange] = React.useState<DateRange<Dayjs>>([null, null]);
   function generateReport() {
     // API Call
@@ -116,19 +107,24 @@ const FiltersReport = () => {
                   <DatePicker
                     openTo="day"
                     views={["day", "month", "year"]}
-                    // label="Today"
+                    label="Select a Date"
                     value={date}
+                    minDate={dayjs("2018-12-30")}
                     onChange={(newValue) => {
                       // @ts-ignore
                       let finalDate = `${doubleDigitDate(
                         // @ts-ignore
-
-                        newValue.$D // @ts-ignore
-                      )}-${doubleDigitDate(newValue.$M + 1)}-${doubleDigitDate(
+                        newValue?.$M + 1
+                      )}-${doubleDigitDate(
                         // @ts-ignore
 
-                        newValue.$y
+                        newValue?.$D // @ts-ignore
+                      )}-${doubleDigitDate(
+                        // @ts-ignore
+
+                        newValue?.$y
                       )}`;
+                      console.log("filter report", newValue);
                       setDate(newValue);
                       value?.setDateAndTime({
                         ...value.dateAndTime,
@@ -146,18 +142,23 @@ const FiltersReport = () => {
                   dateAdapter={AdapterDayjs}
                   localeText={{ start: "Check-in", end: "Check-out" }}>
                   <DateRangePicker
+                    minDate={dayjs("2018-12-30")}
                     value={range}
                     onChange={(newValue) => {
                       newValue.map((dateValue, idx) => {
                         if (dateValue) {
                           // @ts-ignore
+
                           let finalDate = `${doubleDigitDate(
-                              // @ts-ignore
-                              dateValue.$D
-                              // @ts-ignore
-                          )}-${doubleDigitDate(dateValue.$M)}-${doubleDigitDate(
                             // @ts-ignore
-                            dateValue.$y
+                            dateValue?.$M + 1
+                          )}-${doubleDigitDate(
+                            // @ts-ignore
+                            dateValue?.$D
+                            // @ts-ignore
+                          )}-${doubleDigitDate(
+                            // @ts-ignore
+                            dateValue?.$y
                           )}`;
                           idx === 0
                             ? // Logical errror month is 1 less
@@ -193,6 +194,7 @@ const FiltersReport = () => {
                 disableTransition={true}
                 onClick={() => {
                   value?.setGenerateReport(true);
+                  setDate(null);
                 }}
               />
             </DateButtonBox>

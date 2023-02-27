@@ -5,6 +5,8 @@ export type ReportButtonTypes = {
   icon2: React.ReactNode;
   icon3: React.ReactNode;
   label: string;
+  openDropDown?: boolean;
+  onClick?: () => void;
   options: Array<{ label: string; link: string }>;
   activeSider: boolean;
 };

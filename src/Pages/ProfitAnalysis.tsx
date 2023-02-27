@@ -17,11 +17,11 @@ const ProfitAnalysis = () => {
   const context = useContext(MyContext);
   // @ts-ignore
   const { dateAndTime, generateReport, setGenerateReport } = context;
-  const date1 = dateAndTime.date1;
-  const date2 = dateAndTime.date2;
-  const isDaily = dateAndTime.isDaily;
-  const isMonthly = dateAndTime.isMonthly;
-  const isWeekly = dateAndTime.isWeekly;
+  const date1 = dateAndTime?.date1;
+  const date2 = dateAndTime?.date2;
+  const isDaily = dateAndTime?.isDaily;
+  const isMonthly = dateAndTime?.isMonthly;
+  const isWeekly = dateAndTime?.isWeekly;
 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -44,13 +44,6 @@ const ProfitAnalysis = () => {
           // console.log("Response from profit analysis.");
           setpurchaseProfit(res.data.payload.data);
           console.log(`${date1} ${date2}`, res.data.payload.data);
-          toast.info("Generated report successfully.", {
-            theme: "colored",
-            hideProgressBar: true,
-            autoClose: 1000,
-            position: "top-right",
-            toastId: "info4",
-          });
         })
 
         .catch(function (err) {

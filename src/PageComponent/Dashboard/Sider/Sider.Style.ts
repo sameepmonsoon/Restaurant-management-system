@@ -66,10 +66,13 @@ export const SiderMainDiv = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   padding-left: 20px;
-  height: 85vh;
+  height: 87vh;
   padding-top: 30px;
   overflow-y: scroll;
+  overflow-x: hidden;
   scroll-behavior: smooth;
+  scrollbar-color: white;
+  scrollbar-width: thin !important;
   &::-webkit-scrollbar {
     width: 3px;
     background-color: white;
@@ -83,6 +86,9 @@ export const SiderMainDiv = styled.div`
     border-radius: 10px;
   }
   border-top: 1px solid rgba(0, 0, 0, 0.05);
+  @media screen and (min-width: 500px) and (max-width: 1300px) {
+    height: 80%;
+  }
 `;
 
 export const SiderButtonLabel = styled.div`
@@ -111,21 +117,38 @@ export const SettingDiv = styled.div`
   margin-top: 150px; */
   cursor: pointer;
   gap: 10px;
-  position:absolute;
-  bottom: 0;
-  margin-bottom: 28px;
-  justify-content: flex-start;
-  align-items: center;
+  position: relative;
+  top: 170px;
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
   color: #676767;
-  transition: all 300ms ease;
+  left: 10px;
+  transition: color 100ms ease;
+  transition: gap 200ms ease;
+  justify-content: flex-start;
+  align-items: center;
   &:hover {
-    margin-left: 1rem;
+    gap: 16px;
     color: #313131;
   }
+  /* 
+  bottom: 0;
+  margin-bottom: 28px;
+  
+ 
+  
+ 
+  */
+  @media screen and (max-width: 1550px) {
+    top: 170px;
+  }
+  @media screen and (max-width: 1350px) {
+    top: 120px;
+  }
+  @media screen and (max-width: 1250px) {
+    top: 80px;
+  }
 `;
-

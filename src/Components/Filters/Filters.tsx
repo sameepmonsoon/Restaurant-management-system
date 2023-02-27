@@ -1,5 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { useFilterStore, useStatusPaymentStore } from "../../Pages/states/TablesFilter.state";
+import {
+  useFilterStore,
+  useStatusPaymentStore,
+} from "../../Pages/states/TablesFilter.state";
 import { FilterTypes } from "../../Types/Components/Filters";
 import {
   FilterComponentDiv,
@@ -37,12 +40,17 @@ const Filters = (props: FilterTypes) => {
   return (
     <>
       <FilterComponentDiv>
-        <label htmlFor="filter">Filters</label>
+        {location.pathname.includes("menu") ? (
+          <></>
+        ) : (
+          <label htmlFor="filter">Filters</label>
+        )}
 
         {/*----for-----Search----box---date box----or-----status/payment----date&status----not----visible----for---stocks---*/}
-        {`${title}` === "Stocks" ? (
+        {location.pathname.includes("/home/stocks") ||
+        location.pathname.includes("/menu") ? (
           <>
-            <InputDiv>
+            <InputDiv isTrue={location.pathname.includes("menu")}>
               <IconDiv>{icon}</IconDiv>
               <TextField
                 type="text"
@@ -56,7 +64,7 @@ const Filters = (props: FilterTypes) => {
           </>
         ) : (
           <>
-            <InputDiv>
+            <InputDiv isTrue={false}>
               <IconDiv>{icon}</IconDiv>
               <TextField
                 type="text"

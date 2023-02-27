@@ -1,4 +1,9 @@
 import styled from "@emotion/styled";
+import { boolean } from "yup";
+
+type menuTypes = {
+  isTrue: boolean;
+};
 
 export const FilterComponentDiv = styled("form")`
   display: flex;
@@ -25,7 +30,7 @@ export const FilterComponentDiv = styled("form")`
   }
 `;
 
-export const InputDiv = styled("div")`
+export const InputDiv = styled("div")<menuTypes>`
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -35,7 +40,7 @@ export const InputDiv = styled("div")`
   color: #676767;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
   border-radius: 5px;
-  width: 379px;
+  width: ${({ isTrue }) => (isTrue === true ? "1095px" : "379px")};
   height: 45px;
   text-transform: capitalize;
   background: #ffffff;
@@ -46,12 +51,20 @@ export const InputDiv = styled("div")`
     line-height: 19px;
     color: #676767;
     border: none;
-    width: 300px;
-    height: 42px;
+    width: ${({ isTrue }) => (isTrue === true ? "1000px" : "300px")};
+    height: 38px;
+    padding: 0 5px;
     background: transparent;
+    border-radius: 0;
   }
   input:focus {
     outline: none;
+  }
+  @media screen and (max-width: 1400px) {
+    width: 379px;
+    input {
+      width: 300px;
+    }
   }
 `;
 

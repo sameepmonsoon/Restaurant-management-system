@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { RxDashboard } from "react-icons/rx";
 import {
   SiderLogoDiv,
@@ -14,24 +14,19 @@ import {
 } from "./Sider.Style";
 import SiderButton from "../../../Components/SiderButton/SiderButton";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
-import { HiOutlineLogout } from "react-icons/hi";
+import { HiOutlineLogout, HiUserGroup } from "react-icons/hi";
 import { BsFileEarmarkBarGraph } from "react-icons/bs";
+import { RiFileListLine } from "react-icons/ri";
 import { Link, useNavigate, useLocation, matchPath } from "react-router-dom";
 
-// import { ReactComponent as TableIcon } from "/assets/tableIcon.svg";
-import Tables from "/assets/tableIcon.svg"
 import { title } from "process";
-import { GiRoundTable } from "react-icons/gi";
-import {BiDish} from "react-icons/bi";
-import {HiUserGroup} from "react-icons/hi"
-import {BiFoodMenu} from "react-icons/bi"
+import { BiDish } from "react-icons/bi";
 import DashboardButton from "../../../Components/DashboardButton/DashboardButton";
 import ReportButton from "../../../Components/ReportButton/ReportButton";
 import { siderToggle } from "../../../Pages/states/NavBar.state";
-
-
-
 export default function Sider() {
+  const [isOpen, setIsOpen] = useState(false);
+
   const navigate = useNavigate();
   const handleLogout = () => {
     navigate("/");
@@ -105,11 +100,8 @@ export default function Sider() {
           <Link
             to="/tables/floorFirst"
             style={{ color: "#090909", textDecoration: "none" }}>
-            <DashboardButton 
-              icon={<img src="/assets/tableIcon.svg"
-                    alt="Icon"
-                    
-              />}
+            <DashboardButton
+              icon={<img src="/assets/tableIcon.svg" alt="Icon" />}
               // icon={<Tables />}
               title={"Table"}
               location={getReport()}
@@ -119,35 +111,41 @@ export default function Sider() {
             to="/customer"
             style={{ color: "#090909", textDecoration: "none" }}>
             <DashboardButton
-              icon={<HiUserGroup size={26} />}
+              icon={<HiUserGroup size={25} />}
               title={"Customer"}
               location={location.pathname === "/customer"}
             />
           </Link>
-
           <Link
             to="/weborder"
             style={{ color: "#090909", textDecoration: "none" }}>
             <DashboardButton
-              icon={<BiDish size={28} />}
+              icon={<BiDish size={25} />}
               title={"Web Order"}
               location={location.pathname === "/weborder"}
             />
           </Link>
-
-          <Link to="/menu" style={{ color: "#090909", textDecoration: "none" }}>
+          <Link
+            to="/menu/0"
+            style={{ color: "#090909", textDecoration: "none" }}>
             <DashboardButton
-              icon={<BiFoodMenu size={28} />}
+              icon={<RiFileListLine size={25} />}
               title={"Menu"}
-              location={location.pathname === "/menu"}
+              location={location.pathname.includes("menu")}
             />
           </Link>
-
-          
           <Link
             to="/report/purchase"
-            style={{ color: "#090909", textDecoration: "none" }}>
+            style={{ color: "#090909", textDecoration: "none" }}
+            onClick={() => {
+              setIsOpen(!isOpen);
+              console.log(isOpen);
+            }}>
             <ReportButton
+              onClick={() => {
+                console.log("inside rb", isOpen);
+              }}
+              openDropDown={isOpen}
               icon1={<BsFileEarmarkBarGraph size={25} />}
               label={"Report"}
               icon2={<IoIosArrowUp size={25} />}
@@ -174,7 +172,7 @@ export default function Sider() {
             />
           </Link>
           <SettingDiv onClick={handleLogout}>
-            <HiOutlineLogout fontSize="2rem" />
+            <HiOutlineLogout size={30} />
             <span>Logout</span>
           </SettingDiv>
         </SiderButtonLabel>

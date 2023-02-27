@@ -9,7 +9,9 @@ export const TableCheck = styled("div")`
   width: 190px;
   height: 19px;
   svg {
-    color: #4aa6f7;
+    color: #ffe7e7;
+    border: 1px solid #9a9a9a;
+    border-radius: 50%;
   }
 `;
 
@@ -27,7 +29,11 @@ export const TableMain = styled("div")`
   align-items: flex-start;
   row-gap: 15px;
   flex: 1;
-  /* background-color: red; */
+  width: 80%;
+  margin-bottom: 10px;
+  @media screen and (min-width: 300px) and (max-width: 1500px) {
+    width: 77%;
+  }
 `;
 
 export const TableDiv = styled("div")`

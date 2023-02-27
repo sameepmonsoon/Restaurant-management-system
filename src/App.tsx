@@ -26,6 +26,7 @@ import { useTotalAmountStore } from "./Pages/states/TablesFilter.state";
 import { useEffect } from "react";
 import ReportTable from "./Components/reportTable/ReportTable";
 import OrderTableForm from "./PageComponent/forms/OrderTableForm";
+import MenuSubCategoryContent from "./Components/Menu/MenuSubCategoryContent/MenuSubCategoryContent";
 
 function App(props: any) {
   const { totalAmount, fetchTotalAmounts } = useTotalAmountStore(
@@ -45,6 +46,16 @@ function App(props: any) {
     {
       path: "/register",
       element: <Register />,
+    },
+    {
+      path: "/menu",
+      element: <Menu />,
+      children: [
+        {
+          path: ":id",
+          element: <MenuSubCategoryContent />,
+        },
+      ],
     },
 
     {
@@ -79,7 +90,10 @@ function App(props: any) {
       element: <Tables />,
       children: [
         { path: "floorFirst", element: <FloorFirst /> },
-      
+        {
+          path: "floorSecond",
+          element: <FloorSecond />,
+        },
       ],
     },
 
@@ -123,23 +137,17 @@ function App(props: any) {
         },
       ],
     },
-    {
-      path: "/menu",
-      element: <Menu />,
-    },
 
+    // {
+    //   path: "/menu",
+    //   element: <Menu />,
+    // },
     {
       path: "purchaseTable",
       element: <Purchase />,
     },
-    {
-      path:"tableForm"
-      ,element: <OrderTableForm/>
-    },
-    {
-      path: "/components",
-      element: <Components />,
-    },
+    { path: "tableForm", element: <OrderTableForm /> },
+    { path: "/components", element: <Components /> },
 
     // ,
     // {

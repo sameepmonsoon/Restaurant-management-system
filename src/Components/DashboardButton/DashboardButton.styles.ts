@@ -7,7 +7,7 @@ type SetTitle = {
 
 export const DashboardButtonMainDiv = styled("button")<SetTitle>`
   background-color: ${({ activeSider, disableTransition }) =>
-    activeSider === true || disableTransition ? "#313131" : "white"};
+    activeSider === true || disableTransition ? "#313131" : "#ffffff"};
   border: ${({ activeSider, disableTransition }) =>
     disableTransition === true ? "1px solid #00020f" : "red"};
   box-shadow: ${({ activeSider }) =>
@@ -22,6 +22,17 @@ export const DashboardButtonMainDiv = styled("button")<SetTitle>`
   div {
     color: ${({ activeSider, disableTransition }) =>
       activeSider === true || disableTransition ? "#ffffff" : "#9a9a9a"};
+    transition: gap 200ms ease, color 100ms ease-in;
+  }
+  div:hover {
+    column-gap: ${({ disableTransition, activeSider }) =>
+      activeSider === true || disableTransition ? "20px;" : "25px;"};
+  }
+  &:hover {
+    ${({ disableTransition }) =>
+      disableTransition
+        ? "background-color:#545454; transition:all 200ms ease;"
+        : ""};
   }
 `;
 export const DashboardButtonInnerDiv = styled("div")<SetTitle>`
@@ -32,10 +43,9 @@ export const DashboardButtonInnerDiv = styled("div")<SetTitle>`
   gap: 20px;
   /* gap: ${({ disableTransition }) =>
     disableTransition === true ? "20px" : "20px"}; */
-  transition: all 300ms ease;
   &:hover {
     margin-left: ${({ activeSider, disableTransition }) =>
-      activeSider === true || disableTransition ? "0" : "1rem;"};
+      activeSider === true || disableTransition ? "0" : "0rem;"};
     cursor: pointer;
 
     div {

@@ -4,8 +4,8 @@ import FiltersReport from "../Components/FiltersReport/FiltersReport";
 import React, { useState } from "react";
 type contextType = {
   dateAndTime: {
-    date1: null;
-    date2: null;
+    date1: Date | null;
+    date2: Date | null;
     isMonthly: false;
     isWeekly: false;
     isDaily: false;
@@ -20,14 +20,14 @@ export default function Reports() {
   const currentDate = `${current.getFullYear()}/${current.getMonth()}/${current.getDate()}`;
   const [dateAndTime, setDateAndTime] = useState<any>({
     date1: currentDate,
-    date2: null,
+    date2: currentDate,
     isMonthly: false,
     isWeekly: false,
     isDaily: true,
   });
   const [generateReport, setGenerateReport] = useState(false);
-  const {pathname}=useLocation()
-  const showReport=!pathname.includes("stocks")
+  const { pathname } = useLocation();
+  const showReport = !pathname.includes("stocks");
   return (
     // @ts-ignore
     <MyContext.Provider
@@ -38,10 +38,8 @@ export default function Reports() {
         setGenerateReport,
       }}>
       <ReportLayout>
-        {
-          showReport ? <FiltersReport />:<></> 
-        }
-       
+        {showReport ? <FiltersReport /> : <></>}
+
         <Outlet />
       </ReportLayout>
     </MyContext.Provider>
