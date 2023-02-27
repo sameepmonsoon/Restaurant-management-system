@@ -8,6 +8,7 @@ import Navbar from "../PageComponent/Dashboard/Navbar/Navbar";
 import Sider from "../PageComponent/Dashboard/Sider/Sider";
 import { InventoryDataType } from "../Types/Components/InventoryDataTpes";
 import { HTTPMethods } from "../Utils/HTTPMock";
+import TotalItems from "../Components/TotalItems/TotalItems";
 import { siderToggle } from "../Pages/states/NavBar.state";
 import {
   ChildrenDiv,
@@ -120,6 +121,7 @@ export default function DashboardLayout({
     }
     return "Title";
   }
+
   return (
     <>
       <DashboardMainDiv>

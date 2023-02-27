@@ -35,7 +35,7 @@ export const MenuLayoutSubCategory = styled("div")`
   align-items: flex-start;
   justify-content: flex-start;
   row-gap: 0px;
-  width: 60%;
+  width: 100%;
 `;
 export const MenuLayoutSubCategoryContent = styled("div")`
   display: flex;

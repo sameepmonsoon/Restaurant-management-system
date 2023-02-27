@@ -1,5 +1,5 @@
 export type MenuSubCategoriesTypes = {
-  title: string | null;
+  title?: string | null;
   amount: number | null;
   onClick?: () => void;
   editIcon?: React.ReactNode | null;
@@ -8,6 +8,7 @@ export type MenuSubCategoriesTypes = {
   clicked?: boolean;
   subCatImage?: string;
   subcatId?: boolean | any;
+  subCatIdforItem?: String;
   categoryList: Array<{
     category: String;
     subcategory: String;

@@ -1,4 +1,3 @@
-import { LocationOn, Title } from "@mui/icons-material";
 import React, { useState, useEffect } from "react";
 import {
   EditCategory,
@@ -9,10 +8,8 @@ import {
   MenuSubcatMainDiv,
   MenuSubCategoriesDiv,
 } from "./MenuSubCategories.style";
-
 import { MenuSubCategoriesTypes } from "../../../Types/Components/MenuSubCategoriesTypes";
 import { useNavigate, useParams } from "react-router-dom";
-// import image from "../../../../public/assets/KBLimage.jpg";
 const MenuSubCategories = (props: MenuSubCategoriesTypes) => {
   const {
     title,
@@ -50,35 +47,39 @@ const MenuSubCategories = (props: MenuSubCategoriesTypes) => {
     return () => setClick(false);
   }, [clicked]);
   return (
-    <MenuSubcatMainDiv {...rest}>
-      <MenuSubCategoriesDiv
-        clicked={click}
-        {...rest}
-        onClick={() => {
-          // navigate(`/menu/${visible}`);
-        }}
-        onMouseEnter={() => {
-          setHoveredIndex(`${subcatId}`);
-        }}
-        onMouseLeave={() => {
-          setHoveredIndex(null);
-        }}
-        key={subcatId}>
-        <img src={subCatImage} alt="Sub Category" />
-        {/* <ItemTitleAmount>
-          <ItemAmount>Rs. {visible}</ItemAmount>
-        </ItemTitleAmount> */}
-        {hoveredIndex == subcatId || click === true ? (
-          <EditCategory>
-            <Icon onClick={handleEdit}>{editIcon}</Icon>
-            <Icon onClick={handleDelete}>{deleteIcon}</Icon>
-          </EditCategory>
-        ) : (
-          <></>
-        )}
-      </MenuSubCategoriesDiv>
-      <ItemTitle>{title}</ItemTitle>
-    </MenuSubcatMainDiv>
+    <>
+      {title && (
+        <MenuSubcatMainDiv {...rest}>
+          <MenuSubCategoriesDiv
+            clicked={click}
+            {...rest}
+            onClick={() => {
+              // navigate(`/menu/${visible}`);
+            }}
+            onMouseEnter={() => {
+              setHoveredIndex(`${subcatId}`);
+            }}
+            onMouseLeave={() => {
+              setHoveredIndex(null);
+            }}
+            key={subcatId}>
+            <img src={subCatImage} alt="Sub Category" />
+            {/* <ItemTitleAmount>
+        <ItemAmount>Rs. {visible}</ItemAmount>
+      </ItemTitleAmount> */}
+            {hoveredIndex == subcatId || click === true ? (
+              <EditCategory>
+                <Icon onClick={handleEdit}>{editIcon}</Icon>
+                <Icon onClick={handleDelete}>{deleteIcon}</Icon>
+              </EditCategory>
+            ) : (
+              <></>
+            )}
+          </MenuSubCategoriesDiv>
+          <ItemTitle>{title}</ItemTitle>
+        </MenuSubcatMainDiv>
+      )}
+    </>
   );
 };
 

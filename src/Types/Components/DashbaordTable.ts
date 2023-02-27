@@ -1,7 +1,7 @@
-import { productObjectType } from "./ProductListsType"
+import { productObjectType } from "./ProductListsType";
 
-export type TableStatus={
-
-    data?: productObjectType[],
-    onDeleteSuccess: () => void;
-}
+export type TableStatus = {
+  data?: productObjectType[];
+  onDeleteSuccess: () => void;
+  pagination?: JSX.Element;
+};
