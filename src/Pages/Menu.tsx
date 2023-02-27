@@ -51,12 +51,12 @@ export default function Menu() {
             position: "bottom-right",
             toastId: "info1",
           });
-        }, 1500);
+        }, 300);
       })
       .finally(function () {
         setTimeout(() => {
           setIsLoading(false);
-        }, 1500);
+        }, 300);
       });
 
     // API CALL

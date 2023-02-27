@@ -58,10 +58,26 @@ function getMenu(url: string) {
     },
   });
 }
+
+function postMenu(url: string, data: any) {
+  if (!url) {
+    throw new Error("Url Not Provided");
+  }
+  return axios.post(BASE_URL_Menu + url, data);
+}
+
+function deleteMenu(url: string, data: any) {
+  if (!url) {
+    throw new Error("Error not provided");
+  }
+  return axios.delete(BASE_URL_Menu + url, data);
+}
 export const HTTPMethods = {
   get,
   post,
   put,
   deleteMethod,
   getMenu,
+  postMenu,
+  deleteMenu,
 };

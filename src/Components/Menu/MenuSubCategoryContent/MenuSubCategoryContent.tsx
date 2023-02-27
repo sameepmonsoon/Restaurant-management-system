@@ -12,7 +12,6 @@ import {
   MenuSubCategoryContentDiv,
 } from "./MenuSubCategoryContent.style";
 import { toast } from "react-toastify";
-import image from "../../../../public/assets/KBLimage.jpg";
 export default function MenuSubCategoryContent() {
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
@@ -21,6 +20,9 @@ export default function MenuSubCategoryContent() {
   const [mapSubcatId, setMapSubcatId] = useState<number | any>(1);
   const [subCatItemVisible, setSubCatItemVisible] = useState(false);
   const [subCategoryName, setSubCategoryName] = useState<string | any>("");
+  const [subCategoryParentId, setSubCategoryParentId] = useState<string | any>(
+    ""
+  );
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
@@ -35,7 +37,7 @@ export default function MenuSubCategoryContent() {
         }
       })
       .catch(async (err) => {
-        toast.error("cannot fetch subcategory item.", {
+        toast.error("Cannot fetch subcategory item.", {
           theme: "colored",
           hideProgressBar: true,
           autoClose: 2000,
@@ -46,7 +48,6 @@ export default function MenuSubCategoryContent() {
       });
   }, [id]);
   // @ts-ignore
-
   let filteredCat = [];
   let data = category.map((item: any) =>
     item.subcategory_name.toLocaleLowerCase()
@@ -68,9 +69,9 @@ export default function MenuSubCategoryContent() {
   return (
     <MenuSubCategoryContentMain>
       {loading ? (
-        <h1>Loading.....</h1>
+        <div>Loading..</div>
       ) : (
-        <MenuSubCategoryContentDiv>
+        <MenuSubCategoryContentDiv borderBottom={subCatItemVisible}>
           {category.map((subcat: any, index: any) => (
             <MenuSubCategories
               title={subcat.subcategory_name}
@@ -82,6 +83,7 @@ export default function MenuSubCategoryContent() {
                 setMapSubcatId(index);
                 setSubCatItemVisible(true);
                 setSubCategoryName(subcat.subcategory_name);
+                setSubCategoryParentId(subcat.subcategory_id);
               }}
               clicked={mapSubcatId}
               subcatId={index}
@@ -103,21 +105,11 @@ export default function MenuSubCategoryContent() {
       )}
 
       {subCatItemVisible && (
-        <MenuSubCategoryItem subcatParentId={mapSubcatId} />
+        <MenuSubCategoryItem
+          subcatParentId={subCategoryParentId}
+          clickedSubCat={subCategoryParentId}
+        />
       )}
     </MenuSubCategoryContentMain>
   );
 }
-
-const subCatItemList = [
-  { subCatItem: "ramyen", active: false, id: 1 },
-  { subCatItem: "dosa", active: false, id: 2 },
-  { subCatItem: "daal vaat", active: false, id: 3 },
-  { subCatItem: "ramyen", active: false, id: 4 },
-  { subCatItem: "gimbap", active: false, id: 5 },
-  { subCatItem: "noodles", active: false, id: 6 },
-  { subCatItem: "chowmein", active: false, id: 7 },
-  { subCatItem: "soba", active: false, id: 8 },
-  { subCatItem: "wine", active: false, id: 9 },
-  { subCatItem: "eggs", active: false, id: 10 },
-];

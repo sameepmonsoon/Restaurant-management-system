@@ -13,22 +13,35 @@ import { useNavigate, useParams } from "react-router-dom";
 import ActionButton from "../../ActionButton/ActionButton";
 import { MdAdd } from "react-icons/md";
 import Pagination from "../../../PageComponent/Pagination/Pagination";
+import { HTTPMethods } from "../../../Utils/HTTPMock";
 
 export const MyCategoryIdContext = createContext<any>(null);
 const MenuCategories = (props: MenuCategoriesTypes) => {
   const { title, deleteIcon, editIcon, clicked, categoryList, ...rest } = props;
   const { drawerSubCatId, setDrawerSubCatId } = useSubCategoryIdStore();
-
+  const [currentSubcatId, setCurrentSubcatId] = useState<string | any>("");
   const [category, setCategory] = useState(categoryList);
   const [hoveredIndex, setHoveredIndex] = useState<null | number>(null);
   const navigate = useNavigate();
   const { id } = useParams();
+
   const handleEdit = () => {
     // console.log(categoryData);
   };
 
-  const handleDelete = () => {
-    // console.log("Menu Item Delete");
+  // delte category
+  function handleDelete(subCatID: any) {
+    alert(subCatID);
+    HTTPMethods.deleteMenu(`/category/deletecategory/`, {})
+      .then(async (res) => console.log("successfully deleted"))
+      .catch(async (err) => console.log("error while deleting"));
+  }
+
+  // add new category
+  const addCategory = () => {
+    HTTPMethods.postMenu("category/addcategory", {}).then(async (res: any) =>
+      alert(res)
+    );
   };
 
   useEffect(() => {
@@ -63,7 +76,9 @@ const MenuCategories = (props: MenuCategoriesTypes) => {
             {hoveredIndex === idx || item.active ? (
               <EditCategory>
                 <Icon onClick={handleEdit}>{editIcon}</Icon>
-                <Icon onClick={handleDelete}>{deleteIcon}</Icon>
+                <Icon onClick={() => handleDelete(item.category_id)}>
+                  {deleteIcon}
+                </Icon>
               </EditCategory>
             ) : (
               <></>
@@ -73,7 +88,7 @@ const MenuCategories = (props: MenuCategoriesTypes) => {
         <ActionButton
           icon={<MdAdd size={25} />}
           label={"add category"}
-          onClick={() => {}}
+          onClick={addCategory}
           forMenuCat={true}
         />
       </MenuCategoryMainDIv>

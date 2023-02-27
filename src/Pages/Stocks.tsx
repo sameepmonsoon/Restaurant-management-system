@@ -62,6 +62,6 @@ export default function Stocks() {
       />
     </>
   ) : (
-    <div>Loading</div>
+    <div>No Data to Show</div>
   );
 }
