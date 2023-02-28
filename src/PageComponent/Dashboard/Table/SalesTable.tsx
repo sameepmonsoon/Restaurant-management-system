@@ -22,6 +22,7 @@ import { toast } from "react-toastify";
 import { left } from "@popperjs/core";
 import { useFilterStore } from "../../../Pages/states/TablesFilter.state";
 import { useLocation } from "react-router-dom";
+import AlertModal from "../../../Components/AlertDeleteModal/AlertModal";
 
 const SalesTable = (props: TableStatus) => {
   const { data, onDeleteSuccess } = props;
@@ -30,7 +31,9 @@ const SalesTable = (props: TableStatus) => {
   const [clickedData, setClickedData] = useState(null);
   const [val, setVal] = useState(true);
   const searchedTerm = useFilterStore((state: any) => state.searchTerm);
-
+  const [openModal, setOpenModal] = useState(false);
+  const [deleteItem, setDeleteItem] = useState(false);
+  const [deleteProduct, setDeleteProduct] = useState<[] | any>();
   const location = useLocation();
   const isSales = location.pathname.includes("home");
   const openMenu = (data: any) => {
@@ -47,7 +50,7 @@ const SalesTable = (props: TableStatus) => {
     toggleDrawer();
   };
   function deleteSales(product: any) {
-    HTTPMethods.deleteMethod(`/new_sales/delete/${product.id}`, {})
+    HTTPMethods.deleteMethod(`/new_sales/delete/`, {})
       .then(function (resp) {
         toast.success("delete successful", {
           theme: "colored",
@@ -55,6 +58,9 @@ const SalesTable = (props: TableStatus) => {
           autoClose: 1000,
         });
         onDeleteSuccess();
+        setTimeout(() => {
+          setOpenModal(false);
+        }, 2500);
       })
 
       .catch(function (err) {
@@ -62,8 +68,17 @@ const SalesTable = (props: TableStatus) => {
           hideProgressBar: true,
           autoClose: 1000,
         });
+        setTimeout(() => {
+          setOpenModal(false);
+        }, 3000);
       });
   }
+  useEffect(() => {
+    if (openModal && deleteItem) {
+      deleteSales(deleteProduct);
+      setDeleteItem(false);
+    }
+  }, [openModal, deleteItem]);
   return (
     <TableWithPagination>
       <MainTableDiv>
@@ -138,7 +153,10 @@ const SalesTable = (props: TableStatus) => {
                       <Button
                         type="reset"
                         variant="contained"
-                        onClick={() => deleteSales(product)}>
+                        onClick={() => {
+                          setOpenModal(true);
+                          setDeleteProduct(product);
+                        }}>
                         Delete
                       </Button>
                     </TableDataAction>
@@ -147,6 +165,14 @@ const SalesTable = (props: TableStatus) => {
               ))}
         </TableBody>
       </MainTableDiv>
+      {openModal && (
+        <AlertModal
+          title={"Are you sure you want to delete?"}
+          setOpenModal={setOpenModal}
+          setDeleteItem={setDeleteItem}
+          deleteItem={deleteItem}
+        />
+      )}
     </TableWithPagination>
   );
 };

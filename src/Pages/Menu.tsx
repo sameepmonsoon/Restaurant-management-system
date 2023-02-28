@@ -36,9 +36,8 @@ export default function Menu() {
     // id of chicken category ---intended to display the sub categories on initial render
     setDrawerSubCatId("80ce259c-2ece-4de1-b685-35ad3f25c2b7");
 
-    HTTPMethods.getMenu("/category/readallcategory")
+    HTTPMethods.getMenu("/category/readallcategory?page=1&offset=10")
       .then(async (res: any) => {
-        // setDrawerSubCatId(res.data.payload.category[0]);
         setCategory(res.data.payload.category);
       })
       .catch(async (err) => {

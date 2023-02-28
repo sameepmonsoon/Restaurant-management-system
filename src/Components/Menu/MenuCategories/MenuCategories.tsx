@@ -14,6 +14,8 @@ import ActionButton from "../../ActionButton/ActionButton";
 import { MdAdd } from "react-icons/md";
 import Pagination from "../../../PageComponent/Pagination/Pagination";
 import { HTTPMethods } from "../../../Utils/HTTPMock";
+import { toast } from "react-toastify";
+import AlertModal from "../../AlertDeleteModal/AlertModal";
 
 export const MyCategoryIdContext = createContext<any>(null);
 const MenuCategories = (props: MenuCategoriesTypes) => {
@@ -22,6 +24,10 @@ const MenuCategories = (props: MenuCategoriesTypes) => {
   const [currentSubcatId, setCurrentSubcatId] = useState<string | any>("");
   const [category, setCategory] = useState(categoryList);
   const [hoveredIndex, setHoveredIndex] = useState<null | number>(null);
+  const [openModal, setOpenModal] = useState(false);
+  const [deleteItem, setDeleteItem] = useState(false);
+  const [deleteCategoryId, setDeleteCategoryId] = useState("");
+
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -30,11 +36,32 @@ const MenuCategories = (props: MenuCategoriesTypes) => {
   };
 
   // delte category
-  function handleDelete(subCatID: any) {
-    alert(subCatID);
+  function handleDelete(subCatId: any) {
     HTTPMethods.deleteMenu(`/category/deletecategory/`, {})
-      .then(async (res) => console.log("successfully deleted"))
-      .catch(async (err) => console.log("error while deleting"));
+      .then(async (res) => {
+        toast.success("Category deleted Successfully.", {
+          theme: "colored",
+          hideProgressBar: true,
+          autoClose: 1500,
+          position: "bottom-right",
+          toastId: "info1",
+        });
+        setTimeout(() => {
+          setOpenModal(false);
+        }, 3000);
+      })
+      .catch(async (err) => {
+        toast.error("Selected Category cannot be deleted.", {
+          theme: "colored",
+          hideProgressBar: true,
+          autoClose: 1500,
+          position: "bottom-right",
+          toastId: "info1",
+        });
+        setTimeout(() => {
+          setOpenModal(false);
+        }, 3000);
+      });
   }
 
   // add new category
@@ -55,6 +82,13 @@ const MenuCategories = (props: MenuCategoriesTypes) => {
       })
     );
   }, [id]);
+
+  useEffect(() => {
+    if (openModal && deleteItem) {
+      handleDelete(deleteCategoryId);
+      setDeleteItem(false);
+    }
+  }, [openModal, deleteItem]);
   return (
     <>
       {/* <MyCategoryIdContext.Provider value={"green"}>
@@ -76,7 +110,12 @@ const MenuCategories = (props: MenuCategoriesTypes) => {
             {hoveredIndex === idx || item.active ? (
               <EditCategory>
                 <Icon onClick={handleEdit}>{editIcon}</Icon>
-                <Icon onClick={() => handleDelete(item.category_id)}>
+                <Icon
+                  onClick={() => {
+                    setOpenModal(true);
+                    // @ts-ignore
+                    setDeleteCategoryId(item.category_id);
+                  }}>
                   {deleteIcon}
                 </Icon>
               </EditCategory>
@@ -85,6 +124,7 @@ const MenuCategories = (props: MenuCategoriesTypes) => {
             )}
           </MenuCategoriesDiv>
         ))}
+
         <ActionButton
           icon={<MdAdd size={25} />}
           label={"add category"}
@@ -92,6 +132,14 @@ const MenuCategories = (props: MenuCategoriesTypes) => {
           forMenuCat={true}
         />
       </MenuCategoryMainDIv>
+      {openModal && (
+        <AlertModal
+          title={"Are you sure you want to delete?"}
+          setOpenModal={setOpenModal}
+          setDeleteItem={setDeleteItem}
+          deleteItem={deleteItem}
+        />
+      )}
     </>
   );
 };

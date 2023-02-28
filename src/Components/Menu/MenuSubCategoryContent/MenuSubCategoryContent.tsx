@@ -40,7 +40,7 @@ export default function MenuSubCategoryContent() {
         toast.error("Cannot fetch subcategory item.", {
           theme: "colored",
           hideProgressBar: true,
-          autoClose: 2000,
+          autoClose: 1500,
           position: "bottom-right",
           toastId: "info1",
         });
@@ -65,7 +65,6 @@ export default function MenuSubCategoryContent() {
       }
       return 0;
     });
-  console.log(subCatItemVisible, drawerSubCatId);
   return (
     <MenuSubCategoryContentMain>
       {loading ? (
@@ -108,6 +107,9 @@ export default function MenuSubCategoryContent() {
         <MenuSubCategoryItem
           subcatParentId={subCategoryParentId}
           clickedSubCat={subCategoryParentId}
+          deleteIcon={<MdDeleteOutline size={25} />}
+          editIcon={<HiOutlinePencil size={25} />}
+          onClick={() => {}}
         />
       )}
     </MenuSubCategoryContentMain>
