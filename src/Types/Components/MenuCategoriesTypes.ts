@@ -8,6 +8,7 @@ export type MenuCategoriesTypes = {
 
   categoryList: Array<{
     category_name: String;
+    category_id: String;
     subcategory: String;
     active: boolean;
     id: number;

@@ -11,6 +11,7 @@ import {
   TableRow,
   TableDataStatus,
   TableDataAction,
+  TableWithPagination,
 } from "./Table.styles";
 import { Button } from "@mui/material";
 import { HTTPMethods } from "../../../Utils/HTTPMock";
@@ -64,11 +65,10 @@ const SalesTable = (props: TableStatus) => {
       });
   }
   return (
-    <>
+    <TableWithPagination>
       <MainTableDiv>
         <TableHeader>
           <TableHeadData>
-            {" "}
             <input type="checkbox" name="" id="" />
             id <HiChevronDown />
           </TableHeadData>
@@ -114,20 +114,18 @@ const SalesTable = (props: TableStatus) => {
               .map((product, index) => (
                 <TableRow>
                   <TableData style={{ justifyContent: "center" }}>
-                    {" "}
                     {index + 1}
                   </TableData>
                   <TableData>{product.date}</TableData>
                   <TableData>{product.item_name}</TableData>
                   <TableData>
-                    {product.quantity}{" "}
+                    {product.quantity}
                     <span style={{ marginLeft: "3px" }}>{product.unit}</span>
                   </TableData>
                   <TableData>{product.per_piece}</TableData>
                   <TableData>{product.total_amount}</TableData>
-
                   <TableDataStatus status={product.status}>
-                    <p>{product.status}</p>
+                    {product.status}
                   </TableDataStatus>
                   {isSales && (
                     <TableDataAction>
@@ -149,7 +147,7 @@ const SalesTable = (props: TableStatus) => {
               ))}
         </TableBody>
       </MainTableDiv>
-    </>
+    </TableWithPagination>
   );
 };
 

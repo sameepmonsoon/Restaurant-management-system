@@ -1,6 +1,14 @@
 import styled from "@emotion/styled";
 import { TableStatusStyled } from "../../../Types/Components/DashboardTableStyles";
 
+export const TableWithPagination = styled("div")`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  row-gap: 41px;
+`;
 export const MainTableDiv = styled("table")`
   border-collapse: collapse;
   display: flex;
@@ -8,6 +16,8 @@ export const MainTableDiv = styled("table")`
   flex-wrap: nowrap;
   box-sizing: border-box;
   width: 74vw;
+  justify-content: center;
+  align-items: center;
   @media screen and (max-width: 1400px) {
     width: 70vw;
   }
@@ -18,21 +28,22 @@ export const TableHeader = styled("thead")`
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
-  width: 74vw;
+  min-width: 100%;
+  max-width: 74vw;
   height: 46px;
   background: #ffffff;
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15);
   border-radius: 5px 5px 0px 0px;
-
   @media screen and (max-width: 1200px) {
-    width: 100%;
   }
 `;
 
 export const TableBody = styled("tbody")`
+  min-width: 100%;
+  max-width: 74vw;
   tr {
     margin-top: 10px;
-    height: 62px;
+    min-height: 62px;
   }
 `;
 
@@ -41,12 +52,14 @@ export const TableRow = styled("tr")`
   flex-direction: row;
   align-items: center;
   flex-wrap: nowrap;
-  width: 74vw;
+  min-width: 100%;
+  max-width: 74vw;
+  align-items: center;
+  justify-content: flex-start;
   background: #ffffff;
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15);
 
   @media screen and (max-width: 1200px) {
-    width: 100%;
   }
 `;
 
@@ -57,6 +70,7 @@ export const TableDataStatus = styled("span")<TableStatusStyled>`
   justify-content: center;
   font-style: normal;
   font-weight: 500;
+  flex: 1;
   font-size: 14px;
   line-height: 17px;
   letter-spacing: 0.01em;

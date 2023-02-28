@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { HiOutlinePencil } from "react-icons/hi";
 import { MdAdd, MdDeleteOutline } from "react-icons/md";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { HTTPMethods } from "../../../Utils/HTTPMock";
 import ActionButton from "../../ActionButton/ActionButton";
 import MenuSubCategories from "../MenuSubCategories/MenuSubCategories";
@@ -12,49 +12,50 @@ import {
   MenuSubCategoryContentDiv,
 } from "./MenuSubCategoryContent.style";
 import { toast } from "react-toastify";
-import image from "../../../../public/assets/KBLimage.jpg";
 export default function MenuSubCategoryContent() {
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
-  const [category, setCategory] = useState([]);
+  const [category, setCategory] = useState<any>([]);
   const { drawerSubCatId, setDrawerSubCatId } = useSubCategoryIdStore();
-  // const [subCatList, setSubCatList] = useState(subCategoryList);
   const [mapSubcatId, setMapSubcatId] = useState<number | any>(1);
+  const [subCatItemVisible, setSubCatItemVisible] = useState(false);
+  const [subCategoryName, setSubCategoryName] = useState<string | any>("");
+  const [subCategoryParentId, setSubCategoryParentId] = useState<string | any>(
+    ""
+  );
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
-
+    }, 700);
     HTTPMethods.getMenu(`/menu/readsubcatgory/${drawerSubCatId}`)
       .then(async (res: any) => {
-        setCategory(res.data.payload.dish);
-        setDrawerSubCatId("");
+        if (res.data.payload.subcategory.length === 0) {
+          setCategory([]);
+        } else {
+          setCategory(res.data.payload.subcategory);
+        }
       })
       .catch(async (err) => {
-        toast.info("cannot fetch sub cat.", {
+        toast.error("Cannot fetch subcategory item.", {
           theme: "colored",
           hideProgressBar: true,
           autoClose: 2000,
           position: "bottom-right",
           toastId: "info1",
         });
-      })
-      .finally(function () {
-        setDrawerSubCatId("");
+        setCategory([]);
       });
   }, [id]);
   // @ts-ignore
-
   let filteredCat = [];
-  // @ts-ignore
-  let data = category.map((item) => item.subcategory_name.toLocaleLowerCase());
+  let data = category.map((item: any) =>
+    item.subcategory_name.toLocaleLowerCase()
+  );
   filteredCat = category
-    .filter((item, idx) => category.indexOf(item) === idx)
-    .sort(function (a, b) {
-      // @ts-ignore
+    .filter((item: any, idx: any) => category.indexOf(item) === idx)
+    .sort(function (a: any, b: any) {
       let x = a.subcategory_name.toLowerCase();
-      // @ts-ignore
       let y = b.subcategory_name.toLowerCase();
       if (x < y) {
         return -1;
@@ -64,40 +65,34 @@ export default function MenuSubCategoryContent() {
       }
       return 0;
     });
-
+  console.log(subCatItemVisible, drawerSubCatId);
   return (
     <MenuSubCategoryContentMain>
       {loading ? (
-        <h1>Loading.....</h1>
+        <div>Loading..</div>
       ) : (
-        <MenuSubCategoryContentDiv>
-          {category.map((subcat, index) => (
+        <MenuSubCategoryContentDiv borderBottom={subCatItemVisible}>
+          {category.map((subcat: any, index: any) => (
             <MenuSubCategories
-              // @ts-ignore
               title={subcat.subcategory_name}
-              // @ts-ignore
               amount={subcat.id}
               deleteIcon={<MdDeleteOutline size={25} />}
               editIcon={<HiOutlinePencil size={25} />}
               onClick={() => {
-                // @ts-ignore
+                // set for click event selects the subcat
                 setMapSubcatId(index);
-                // @ts-ignore
-
-                // setSelectSubCategory(!selectSubCategory);
+                setSubCatItemVisible(true);
+                setSubCategoryName(subcat.subcategory_name);
+                setSubCategoryParentId(subcat.subcategory_id);
               }}
               clicked={mapSubcatId}
-              // @ts-ignore
               subcatId={index}
               // @ts-ignore
-
               categoryList={filteredCat}
-              // @ts-ignore
               active={subcat.active}
-              // @ts-ignore
               key={subcat.id}
-              // @ts-ignore
               subCatImage={`http://backend1.kpop.com.np/public/SubCategory_Images/${subcat.subcategory_image}`}
+              subCatIdforItem={subcat.subcategory_id}
             />
           ))}
           <ActionButton
@@ -108,27 +103,13 @@ export default function MenuSubCategoryContent() {
           />
         </MenuSubCategoryContentDiv>
       )}
-      {mapSubcatId.length != 0 && (
+
+      {subCatItemVisible && (
         <MenuSubCategoryItem
-          subcatParentId={mapSubcatId}
-          itemName={`Spicy Ramen ${mapSubcatId}`}
-          subCatItemList={subCatItemList}
-          subCatItemImage={image}
+          subcatParentId={subCategoryParentId}
+          clickedSubCat={subCategoryParentId}
         />
       )}
     </MenuSubCategoryContentMain>
   );
 }
-
-const subCatItemList = [
-  { subCatItem: "ramyen", active: false, id: 1 },
-  { subCatItem: "dosa", active: false, id: 2 },
-  { subCatItem: "daal vaat", active: false, id: 3 },
-  { subCatItem: "ramyen", active: false, id: 4 },
-  { subCatItem: "gimbap", active: false, id: 5 },
-  { subCatItem: "noodles", active: false, id: 6 },
-  { subCatItem: "chowmein", active: false, id: 7 },
-  { subCatItem: "soba", active: false, id: 8 },
-  { subCatItem: "wine", active: false, id: 9 },
-  { subCatItem: "eggs", active: false, id: 10 },
-];

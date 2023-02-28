@@ -12,18 +12,16 @@ import {
   SiderLogoSubHeader,
   SiderButtonTitle,
 } from "./Sider.Style";
-import SiderButton from "../../../Components/SiderButton/SiderButton";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { HiOutlineLogout, HiUserGroup } from "react-icons/hi";
 import { BsFileEarmarkBarGraph } from "react-icons/bs";
 import { RiFileListLine } from "react-icons/ri";
 import { Link, useNavigate, useLocation, matchPath } from "react-router-dom";
-
-import { title } from "process";
 import { BiDish } from "react-icons/bi";
 import DashboardButton from "../../../Components/DashboardButton/DashboardButton";
 import ReportButton from "../../../Components/ReportButton/ReportButton";
 import { siderToggle } from "../../../Pages/states/NavBar.state";
+import { GiRoundTable } from "react-icons/gi";
 export default function Sider() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -101,8 +99,7 @@ export default function Sider() {
             to="/tables/floorFirst"
             style={{ color: "#090909", textDecoration: "none" }}>
             <DashboardButton
-              icon={<img src="/assets/tableIcon.svg" alt="Icon" />}
-              // icon={<Tables />}
+              icon={<GiRoundTable size={27} />}
               title={"Table"}
               location={getReport()}
             />

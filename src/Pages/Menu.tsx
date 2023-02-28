@@ -15,6 +15,7 @@ import Navbar from "../PageComponent/Dashboard/Navbar/Navbar";
 import { siderToggle } from "./states/NavBar.state";
 import { HTTPMethods } from "../Utils/HTTPMock";
 import { useSubCategoryIdStore } from "../Pages/states/MenuCategory.state";
+import { toast } from "react-toastify";
 
 export default function Menu() {
   const [category, setCategory] = useState<any>([]);
@@ -28,25 +29,38 @@ export default function Menu() {
   const navigate = useNavigate();
   useEffect(() => {
     setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      // ON SUCCESS CALL
-      // Take id of fist category
-      navigate("/menu/0");
-      setDrawerSubCatId("80ce259c-2ece-4de1-b685-35ad3f25c2b7");
-    }, 2500);
+    navigate("/menu/0");
+    // ON SUCCESS CALL
+    // Take id of fist category
+
+    // id of chicken category ---intended to display the sub categories on initial render
+    setDrawerSubCatId("80ce259c-2ece-4de1-b685-35ad3f25c2b7");
 
     HTTPMethods.getMenu("/category/readallcategory")
       .then(async (res: any) => {
+        // setDrawerSubCatId(res.data.payload.category[0]);
         setCategory(res.data.payload.category);
-        console.log(category);
       })
       .catch(async (err) => {
-        console.log(err);
+        setIsLoading(true);
+        setTimeout(() => {
+          toast.error("Cannot read Category", {
+            theme: "colored",
+            hideProgressBar: true,
+            autoClose: 2000,
+            position: "bottom-right",
+            toastId: "info1",
+          });
+        }, 300);
+      })
+      .finally(function () {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 300);
       });
 
     // API CALL
-  }, [0]);
+  }, []);
 
   // const uniqueCategory = (x: any, i: any, a: any) => a.indexOf(x) === i;
 
@@ -76,6 +90,7 @@ export default function Menu() {
 
   // console.log("inside menu filter cat cat", data);
   // console.log("inside category list", categoryList);
+
   return (
     <>
       <DashboardMainDiv>

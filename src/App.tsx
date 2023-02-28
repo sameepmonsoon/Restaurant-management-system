@@ -27,6 +27,7 @@ import { useEffect } from "react";
 import ReportTable from "./Components/reportTable/ReportTable";
 import OrderTableForm from "./PageComponent/forms/OrderTableForm";
 import MenuSubCategoryContent from "./Components/Menu/MenuSubCategoryContent/MenuSubCategoryContent";
+import Pagination from "./PageComponent/Pagination/Pagination";
 
 function App(props: any) {
   const { totalAmount, fetchTotalAmounts } = useTotalAmountStore(

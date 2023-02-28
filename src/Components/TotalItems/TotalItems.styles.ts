@@ -22,11 +22,14 @@ export const TotalItemDiv = styled("span")`
   background: #ffffff;
   order: 2;
   color: #676767;
+  min-width: 50px;
+  max-width: 300px;
+  overflow: hidden;
   height: 30px;
   display: flex;
   padding: 0px 5px;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
   border-radius: 5px;
   padding-left: 5px;

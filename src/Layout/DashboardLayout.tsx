@@ -2,12 +2,10 @@ import React, { useEffect, useState } from "react";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { BsTag } from "react-icons/bs";
 import { CiBoxes } from "react-icons/ci";
-import { toast } from "react-toastify";
 import InventoryCard from "../Components/InventoryCard/InventoryCard";
 import Navbar from "../PageComponent/Dashboard/Navbar/Navbar";
 import Sider from "../PageComponent/Dashboard/Sider/Sider";
 import { InventoryDataType } from "../Types/Components/InventoryDataTpes";
-import { HTTPMethods } from "../Utils/HTTPMock";
 import { siderToggle } from "../Pages/states/NavBar.state";
 import {
   ChildrenDiv,
@@ -20,7 +18,6 @@ import {
 import { DashboardMainDiv } from "./DashboardLayout.style";
 import DrawerC from "../PageComponent/Dashboard/Drawer/Drawer";
 import { useDrawer } from "../Pages/states/Drawer.state";
-import { TextField } from "../Components/TextField";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import PurchaseForm from "../PageComponent/forms/PurchaseForm";
 import SalesForm from "../PageComponent/forms/SalesForm";
@@ -120,6 +117,7 @@ export default function DashboardLayout({
     }
     return "Title";
   }
+
   return (
     <>
       <DashboardMainDiv>

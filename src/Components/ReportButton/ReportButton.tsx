@@ -1,8 +1,5 @@
 import { useState } from "react";
-import { AiFillPrinter } from "react-icons/ai";
-import { BsFileEarmarkBarGraph } from "react-icons/bs";
-import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { ReportButtonTypes } from "../../Types/Components/ReportButtonTypes";
 import {
   DropdownHeader,

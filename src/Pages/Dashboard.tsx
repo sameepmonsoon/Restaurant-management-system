@@ -1,5 +1,4 @@
 import DashboardLayout from "../Layout/DashboardLayout";
-import { useNavigate } from "react-router-dom";
 import { Navigate, Outlet, useLocation } from "react-router";
 import ActionButton from "../Components/ActionButton/ActionButton";
 import { MdAdd } from "react-icons/md";
@@ -9,16 +8,58 @@ import { FiSearch, FiCalendar } from "react-icons/fi";
 import { RiLoader2Fill } from "react-icons/ri";
 import TotalItems from "../Components/TotalItems/TotalItems";
 import { DOMToggleButtonName } from "../Utils/DOMToggleButtonName";
+import {
+  useProductStore,
+  useSalesStore,
+  useTotalAmountStore,
+} from "./states/TablesFilter.state";
 
 function Dashboard() {
   const location = useLocation();
-
+  const { totalAmount } = useTotalAmountStore((state: any) => ({
+    totalAmount: state.totalAmounts,
+  }));
+  const [products] = useProductStore((state: any) => [
+    state.products,
+    state.fetchProducts,
+  ]);
+  const [salesProducts] = useSalesStore((state: any) => [
+    state.salesProducts,
+    state.loading,
+    state.fetchSales,
+  ]);
   const { open, toggleDrawer } = useDrawer();
   function openDrawer() {
-    console.log("inside open drawer", open);
     toggleDrawer();
   }
+  // for total cart items
+  const cart_total_sales = salesProducts.length
+    ? salesProducts.length !== undefined
+      ? `${salesProducts.length}`
+      : "0"
+    : "Loading";
+  const cart_total_purchase = products.length
+    ? `${products.length}`
+    : products.length === 0
+    ? " 0"
+    : "Loading";
+  const cart_total_stocks =
+    totalAmount.total_stocks !== undefined
+      ? totalAmount.total_stocks !== 0
+        ? `${totalAmount.total_stocks}`
+        : "0"
+      : "loading";
 
+  function getTotalItems() {
+    if (location.pathname === "/home/stocks") {
+      return cart_total_stocks;
+    } else if (location.pathname === "/home/sales") {
+      return cart_total_sales;
+    } else if (location.pathname === "/home/purchase") {
+      return cart_total_purchase;
+    } else return "0";
+  }
+  // for action label
   function actionLabel() {
     if (location.pathname === "/home/purchase") return "Add Purchase";
 
@@ -62,7 +103,7 @@ function Dashboard() {
           statusIcon={<RiLoader2Fill size={20} />}
         />
       }
-      renderTotalitems={<TotalItems totalItems={1234567} />}>
+      renderTotalitems={<TotalItems totalItems={getTotalItems()} />}>
       <Outlet />
     </DashboardLayout>
   );

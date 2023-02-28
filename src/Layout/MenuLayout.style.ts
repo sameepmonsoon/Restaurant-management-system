@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
-
-export const MenuLayoutMainDiv = styled("div")`
+type MenuOpenSiderTypes = {
+  openSider: boolean;
+};
+export const MenuLayoutMainDiv = styled("div")<MenuOpenSiderTypes>`
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 100px 89%;
@@ -9,7 +11,7 @@ export const MenuLayoutMainDiv = styled("div")`
   row-gap: 10px;
   margin: 20px 0 20px 50px;
   overflow: hidden;
-  padding-top: 30px;
+  padding-top: 50px;
   @media screen and (max-width: 1300px) {
   }
 `;
@@ -35,7 +37,7 @@ export const MenuLayoutSubCategory = styled("div")`
   align-items: flex-start;
   justify-content: flex-start;
   row-gap: 0px;
-  width: 60%;
+  width: 100%;
 `;
 export const MenuLayoutSubCategoryContent = styled("div")`
   display: flex;

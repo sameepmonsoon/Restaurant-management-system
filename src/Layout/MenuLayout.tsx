@@ -27,7 +27,7 @@ const MenuLayout = ({
   const { openSider } = siderToggle();
   return (
     <>
-      <MenuLayoutMainDiv>
+      <MenuLayoutMainDiv openSider={openSider}>
         {filter}
         <MenuCatSubcatDiv>
           <MenuLayoutCategory>

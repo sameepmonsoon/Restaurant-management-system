@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, createContext } from "react";
 import {
   CategoryTitle,
   EditCategory,
@@ -12,24 +12,39 @@ import { MenuCategoriesTypes } from "../../../Types/Components/MenuCategoriesTyp
 import { useNavigate, useParams } from "react-router-dom";
 import ActionButton from "../../ActionButton/ActionButton";
 import { MdAdd } from "react-icons/md";
+import Pagination from "../../../PageComponent/Pagination/Pagination";
+import { HTTPMethods } from "../../../Utils/HTTPMock";
+
+export const MyCategoryIdContext = createContext<any>(null);
 const MenuCategories = (props: MenuCategoriesTypes) => {
-  const { drawerSubCatId, setDrawerSubCatId } = useSubCategoryIdStore();
   const { title, deleteIcon, editIcon, clicked, categoryList, ...rest } = props;
+  const { drawerSubCatId, setDrawerSubCatId } = useSubCategoryIdStore();
+  const [currentSubcatId, setCurrentSubcatId] = useState<string | any>("");
   const [category, setCategory] = useState(categoryList);
   const [hoveredIndex, setHoveredIndex] = useState<null | number>(null);
   const navigate = useNavigate();
   const { id } = useParams();
-  const uniqueCategory = (x: any, i: any, a: any) => a.indexOf(x) === i;
+
   const handleEdit = () => {
     // console.log(categoryData);
   };
 
-  const handleDelete = () => {
-    // console.log("Menu Item Delete");
+  // delte category
+  function handleDelete(subCatID: any) {
+    alert(subCatID);
+    HTTPMethods.deleteMenu(`/category/deletecategory/`, {})
+      .then(async (res) => console.log("successfully deleted"))
+      .catch(async (err) => console.log("error while deleting"));
+  }
+
+  // add new category
+  const addCategory = () => {
+    HTTPMethods.postMenu("category/addcategory", {}).then(async (res: any) =>
+      alert(res)
+    );
   };
 
   useEffect(() => {
-    console.log("inside categoryList ", category);
     setCategory(
       category.map((cat: any, index: number) => {
         // @ts-ignore
@@ -42,18 +57,18 @@ const MenuCategories = (props: MenuCategoriesTypes) => {
   }, [id]);
   return (
     <>
+      {/* <MyCategoryIdContext.Provider value={"green"}>
+        <Pagination />
+      </MyCategoryIdContext.Provider> */}
       <MenuCategoryMainDIv {...rest}>
         <MenuTitleName>Categories</MenuTitleName>
 
-        {categoryList.map((item, idx) => (
+        {category.map((item, idx) => (
           <MenuCategoriesDiv
             clicked={item.active}
             onClick={() => {
               navigate(`/menu/${idx}`);
-              // @ts-ignore
-              setDrawerSubCatId(item.category_id); // @ts-ignore
-
-              // @ts-ignore
+              setDrawerSubCatId(item.category_id);
             }}
             onMouseEnter={() => setHoveredIndex(idx)}
             onMouseLeave={() => setHoveredIndex(null)}>
@@ -61,7 +76,9 @@ const MenuCategories = (props: MenuCategoriesTypes) => {
             {hoveredIndex === idx || item.active ? (
               <EditCategory>
                 <Icon onClick={handleEdit}>{editIcon}</Icon>
-                <Icon onClick={handleDelete}>{deleteIcon}</Icon>
+                <Icon onClick={() => handleDelete(item.category_id)}>
+                  {deleteIcon}
+                </Icon>
               </EditCategory>
             ) : (
               <></>
@@ -71,7 +88,7 @@ const MenuCategories = (props: MenuCategoriesTypes) => {
         <ActionButton
           icon={<MdAdd size={25} />}
           label={"add category"}
-          onClick={() => {}}
+          onClick={addCategory}
           forMenuCat={true}
         />
       </MenuCategoryMainDIv>

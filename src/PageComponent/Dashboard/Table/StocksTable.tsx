@@ -10,17 +10,18 @@ import {
   TableHeadData,
   TableRow,
   TableDataStatus,
+  TableWithPagination,
 } from "./Table.styles";
 import { useState } from "react";
 import { HTTPMethods } from "../../../Utils/HTTPMock";
 import { useFilterStore } from "../../../Pages/states/TablesFilter.state";
 
 const StocksTable = (props: TableStatus) => {
-  const { data } = props;
+  const { data, pagination } = props;
   const searchedTerm = useFilterStore((state: any) => state.searchTerm);
 
   return (
-    <>
+    <TableWithPagination>
       <MainTableDiv>
         <TableHeader>
           <TableHeadData>
@@ -45,7 +46,7 @@ const StocksTable = (props: TableStatus) => {
               .map((product, index) => (
                 <TableRow>
                   <TableData style={{ justifyContent: "center" }}>
-                    {index + 1}
+                    {product.Id}
                   </TableData>
                   <TableData>{product.name}</TableData>
                   <TableData>{product.initial_quantity}</TableData>
@@ -53,7 +54,8 @@ const StocksTable = (props: TableStatus) => {
               ))}
         </TableBody>
       </MainTableDiv>
-    </>
+      {pagination}
+    </TableWithPagination>
   );
 };
 
