@@ -23,8 +23,6 @@ import ReportButton from "../../../Components/ReportButton/ReportButton";
 import { siderToggle } from "../../../Pages/states/NavBar.state";
 import { GiRoundTable } from "react-icons/gi";
 export default function Sider() {
-  const [isOpen, setIsOpen] = useState(false);
-
   const navigate = useNavigate();
   const handleLogout = () => {
     navigate("/");
@@ -133,16 +131,10 @@ export default function Sider() {
           </Link>
           <Link
             to="/report/purchase"
-            style={{ color: "#090909", textDecoration: "none" }}
-            onClick={() => {
-              setIsOpen(!isOpen);
-              console.log(isOpen);
-            }}>
+            style={{ color: "#090909", textDecoration: "none" }}>
             <ReportButton
-              onClick={() => {
-                console.log("inside rb", isOpen);
-              }}
-              openDropDown={isOpen}
+              onClick={() => {}}
+              openDropDown={location.pathname.includes("report")}
               icon1={<BsFileEarmarkBarGraph size={25} />}
               label={"Report"}
               icon2={<IoIosArrowUp size={25} />}

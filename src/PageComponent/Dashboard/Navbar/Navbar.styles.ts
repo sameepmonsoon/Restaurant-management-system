@@ -43,7 +43,13 @@ export const NavbarItemTextElementOne = styled("div")`
   font-size: 16px;
   line-height: 19px;
   color: #313131;
+  display: inline-block;
   text-transform: uppercase;
+  cursor: pointer;
+  min-width: 60px;
+  white-space: nowrap;
+  max-width: 150px;
+  min-height: 30px;
 `;
 
 //for items inside navbar --item arrow // for //only visible when clicked
@@ -55,15 +61,8 @@ export const NavbarItemTextElementsArrow = styled("span")`
 `;
 
 // for item inside navbar text after selection
-export const NavbarItemTextElementThree = styled("div")`
-  align-items: center;
+export const NavbarItemTextElementThree = styled(NavbarItemTextElementOne)`
   padding-left: 1%;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 19px;
-  color: #313131;
-  text-transform: uppercase;
 `;
 
 //navbar--inner logo Container (bell,image,dropdown)

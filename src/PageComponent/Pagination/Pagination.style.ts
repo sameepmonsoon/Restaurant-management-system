@@ -18,15 +18,14 @@ export const PreviousIndex = styled("button")`
   background: #eeeeee;
   border-radius: 8px;
   border: 0px;
+  display: grid;
+  place-items: center;
+  &:hover {
+    background: #ffffff;
+    box-shadow: 0px 4px 4px #e6e0e0;
+  }
 `;
-export const NextIndex = styled("button")`
-  min-width: 31px;
-  overflow: hidden;
-  min-height: 31px;
-  background: #eeeeee;
-  border-radius: 8px;
-  border: 0px;
-`;
+export const NextIndex = styled(PreviousIndex)``;
 export const PaginationIndexes = styled("div")`
   width: 31px;
   height: 31px;
@@ -38,13 +37,11 @@ export const PaginationIndexes = styled("div")`
   align-items: center;
 `;
 export const Index = styled("button")<Pagination>`
-  display: flex;
   border: 0px;
-  flex-flow: row nowrap;
-  justify-content: center;
-  align-items: center;
-  width: 31px;
-  height: 31px;
+  display: grid;
+  place-items: center;
+  min-width: 32px;
+  min-height: 32px;
   background: ${({ active }) => (active === true ? "#ffffff" : " #eeeeee ")};
   box-shadow: ${({ active }) =>
     active === true ? "0px 4px 4px #e6e0e0" : " 0 "};

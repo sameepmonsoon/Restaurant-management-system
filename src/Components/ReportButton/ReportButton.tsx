@@ -42,27 +42,34 @@ const ReportButton = (props: ReportButtonTypes) => {
             <DropDownText>{label}</DropDownText>
 
             <DropDownArrow>
-              {isOpen === true ? <>{icon2}</> : <> {icon3}</>}
+              {isOpen ? (
+                <> {icon3}</>
+              ) : openDropDown ? (
+                <>{icon2}</>
+              ) : (
+                <>{icon3}</>
+              )}
             </DropDownArrow>
           </DropDownLabelDiv>
         </ReportInnerDiv>
       </DropdownHeader>
 
-      {isOpen && (
-        <DropDownOptions>
-          {options.map((option) => (
-            <ReportLink key={option.label} to={option.link}>
-              <li
-                style={{
-                  color:
-                    location.pathname === option.link ? "#313131" : "#979797",
-                }}>
-                {option.label}
-              </li>
-            </ReportLink>
-          ))}
-        </DropDownOptions>
-      )}
+      {isOpen ||
+        (openDropDown && (
+          <DropDownOptions>
+            {options.map((option) => (
+              <ReportLink key={option.label} to={option.link}>
+                <li
+                  style={{
+                    color:
+                      location.pathname === option.link ? "#313131" : "#979797",
+                  }}>
+                  {option.label}
+                </li>
+              </ReportLink>
+            ))}
+          </DropDownOptions>
+        ))}
     </ReportDiv>
   );
 };

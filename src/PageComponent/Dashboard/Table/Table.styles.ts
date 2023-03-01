@@ -19,7 +19,7 @@ export const MainTableDiv = styled("table")`
   justify-content: center;
   align-items: center;
   @media screen and (max-width: 1400px) {
-    width: 70vw;
+    /* width: 70vw; */
   }
 `;
 
@@ -28,19 +28,19 @@ export const TableHeader = styled("thead")`
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
+  gap: 10px;
   min-width: 100%;
   max-width: 74vw;
   height: 46px;
   background: #ffffff;
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15);
   border-radius: 5px 5px 0px 0px;
-  @media screen and (max-width: 1200px) {
-  }
 `;
 
 export const TableBody = styled("tbody")`
   min-width: 100%;
   max-width: 74vw;
+
   tr {
     margin-top: 10px;
     min-height: 62px;
@@ -49,6 +49,7 @@ export const TableBody = styled("tbody")`
 
 export const TableRow = styled("tr")`
   display: flex;
+  gap: 10px;
   flex-direction: row;
   align-items: center;
   flex-wrap: nowrap;
@@ -58,7 +59,6 @@ export const TableRow = styled("tr")`
   justify-content: flex-start;
   background: #ffffff;
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.15);
-
   @media screen and (max-width: 1200px) {
   }
 `;
@@ -71,9 +71,12 @@ export const TableDataStatus = styled("span")<TableStatusStyled>`
   font-style: normal;
   font-weight: 500;
   flex: 1;
+  min-width: 95px;
   font-size: 14px;
   line-height: 17px;
   letter-spacing: 0.01em;
+  height: 27px;
+  border-radius: 14px;
   ${({ status }) =>
     status === "Completed" || status === "Cash"
       ? "color:#02844B; background-color: #E7FFF1;"
@@ -82,9 +85,7 @@ export const TableDataStatus = styled("span")<TableStatusStyled>`
       : status === "Cancelled" || status === "Due"
       ? "color:#E84A4A; background:#FAE8E9;"
       : "color:#E98C02;background:#FAE8E9;"};
-  width: 9%;
-  height: 27px;
-  border-radius: 14px;
+
   p {
     margin: 0;
     padding: 0;
@@ -92,9 +93,10 @@ export const TableDataStatus = styled("span")<TableStatusStyled>`
 `;
 
 export const TableData = styled("td")`
-  flex: 1;
+  flex: 1 1 20px;
+  min-width: 100px;
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   font-style: normal;
   align-items: center;
   font-weight: 400;
@@ -103,12 +105,12 @@ export const TableData = styled("td")`
   padding-left: 5px;
   height: 30px;
   text-transform: capitalize;
-  /* border-right: 1.5px solid rgba(223, 223, 223, 0.46); */
-  /* &::after {
-    content: "";
-    height: 50px;
-    width: 1px;
-  } */
+  word-wrap: break-word;
+`;
+export const TableDataSnBox = styled(TableData)`
+  padding-left: 30px;
+  flex: 0.8;
+  min-width: 100px;
 `;
 
 export const TableHeadData = styled("td")`
@@ -122,16 +124,25 @@ export const TableHeadData = styled("td")`
   text-transform: uppercase;
   align-items: center;
   width: 100%;
+  min-width: 100px;
+  height: 20px;
   padding-left: 5px;
-
-  @media screen and (max-width: 1200px) {
-    width: 100%;
-    flex-direction: row;
+  @media screen and (max-width: 1400px) {
     column-gap: 8px;
     padding-left: 2px;
   }
 `;
-
+export const TableHeadDataAction = styled(TableHeadData)`
+  min-width: 150px;
+`;
+export const TableHeadDataStockId = styled(TableHeadData)`
+  width: 80%;
+  padding-left: 30px;
+  @media screen and (max-width: 1400px) {
+    padding-left: 30px;
+    column-gap: 8px;
+  }
+`;
 export const TableDataAction = styled("td")`
   display: flex;
   gap: 5px;

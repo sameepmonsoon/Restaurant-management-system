@@ -1,4 +1,5 @@
 import React from "react";
+
 import logo from "../../../../public/vite.svg";
 import { VscBellDot } from "react-icons/vsc";
 import { RiArrowDownSLine } from "react-icons/ri";
@@ -34,7 +35,15 @@ function subtitle() {
   return pathnameMap[location.pathname as keyof typeof pathnameMap] || "";
 }
 
-function title() {
+function title():
+  | "dashboard"
+  | "report"
+  | "Web Order"
+  | "Table"
+  | "Customer"
+  | "menu"
+  | undefined {
+  const location = useLocation();
   if (location.pathname.includes("/home")) {
     return "dashboard";
   } else if (location.pathname.includes("/report")) {
@@ -46,14 +55,27 @@ function title() {
   } else if (location.pathname.includes("/customer")) {
     return "Customer";
   } else if (location.pathname.includes("/menu")) {
-    return "menu  ";
+    return "menu";
   }
+  return undefined;
 }
-
+type titleTypes = {
+  dashboard: string;
+};
 const Navbar = (props: NavbarTitles) => {
   const { navTitle } = props;
   const { openSider, toggleSider } = siderToggle();
-
+  // @ts-ignore
+  const currentTitle = title().toLowerCase();
+  const titleBasedRoute: { [key: string]: string } = {
+    dashboard: "/home",
+    table: "/tables",
+    customer: "/customer",
+    "web order": "/weborder",
+    menu: "/menu",
+    report: "/report/purchase",
+  };
+  const setRouteTo = titleBasedRoute[currentTitle] || "/";
   return (
     <>
       <NavbarMainDiv>
@@ -65,7 +87,11 @@ const Navbar = (props: NavbarTitles) => {
           )}
         </NavbarItemIcon>
         <NabarItemTextContainer>
-          <NavbarItemTextElementOne>{title()} </NavbarItemTextElementOne>
+          <Link
+            to={setRouteTo}
+            style={{ color: "#090909", textDecoration: "none" }}>
+            <NavbarItemTextElementOne>{title()} </NavbarItemTextElementOne>
+          </Link>
           {subtitle() !== "" ? (
             <NavbarItemTextElementsArrow>
               <RiArrowRightSLine size={25} />

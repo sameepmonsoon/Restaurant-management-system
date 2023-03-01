@@ -27,6 +27,8 @@ const MenuSubCategoryItem = (props: MenuSubCategoryItemTypes) => {
   const [hoveredIndex, setHoveredIndex] = useState<any>();
   const [openModal, setOpenModal] = useState(false);
   const [deleteItem, setDeleteItem] = useState(false);
+  const [deleteCategoryId, setDeleteCategoryId] = useState("");
+
   const location = useLocation();
   useEffect(() => {
     HTTPMethods.getMenu(`/menu/readdishwithsubcategory/${subcatParentId}`)
@@ -51,11 +53,51 @@ const MenuSubCategoryItem = (props: MenuSubCategoryItemTypes) => {
 
   // detects route change and removes pre fetched subcategory item
   useEffect(() => {
+    setDeleteCategoryId("");
     setCategory([]);
     setClick(false);
   }, [location]);
 
-  //
+  // function to delete the sub category item
+  function handleDelete(deleteSubCatItem: any) {
+    // ${deleteSubCatItem}
+    HTTPMethods.deleteMenu(`menu/deletedish/${deleteSubCatItem}`, {})
+      .then(async (res) => {
+        toast.success("Sub category Successfully deleted", {
+          theme: "colored",
+          hideProgressBar: true,
+          autoClose: 1500,
+          position: "bottom-right",
+          toastId: "info1",
+        });
+        setTimeout(() => {
+          setOpenModal(false);
+        }, 3000);
+      })
+      .catch(async (err) => {
+        toast.error("Can't delete the selected subcat item", {
+          theme: "colored",
+          hideProgressBar: true,
+          autoClose: 1500,
+          position: "bottom-right",
+          toastId: "info1",
+        });
+        setTimeout(() => {
+          setOpenModal(false);
+        }, 3000);
+      });
+  }
+
+  //to open and close the modal-- handle delete state
+  useEffect(() => {
+    if (openModal && deleteItem) {
+      handleDelete(deleteCategoryId);
+      setDeleteItem(false);
+    }
+  }, [openModal, deleteItem]);
+
+  //to set the  click and hovered css effect
+
   const [click, setClick] = useState<any>(false);
   useEffect(() => {
     setClick(() => {
@@ -98,6 +140,8 @@ const MenuSubCategoryItem = (props: MenuSubCategoryItemTypes) => {
                           <Icon
                             onClick={() => {
                               setOpenModal(true);
+                              setDeleteCategoryId(`${item.dish_id}`);
+                              console.log(deleteCategoryId);
                             }}>
                             {deleteIcon}
                           </Icon>

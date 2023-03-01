@@ -9,7 +9,8 @@ import {
   TableHeader,
   TableHeadData,
   TableRow,
-  TableDataStatus,
+  TableDataSnBox,
+  TableHeadDataStockId,
   TableWithPagination,
 } from "./Table.styles";
 import { useState } from "react";
@@ -24,10 +25,10 @@ const StocksTable = (props: TableStatus) => {
     <TableWithPagination>
       <MainTableDiv>
         <TableHeader>
-          <TableHeadData>
+          <TableHeadDataStockId>
             <input type="checkbox" name="" id="" />
             id <HiChevronDown />
-          </TableHeadData>
+          </TableHeadDataStockId>
           <TableHeadData>
             items
             <HiChevronDown />
@@ -45,9 +46,7 @@ const StocksTable = (props: TableStatus) => {
               )
               .map((product, index) => (
                 <TableRow>
-                  <TableData style={{ justifyContent: "center" }}>
-                    {product.Id}
-                  </TableData>
+                  <TableDataSnBox>{product.Id}</TableDataSnBox>
                   <TableData>{product.name}</TableData>
                   <TableData>{product.initial_quantity}</TableData>
                 </TableRow>

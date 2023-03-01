@@ -37,6 +37,7 @@ export default function Sales() {
         postsPerPage={postsPerPage}
         totalPosts={posts.length}
         paginate={paginate}
+        currentPageNumber={currentPage}
       />
     </>
   ) : (

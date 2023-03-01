@@ -57,6 +57,7 @@ export default function Stocks() {
             postsPerPage={postsPerPage}
             totalPosts={products.length}
             paginate={paginate}
+            currentPageNumber={currentPage}
           />
         }
       />

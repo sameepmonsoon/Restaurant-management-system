@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Index,
   NextIndex,
@@ -11,37 +11,57 @@ type PaginationTypes = {
   postsPerPage: number;
   totalPosts: number;
   paginate: (pageNumber: any) => void;
+  currentPageNumber: number;
 };
 const Pagination = (props: PaginationTypes) => {
-  const { postsPerPage, totalPosts, paginate } = props;
+  const { currentPageNumber, postsPerPage, totalPosts, paginate } = props;
   const [selectIndex, setSelectIndex] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState<number | any>(0);
+  // @ts-ignore
   const pageNumbers = [];
-
-  for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
+  const totalPages = Math.ceil(totalPosts / postsPerPage);
+  for (let i = 1; i <= totalPages; i++) {
     pageNumbers.push(i);
   }
+  // previous page
+  const handlePrevious = () => {
+    if (currentPageNumber === 1) {
+      paginate(1);
+    } else {
+      paginate(currentPageNumber - 1);
+    }
+  };
+  // next page
+  const handleNext = () => {
+    if (currentPageNumber == totalPages) {
+      paginate(currentPageNumber);
+    } else {
+      paginate(currentPageNumber + 1);
+    }
+  };
   return (
     <PaginationDiv>
       {totalPosts !== 0 && (
-        <PreviousIndex>
-          <HiOutlineChevronLeft size={25} />
+        <PreviousIndex onClick={handlePrevious}>
+          <HiOutlineChevronLeft size={17} />
         </PreviousIndex>
       )}
       {pageNumbers.map((number) => (
-        <PaginationIndexes key={number}>
-          <Index
-            onClick={() => {
-              paginate(number);
-              setSelectIndex(!selectIndex);
-            }}
-            active={selectIndex}>
-            {number}
-          </Index>
-        </PaginationIndexes>
+        <>
+          <PaginationIndexes key={number}>
+            <Index
+              onClick={() => {
+                paginate(number);
+              }}
+              active={number === currentPageNumber}>
+              {number}
+            </Index>
+          </PaginationIndexes>
+        </>
       ))}
       {totalPosts !== 0 && (
-        <NextIndex>
-          <HiOutlineChevronRight size={25} />
+        <NextIndex onClick={handleNext}>
+          <HiOutlineChevronRight size={17} />
         </NextIndex>
       )}
     </PaginationDiv>
