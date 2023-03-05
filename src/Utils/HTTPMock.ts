@@ -63,7 +63,14 @@ function postMenu(url: string, data: any) {
   if (!url) {
     throw new Error("Url Not Provided");
   }
-  return axios.post(BASE_URL_Menu + url, data);
+  return axios.post(BASE_URL_Menu + url, data, {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      // "Access-Control-Request-Method": "",
+      "Content-type": "",
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
 }
 
 function deleteMenu(url: string, data: any) {

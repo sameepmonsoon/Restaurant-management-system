@@ -48,9 +48,8 @@ const DrawerC = (props: DrawerTitles) => {
               onClick={(e) => {
                 e.preventDefault();
                 closeDrawer();
-              }}>
-              X
-            </DrawerButton>
+              }}
+            />
           </DrawerTitleCancelButton>
         </DrawerTitleDiv>
         <DrawerInputContentDiv>{children}</DrawerInputContentDiv>

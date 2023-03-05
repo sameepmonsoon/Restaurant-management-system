@@ -84,7 +84,16 @@ export const DrawerInputContentDiv = styled("div")`
   justify-content: flex-start;
   align-items: center;
   padding: 0px;
-  button[type="submit"] {
+
+  && label {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 18px;
+    margin-bottom: 4px;
+  }
+  && button[type="submit"] {
     position: relative;
     order: 1;
     text-transform: capitalize;
@@ -95,7 +104,7 @@ export const DrawerInputContentDiv = styled("div")`
     border-radius: 5px;
   }
 
-  button[type="reset"] {
+  && button[type="reset"] {
     text-transform: capitalize;
     order: 2;
     width: 185px;
@@ -105,7 +114,7 @@ export const DrawerInputContentDiv = styled("div")`
     border: 1px solid #9a9a9a;
     border-radius: 5px;
   }
-  button[type="reset"]:hover {
+  && button[type="reset"]:hover {
     background-color: #e8e8e8;
     cursor: pointer;
   }
@@ -121,20 +130,31 @@ export const DrawerButtonDiv = styled("div")`
 
 export const DrawerButton = styled("button")`
   background-color: transparent;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  color: #5f7161;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 20px;
-  font-size: 15px;
-  width: 30px;
-  height: 30px;
+  height: 25px;
+  min-width: 10px;
+  border: 0px;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+  opacity: 0.3;
   &:hover {
-    border: 2px solid rgba(0, 0, 0, 0.3);
-    background-color: rgba(222, 241, 209), 1;
-    cursor: pointer;
-    color: #424242;
-    transition: background-color 0.5s ease;
+    background-color: transparent;
+    color: #313131;
+    opacity: 1;
+  }
+  position: relative;
+  &::after,
+  &::before {
+    position: absolute;
+    left: 1px;
+    top: 0;
+    content: " ";
+    height: 20px;
+    width: 2px;
+    background-color: #333;
+  }
+  &::after {
+    transform: rotate(45deg);
+  }
+  &::before {
+    transform: rotate(-45deg);
   }
 `;

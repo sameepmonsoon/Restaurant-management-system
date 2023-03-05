@@ -22,10 +22,10 @@ export const MainLoginDiv = styled("div")`
     line-height: 10px;
     color: #515151;
   }
-    @media screen and (max-width: 1100px) {
-      flex-flow: column wrap;
-    }
-  `;
+  @media screen and (max-width: 1100px) {
+    flex-flow: column wrap;
+  }
+`;
 
 //image container
 export const Image = styled("div")`
@@ -94,6 +94,9 @@ export const FormDiv = styled("form")`
   align-items: flex-start;
   justify-content: center;
   row-gap: 10px;
+  & label {
+    font-size: 16px;
+  }
 
   @media screen and (max-width: 1100px) {
     justify-content: flex-end;
@@ -121,13 +124,13 @@ export const Title = styled("p")`
 // password field div
 export const PasswordField = styled("div")`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   margin-bottom: 10px;
   flex-flow: row;
-  width: 370px;
-  height: 50px;
-  column-gap: 6em;
-  justify-content: start;
+  min-width: 350px;
+  min-height: 30px;
+  column-gap: 10px;
+  justify-content: space-between;
   color: #000000;
 `;
 
@@ -135,6 +138,7 @@ export const PasswordField = styled("div")`
 export const RemembermeDiv = styled("span")`
   display: flex;
   align-items: center;
+  justify-content: space-evenly;
   column-gap: 5px;
   font-family: "Inter";
   font-style: normal;
@@ -143,6 +147,7 @@ export const RemembermeDiv = styled("span")`
   line-height: 20px;
   text-align: center;
   order: 1;
+  min-width: 100px;
   &:hover {
     color: #545454;
     cursor: pointer;
@@ -160,6 +165,7 @@ export const ForgetPassword = styled(Link)`
   line-height: 19px;
   text-align: center;
   color: #000000;
+  min-width: 100px;
   &:hover {
     color: #545454;
     cursor: pointer;
@@ -193,7 +199,6 @@ export const EmailContainer = styled("span")`
 // for password field and toggle icon
 export const PasswordContainer = styled("span")`
   height: 84px;
-  margin-top: 0.9rem;
 `;
 
 // for eye on and off toggle icon

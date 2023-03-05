@@ -68,7 +68,7 @@ export const SiderMainDiv = styled.div`
   padding-left: 20px;
   height: 87vh;
   padding-top: 30px;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   scroll-behavior: smooth;
   scrollbar-color: white;

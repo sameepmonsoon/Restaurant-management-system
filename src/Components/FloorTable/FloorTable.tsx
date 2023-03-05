@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { MdAdd } from "react-icons/md";
 import {
   Tables,
@@ -14,7 +14,7 @@ import { TableType } from "../../Types/Components/TableTypes";
 
 const FLoorTable = (props: TableType) => {
   const { tableNames, karaokeList, selected, image, ...rest } = props;
-
+  console.log("inside table names", tableNames);
   return (
     <>
       {location.pathname === "/tables/floorFirst" ? (
@@ -22,10 +22,10 @@ const FLoorTable = (props: TableType) => {
           {tableNames.map((table) => (
             <>
               <TableContainer {...rest}>
-                <Tables select={selected}>
+                <Tables select={table.table_id != " "}>
                   <TableImage src={dinningTableImage} />
                 </Tables>
-                <TableNum>{table}</TableNum>
+                <TableNum>{table.table_name}</TableNum>
               </TableContainer>
             </>
           ))}

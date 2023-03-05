@@ -12,7 +12,14 @@ import { MenuSubCategoriesTypes } from "../../../Types/Components/MenuSubCategor
 import { useNavigate, useParams } from "react-router-dom";
 import { HTTPMethods } from "../../../Utils/HTTPMock";
 import { toast } from "react-toastify";
-import AlertModal from "../../AlertDeleteModal/AlertModal";
+import AlertDeleteModal from "../../Modals/PopUpModal/AlertDeleteModal";
+import AddNewMenuModal from "../../Modals/AddNewMenuModal/AddNewMenuModal";
+import { TextField } from "../../TextField";
+import { Button } from "@mui/material";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import { useSubCategoryIdStore } from "../../../Pages/states/MenuCategory.state";
+
 const MenuSubCategories = (props: MenuSubCategoriesTypes) => {
   const {
     title,
@@ -30,19 +37,73 @@ const MenuSubCategories = (props: MenuSubCategoriesTypes) => {
 
   const [category, setCategory] = useState(categoryList);
   const [hoveredIndex, setHoveredIndex] = useState<number | null | any>(null);
+  const { drawerSubCatId, setDrawerSubCatId } = useSubCategoryIdStore();
+  // modal states -----{start
   const [openModal, setOpenModal] = useState(false);
-  const [deleteCategoryId, setDeleteCategoryId] = useState("");
-
   const [deleteItem, setDeleteItem] = useState(false);
+  const [addMenuModal, setAddMenuModal] = useState(false);
+  const [deleteCategoryId, setDeleteCategoryId] = useState<string>("");
+  const [modalTitle, setModalTitle] = useState<string>();
+  //modal states -----end}
+
   const navigate = useNavigate();
   const { id } = useParams();
   const handleEdit = () => {
     // console.log("Menu sub category Item edit")
   };
 
+  //
+  const [file, setFile] = useState<File | any>();
+  let schema = yup.object().shape({
+    subcategory_name: yup.string().required("is required"),
+    image: yup.mixed().required("is required"),
+  });
+
+  const {
+    values,
+    errors,
+    handleChange,
+    handleSubmit,
+    handleReset,
+    resetForm,
+    touched,
+  } = useFormik({
+    initialValues: {
+      subcategory_name: "",
+      image: "",
+      category_id: drawerSubCatId,
+    },
+    onSubmit: (values, action) => {
+      console.log(values);
+      HTTPMethods.postMenu(
+        `subcategory/addsubcategory/${drawerSubCatId}`,
+        values
+      )
+        .then(async (res) => {
+          action.resetForm();
+          console.log(res);
+          toast.success("Product added successfully", {
+            theme: "colored",
+            hideProgressBar: true,
+            autoClose: 1000,
+          });
+          action.resetForm();
+        })
+        .catch((err) => {
+          toast.error("error", {
+            theme: "colored",
+            hideProgressBar: true,
+            autoClose: 1000,
+          });
+        });
+    },
+    validationSchema: schema,
+  });
+
+  // image------{start
   function handleDelete(subCatId: any) {
     // ${subCatId}
-    HTTPMethods.deleteMenu(`/subcategory/deletesubcategory/`, {})
+    HTTPMethods.deleteMenu(`/subcategory/deletesubcategory/${subCatId}`, {})
       .then(async (res) => {
         toast.success("Sub category Successfully deleted", {
           theme: "colored",
@@ -79,10 +140,6 @@ const MenuSubCategories = (props: MenuSubCategoriesTypes) => {
     return () => setClick(false);
   }, [clicked]);
 
-  // unselect on location change
-  // useEffect(() => {
-  //   setClick(!click);
-  // }, [location]);
   useEffect(() => {
     if (openModal && deleteItem) {
       handleDelete(deleteCategoryId);
@@ -96,9 +153,7 @@ const MenuSubCategories = (props: MenuSubCategoriesTypes) => {
           <MenuSubCategoriesDiv
             clicked={click}
             {...rest}
-            onClick={() => {
-              // navigate(`/menu/${visible}`);
-            }}
+            onClick={() => {}}
             onMouseEnter={() => {
               setHoveredIndex(`${subcatId}`);
             }}
@@ -107,12 +162,16 @@ const MenuSubCategories = (props: MenuSubCategoriesTypes) => {
             }}
             key={subcatId}>
             <img src={subCatImage} alt="Sub Category" />
-            {/* <ItemTitleAmount>
-        <ItemAmount>Rs. {visible}</ItemAmount>
-      </ItemTitleAmount> */}
             {hoveredIndex == subcatId || click === true ? (
               <EditCategory>
-                <Icon onClick={handleEdit}>{editIcon}</Icon>
+                <Icon
+                  onClick={() => {
+                    setAddMenuModal(!addMenuModal);
+                    setModalTitle("Edit Sub Category");
+                    handleEdit;
+                  }}>
+                  {editIcon}
+                </Icon>
                 <Icon
                   onClick={() => {
                     setOpenModal(true);
@@ -126,13 +185,56 @@ const MenuSubCategories = (props: MenuSubCategoriesTypes) => {
             )}
           </MenuSubCategoriesDiv>
           <ItemTitle>{title}</ItemTitle>
-          {openModal && (
-            <AlertModal
+          {openModal === true ? (
+            <AlertDeleteModal
               title={"Are you sure you want to delete?"}
               setOpenModal={setOpenModal}
               setDeleteItem={setDeleteItem}
               deleteItem={deleteItem}
             />
+          ) : addMenuModal === true ? (
+            <AddNewMenuModal
+              title={modalTitle}
+              setAddMenuModal={setAddMenuModal}
+              footerButtons={<></>}>
+              <form onSubmit={handleSubmit}>
+                <TextField
+                  type="text"
+                  label="sub category name"
+                  name="subcategory_name"
+                  placeholder="Sub Category Name"
+                  onChange={handleChange}
+                  error={
+                    touched.subcategory_name && errors.subcategory_name
+                      ? errors.subcategory_name
+                      : null
+                  }
+                />
+                <label htmlFor="image">
+                  <img src={file || "/assets/imageUpload.svg"} alt="" />
+                  <TextField
+                    type="file"
+                    label="Sub category Image"
+                    name="image"
+                    placeholder="Image"
+                    // @ts-ignore
+                    id="image"
+                    error={touched.image && errors.image ? errors.image : null}
+                    onChange={handleChange}
+                  />
+                </label>
+                <Button
+                  onClick={() => {
+                    resetForm();
+                  }}
+                  type="reset">
+                  Clear
+                </Button>
+                <Button type="submit">Add</Button>
+              </form>
+            </AddNewMenuModal>
+          ) : (
+            <></>
           )}
         </MenuSubcatMainDiv>
       )}

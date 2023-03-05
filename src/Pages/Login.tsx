@@ -52,8 +52,8 @@ export function Login() {
   // redirect()
 
   let schema = yup.object().shape({
-    email: yup.string().email().required(" Email is required"),
-    password: yup.string().min(6).required(" Password is required"),
+    email: yup.string().email().required("is required"),
+    password: yup.string().min(6).required("is required"),
   });
 
   const { values, handleSubmit, handleChange, errors, touched } = useFormik({
@@ -112,11 +112,10 @@ export function Login() {
               // error={errors.email}
               label={"Email"}
               placeholder="Enter Your Email"
-              defaultValue={" "}></TextField>
+              defaultValue={" "}
+              error={touched.email && errors.email ? errors.email : null}
+            />
           </EmailContainer>
-          {errors.email && touched.email ? (
-            <FormError>{errors.email}</FormError>
-          ) : null}
 
           <PasswordContainer>
             <TextField
@@ -126,7 +125,11 @@ export function Login() {
               // error={errors.password}
               label={"Password"}
               placeholder="Enter your Password"
-              defaultValue={""}></TextField>
+              defaultValue={""}
+              error={
+                touched.password && errors.password ? errors.password : null
+              }
+            />
             <ToggleIcon>
               {type === "password" ? (
                 <AiOutlineEyeInvisible size={20} onClick={togglePassword} />
@@ -135,15 +138,15 @@ export function Login() {
               )}
             </ToggleIcon>
           </PasswordContainer>
-          {errors.password && touched.password ? (
-            <FormError>{errors.password}</FormError>
-          ) : null}
+
           <PasswordField>
             <RemembermeDiv>
               <input type="checkbox" />
               Rembember Me
             </RemembermeDiv>
-            <ForgetPassword to="ForgotPassword">Forgot Password</ForgetPassword>
+            <ForgetPassword to="ForgotPassword">
+              Forgot Password?
+            </ForgetPassword>
           </PasswordField>
 
           <Button

@@ -8,7 +8,7 @@ export type MenuCategoriesTypes = {
 
   categoryList: Array<{
     category_name: String;
-    category_id: String;
+    category_id: React.SetStateAction<string>;
     subcategory: String;
     active: boolean;
     id: number;

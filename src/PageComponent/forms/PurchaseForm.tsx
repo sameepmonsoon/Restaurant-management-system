@@ -7,7 +7,6 @@ import { Button, LabelDiv } from "../../Components/TextField.Style";
 import { HTTPMethods } from "../../Utils/HTTPMock";
 import { useDrawer } from "../../Pages/states/Drawer.state";
 import { toast } from "react-toastify";
-import { type } from "os";
 import { DOMToggleButtonName } from "../../Utils/DOMToggleButtonName";
 import { useProductStore } from "../../Pages/states/TablesFilter.state";
 export default function PurchaseForm() {
@@ -237,7 +236,11 @@ export default function PurchaseForm() {
         ) : (
           <LabelDiv>Status</LabelDiv>
         )}
-        <select name="status" onChange={handleChange} id="input-status">
+        <select
+          name="status"
+          onChange={handleChange}
+          id="input-status"
+          placeholder="Select Me">
           <option selected>Complete</option>
           <option>Cancelled</option>
           <option>Pending</option>
@@ -245,6 +248,10 @@ export default function PurchaseForm() {
         </select>
       </div>
       <DrawerButtonDiv>
+        {/* initially type="" was not specified. So, the clear button was not working */}
+        <Button onClick={() => resetForm()} type="reset">
+          clear
+        </Button>
         <Button
           type="submit"
           onClick={(e) => {
@@ -252,11 +259,6 @@ export default function PurchaseForm() {
             handleSubmit();
           }}>
           Submit
-        </Button>
-
-        {/* initially type="" was not specified. So, the clear button was not working */}
-        <Button onClick={() => resetForm()} type="reset">
-          clear
         </Button>
       </DrawerButtonDiv>
     </form>

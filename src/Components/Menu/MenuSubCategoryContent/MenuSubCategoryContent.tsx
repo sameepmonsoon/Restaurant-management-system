@@ -12,6 +12,11 @@ import {
   MenuSubCategoryContentDiv,
 } from "./MenuSubCategoryContent.style";
 import { toast } from "react-toastify";
+import AddNewMenuModal from "../../Modals/AddNewMenuModal/AddNewMenuModal";
+import { TextField } from "../../TextField";
+import { Button } from "@mui/material";
+import { useFormik } from "formik";
+import * as yup from "yup";
 export default function MenuSubCategoryContent() {
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
@@ -23,6 +28,58 @@ export default function MenuSubCategoryContent() {
   const [subCategoryParentId, setSubCategoryParentId] = useState<string | any>(
     ""
   );
+  // modal states -----{start
+  const [openModal, setOpenModal] = useState(false);
+  const [deleteItem, setDeleteItem] = useState(false);
+  const [addMenuModal, setAddMenuModal] = useState(false);
+  const [deleteCategoryId, setDeleteCategoryId] = useState<string>("");
+  const [modalTitle, setModalTitle] = useState<string>();
+  //modal states -----end}
+  const [file, setFile] = useState<File | any>();
+  let schema = yup.object().shape({
+    subcategory_name: yup.string().required("is required"),
+    image: yup.mixed().required("is required"),
+  });
+
+  const {
+    values,
+    errors,
+    handleChange,
+    handleSubmit,
+    handleReset,
+    resetForm,
+    touched,
+  } = useFormik({
+    initialValues: {
+      image: "",
+      category_id: drawerSubCatId,
+      subcategory_name: "",
+    },
+    onSubmit: (values, action) => {
+      console.log(values);
+      HTTPMethods.postMenu(`/subcategory/addsubcategory`, values)
+        .then(async (res) => {
+          action.resetForm();
+          console.log(res);
+          toast.success("Product added successfully", {
+            theme: "colored",
+            hideProgressBar: true,
+            autoClose: 1000,
+          });
+          action.resetForm();
+        })
+        .catch((err) => {
+          toast.error("error", {
+            theme: "colored",
+            hideProgressBar: true,
+            autoClose: 1000,
+          });
+        });
+    },
+    validationSchema: schema,
+  });
+
+  //
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
@@ -47,8 +104,7 @@ export default function MenuSubCategoryContent() {
         setCategory([]);
       });
   }, [id]);
-  // @ts-ignore
-  let filteredCat = [];
+  let filteredCat: any[] = [];
   let data = category.map((item: any) =>
     item.subcategory_name.toLocaleLowerCase()
   );
@@ -86,7 +142,6 @@ export default function MenuSubCategoryContent() {
               }}
               clicked={mapSubcatId}
               subcatId={index}
-              // @ts-ignore
               categoryList={filteredCat}
               active={subcat.active}
               key={subcat.id}
@@ -97,9 +152,54 @@ export default function MenuSubCategoryContent() {
           <ActionButton
             icon={<MdAdd size={25} />}
             label={"Add SUBCATEGORY "}
-            onClick={() => {}}
+            onClick={() => {
+              setAddMenuModal(true);
+              setModalTitle("Add New sub Category");
+            }}
             forMenuSubcat={true}
           />
+          {addMenuModal && (
+            <AddNewMenuModal
+              title={modalTitle}
+              setAddMenuModal={setAddMenuModal}
+              footerButtons={<></>}>
+              <form onSubmit={handleSubmit}>
+                <TextField
+                  type="text"
+                  label="sub category name"
+                  name="subcategory_name"
+                  placeholder="Sub Category Name"
+                  onChange={handleChange}
+                  error={
+                    touched.subcategory_name && errors.subcategory_name
+                      ? errors.subcategory_name
+                      : null
+                  }
+                />
+                <label htmlFor="image">
+                  <img src={file || "/assets/imageUpload.svg"} alt="" />
+                  <TextField
+                    type="file"
+                    label="Sub category Image"
+                    name="image"
+                    placeholder="Image"
+                    // @ts-ignore
+                    id="image"
+                    error={touched.image && errors.image ? errors.image : null}
+                    onChange={handleChange}
+                  />
+                </label>
+                <Button
+                  onClick={() => {
+                    resetForm();
+                  }}
+                  type="reset">
+                  Clear
+                </Button>
+                <Button type="submit">Add</Button>
+              </form>
+            </AddNewMenuModal>
+          )}
         </MenuSubCategoryContentDiv>
       )}
 

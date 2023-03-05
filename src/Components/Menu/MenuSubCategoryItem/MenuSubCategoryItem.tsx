@@ -5,7 +5,12 @@ import { toast } from "react-toastify";
 import { MenuSubCategoryItemTypes } from "../../../Types/Components/MenuSubCategoryItemTypes";
 import { HTTPMethods } from "../../../Utils/HTTPMock";
 import ActionButton from "../../ActionButton/ActionButton";
-import AlertModal from "../../AlertDeleteModal/AlertModal";
+import AddNewMenuModal from "../../Modals/AddNewMenuModal/AddNewMenuModal";
+import AlertDeleteModal from "../../Modals/PopUpModal/AlertDeleteModal";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import { TextField } from "../../TextField";
+import { Button } from "@mui/material";
 import MenuSubCategories from "../MenuSubCategories/MenuSubCategories";
 import {
   MenuSubCategoriesDiv,
@@ -25,10 +30,65 @@ const MenuSubCategoryItem = (props: MenuSubCategoryItemTypes) => {
   const [category, setCategory] = useState<any>([]);
   const [itemState, setItemState] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<any>();
+  // modal states -----{start
   const [openModal, setOpenModal] = useState(false);
   const [deleteItem, setDeleteItem] = useState(false);
-  const [deleteCategoryId, setDeleteCategoryId] = useState("");
+  const [addMenuModal, setAddMenuModal] = useState(false);
+  const [deleteCategoryId, setDeleteCategoryId] = useState<string>("");
+  const [modalTitle, setModalTitle] = useState<string>();
+  // to change the preview image based on modal value
+  useEffect(() => {
+    setPreview(() => {
+      if (addMenuModal == false) {
+        return null;
+      } else return preview;
+    });
+  }, [addMenuModal]);
+  //modal states -----end}
 
+  // image upload and preview
+  const [file, setFile] = useState<File | any>();
+  const [preview, setPreview] = useState<File | any>();
+  // form validation
+  let schema = yup.object().shape({
+    category_name: yup.string().required("is required"),
+    image: yup.mixed().required("is required"),
+  });
+  // formik form
+  const formik = useFormik({
+    initialValues: {
+      dish_name: "",
+      dish_price: "90",
+      image: "",
+      description: "aaaaa",
+      subcategory_id: "b72d6b4-00c8-43d3-b347-2d3d726b0d77",
+      category_id: "22f03442-fba1-439f-af55-ca44a4770f8a",
+    },
+    onSubmit: async (values, action) => {
+      console.log(values);
+      // HTTPMethods.postMenu("/menu/adddish", values)
+      //   .then(async (res) => {
+      //     action.resetForm();
+      //     console.log(res);
+      //     toast.success("Product added successfully", {
+      //       theme: "colored",
+      //       hideProgressBar: true,
+      //       autoClose: 1000,
+      //     });
+      //     action.resetForm();
+      //   })
+      //   .catch((err) => {
+      //     toast.error("error", {
+      //       theme: "colored",
+      //       hideProgressBar: true,
+      //       autoClose: 1000,
+      //     });
+      //   });
+    },
+    validationSchema: schema,
+  });
+  //
+  console.log(formik.initialValues);
   const location = useLocation();
   useEffect(() => {
     HTTPMethods.getMenu(`/menu/readdishwithsubcategory/${subcatParentId}`)
@@ -107,6 +167,9 @@ const MenuSubCategoryItem = (props: MenuSubCategoryItemTypes) => {
     });
     return () => setClick(false);
   }, [itemState]);
+
+  // handle edit or delete
+
   return (
     <>
       {clickedSubCat === subcatParentId ? (
@@ -136,7 +199,14 @@ const MenuSubCategoryItem = (props: MenuSubCategoryItemTypes) => {
                       />
                       {hoveredIndex == subcatParentId || click === true ? (
                         <EditCategory>
-                          <Icon onClick={() => {}}>{editIcon}</Icon>
+                          <Icon
+                            onClick={() => {
+                              setAddMenuModal(!addMenuModal);
+                              setModalTitle("Edit Item");
+                              setDeleteCategoryId(item.category_id);
+                            }}>
+                            {editIcon}
+                          </Icon>
                           <Icon
                             onClick={() => {
                               setOpenModal(true);
@@ -154,35 +224,82 @@ const MenuSubCategoryItem = (props: MenuSubCategoryItemTypes) => {
                   </MenuSubcatMainDiv>
                 );
               })}
-              {/* <MenuSubCategories
-                    title={item.dish_name}
-                    amount={1}
-                    deleteIcon={<MdDeleteOutline size={25} />}
-                    editIcon={<HiOutlinePencil size={25} />}
-                    onClick={() => {
-                      console.log(category);
-                    }}
-                    clicked={true}
-                    subcatId={""}
-                    categoryList={[]}
-                    key={subcatParentId}
-                    subCatImage={`http://backend1.kpop.com.np/public/Dish_Images/${item.dish_image}`}
-                  />
-              */}
               <ActionButton
                 icon={<MdAdd size={25} />}
                 label={"Add ITEM"}
-                onClick={() => {}}
+                onClick={() => {
+                  setAddMenuModal(true);
+                  console.log(deleteCategoryId);
+                }}
                 forMenuSubcat={true}
               />
             </>
-            {openModal && (
-              <AlertModal
+            {openModal === true ? (
+              <AlertDeleteModal
                 title={"Are you sure you want to delete?"}
                 setOpenModal={setOpenModal}
                 setDeleteItem={setDeleteItem}
                 deleteItem={deleteItem}
               />
+            ) : addMenuModal === true ? (
+              <AddNewMenuModal
+                title={modalTitle}
+                setAddMenuModal={setAddMenuModal}
+                footerButtons={<></>}>
+                <form onSubmit={formik.handleSubmit}>
+                  <TextField
+                    type="text"
+                    label="item name"
+                    name="dish_name"
+                    placeholder="Item Name"
+                    onChange={formik.handleChange}
+                    error={
+                      formik.touched.dish_name && formik.errors.dish_name
+                        ? formik.errors.dish_name
+                        : null
+                    }
+                  />
+                  <label htmlFor="image">
+                    <img src={preview || "/assets/imageUpload.svg"} alt="" />
+                    <TextField
+                      type="file"
+                      label="Item Image"
+                      name="image"
+                      placeholder="Image"
+                      // @ts-ignore
+                      id="image"
+                      error={
+                        formik.touched.image && formik.errors.image
+                          ? formik.errors.image
+                          : null
+                      }
+                      onChange={(e: any) => {
+                        const filereader = new FileReader();
+                        filereader.readAsDataURL(e.target.files[0]);
+                        setFile(e.target.files[0]);
+                        filereader.onload = () => {
+                          if (filereader.readyState === 2) {
+                            formik.setFieldValue("image", e.target.files[0]);
+                            setPreview(filereader.result);
+                          }
+                        };
+                      }}
+                      accept="image/*"
+                    />
+                  </label>
+                  <Button
+                    onClick={() => {
+                      formik.resetForm();
+                      setPreview("");
+                    }}
+                    type="reset">
+                    Clear
+                  </Button>
+                  <Button type="submit">Add</Button>
+                </form>
+              </AddNewMenuModal>
+            ) : (
+              <></>
             )}
           </ItemContentDivContainer>
         </MenuSubCatItemDiv>
@@ -190,12 +307,6 @@ const MenuSubCategoryItem = (props: MenuSubCategoryItemTypes) => {
         <>
           <MenuSubCatItemDiv>
             <ItemTitle>Items</ItemTitle>
-            <ActionButton
-              icon={<MdAdd size={25} />}
-              label={"Add ITEM"}
-              onClick={() => {}}
-              forMenuSubcat={true}
-            />
           </MenuSubCatItemDiv>
         </>
       )}

@@ -1,5 +1,4 @@
 import React, { useEffect, useState, createContext } from "react";
-import axios from "axios";
 import {
   CategoryTitle,
   EditCategory,
@@ -20,12 +19,82 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import AddNewMenuModal from "../../Modals/AddNewMenuModal/AddNewMenuModal";
 import { TextField } from "../../TextField";
-import { Button } from "@mui/material";
+import { Button } from "../../TextField.Style";
 type RouteParamType = {
   id: any;
 };
 export const MyCategoryIdContext = createContext<any>(null);
 const MenuCategories = (props: MenuCategoriesTypes) => {
+  //
+  let schema = yup.object().shape({
+    category_name: yup.string().required("is required"),
+    category_image: yup.mixed().required("is required"),
+  });
+
+  const {
+    values,
+    errors,
+    handleChange,
+    handleSubmit,
+    handleReset,
+    resetForm,
+    touched,
+  } = useFormik({
+    initialValues: {
+      category_name: "",
+      image: "",
+    },
+    onSubmit: async (values, action) => {
+      console.log(values);
+      
+      HTTPMethods.postMenu("/category/addcategory", values)
+        .then(async (res) => {
+          action.resetForm();
+          console.log(res);
+          toast.success("Product added successfully", {
+            theme: "colored",
+            hideProgressBar: true,
+            autoClose: 1000,
+          });
+          action.resetForm();
+        })
+        .catch((err) => {
+          toast.success("Product added successfully", {
+            theme: "colored",
+            hideProgressBar: true,
+            autoClose: 1000,
+          });
+        });
+    },
+    validationSchema: schema,
+  });
+
+  // image------{start
+  // image to base64 converter
+  const [file, setFile] = useState<File | any>();
+  function convetToBase64(filetarget: File) {
+    return new Promise((resolve: any, reject: any) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(filetarget);
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  }
+  //base64 image handler
+  const onUpload = async (e: any) => {
+    const filetarget = e.target.files[0];
+    console.log(filetarget);
+    const base64 = await convetToBase64(filetarget);
+    setFile(base64);
+    console.log(file);
+    alert(file);
+  };
+  //image-------- end}
+
   //
   const { title, deleteIcon, editIcon, clicked, categoryList, ...rest } = props;
   const { drawerSubCatId, setDrawerSubCatId } = useSubCategoryIdStore();
@@ -38,63 +107,19 @@ const MenuCategories = (props: MenuCategoriesTypes) => {
   const [addMenuModal, setAddMenuModal] = useState(false);
   const [deleteCategoryId, setDeleteCategoryId] = useState<string>("");
   const [modalTitle, setModalTitle] = useState<string>();
-  // to change the preview image based on modal value
-  useEffect(() => {
-    formik.resetForm();
-
-    setPreview(() => {
-      if (addMenuModal == false) {
-        return null;
-      } else return preview;
-    });
-  }, [addMenuModal]);
   //modal states -----end}
-
-  // image upload and preview
-  const [file, setFile] = useState<File | any>();
-  const [preview, setPreview] = useState<File | any>();
-  // form validation
-  let schema = yup.object().shape({
-    category_name: yup.string().required("is required"),
-    image: yup.mixed().required("is required"),
-  });
-  // formik form
-  const formik = useFormik({
-    initialValues: {
-      category_name: "",
-      image: "",
-    },
-    onSubmit: (values, action) => {
-      console.log(values);
-      HTTPMethods.postMenu("/category/addcategory", values)
-        .then(async (res) => {
-          console.log(res);
-          toast.success("Product added successfully", {
-            theme: "colored",
-            hideProgressBar: true,
-            autoClose: 1000,
-          });
-          action.resetForm();
-        })
-        .catch((err) => {
-          toast.error("error", {
-            theme: "colored",
-            hideProgressBar: true,
-            autoClose: 1000,
-          });
-        });
-    },
-    validationSchema: schema,
-  });
-  //
 
   const navigate = useNavigate();
   const { id } = useParams<RouteParamType>();
   const handleEdit = () => {};
 
+  // const handleChange = () => {
+  //   alert("change");
+  // };
+
   // delete category
   function handleDelete(subCatId: any) {
-    HTTPMethods.deleteMenu(`/category/deletecategory/${subCatId}`, {})
+    HTTPMethods.deleteMenu(`/category/deletecategory/`, {})
       .then(async (res) => {
         toast.success("Category deleted Successfully.", {
           theme: "colored",
@@ -146,7 +171,7 @@ const MenuCategories = (props: MenuCategoriesTypes) => {
   useEffect(() => {
     if (openModal && deleteItem) {
       handleDelete(deleteCategoryId);
-      setDeleteItem(true);
+      setDeleteItem(false);
     }
   }, [openModal, deleteItem]);
   return (
@@ -170,7 +195,7 @@ const MenuCategories = (props: MenuCategoriesTypes) => {
                   onClick={() => {
                     setAddMenuModal(!addMenuModal);
                     setModalTitle("Edit Category");
-                    // setDeleteCategoryId(item.category_id);
+                    setDeleteCategoryId(item.category_id);
                     handleEdit;
                   }}>
                   {editIcon}
@@ -178,6 +203,7 @@ const MenuCategories = (props: MenuCategoriesTypes) => {
                 <Icon
                   onClick={() => {
                     setOpenModal(true);
+
                     setDeleteCategoryId(item.category_id);
                   }}>
                   {deleteIcon}
@@ -212,58 +238,46 @@ const MenuCategories = (props: MenuCategoriesTypes) => {
           title={modalTitle}
           setAddMenuModal={setAddMenuModal}
           footerButtons={<></>}>
-          <form onSubmit={formik.handleSubmit}>
+          <form onSubmit={handleSubmit}>
             <TextField
               type="text"
               label="category name"
               name="category_name"
               placeholder="Category Name"
-              onChange={formik.handleChange}
+              onChange={handleChange}
               error={
-                formik.touched.category_name && formik.errors.category_name
-                  ? formik.errors.category_name
+                touched.category_name && errors.category_name
+                  ? errors.category_name
                   : null
               }
             />
             <label htmlFor="image">
-              <img src={preview || "/assets/imageUpload.svg"} alt="" />
+              <img src={file || "/assets/imageUpload.svg"} alt="" />
               <TextField
                 type="file"
                 label="Category Image"
                 name="image"
-                placeholder="Image"
                 // @ts-ignore
                 id="image"
-                error={
-                  formik.touched.image && formik.errors.image
-                    ? formik.errors.image
-                    : null
-                }
-                onChange={(e: any) => {
-                  const filereader = new FileReader();
-                  filereader.readAsDataURL(e.target.files[0]);
-                  setFile(e.target.files[0]);
-                  filereader.onload = () => {
-                    if (filereader.readyState === 2) {
-                      formik.setFieldValue("image", e.target.files[0]);
-                      setPreview(filereader.result);
-                    }
-                  };
-
-                  console.log(file);
-                }}
-                // accept="image/*"
+                error={touched.image && errors.image ? errors.image : null}
+                onChange={handleChange}
               />
             </label>
             <Button
               onClick={() => {
-                formik.resetForm();
-                setPreview("");
+                resetForm();
               }}
               type="reset">
               Clear
             </Button>
-            <Button type="submit">Add</Button>
+            <Button
+              onClick={(e) => {
+                e.preventDefault();
+                handleSubmit();
+              }}
+              type="submit">
+              Add
+            </Button>
           </form>
         </AddNewMenuModal>
       ) : (

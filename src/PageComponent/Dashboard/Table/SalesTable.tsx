@@ -24,7 +24,8 @@ import { toast } from "react-toastify";
 import { left } from "@popperjs/core";
 import { useFilterStore } from "../../../Pages/states/TablesFilter.state";
 import { useLocation } from "react-router-dom";
-import AlertModal from "../../../Components/AlertDeleteModal/AlertModal";
+import AlertModal from "../../../Components/Modals/PopUpModal/AlertDeleteModal";
+import PopUpModal from "../../../Components/Modals/PopUpModal/AlertDeleteModal";
 
 const SalesTable = (props: TableStatus) => {
   const { data, onDeleteSuccess } = props;
@@ -52,7 +53,7 @@ const SalesTable = (props: TableStatus) => {
     toggleDrawer();
   };
   function deleteSales(product: any) {
-    HTTPMethods.deleteMethod(`/new_sales/delete/`, {})
+    HTTPMethods.deleteMethod(`/new_sales/delete/${product.id}`, {})
       .then(function (resp) {
         toast.success("delete successful", {
           theme: "colored",
@@ -166,7 +167,7 @@ const SalesTable = (props: TableStatus) => {
         </TableBody>
       </MainTableDiv>
       {openModal && (
-        <AlertModal
+        <PopUpModal
           title={"Are you sure you want to delete?"}
           setOpenModal={setOpenModal}
           setDeleteItem={setDeleteItem}

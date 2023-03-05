@@ -34,7 +34,7 @@ export default function Menu() {
     // Take id of fist category
 
     // id of chicken category ---intended to display the sub categories on initial render
-    setDrawerSubCatId("80ce259c-2ece-4de1-b685-35ad3f25c2b7");
+    // setDrawerSubCatId("80ce259c-2ece-4de1-b685-35ad3f25c2b7");
 
     HTTPMethods.getMenu("/category/readallcategory?page=1&offset=10")
       .then(async (res: any) => {
@@ -66,15 +66,14 @@ export default function Menu() {
   // to sort the dish category in alphabeical order
 
   let filteredCat = [];
-  // @ts-ignore
-  let data = category.map((item) => item.category_name.toLocaleLowerCase());
+  let data = category.map((item: any) =>
+    item.category_name.toLocaleLowerCase()
+  );
   filteredCat = category
     .filter((item: any, idx: any) => category.indexOf(item) === idx)
 
     .sort(function (a: any, b: any) {
-      // @ts-ignore
       let x = a.category_name.toLowerCase();
-      // @ts-ignore
       let y = b.category_name.toLowerCase();
       if (x < y) {
         return -1;

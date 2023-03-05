@@ -1,5 +1,8 @@
 export type TableType = {
-  tableNames: string[];
+  tableNames: Array<{
+    table_name: String;
+    table_id: React.SetStateAction<string>;
+  }>;
   karaokeList?: string[] | null;
   selected: boolean;
   image?: String;

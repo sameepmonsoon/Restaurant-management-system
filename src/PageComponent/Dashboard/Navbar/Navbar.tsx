@@ -69,7 +69,7 @@ const Navbar = (props: NavbarTitles) => {
   const currentTitle = title().toLowerCase();
   const titleBasedRoute: { [key: string]: string } = {
     dashboard: "/home",
-    table: "/tables",
+    table: "/tables/floorFirst",
     customer: "/customer",
     "web order": "/weborder",
     menu: "/menu",

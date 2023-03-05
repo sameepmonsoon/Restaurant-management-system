@@ -11,7 +11,10 @@ export const TableContainer = styled("div")`
 `;
 export const Tables = styled("div")<TableType>`
   background: ${({ select }) => (select === true ? "  #FFE7E7" : "#ffffff")};
-  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: ${({ select }) =>
+    select === true
+      ? " 0px 1px 3px 1px rgba(0, 0, 0, 0.1)"
+      : " 0px 1px 5px 1px rgba(0, 0, 0, 0.1)"};
   border-radius: 8px;
   width: 186px;
   height: 135px;

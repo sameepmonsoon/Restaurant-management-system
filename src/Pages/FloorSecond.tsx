@@ -4,7 +4,7 @@ const FloorSecond = () => {
   const { select, onSelect } = floorTabelState();
   return (
     <>
-      <FloorTable
+      {/* <FloorTable
         tableNames={[
           "Table 11",
           "Table 12",
@@ -15,7 +15,7 @@ const FloorSecond = () => {
         karaokeList={["Karaoke A", "Karaoke B", "Karaoke C"]}
         selected={select}
         onClick={onSelect}
-      />
+      /> */}
     </>
   );
 };
