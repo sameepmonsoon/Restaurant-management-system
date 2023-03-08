@@ -27,12 +27,21 @@ type RouteParamType = {
 export const MyCategoryIdContext = createContext<any>(null);
 const MenuCategories = (props: MenuCategoriesTypes) => {
   //
-  const { title, deleteIcon, editIcon, clicked, categoryList, ...rest } = props;
+  const {
+    title,
+    deleteIcon,
+    editIcon,
+    clicked,
+    onFetchCategory,
+    categoryList,
+    ...rest
+  } = props;
   const { drawerSubCatId, setDrawerSubCatId } = useSubCategoryIdStore();
   const [category, setCategory] = useState(categoryList);
   const [hoveredIndex, setHoveredIndex] = useState<null | number>(null);
 
   // modal states -----{start
+  const [isAdding, setIsAdding] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [deleteItem, setDeleteItem] = useState(false);
   const [addMenuModal, setAddMenuModal] = useState(false);
@@ -65,10 +74,17 @@ const MenuCategories = (props: MenuCategoriesTypes) => {
       image: "",
     },
     onSubmit: (values, action) => {
-      console.log(values);
-      HTTPMethods.postMenu("/category/addcategory", values)
+      // console.log(values);
+      setIsAdding(true);
+      const formdata = new FormData();
+      formdata.append("image", values.image);
+      formdata.append("category_name", values.category_name);
+
+      HTTPMethods.postMenu("/category/addcategory", formdata)
         .then(async (res) => {
-          console.log(res);
+          setIsAdding(false);
+          onFetchCategory((prev: any) => !prev);
+
           toast.success("Product added successfully", {
             theme: "colored",
             hideProgressBar: true,
@@ -77,11 +93,13 @@ const MenuCategories = (props: MenuCategoriesTypes) => {
           action.resetForm();
         })
         .catch((err) => {
+          setIsAdding(false);
           toast.error("error", {
             theme: "colored",
             hideProgressBar: true,
             autoClose: 1000,
           });
+          onFetchCategory((prev: any) => !prev);
         });
     },
     validationSchema: schema,
@@ -93,6 +111,7 @@ const MenuCategories = (props: MenuCategoriesTypes) => {
   const handleEdit = () => {};
 
   // delete category
+  // sometimes it doesnot show the error or success message evenif the item/cat is deleted
   function handleDelete(subCatId: any) {
     HTTPMethods.deleteMenu(`/category/deletecategory/${subCatId}`, {})
       .then(async (res) => {
@@ -103,8 +122,10 @@ const MenuCategories = (props: MenuCategoriesTypes) => {
           position: "bottom-right",
           toastId: "info1",
         });
+
         setTimeout(() => {
           setOpenModal(false);
+          onFetchCategory((prev: any) => !prev);
         }, 3000);
       })
       .catch(async (err) => {
@@ -115,8 +136,10 @@ const MenuCategories = (props: MenuCategoriesTypes) => {
           position: "bottom-right",
           toastId: "info1",
         });
+
         setTimeout(() => {
           setOpenModal(false);
+          onFetchCategory((prev: any) => !prev);
         }, 3000);
       });
   }
@@ -225,7 +248,7 @@ const MenuCategories = (props: MenuCategoriesTypes) => {
                   : null
               }
             />
-            <label htmlFor="image">
+            <label htmlFor="image" className="imageContainer">
               <img src={preview || "/assets/imageUpload.svg"} alt="" />
               <TextField
                 type="file"
@@ -263,7 +286,9 @@ const MenuCategories = (props: MenuCategoriesTypes) => {
               type="reset">
               Clear
             </Button>
-            <Button type="submit">Add</Button>
+            <Button type="submit" disabled={isAdding}>
+              {isAdding ? "Adding..." : "Add"}
+            </Button>
           </form>
         </AddNewMenuModal>
       ) : (

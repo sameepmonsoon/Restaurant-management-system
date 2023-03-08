@@ -8,6 +8,7 @@ import { HTTPMethods } from "../Utils/HTTPMock";
 const FloorFirst = () => {
   const { open, setDrawerData, toggleDrawer } = useDrawer();
   const [tableList, setTableList] = useState<any>([]);
+  const [fetchTable, setFetchTable] = useState<any>();
   console.log(open);
   const { select, onSelect } = floorTabelState();
   const selectTable = () => {
@@ -51,6 +52,7 @@ const FloorFirst = () => {
         onClick={(e: React.MouseEvent<HTMLElement>) => {
           openDrawer();
         }}
+        fetchTable={setFetchTable}
       />
 
       <DrawerC cardtitle={"New"} open={open} closeDrawer={() => closeDrawer()}>

@@ -5,6 +5,7 @@ export type TableType = {
   }>;
   karaokeList?: string[] | null;
   selected: boolean;
+  fetchTable?: React.SetStateAction<any>;
   image?: String;
   onClick: (e: React.MouseEvent<HTMLElement>) => void;
 };

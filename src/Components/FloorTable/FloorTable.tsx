@@ -13,7 +13,8 @@ import iconKaraoke from "../../../public/assets/iconKaraoke.svg";
 import { TableType } from "../../Types/Components/TableTypes";
 
 const FLoorTable = (props: TableType) => {
-  const { tableNames, karaokeList, selected, image, ...rest } = props;
+  const { tableNames, karaokeList, selected, fetchTable, image, ...rest } =
+    props;
   console.log("inside table names", tableNames);
   return (
     <>

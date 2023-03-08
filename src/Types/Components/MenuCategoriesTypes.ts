@@ -5,7 +5,7 @@ export type MenuCategoriesTypes = {
   editIcon?: React.ReactNode | null;
   deleteIcon?: React.ReactNode | null;
   clicked?: boolean;
-
+  onFetchCategory: any;
   categoryList: Array<{
     category_name: String;
     category_id: React.SetStateAction<string>;

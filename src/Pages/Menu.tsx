@@ -27,6 +27,7 @@ export default function Menu() {
   const { openSider } = siderToggle();
   const { drawerSubCatId, setDrawerSubCatId } = useSubCategoryIdStore();
   const navigate = useNavigate();
+  const [fetchCategory, setFetchCategory] = useState<Boolean>();
   useEffect(() => {
     setIsLoading(true);
     navigate("/menu/0");
@@ -36,7 +37,7 @@ export default function Menu() {
     // id of chicken category ---intended to display the sub categories on initial render
     // setDrawerSubCatId("80ce259c-2ece-4de1-b685-35ad3f25c2b7");
 
-    HTTPMethods.getMenu("/category/readallcategory?page=1&offset=10")
+    HTTPMethods.getMenu("/category/readallcategory?page=1&offset=40")
       .then(async (res: any) => {
         setCategory(res.data.payload.category);
       })
@@ -59,7 +60,7 @@ export default function Menu() {
       });
 
     // API CALL
-  }, []);
+  }, [fetchCategory]);
 
   // const uniqueCategory = (x: any, i: any, a: any) => a.indexOf(x) === i;
 
@@ -118,6 +119,7 @@ export default function Menu() {
                   deleteIcon={<MdDeleteOutline size={25} />}
                   editIcon={<HiOutlinePencil size={25} />}
                   categoryList={filteredCat}
+                  onFetchCategory={setFetchCategory}
                 />
               }>
               <Outlet />

@@ -34,41 +34,61 @@ export default function MenuSubCategoryContent() {
   const [addMenuModal, setAddMenuModal] = useState(false);
   const [deleteCategoryId, setDeleteCategoryId] = useState<string>("");
   const [modalTitle, setModalTitle] = useState<string>();
+  const [fetchSubCategory, setFetchSubCategory] = useState<Boolean>();
+
+  // to change the preview image based on modal value
+  useEffect(() => {
+    formik.resetForm();
+
+    setPreview(() => {
+      if (addMenuModal == false) {
+        return null;
+      } else return preview;
+    });
+  }, [addMenuModal]);
   //modal states -----end}
+
+  // image upload and preview
   const [file, setFile] = useState<File | any>();
+  const [preview, setPreview] = useState<File | any>();
+  // form validation
   let schema = yup.object().shape({
     subcategory_name: yup.string().required("is required"),
     image: yup.mixed().required("is required"),
   });
+  // formik form
+  const category_id = drawerSubCatId;
 
-  const {
-    values,
-    errors,
-    handleChange,
-    handleSubmit,
-    handleReset,
-    resetForm,
-    touched,
-  } = useFormik({
+  const formik = useFormik({
     initialValues: {
-      image: "",
-      category_id: drawerSubCatId,
       subcategory_name: "",
+      image: "",
     },
     onSubmit: (values, action) => {
-      console.log(values);
-      HTTPMethods.postMenu(`/subcategory/addsubcategory`, values)
+      console.log("vals", values);
+      const formdata = new FormData();
+      formdata.append("image", values.image);
+      formdata.append("category_id", category_id);
+      formdata.append("subcategory_name", values.subcategory_name);
+      console.log("vals", formdata.get("image"));
+      console.log("formdata", formdata.get("category_id"));
+      HTTPMethods.postMenu(`/subcategory/addsubcategory`, formdata)
         .then(async (res) => {
           action.resetForm();
-          console.log(res);
           toast.success("Product added successfully", {
             theme: "colored",
             hideProgressBar: true,
             autoClose: 1000,
           });
+          setFetchSubCategory((prev) => !prev);
+          setAddMenuModal(false);
           action.resetForm();
         })
         .catch((err) => {
+          setFetchSubCategory((prev) => !prev);
+
+          setAddMenuModal(false);
+
           toast.error("error", {
             theme: "colored",
             hideProgressBar: true,
@@ -92,8 +112,15 @@ export default function MenuSubCategoryContent() {
         } else {
           setCategory(res.data.payload.subcategory);
         }
+        setTimeout(() => {
+          setOpenModal(false);
+        }, 3000);
       })
       .catch(async (err) => {
+        setTimeout(() => {
+          setOpenModal(false);
+        }, 3000);
+
         toast.error("Cannot fetch subcategory item.", {
           theme: "colored",
           hideProgressBar: true,
@@ -103,7 +130,7 @@ export default function MenuSubCategoryContent() {
         });
         setCategory([]);
       });
-  }, [id]);
+  }, [id, drawerSubCatId, fetchSubCategory]);
   let filteredCat: any[] = [];
   let data = category.map((item: any) =>
     item.subcategory_name.toLocaleLowerCase()
@@ -147,6 +174,7 @@ export default function MenuSubCategoryContent() {
               key={subcat.id}
               subCatImage={`http://backend1.kpop.com.np/public/SubCategory_Images/${subcat.subcategory_image}`}
               subCatIdforItem={subcat.subcategory_id}
+              onFetchSubCategory={setFetchSubCategory}
             />
           ))}
           <ActionButton
@@ -163,35 +191,55 @@ export default function MenuSubCategoryContent() {
               title={modalTitle}
               setAddMenuModal={setAddMenuModal}
               footerButtons={<></>}>
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={formik.handleSubmit}>
                 <TextField
                   type="text"
-                  label="sub category name"
+                  label="Sub Category name"
                   name="subcategory_name"
                   placeholder="Sub Category Name"
-                  onChange={handleChange}
+                  onChange={formik.handleChange}
                   error={
-                    touched.subcategory_name && errors.subcategory_name
-                      ? errors.subcategory_name
+                    formik.touched.subcategory_name &&
+                    formik.errors.subcategory_name
+                      ? formik.errors.subcategory_name
                       : null
                   }
                 />
-                <label htmlFor="image">
-                  <img src={file || "/assets/imageUpload.svg"} alt="" />
+                <label htmlFor="image" className="imageContainer">
+                  <img src={preview || "/assets/imageUpload.svg"} alt="" />
                   <TextField
                     type="file"
-                    label="Sub category Image"
+                    label="sub Category Image"
                     name="image"
                     placeholder="Image"
                     // @ts-ignore
                     id="image"
-                    error={touched.image && errors.image ? errors.image : null}
-                    onChange={handleChange}
+                    error={
+                      formik.touched.image && formik.errors.image
+                        ? formik.errors.image
+                        : null
+                    }
+                    onChange={(e: any) => {
+                      const filereader = new FileReader();
+                      filereader.readAsDataURL(e.target.files[0]);
+                      setFile(e.target.files[0]);
+                      filereader.onload = () => {
+                        if (filereader.readyState === 2) {
+                          formik.setFieldValue("image", e.target.files[0]);
+                          setPreview(filereader.result);
+                        }
+                      };
+
+                      console.log(file);
+                    }}
+                    // accept="image/*"
                   />
                 </label>
+
                 <Button
                   onClick={() => {
-                    resetForm();
+                    formik.resetForm();
+                    setPreview("");
                   }}
                   type="reset">
                   Clear
@@ -210,6 +258,7 @@ export default function MenuSubCategoryContent() {
           deleteIcon={<MdDeleteOutline size={25} />}
           editIcon={<HiOutlinePencil size={25} />}
           onClick={() => {}}
+          categoryId={drawerSubCatId}
         />
       )}
     </MenuSubCategoryContentMain>

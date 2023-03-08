@@ -70,6 +70,9 @@ export default function TableLayout({
             hideProgressBar: true,
             autoClose: 1000,
           });
+          setTimeout(() => {
+            setAddMenuModal(false);
+          }, 500);
           action.resetForm();
         })
         .catch(async (err: any) => {

@@ -30,7 +30,7 @@ export const ModalContainer: any = styled("div")`
   left: 32%;
   top: 15%;
   transition: all 100ms ease;
-  animation: fadeIn 400ms 1 ease;
+  animation: fadeIn 700ms 1 ease;
   @keyframes fadeIn {
     from {
       transform: scale(0);
@@ -80,7 +80,8 @@ export const ModalFooter = styled(ModalHeader)`
 `;
 export const ModalBody = styled(ModalHeader)`
   min-height: 260px;
-  max-height: auto;
+  max-height: 70vh;
+  height: auto;
   flex: 1;
   min-width: 530px;
   border-bottom: 0;
@@ -94,6 +95,7 @@ export const ModalBody = styled(ModalHeader)`
   overflow-y: auto;
   scroll-snap-type: y mandatory;
   gap: 100px;
+
   ::-webkit-scrollbar {
     width: 4px;
   }
@@ -107,6 +109,7 @@ export const ModalBody = styled(ModalHeader)`
     background: #9a9e9a;
     border-radius: 5px;
   }
+
   &::after {
     transform: rotate(45deg);
   }
@@ -145,13 +148,17 @@ export const ModalBody = styled(ModalHeader)`
     background: #1e1e1e;
   }
 
+  /* for image preview image postion relative cause overflow */
+  .imageContainer {
+    position: relative;
+  }
   & img {
     padding: 0;
     margin: 0;
     position: absolute;
     width: 472px;
     height: 105px;
-    top: 156px;
+    top: 30px;
     z-index: 2;
     border: 1px solid transparent;
     border-radius: 5px;
@@ -176,24 +183,24 @@ export const ModalBody = styled(ModalHeader)`
     line-height: 18px;
     border: 0;
     overflow: hidden;
-  }
-  & input[type="text"] {
     width: 472px;
-    height: 42px;
-    background: #fafafa;
     border: 1px solid #b5b5b5;
     border-radius: 5px;
+    background: #fafafa;
     padding: 0 10px;
+  }
+  & input[type="text"] {
+    height: 42px;
+    background: #fafafa;
   }
   & input[type="text"]:focus {
   }
   & input[type="file"] {
-    width: 472px;
     height: 109px;
     background: none;
     border: 1px dashed #b5b5b5;
-    border-radius: 5px;
     position: relative;
+    padding: 0;
     /* z-index: 1; */
   }
   & input[type="file"]::before {

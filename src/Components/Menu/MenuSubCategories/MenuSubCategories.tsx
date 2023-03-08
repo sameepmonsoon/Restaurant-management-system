@@ -31,6 +31,7 @@ const MenuSubCategories = (props: MenuSubCategoriesTypes) => {
     subcatId,
     subCatImage,
     active,
+    onFetchSubCategory,
     subCatIdforItem,
     ...rest
   } = props;
@@ -39,11 +40,22 @@ const MenuSubCategories = (props: MenuSubCategoriesTypes) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null | any>(null);
   const { drawerSubCatId, setDrawerSubCatId } = useSubCategoryIdStore();
   // modal states -----{start
+  const [isAdding, setIsAdding] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [deleteItem, setDeleteItem] = useState(false);
   const [addMenuModal, setAddMenuModal] = useState(false);
   const [deleteCategoryId, setDeleteCategoryId] = useState<string>("");
   const [modalTitle, setModalTitle] = useState<string>();
+  // to change the preview image based on modal value
+  useEffect(() => {
+    formik.resetForm();
+
+    setPreview(() => {
+      if (addMenuModal == false) {
+        return null;
+      } else return preview;
+    });
+  }, [addMenuModal]);
   //modal states -----end}
 
   const navigate = useNavigate();
@@ -52,33 +64,28 @@ const MenuSubCategories = (props: MenuSubCategoriesTypes) => {
     // console.log("Menu sub category Item edit")
   };
 
-  //
+  // image upload and preview
   const [file, setFile] = useState<File | any>();
+  const [preview, setPreview] = useState<File | any>();
+  // form validation
   let schema = yup.object().shape({
     subcategory_name: yup.string().required("is required"),
     image: yup.mixed().required("is required"),
   });
+  // formik form
 
-  const {
-    values,
-    errors,
-    handleChange,
-    handleSubmit,
-    handleReset,
-    resetForm,
-    touched,
-  } = useFormik({
+  const formik = useFormik({
     initialValues: {
       subcategory_name: "",
       image: "",
       category_id: drawerSubCatId,
     },
     onSubmit: (values, action) => {
-      console.log(values);
-      HTTPMethods.postMenu(
-        `subcategory/addsubcategory/${drawerSubCatId}`,
-        values
-      )
+      console.log("vals", values);
+      const formdata = new FormData();
+      formdata.append("image", values.image);
+      formdata.append("category_name", values.subcategory_name);
+      HTTPMethods.postMenu(`/subcategory/editsubcategory/`, formdata)
         .then(async (res) => {
           action.resetForm();
           console.log(res);
@@ -105,6 +112,7 @@ const MenuSubCategories = (props: MenuSubCategoriesTypes) => {
     // ${subCatId}
     HTTPMethods.deleteMenu(`/subcategory/deletesubcategory/${subCatId}`, {})
       .then(async (res) => {
+        onFetchSubCategory((prev: any) => !prev);
         toast.success("Sub category Successfully deleted", {
           theme: "colored",
           hideProgressBar: true,
@@ -112,11 +120,10 @@ const MenuSubCategories = (props: MenuSubCategoriesTypes) => {
           position: "bottom-right",
           toastId: "info1",
         });
-        setTimeout(() => {
-          setOpenModal(false);
-        }, 3000);
       })
       .catch(async (err) => {
+        onFetchSubCategory((prev: any) => !prev);
+
         toast.error("Can't delete the selected sub category", {
           theme: "colored",
           hideProgressBar: true,
@@ -124,9 +131,6 @@ const MenuSubCategories = (props: MenuSubCategoriesTypes) => {
           position: "bottom-right",
           toastId: "info1",
         });
-        setTimeout(() => {
-          setOpenModal(false);
-        }, 3000);
       });
   }
 
@@ -197,40 +201,62 @@ const MenuSubCategories = (props: MenuSubCategoriesTypes) => {
               title={modalTitle}
               setAddMenuModal={setAddMenuModal}
               footerButtons={<></>}>
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={formik.handleSubmit}>
                 <TextField
                   type="text"
-                  label="sub category name"
+                  label="Sub category name"
                   name="subcategory_name"
                   placeholder="Sub Category Name"
-                  onChange={handleChange}
+                  onChange={formik.handleChange}
                   error={
-                    touched.subcategory_name && errors.subcategory_name
-                      ? errors.subcategory_name
+                    formik.touched.subcategory_name &&
+                    formik.errors.subcategory_name
+                      ? formik.errors.subcategory_name
                       : null
                   }
                 />
-                <label htmlFor="image">
-                  <img src={file || "/assets/imageUpload.svg"} alt="" />
+
+                <label htmlFor="image" className="imageContainer">
+                  <img src={preview || "/assets/imageUpload.svg"} alt="" />
                   <TextField
                     type="file"
-                    label="Sub category Image"
+                    label="sub Category Image"
                     name="image"
                     placeholder="Image"
                     // @ts-ignore
                     id="image"
-                    error={touched.image && errors.image ? errors.image : null}
-                    onChange={handleChange}
+                    error={
+                      formik.touched.image && formik.errors.image
+                        ? formik.errors.image
+                        : null
+                    }
+                    onChange={(e: any) => {
+                      const filereader = new FileReader();
+                      filereader.readAsDataURL(e.target.files[0]);
+                      setFile(e.target.files[0]);
+                      filereader.onload = () => {
+                        if (filereader.readyState === 2) {
+                          formik.setFieldValue("image", e.target.files[0]);
+                          setPreview(filereader.result);
+                        }
+                      };
+
+                      console.log(file);
+                    }}
+                    // accept="image/*"
                   />
                 </label>
                 <Button
                   onClick={() => {
-                    resetForm();
+                    formik.resetForm();
+                    setPreview("");
                   }}
                   type="reset">
                   Clear
                 </Button>
-                <Button type="submit">Add</Button>
+                <Button type="submit" disabled={isAdding}>
+                  {isAdding ? "Adding..." : "Add"}
+                </Button>
               </form>
             </AddNewMenuModal>
           ) : (

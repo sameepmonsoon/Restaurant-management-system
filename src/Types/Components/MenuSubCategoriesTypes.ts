@@ -9,6 +9,7 @@ export type MenuSubCategoriesTypes = {
   subCatImage?: string;
   subcatId?: boolean | any;
   subCatIdforItem?: String;
+  onFetchSubCategory: any;
   categoryList: Array<{
     category: String;
     subcategory: String;

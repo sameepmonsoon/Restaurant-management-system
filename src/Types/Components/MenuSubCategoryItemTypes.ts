@@ -1,5 +1,6 @@
 export type MenuSubCategoryItemTypes = {
-  subcatParentId: string | null;
+  subcatParentId: string;
+  categoryId: string;
   itemName?: string | null;
   subCatItemList?: Array<{
     subCatItem: String;
