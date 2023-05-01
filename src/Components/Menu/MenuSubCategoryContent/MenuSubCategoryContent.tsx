@@ -29,6 +29,7 @@ export default function MenuSubCategoryContent() {
     ""
   );
   // modal states -----{start
+  const [isAdding, setIsAdding] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [deleteItem, setDeleteItem] = useState(false);
   const [addMenuModal, setAddMenuModal] = useState(false);
@@ -66,6 +67,8 @@ export default function MenuSubCategoryContent() {
     },
     onSubmit: (values, action) => {
       console.log("vals", values);
+      setIsAdding(true);
+
       const formdata = new FormData();
       formdata.append("image", values.image);
       formdata.append("category_id", category_id);
@@ -75,6 +78,8 @@ export default function MenuSubCategoryContent() {
       HTTPMethods.postMenu(`/subcategory/addsubcategory`, formdata)
         .then(async (res) => {
           action.resetForm();
+          setIsAdding(false);
+
           toast.success("Product added successfully", {
             theme: "colored",
             hideProgressBar: true,
@@ -85,6 +90,8 @@ export default function MenuSubCategoryContent() {
           action.resetForm();
         })
         .catch((err) => {
+          setIsAdding(false);
+
           setFetchSubCategory((prev) => !prev);
 
           setAddMenuModal(false);
@@ -151,7 +158,7 @@ export default function MenuSubCategoryContent() {
   return (
     <MenuSubCategoryContentMain>
       {loading ? (
-        <div>Loading..</div>
+        <h5>Loading...</h5>
       ) : (
         <MenuSubCategoryContentDiv borderBottom={subCatItemVisible}>
           {category.map((subcat: any, index: any) => (
@@ -244,7 +251,9 @@ export default function MenuSubCategoryContent() {
                   type="reset">
                   Clear
                 </Button>
-                <Button type="submit">Add</Button>
+                <Button type="submit" disabled={isAdding}>
+                  {isAdding ? "Adding..." : "Add"}
+                </Button>
               </form>
             </AddNewMenuModal>
           )}
